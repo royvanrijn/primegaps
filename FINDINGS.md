@@ -39,20 +39,51 @@ Source: Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126v1.
   `int_delta^1 t^a(1-t)^b dt` (`D`). Tests verify exactly that C+D equals the
   integer beta integral for multiple exponents, including the published
   `delta=7/250`.
+- The omitted multidimensional formulas have now been reconstructed.
+  `small_cube_coefficients` computes `C_{m,i}` by exact inclusion--exclusion and
+  Dirichlet integration; `large_simplex_coefficients` computes `D_{m,i}` after
+  shifting the large simplex. They reduce to every tested k=1 base case and
+  agree exactly across reciprocal-delta chamber boundaries.
+- A reference exact `I/J/K` assembler accepts sparse polynomial basis functions
+  and rational support parameters and returns rational matrix entries. Tiny
+  matrices agree with independent nested Gauss--Legendre quadrature, the
+  full-simplex Dirichlet identity, and a case with an active `B` boundary.
 - The complete generalized-eigenvalue *end of the pipeline* is implemented:
-  symmetric generalized eigenvalue search in floating point plus exact rational
-  Rayleigh-quotient verification for a candidate certificate. This mirrors the
+  diagonally equilibrated symmetric generalized eigenvalue search in floating
+  point, conditioning/residual diagnostics, candidate-vector rationalization,
+  and a portable exact certificate. Dense, matrix-free Lanczos, simultaneous
+  block, and optional sparse paths are available. The standalone verifier checks
+  semantic matrix hashes and replays both quadratic forms using Python integers.
+  This mirrors the
   paper's strategy: floating point locates `c`; exact arithmetic proves it.
+- Proposition 2/3 distribution feasibility is now executable through
+  `primegaps.is_certified`. It checks the Harman-minorant inequalities, the
+  global Type I/II/III hypotheses, and continuous support-cell partition
+  conditions using exact rational order-statistic witnesses. The published
+  support's full Cartesian product of `(j,m)` cells is certified (empty cells
+  are identified vacuously), including its non-BV `A_1+A_1=0.506` pairs.
+
+## Distribution statement endpoint issue
+
+The printed Type IIc condition in Proposition 3 quantifies
+`omega_0 in [-epsilon, omega(j,j')]` while requiring
+`sum_{i in I_4} y_i <= 8 omega_0`. For negative `omega_0`, even the empty set
+has sum zero and cannot meet that bound. The proof of the final theorem only
+uses the two positive-capacity bins, so it implicitly treats the modulus range
+at or below `x^(1/2)` by Bombieri--Vinogradov. The executable certificate makes
+that split explicit: BV covers `omega_0 <= 0`, and the Proposition 3 Type IIc
+partition is checked uniformly on `0 <= omega_0 <= omega`.
 
 ## What the paper does and does not specify
 
 Section 5 confirms that all required integrals are represented as polynomials in
 `delta` with coefficients `C_{m,i}` and `D_{m,i}` and that complicated mixed
 small/large-coordinate integrals reduce to matrix products of these vectors.
-However, it only sketches the multidimensional coefficient recurrence and says
-that the full implementation will be uploaded later. So the remaining task is
-not numerical integration: it is reconstructing that omitted multidimensional
-recurrence/decomposition exactly.
+It only sketches the multidimensional coefficient recurrence and says that the
+full implementation will be uploaded later. The present reconstruction supplies
+exact closed forms and a low-dimensional reference assembler. The remaining
+engineering problem is symmetry-compressed assembly at `k=49`, not the rational
+integral kernel itself.
 
 ## Coupled-optimization plan
 
@@ -73,9 +104,10 @@ single distribution exponent.
 ## Current gate / next milestone
 
 This repository still does **not** independently reproduce `k=49`. The next
-milestone is now narrower: extend the verified one-dimensional C/D base cases to
-`k>1`, then assemble `M1` for a tiny basis and cross-check it against brute-force
-high-precision integration in low dimensions. After that:
+milestone is now narrower: replace the reference status enumeration with a
+symmetry-compressed assembler using the verified C/D kernel, then reproduce the
+paper's intermediate matrix data or certificate when it becomes available.
+After that:
 
 1. reproduce the paper's `k=49`, D=21 quotient > 1;
 2. same support, `k=48`, D=21;
