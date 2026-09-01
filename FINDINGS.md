@@ -21,24 +21,38 @@ Source: Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126v1.
   - `xi_1 = 0.38`, `xi_2 = xi_3 = 0.4`
 - For those parameters Proposition 2 allows using the prime indicator directly
   (`c1=c2=0`), i.e. the general Harman-minorant machinery is not needed for 240.
-  Stadlmann explicitly says the more general results were developed with better
-  `H_1` bounds in mind.
-- The final numerical certificate is a vector `c` with a generalized Rayleigh
+- The final numerical certificate is a vector `c` with generalized Rayleigh
   quotient `c M2 c^T / (c M1 c^T) > 1` for `k=49`.
 
-## New computational observations in this repository
+## Implemented so far
 
-The symmetric basis size grows from **846 functions at D=21** to **2526 at
-D=27** for `k=49`. A dense matrix therefore grows from about 0.72M to 6.38M
-entries (~8.8x); this explains part of the resource jump even before accounting
-for the much more expensive exact integral construction.
+- Exact published support `T_k(delta,A,B,epsilon)` and validation.
+- Symmetric basis enumeration. At `k=49` the basis grows from **846 functions at
+  D=21** to **2526 at D=27**, so a dense matrix grows from about 0.72M to 6.38M
+  entries (~8.8x) before considering exact-integral construction cost.
+- A support-geometry Monte-Carlo diagnostic. Uniform volume is a bad proxy for
+  sieve gain: at `k≈49` most uniform-simplex points do not probe the interesting
+  `B` boundary. The actual objective must remain the `I/J/K` integral quotient.
+- The Section 5.2.1 **exact k=1 recurrence base cases** are now implemented as
+  rational coefficient vectors for
+  `int_0^delta t^a(1-t)^b dt` (`C`) and
+  `int_delta^1 t^a(1-t)^b dt` (`D`). Tests verify exactly that C+D equals the
+  integer beta integral for multiple exponents, including the published
+  `delta=7/250`.
+- The complete generalized-eigenvalue *end of the pipeline* is implemented:
+  symmetric generalized eigenvalue search in floating point plus exact rational
+  Rayleigh-quotient verification for a candidate certificate. This mirrors the
+  paper's strategy: floating point locates `c`; exact arithmetic proves it.
 
-A uniform-volume Monte-Carlo sample inside the outer simplex almost never sees
-Stadlmann's `B` constraint at `k≈49`: most coordinates are much smaller than
-`delta=0.028`. Consequently a naive objective such as "maximize support volume"
-is a poor surrogate for the actual sieve objective. The important mass is set by
-the test function / `I,J,K` integrals, not Euclidean volume. This diagnostic is
-implemented in `primegaps.scan` and intentionally carries no bound claim.
+## What the paper does and does not specify
+
+Section 5 confirms that all required integrals are represented as polynomials in
+`delta` with coefficients `C_{m,i}` and `D_{m,i}` and that complicated mixed
+small/large-coordinate integrals reduce to matrix products of these vectors.
+However, it only sketches the multidimensional coefficient recurrence and says
+that the full implementation will be uploaded later. So the remaining task is
+not numerical integration: it is reconstructing that omitted multidimensional
+recurrence/decomposition exactly.
 
 ## Coupled-optimization plan
 
@@ -51,25 +65,24 @@ search jointly over:
 3. test-function representation;
 4. analytically certified modulus regimes.
 
-The outer optimizer should be allowed to ask which currently-forbidden support
-interaction would raise the final eigenvalue most. That turns analytic theorem
-improvement into a targeted separation-oracle problem instead of blindly
-maximizing a distribution exponent.
+The outer optimizer should ask which currently-forbidden support interaction
+would raise the final eigenvalue most. That turns analytic theorem improvement
+into a targeted separation-oracle problem instead of blindly maximizing a
+single distribution exponent.
 
-## Critical missing milestone
+## Current gate / next milestone
 
-This repository does **not** yet independently reproduce the `k=49` result. The
-paper only sketches the Section 5 coefficient recurrences for the exact integrals
-and says the author's code will be published later. Reconstructing those
-recurrences and obtaining the paper's `M1,M2` eigenvalue is the next gate.
+This repository still does **not** independently reproduce `k=49`. The next
+milestone is now narrower: extend the verified one-dimensional C/D base cases to
+`k>1`, then assemble `M1` for a tiny basis and cross-check it against brute-force
+high-precision integration in low dimensions. After that:
 
-After that, the first experiments should be, in order:
-
-1. same support, `k=48`, D=21;
-2. D=22,23,... until the threshold or D=27;
-3. optimize the simple published support family;
-4. enable the full Proposition 3 / Harman-minorant degrees of freedom;
-5. only then expand to multi-regime support geometry.
+1. reproduce the paper's `k=49`, D=21 quotient > 1;
+2. same support, `k=48`, D=21;
+3. D=22,23,... until threshold or D=27;
+4. jointly optimize the simple support family;
+5. enable full Proposition 3 / Harman-minorant degrees of freedom;
+6. expand to multi-regime support geometry only if useful.
 
 No result below 240 should be claimed until an exact/rational certificate has
 been independently verified.
