@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# Local, reproducible research ledgers, artifacts, scratch work, and archives
+.research/
+
 # C extensions
 *.so
 
