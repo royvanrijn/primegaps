@@ -11,6 +11,10 @@ dependencies = ["numpy>=2.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8"]
+sparse = ["scipy>=1.13"]
+
+[project.scripts]
+primegaps-proof = "primegaps.proof_backend:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
