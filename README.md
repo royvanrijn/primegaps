@@ -11,6 +11,8 @@ independently checkable layers of that reconstruction:
 - the published support `T_k(delta, A, B, epsilon)`;
 - generation/counting of the symmetric-polynomial basis used by Polymath/Stadlmann;
 - reconstructed exact rational `C_{m,i}`/`D_{m,i}` coefficient formulas;
+- symmetry-compressed factorial moments and sparse simplex certificate replay,
+  cross-pollinated from Axiom Math's PrimeGapsLib;
 - a low-dimensional exact `I/J/K` matrix API for sparse polynomial bases;
 - a geometry diagnostic for support sampling;
 - a numerical generalized-eigenvalue and exact-certificate proof backend;
@@ -23,6 +25,11 @@ matrix assembly and the published certificate are not yet reproduced.
 
 See [the Section 5 engine notes](docs/section5-engine.md) for the reconstructed
 formulas, source errata, exact API, and verification boundary.
+
+See [the PrimeGapsLib cross-pollination notes](docs/primegapslib-crosspollination.md)
+for the monomial-signature representation, nilpotent factorial-moment ladder,
+closed simplex/marginal formulas, sparse grouped contraction, and exact replay
+of the released `M_{50,1/25}>4` source certificate.
 
 ## Proof backend
 

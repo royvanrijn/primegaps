@@ -90,31 +90,29 @@ def _connected_blocks(m1, m2, tolerance: float) -> tuple[np.ndarray, ...]:
         count, labels = connected_components(csr_matrix(pattern), directed=False)
         return tuple(np.flatnonzero(labels == label) for label in range(count))
 
-    parent = np.arange(dimension)
-
-    def find(item: int) -> int:
-        while parent[item] != item:
-            parent[item] = parent[parent[item]]
-            item = int(parent[item])
-        return item
-
-    def union(left: int, right: int) -> None:
-        left_root, right_root = find(left), find(right)
-        if left_root != right_root:
-            parent[right_root] = left_root
-
     a = np.asarray(m1)
     b = np.asarray(m2)
-    for i in range(dimension):
-        linked = np.flatnonzero(
-            (np.abs(a[i, i + 1 :]) > tolerance) | (np.abs(b[i, i + 1 :]) > tolerance)
-        )
-        for relative_j in linked:
-            union(i, i + 1 + int(relative_j))
-    groups: dict[int, list[int]] = {}
-    for i in range(dimension):
-        groups.setdefault(find(i), []).append(i)
-    return tuple(np.asarray(indices, dtype=int) for indices in groups.values())
+    unseen = np.ones(dimension, dtype=bool)
+    blocks: list[np.ndarray] = []
+    while np.any(unseen):
+        start = int(np.flatnonzero(unseen)[0])
+        unseen[start] = False
+        frontier = [start]
+        component: list[int] = []
+        while frontier:
+            i = frontier.pop()
+            component.append(i)
+            linked = np.flatnonzero(
+                unseen & ((np.abs(a[i]) > tolerance) | (np.abs(b[i]) > tolerance))
+            )
+            if len(linked):
+                unseen[linked] = False
+                frontier.extend(int(value) for value in linked)
+            if not np.any(unseen):
+                component.extend(frontier)
+                frontier.clear()
+        blocks.append(np.asarray(sorted(component), dtype=int))
+    return tuple(blocks)
 
 
 def _forward_substitution(lower: np.ndarray, rhs: np.ndarray) -> np.ndarray:
@@ -143,11 +141,11 @@ def _largest_spd_eigenvalue(
     value = 0.0
     for _ in range(max(2, iterations)):
         image = operator(vector)
+        value = float(np.dot(vector, image))
         norm = float(np.linalg.norm(image))
         if not np.isfinite(norm) or norm == 0.0:
             return float("nan")
         vector = image / norm
-        value = float(np.dot(vector, operator(vector)))
     return value
 
 
@@ -185,20 +183,25 @@ def _lanczos_largest(
             image -= active_basis @ (active_basis.T @ image)
         beta = float(np.linalg.norm(image))
         active = j + 1
-        if active == 1:
-            ritz_values = diagonal[:1].copy()
-            ritz_vectors = np.ones((1, 1))
-        else:
-            tridiagonal = np.diag(diagonal[:active])
-            links = off_diagonal[: active - 1]
-            tridiagonal += np.diag(links, 1) + np.diag(links, -1)
-            ritz_values, ritz_vectors = np.linalg.eigh(tridiagonal)
-        best_value = float(ritz_values[-1])
-        best_vector = active_basis @ ritz_vectors[:, -1]
-        residual_estimate = abs(beta * float(ritz_vectors[-1, -1]))
-        if beta <= np.finfo(float).eps or residual_estimate <= tolerance * max(1.0, abs(best_value)):
-            best_vector /= np.linalg.norm(best_vector)
-            return best_value, best_vector, True, active
+        should_check = active % 5 == 0 or beta <= np.finfo(float).eps or active == iterations
+        if should_check:
+            if active == 1:
+                ritz_values = diagonal[:1].copy()
+                ritz_vectors = np.ones((1, 1))
+            else:
+                tridiagonal = np.diag(diagonal[:active])
+                links = off_diagonal[: active - 1]
+                tridiagonal += np.diag(links, 1) + np.diag(links, -1)
+                ritz_values, ritz_vectors = np.linalg.eigh(tridiagonal)
+            best_value = float(ritz_values[-1])
+            best_vector = active_basis @ ritz_vectors[:, -1]
+            residual_estimate = abs(beta * float(ritz_vectors[-1, -1]))
+            if (
+                beta <= np.finfo(float).eps
+                or residual_estimate <= tolerance * max(1.0, abs(best_value))
+            ):
+                best_vector /= np.linalg.norm(best_vector)
+                return best_value, best_vector, True, active
         if j == iterations - 1:
             break
         off_diagonal[j] = beta
@@ -440,6 +443,50 @@ def solve_generalized_eigenproblem(
         np.arange(shape1[0]),
     )
     if len(blocks) > 1:
+        if all(len(block) == 1 for block in blocks):
+            diagonal_m1 = np.asarray(
+                m1.diagonal() if sparse else np.diag(m1), dtype=float
+            ).reshape(-1)
+            diagonal_m2 = np.asarray(
+                m2.diagonal() if sparse else np.diag(m2), dtype=float
+            ).reshape(-1)
+            if np.any(diagonal_m1 <= 0.0):
+                raise np.linalg.LinAlgError("M1 has a non-positive diagonal entry")
+            ratios = diagonal_m2 / diagonal_m1
+            best_index = int(np.argmax(ratios))
+            vector = np.zeros(shape1[0])
+            vector[best_index] = 1.0
+            quotient = float(ratios[best_index])
+            residual = _relative_generalized_residual(m1, m2, quotient, vector)
+            condition = float(np.max(diagonal_m1) / np.min(diagonal_m1))
+            warnings: list[str] = []
+            if condition * np.finfo(float).eps > 1e-6:
+                warnings.append("M1 is severely ill-conditioned at float64 precision")
+            if residual > max(10.0 * tolerance, 1e-10):
+                warnings.append(
+                    "block tolerance discarded couplings visible in the eigenpair residual"
+                )
+            diagnostics = ConditioningDiagnostics(
+                dimension=shape1[0],
+                storage="sparse" if sparse else "dense",
+                method="block/diagonal",
+                block_sizes=(1,) * shape1[0],
+                symmetry_error_m1=symmetry1,
+                symmetry_error_m2=symmetry2,
+                diagonal_min=float(np.min(diagonal_m1)),
+                diagonal_max=float(np.max(diagonal_m1)),
+                estimated_m1_eigenvalue_min=float(np.min(diagonal_m1)),
+                estimated_m1_eigenvalue_max=float(np.max(diagonal_m1)),
+                estimated_condition_m1=condition,
+                estimated_condition_equilibrated_m1=1.0,
+                cholesky_diagonal_min=1.0 if not sparse else None,
+                cholesky_diagonal_max=1.0 if not sparse else None,
+                generalized_residual=residual,
+                converged=True,
+                iterations=1,
+                warnings=tuple(warnings),
+            )
+            return GeneralizedEigenResult(quotient, vector, diagnostics)
         results: list[GeneralizedEigenResult] = []
         for block_index, indices in enumerate(blocks):
             if sparse:

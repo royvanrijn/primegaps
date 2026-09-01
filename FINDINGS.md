@@ -48,6 +48,17 @@ Source: Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126v1.
   and rational support parameters and returns rational matrix entries. Tiny
   matrices agree with independent nested Gauss--Legendre quadrature, the
   full-simplex Dirichlet identity, and a case with an active `B` boundary.
+- Axiom Math's PrimeGapsLib certificate layer has been independently audited at
+  commit `1faa7b14e82ddebc2772dfb9153922f01b106477` and its reusable machinery
+  ported without a Lean dependency. Canonical exponent signatures, erasure
+  closure, adaptive overlap-profile moments, the nilpotent `(I+N)^k` moment
+  ladder, exact monomial-symmetric simplex/marginal pairings, and degree-grouped
+  sparse contractions are now implemented in `primegaps.symmetric`.
+- Replaying PrimeGapsLib's 1,295-term `k50e25d25n1295.json` source certificate
+  locally uses 272 erase-closed signatures, 138 mass groups, and 172 marginal
+  groups. Exact integer arithmetic gives `50*J-4*I > 0` and quotient
+  approximately `4.000000917784551`. This reproduces the external 246
+  variational certificate, not Stadlmann's k=49 support matrix.
 - The complete generalized-eigenvalue *end of the pipeline* is implemented:
   diagonally equilibrated symmetric generalized eigenvalue search in floating
   point, conditioning/residual diagnostics, candidate-vector rationalization,
@@ -104,9 +115,11 @@ single distribution exponent.
 ## Current gate / next milestone
 
 This repository still does **not** independently reproduce `k=49`. The next
-milestone is now narrower: replace the reference status enumeration with a
-symmetry-compressed assembler using the verified C/D kernel, then reproduce the
-paper's intermediate matrix data or certificate when it becomes available.
+milestone is now narrower and has a tested combinatorial backend: combine the
+PrimeGapsLib-style signature DAG, factorial-moment tables, and grouped transforms
+with the verified C/D status kernel, replacing the reference status enumeration.
+Then reproduce the paper's intermediate matrix data or certificate when it
+becomes available.
 After that:
 
 1. reproduce the paper's `k=49`, D=21 quotient > 1;

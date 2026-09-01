@@ -41,6 +41,20 @@ def test_exact_packed_and_sparse_storage_have_same_semantic_hash_and_form():
     assert packed.semantic_sha256() == sparse.semantic_sha256()
     assert packed.quadratic_form(vector) == sparse.quadratic_form(vector)
     assert np.array_equal(packed.to_dense_float(), sparse.to_dense_float())
+    expected = sum(
+        vector[i] * dense[i][j] * vector[j]
+        for i in range(3)
+        for j in range(3)
+    )
+    assert packed.quadratic_form(vector) == expected
+
+
+def test_exact_storage_rejects_noninteger_payloads():
+    with pytest.raises(TypeError, match="numerators"):
+        ExactSymmetricMatrix(1, 1, packed_upper=(Fraction(1, 2),))
+    matrix = ExactSymmetricMatrix.from_dense([[1]])
+    with pytest.raises(TypeError, match="vector"):
+        matrix.quadratic_form((1.5,))
 
 
 def test_dense_and_iterative_generalized_solvers_agree():

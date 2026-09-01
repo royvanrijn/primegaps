@@ -11,6 +11,7 @@ from fractions import Fraction
 from hashlib import sha256
 import json
 from math import gcd, isqrt, lcm
+from numbers import Integral
 from pathlib import Path
 from typing import Iterable, Iterator, Sequence
 
@@ -49,6 +50,10 @@ class ExactSymmetricMatrix:
     sparse_upper: tuple[SparseEntry, ...] | None = None
 
     def __post_init__(self) -> None:
+        if not isinstance(self.dimension, Integral) or not isinstance(
+            self.denominator, Integral
+        ):
+            raise TypeError("matrix dimension and denominator must be integers")
         if self.dimension < 1:
             raise ValueError("matrix dimension must be positive")
         if self.denominator <= 0:
@@ -61,11 +66,18 @@ class ExactSymmetricMatrix:
                 raise ValueError(
                     f"packed upper triangle has {len(self.packed_upper)} values; expected {expected}"
                 )
+            if isinstance(self.packed_upper, np.ndarray):
+                if self.packed_upper.dtype.kind not in "iu":
+                    raise TypeError("packed numerators must be integers")
+            elif any(not isinstance(value, Integral) for value in self.packed_upper):
+                raise TypeError("packed numerators must be integers")
             return
 
         assert self.sparse_upper is not None
         previous: tuple[int, int] | None = None
         for raw_i, raw_j, raw_value in self.sparse_upper:
+            if not all(isinstance(value, Integral) for value in (raw_i, raw_j, raw_value)):
+                raise TypeError("sparse indices and numerators must be integers")
             i, j, value = int(raw_i), int(raw_j), int(raw_value)
             if not (0 <= i <= j < self.dimension):
                 raise ValueError(f"invalid sparse upper entry ({i}, {j})")
@@ -174,6 +186,8 @@ class ExactSymmetricMatrix:
         """Compute ``vector.T @ self @ vector`` with Python big integers."""
         if len(vector) != self.dimension:
             raise ValueError("matrix/vector dimensions differ")
+        if any(not isinstance(value, Integral) for value in vector):
+            raise TypeError("quadratic-form vector must contain integers")
         c = tuple(int(value) for value in vector)
         numerator = 0
         for i, j, value in self._iter_nonzero():
