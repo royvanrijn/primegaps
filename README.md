@@ -44,6 +44,11 @@ See [the `P3.II.delta` frontier](docs/p3ii-delta-frontier.md) for the primary
 analytic counterfactual target, the full numerical `A_max -> lambda_48` curve,
 the estimated crossing of 1, and the next binding constraint.
 
+See [the Type-IIc incomplete-rectangle theorem](docs/typeiic-incomplete-rectangles.md)
+for the checked analytic saving on the originating rectangles, its safe
+endpoint `A=2029/8000`, and the precise verification boundary. The production
+distribution oracle remains unchanged pending a fully typeset human review.
+
 See [the research status audit](docs/research-status.md) for a ledger-wide
 summary of exact results, numerical screens, negative experiments, superseded
 work, and the present blockers. In particular, no degree or legal-support

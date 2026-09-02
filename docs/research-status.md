@@ -4,8 +4,8 @@ Status date: 2026-09-02.
 
 This is a durable synthesis of the local append-only research store. It does
 not turn numerical observations into theorems. The latest structural replay
-read all 48 records in 24 ledger shards, including negative and refuted
-records, and checked all 79
+read all 96 records in 48 ledger shards, including negative and refuted
+records, and checked all 216
 referenced immutable objects by SHA-256. The current arXiv entry remains
 `2608.31126v1` at this date.
 
@@ -27,7 +27,7 @@ referenced immutable objects by SHA-256. The current arXiv entry remains
 |---|---|---|
 | Support geometry | The reliable two-band degree-21 screen improves the published support slightly, but the best legal `k=48` screen at the analytic ceiling is `0.9982613325` (SE `3.0018e-6`). | Numerical; no crossing. |
 | Narrow `delta=0.014` support | The earlier apparent gain is driven by a rare large-integrand event; seven of eight constant-weight replicates are below the `delta=0.028` baseline. | Refuted as a positive lead. |
-| `P3.II.delta` relaxation | A translated-simplex screen crosses one near `A_max=0.2536077308`, inside the counterfactual interval ending at `0.253777778055...`. | Numerical and analytically illegal without a new lemma. |
+| `P3.II.delta` relaxation | A translated-simplex screen crosses one near `A_max=0.2536077308`; the originating incomplete-rectangle theorem is independently checked through the safe rational endpoint `2029/8000=0.253625`. | Analytic saving checked; `lambda_48>1` remains numerical and the production oracle awaits a typeset human review. |
 | Degree `22--27` sweep | An unrestricted proxy first crosses one at `D=26`, but it omits the published `B` cutoffs. Randomized cutoff correction and float replay fail calibration. | Inconclusive on legal support. |
 | Exact `D=24` candidate | Exact I is complete and positive; J stopped at `224/7338` groups. | Incomplete; no quotient. |
 | Column generation through `D=27` | The unrestricted proxy stops at `0.9980139970`. | Negative discovery result. |
@@ -39,7 +39,7 @@ referenced immutable objects by SHA-256. The current arXiv entry remains
 
 ## Analytic target
 
-The active `P3.II.delta` branch is
+The published active `P3.II.delta` branch is
 
 ```text
 xi2/4 + 11/16 - 3*A - 2*epsilon >= delta,
@@ -50,9 +50,20 @@ estimate. At the numerical crossing, the missing normalized slack is
 `0.0013231926`, equivalently an exponent saving `0.0211710816` in the parent
 estimate. Epsilon padding and dyadic bookkeeping are far too small. Recorded
 examples show that neither the complete two-variable sum nor the outer `H^4`
-pair count admits the required uniform saving. Any successful lemma must use
-the actual incomplete ranges and preserve cancellation before the existing
-absolute-value and supremum steps. No such lemma is currently proved.
+pair count admits the required uniform saving.
+
+That saving is now obtained on the originating incomplete rectangles. The
+checked replacement is
+
+```text
+6 - 22*gamma + 72*delta + 216*omega < 0,
+```
+
+or `delta < 11*gamma/36 + 2/3 - 3*A`. The safe reviewed-by-agents endpoint is
+`A=2029/8000=0.253625`, above the numerical crossing; the exact limiting
+endpoint and its formal epsilon-padded decimal are not claimed. The production
+oracle remains unchanged until the proof is fully typeset and human-reviewed.
+See [the theorem note](typeiic-incomplete-rectangles.md).
 
 ## Superseded work retained for audit
 
@@ -69,14 +80,16 @@ absolute-value and supremum steps. No such lemma is currently proved.
 
 ## Research-store integrity
 
-All ledger JSON parses, dependency targets resolve, and every referenced
-immutable object exists with the recorded content hash. Seven records
+All ledger JSON parses and every referenced immutable object exists with the
+recorded content hash. Three older adaptive-enrichment dependency targets are
+unresolved. Eight records
 have a `record_sha256` that does not equal the canonical JSON body currently in
 their shard: the distribution-region record, the three PrimeGapsLib records,
 the first support-geometry audit, the legal-support-geometry record, and the
-Type-IIc incomplete-average record. Their claims have separate source/test or
-object evidence, but their ledger identity needs an append-only correction from
-the owning agent; this audit does not rewrite another agent's history.
+first large-`g` and complete-obstruction Type-IIc records. Their claims have
+separate corrected source/test or object evidence, but their ledger identity
+needs an append-only correction from the owning agent; this audit does not
+rewrite another agent's history.
 
 Replay this structural audit without rerunning any mathematical experiment:
 
@@ -94,8 +107,9 @@ runs are not promoted merely because output files exist.
 1. Build a stable full-support matrix constructor using the exact moment caches.
 2. Resolve a legal higher-degree candidate before launching more expensive
    exact contractions.
-3. Prove or refute the required incomplete-range Type-IIc saving. Do not spend
-   on deletion-only minorants of the current Buchstab identity: their rigorous
-   optimistic no-`K` gate already fails.
+3. Typeset and human-review the checked incomplete-range Type-IIc theorem,
+   then promote only its safe rational endpoint. Do not spend on deletion-only
+   minorants of the current Buchstab identity: their rigorous optimistic
+   no-`K` gate already fails.
 4. Preserve negative results and append corrections rather than overwriting
    historical ledgers.
