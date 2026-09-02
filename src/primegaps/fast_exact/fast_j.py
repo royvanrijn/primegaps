@@ -9,6 +9,7 @@ per support cell and distributed to all requested target signatures.
 from __future__ import annotations
 
 from collections import defaultdict
+import json
 from typing import Iterable
 
 from . import fast_i
@@ -183,6 +184,297 @@ def evaluate_density_functional(candidate, moments, rational):
          for exponent, coefficient in candidate.items()),
         rational(0),
     )
+
+
+def _exact_payload(value):
+    if isinstance(value, (tuple, list)):
+        return [_exact_payload(item) for item in value]
+    numerator = value.numerator
+    denominator = value.denominator
+    if callable(numerator):
+        numerator = numerator()
+    if callable(denominator):
+        denominator = denominator()
+    return [str(int(numerator)), str(int(denominator))]
+
+
+def functional_id(target, status, kind, cell):
+    """Return the stable cache key for one target/status/support cell."""
+    return json.dumps(
+        {
+            "target": list(target),
+            "status": list(status),
+            "kind": kind,
+            "cell": _exact_payload(cell),
+        },
+        sort_keys=True,
+        separators=(",", ":"),
+    )
+
+
+def _candidate_dict(candidate, polynomial_backend):
+    if polynomial_backend is None:
+        return candidate
+    return {
+        (x_power, z_power): coefficient
+        for x_power, z_power, coefficient in polynomial_backend.terms(candidate)
+        if coefficient
+    }
+
+
+def evaluate_target_chunk_cached(
+    targets,
+    *,
+    dimension: int,
+    feature_groups,
+    pair_groups,
+    verifier,
+    orbit_size,
+    rational,
+    functional_values,
+    density_statuses,
+    positive_cache: dict | None = None,
+    polynomial_backend=None,
+    slice_cache: dict | None = None,
+    fresh_functional_sink=None,
+    fresh_status_sink=None,
+):
+    """Evaluate a target chunk using persistent density/cell functionals.
+
+    The returned fresh moments and density-status indexes are intended to be
+    appended by the parent process.  A fully cached replay does not rebuild
+    target densities or integrate any geometry moments; it only constructs the
+    candidate polynomial and contracts its coefficients with cached values.
+    """
+    targets, routes = pair_routes(pair_groups, targets)
+    common_dimension = dimension - 1
+    maximum_offset = int(verifier.R // verifier.DELTA)
+    known_statuses = {
+        target: tuple(density_statuses[target])
+        for target in targets
+        if target in density_statuses
+    }
+    unknown = tuple(target for target in targets if target not in known_statuses)
+    densities = {}
+    fresh_statuses = {}
+    if unknown:
+        densities.update(target_densities(
+            unknown,
+            common_dimension=common_dimension,
+            delta=verifier.DELTA,
+            max_large=len(verifier.B),
+            max_offset_count=maximum_offset,
+            rational=rational,
+            orbit_size=orbit_size,
+            positive_cache=positive_cache,
+        ))
+        for target in unknown:
+            statuses = tuple(sorted(densities[target]))
+            known_statuses[target] = statuses
+            if fresh_status_sink is None:
+                fresh_statuses[target] = statuses
+            else:
+                fresh_status_sink(target, statuses)
+
+    def density_for(target, density_status):
+        if target not in densities:
+            densities.update(target_densities(
+                (target,),
+                common_dimension=common_dimension,
+                delta=verifier.DELTA,
+                max_large=len(verifier.B),
+                max_offset_count=maximum_offset,
+                rational=rational,
+                orbit_size=orbit_size,
+                positive_cache=positive_cache,
+            ))
+        return densities[target][density_status]
+
+    answers = {target: rational(0) for target in targets}
+    fresh_functionals = {}
+    for large in range(min(common_dimension, len(verifier.B)) + 1):
+        for shifted in range(maximum_offset - large + 1):
+            density_status = (large, shifted)
+            active = tuple(
+                target
+                for target in targets
+                if density_status in known_statuses[target]
+            )
+            if not active:
+                continue
+            total_offset = (large + shifted) * verifier.DELTA
+            large_offset = large * verifier.DELTA
+            for left_large in (False, True):
+                if large + int(left_large) > len(verifier.B):
+                    continue
+                left_limit = verifier._support_limit(large, left_large)
+                for right_large in (False, True):
+                    if large + int(right_large) > len(verifier.B):
+                        continue
+                    right_limit = verifier._support_limit(large, right_large)
+                    specs = (
+                        verifier.RadialSlice(
+                            0, 0, left_large, support_limit=left_limit
+                        ),
+                        verifier.RadialSlice(
+                            0, 0, right_large, support_limit=right_limit
+                        ),
+                    )
+                    kind, cells = verifier._slice_geometry(
+                        large > 0,
+                        common_dimension > large,
+                        total_offset,
+                        large_offset,
+                        specs,
+                    )
+                    iterable = cells if kind != "point" else (cells[0],)
+                    for cell in iterable:
+                        if kind == "polygons":
+                            _polygon, sample = cell
+                        elif kind in ("xintervals", "zintervals"):
+                            _start, _end, sample = cell
+                        elif kind == "point":
+                            sample = cell
+                        else:
+                            continue
+
+                        left_polys = {}
+                        right_polys = {}
+                        candidate = {
+                            target: (
+                                {}
+                                if polynomial_backend is None
+                                else polynomial_backend.zero()
+                            )
+                            for target in active
+                        }
+                        active_set = set(active)
+                        for (left, right), outputs in routes.items():
+                            selected = tuple(
+                                (target, structure)
+                                for target, structure in outputs
+                                if target in active_set
+                            )
+                            if not selected:
+                                continue
+                            left_poly = left_polys.get(left)
+                            if left_poly is None:
+                                slice_key = (
+                                    left,
+                                    left_large,
+                                    left_limit,
+                                    total_offset,
+                                    large_offset,
+                                    sample,
+                                )
+                                left_poly = (
+                                    None
+                                    if slice_cache is None
+                                    else slice_cache.get(slice_key)
+                                )
+                                if left_poly is None:
+                                    left_poly = verifier._linear_slice_polynomial(
+                                        feature_groups[left],
+                                        left_large,
+                                        left_limit,
+                                        total_offset,
+                                        large_offset,
+                                        sample,
+                                    )
+                                    if polynomial_backend is not None:
+                                        left_poly = polynomial_backend.from_dict(
+                                            left_poly
+                                        )
+                                    if slice_cache is not None:
+                                        slice_cache[slice_key] = left_poly
+                                left_polys[left] = left_poly
+                            right_poly = right_polys.get(right)
+                            if right_poly is None:
+                                slice_key = (
+                                    right,
+                                    right_large,
+                                    right_limit,
+                                    total_offset,
+                                    large_offset,
+                                    sample,
+                                )
+                                right_poly = (
+                                    None
+                                    if slice_cache is None
+                                    else slice_cache.get(slice_key)
+                                )
+                                if right_poly is None:
+                                    right_poly = verifier._linear_slice_polynomial(
+                                        feature_groups[right],
+                                        right_large,
+                                        right_limit,
+                                        total_offset,
+                                        large_offset,
+                                        sample,
+                                    )
+                                    if polynomial_backend is not None:
+                                        right_poly = polynomial_backend.from_dict(
+                                            right_poly
+                                        )
+                                    if slice_cache is not None:
+                                        slice_cache[slice_key] = right_poly
+                                right_polys[right] = right_poly
+                            product = (
+                                verifier.kernel._poly_mul(left_poly, right_poly)
+                                if polynomial_backend is None
+                                else polynomial_backend.multiply(
+                                    left_poly, right_poly
+                                )
+                            )
+                            for target, structure in selected:
+                                if polynomial_backend is None:
+                                    add_scaled_in_place(
+                                        candidate[target],
+                                        product,
+                                        structure,
+                                        rational,
+                                    )
+                                else:
+                                    candidate[target] = (
+                                        polynomial_backend.add_scaled(
+                                            candidate[target],
+                                            product,
+                                            structure,
+                                        )
+                                    )
+                        status = (
+                            large,
+                            shifted,
+                            int(left_large),
+                            int(right_large),
+                        )
+                        for target in active:
+                            polynomial = _candidate_dict(
+                                candidate[target], polynomial_backend
+                            )
+                            if not polynomial:
+                                continue
+                            cache_id = functional_id(target, status, kind, cell)
+                            moments = dict(functional_values.get(cache_id, {}))
+                            missing = tuple(sorted(set(polynomial) - set(moments)))
+                            if missing:
+                                computed = density_weighted_moments(
+                                    density_for(target, density_status),
+                                    missing,
+                                    kind=kind,
+                                    cell=cell,
+                                    verifier=verifier,
+                                    rational=rational,
+                                )
+                                moments.update(computed)
+                                if fresh_functional_sink is None:
+                                    fresh_functionals[cache_id] = computed
+                                else:
+                                    fresh_functional_sink(cache_id, computed)
+                            answers[target] += evaluate_density_functional(
+                                polynomial, moments, rational
+                            )
+    return answers, fresh_functionals, fresh_statuses
 
 
 def evaluate_target_chunk(

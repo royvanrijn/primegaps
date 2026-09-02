@@ -10,8 +10,10 @@ from hashlib import sha256
 import importlib.util
 import json
 import multiprocessing
+import os
 from pathlib import Path
 import sys
+import tempfile
 import time
 
 import gmpy2
@@ -29,7 +31,13 @@ DP_PATH = (
 )
 sys.path.insert(0, str(FROZEN))
 
-from primegaps.fast_exact import compiled_poly, fast_i, fast_j, modular_exact
+from primegaps.fast_exact import (
+    compiled_poly,
+    fast_i,
+    fast_j,
+    modular_exact,
+    moment_cache,
+)
 import exact_symmetric_verifier as verifier
 
 dp_spec = importlib.util.spec_from_file_location("fast_j_orbit_helpers", DP_PATH)
@@ -47,6 +55,10 @@ PAIR_GROUPS = None
 POSITIVE_CACHE = {}
 POLYNOMIAL_BACKEND = None
 MODULAR_PRIMES = ()
+FUNCTIONAL_VALUES = None
+DENSITY_STATUSES = None
+CACHE_CONTEXT_HASH = None
+CACHE_SPOOL_DIRECTORY = None
 
 
 class BoundedLRUCache:
@@ -78,15 +90,74 @@ def file_hash(path):
     return digest.hexdigest()
 
 
-def bind_manifest(args):
+def load_candidate(path, dimension):
+    payload = json.loads(path.read_text())
+    degree = payload.get("degree")
+    if (
+        payload.get("schema") != "primegaps-stadlmann-rational-candidate-v1"
+        or payload.get("k") != dimension
+        or not isinstance(degree, int)
+        or degree < 0
+        or payload.get("radial_coordinate") != "(U-sum(t)) with U=521/2000"
+    ):
+        raise ValueError("candidate schema, k, degree, or convention mismatch")
+    combined = {}
+    for item in payload.get("terms", []):
+        raw_signature = item.get("signature")
+        slack = item.get("slack_power")
+        if not isinstance(raw_signature, list):
+            raise ValueError("candidate signature must be a JSON list")
+        signature = tuple(raw_signature)
+        if (
+            signature != tuple(sorted(signature, reverse=True))
+            or any(
+                isinstance(value, bool)
+                or not isinstance(value, int)
+                or value <= 0
+                or value % 2
+                for value in signature
+            )
+            or isinstance(slack, bool)
+            or not isinstance(slack, int)
+            or slack < 0
+            or sum(signature) + slack > degree
+        ):
+            raise ValueError("invalid candidate basis term")
+        key = (signature, slack)
+        if key in combined:
+            raise ValueError("duplicate candidate basis term")
+        numerator = item.get("numerator")
+        denominator = item.get("denominator")
+        if (
+            isinstance(numerator, bool)
+            or not isinstance(numerator, int)
+            or isinstance(denominator, bool)
+            or not isinstance(denominator, int)
+            or denominator <= 0
+        ):
+            raise ValueError("invalid candidate rational coefficient")
+        value = gmpy2.mpq(numerator, denominator)
+        if not value:
+            raise ValueError("zero candidate term")
+        combined[key] = value
+    if len(combined) != payload.get("basis_dimension"):
+        raise ValueError("candidate term count/basis dimension mismatch")
+    return degree, tuple(
+        verifier.Term(signature, slack, coefficient)
+        for (signature, slack), coefficient in sorted(combined.items())
+    )
+
+
+def bind_manifest(args, degree):
     backend = (
         "modular:" + ",".join(map(str, args.modular_prime))
         if args.modular_prime
         else ("flint-rational" if args.compiled else "python-dict")
     )
     payload = {
-        "schema": "primegaps-fast-exact-J-checkpoint-v1",
+        "schema": "primegaps-fast-exact-J-checkpoint-v2",
         "k": args.k,
+        "degree": degree,
         "backend": backend,
         "candidate_sha256": file_hash(args.candidate),
         "verifier_sha256": file_hash(FROZEN / "exact_symmetric_verifier.py"),
@@ -110,18 +181,68 @@ def bind_manifest(args):
 
 def worker(targets):
     started = time.perf_counter()
-    values = fast_j.evaluate_target_chunk(
-        targets,
-        dimension=DIMENSION,
-        feature_groups=FEATURE_GROUPS,
-        pair_groups=PAIR_GROUPS,
-        verifier=verifier,
-        orbit_size=orbit_helpers.monomial_symmetric_orbit_size,
-        rational=gmpy2.mpq,
-        positive_cache=POSITIVE_CACHE,
-        polynomial_backend=POLYNOMIAL_BACKEND,
-        slice_cache=SLICE_CACHE,
-    )
+    fresh_functionals = {}
+    fresh_statuses = {}
+    spool_path = None
+    if FUNCTIONAL_VALUES is None:
+        values = fast_j.evaluate_target_chunk(
+            targets,
+            dimension=DIMENSION,
+            feature_groups=FEATURE_GROUPS,
+            pair_groups=PAIR_GROUPS,
+            verifier=verifier,
+            orbit_size=orbit_helpers.monomial_symmetric_orbit_size,
+            rational=gmpy2.mpq,
+            positive_cache=POSITIVE_CACHE,
+            polynomial_backend=POLYNOMIAL_BACKEND,
+            slice_cache=SLICE_CACHE,
+        )
+    else:
+        descriptor, raw_spool_path = tempfile.mkstemp(
+            prefix=".j-functional-worker-",
+            suffix=".jsonl",
+            dir=CACHE_SPOOL_DIRECTORY,
+            text=True,
+        )
+        spool_path = Path(raw_spool_path)
+        try:
+            with os.fdopen(descriptor, "w") as spool:
+                def write_status(target, statuses):
+                    record = moment_cache.j_density_status_record(
+                        CACHE_CONTEXT_HASH, target, statuses
+                    )
+                    spool.write(json.dumps(record, sort_keys=True) + "\n")
+
+                def write_functional(functional_id, moments):
+                    record = moment_cache.j_functional_record(
+                        CACHE_CONTEXT_HASH, functional_id, moments
+                    )
+                    spool.write(json.dumps(record, sort_keys=True) + "\n")
+
+                values, fresh_functionals, fresh_statuses = (
+                    fast_j.evaluate_target_chunk_cached(
+                        targets,
+                        dimension=DIMENSION,
+                        feature_groups=FEATURE_GROUPS,
+                        pair_groups=PAIR_GROUPS,
+                        verifier=verifier,
+                        orbit_size=orbit_helpers.monomial_symmetric_orbit_size,
+                        rational=gmpy2.mpq,
+                        functional_values=FUNCTIONAL_VALUES,
+                        density_statuses=DENSITY_STATUSES,
+                        positive_cache=POSITIVE_CACHE,
+                        polynomial_backend=POLYNOMIAL_BACKEND,
+                        slice_cache=SLICE_CACHE,
+                        fresh_functional_sink=write_functional,
+                        fresh_status_sink=write_status,
+                    )
+                )
+        except BaseException:
+            spool_path.unlink(missing_ok=True)
+            raise
+        if not spool_path.stat().st_size:
+            spool_path.unlink()
+            spool_path = None
     elapsed = time.perf_counter() - started
     per_target = elapsed / len(targets)
     rows = []
@@ -143,7 +264,7 @@ def worker(targets):
                 "residues": [int(residue) for residue in value],
             })
         rows.append(row)
-    return rows
+    return rows, fresh_functionals, fresh_statuses, spool_path
 
 
 def main():
@@ -158,6 +279,10 @@ def main():
         "--modular-prime", type=int, action="append",
         help="repeat to batch several CRT primes in one geometry pass",
     )
+    parser.add_argument(
+        "--moment-cache", type=Path,
+        help="append/reuse candidate-independent exact J functionals",
+    )
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if args.chunk_size < 1 or args.workers < 1:
@@ -169,17 +294,19 @@ def main():
         raise ValueError("--modular-prime must be prime")
     if args.compiled and args.modular_prime:
         raise ValueError("choose rational compiled or modular, not both")
+    if args.moment_cache is not None and args.modular_prime:
+        raise ValueError("the exact moment cache cannot be used modulo a prime")
     if args.modular_prime and len(set(args.modular_prime)) != len(
         args.modular_prime
     ):
         raise ValueError("modular primes must be distinct")
 
-    bind_manifest(args)
-
     global DIMENSION, FEATURE_GROUPS, PAIR_GROUPS, POLYNOMIAL_BACKEND
-    global MODULAR_PRIMES
+    global MODULAR_PRIMES, FUNCTIONAL_VALUES, DENSITY_STATUSES
+    global CACHE_CONTEXT_HASH, CACHE_SPOOL_DIRECTORY
     DIMENSION = args.k
-    terms = verifier.rational_terms_from_candidate(args.candidate, args.k)
+    degree, terms = load_candidate(args.candidate, args.k)
+    bind_manifest(args, degree)
     FEATURE_GROUPS = verifier.grouped_marginal_coefficients(terms)
     PAIR_GROUPS = verifier.grouped_signature_pairs(FEATURE_GROUPS, args.k)
     if args.compiled:
@@ -197,6 +324,30 @@ def main():
             if len(backends) == 1
             else compiled_poly.ProductPolynomialBackend(backends)
         )
+    cache = None
+    if args.moment_cache is not None:
+        context = {
+            "schema": "primegaps-fast-exact-J-context-v1",
+            "functional_key_schema": "target-status-cell-v1",
+            "k": args.k,
+            "delta": str(verifier.DELTA),
+            "residual_cap": str(verifier.R),
+            "total_cap": str(verifier.U),
+            "large_caps": [str(value) for value in verifier.B],
+            "verifier_sha256": file_hash(
+                FROZEN / "exact_symmetric_verifier.py"
+            ),
+            "orbit_helpers_sha256": file_hash(DP_PATH),
+            "fast_i_sha256": file_hash(Path(fast_i.__file__)),
+            "fast_j_sha256": file_hash(Path(fast_j.__file__)),
+        }
+        cache = moment_cache.JFunctionalCache(
+            args.moment_cache, context=context, rational=gmpy2.mpq
+        )
+        FUNCTIONAL_VALUES = cache.values
+        DENSITY_STATUSES = cache.density_statuses
+        CACHE_CONTEXT_HASH = cache.context_hash
+        CACHE_SPOOL_DIRECTORY = str(cache.path.parent)
     signatures = list(PAIR_GROUPS)
     if args.limit is not None:
         signatures = signatures[: args.limit]
@@ -220,6 +371,7 @@ def main():
     ]
     print(json.dumps({
         "k": args.k,
+        "degree": degree,
         "groups": len(signatures),
         "completed": len(completed),
         "pending": len(pending),
@@ -228,6 +380,7 @@ def main():
         "workers": args.workers,
         "compiled": args.compiled,
         "modular_prime": args.modular_prime,
+        "moment_cache": str(args.moment_cache) if args.moment_cache else None,
     }), flush=True)
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -239,7 +392,16 @@ def main():
         futures = {pool.submit(worker, chunk): chunk for chunk in chunks}
         newly_completed = 0
         for future in as_completed(futures):
-            rows = future.result()
+            rows, fresh_functionals, fresh_statuses, spool_path = future.result()
+            if cache is not None:
+                if spool_path is not None:
+                    cache.ingest(spool_path, retain=False)
+                    Path(spool_path).unlink()
+                else:
+                    for target, statuses in fresh_statuses.items():
+                        cache.append_density_statuses(target, statuses)
+                    for functional_id, moments in fresh_functionals.items():
+                        cache.append(functional_id, moments)
             for row in rows:
                 stream.write(json.dumps(row, sort_keys=True) + "\n")
                 completed[tuple(row["signature"])] = row

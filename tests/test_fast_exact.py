@@ -138,6 +138,59 @@ def test_pair_first_j_matches_target_first_reference():
     assert actual == expected
 
 
+def test_cached_pair_first_j_replays_without_density_reconstruction(monkeypatch):
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    pair_groups = verifier.grouped_signature_pairs(feature_groups, 3)
+    targets = tuple(pair_groups)
+    expected = fast_j.evaluate_target_chunk(
+        targets,
+        dimension=3,
+        feature_groups=feature_groups,
+        pair_groups=pair_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+    )
+    actual, fresh, statuses = fast_j.evaluate_target_chunk_cached(
+        targets,
+        dimension=3,
+        feature_groups=feature_groups,
+        pair_groups=pair_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+        functional_values={},
+        density_statuses={},
+    )
+    assert actual == expected
+    assert fresh
+    assert set(statuses) == set(targets)
+
+    def fail_density_reconstruction(*args, **kwargs):
+        raise AssertionError("fully cached replay rebuilt target densities")
+
+    monkeypatch.setattr(fast_j, "target_densities", fail_density_reconstruction)
+    replay, replay_fresh, replay_statuses = fast_j.evaluate_target_chunk_cached(
+        targets,
+        dimension=3,
+        feature_groups=feature_groups,
+        pair_groups=pair_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+        functional_values=fresh,
+        density_statuses=statuses,
+    )
+    assert replay == expected
+    assert not replay_fresh
+    assert not replay_statuses
+
+
 def test_flint_pair_first_j_matches_target_first_reference():
     pytest.importorskip("sage.all")
     terms = (
@@ -338,11 +391,38 @@ def test_j_functional_cache_extends_across_degree(tmp_path):
     cache = moment_cache.JFunctionalCache(
         path, context=context, rational=Fraction
     )
+    assert cache.append_density_statuses((2,), ((0, 0), (1, 2)))
     assert cache.append("target/cell", {(0, 0): moments[(0, 0)]})
     assert cache.missing("target/cell", candidate) == ((2, 0),)
     assert cache.append("target/cell", {(2, 0): moments[(2, 0)]})
     assert cache.evaluate("target/cell", candidate) == expected
     assert not cache.append("target/cell", moments)
+
+    reloaded = moment_cache.JFunctionalCache(
+        path, context=context, rational=Fraction
+    )
+    assert reloaded.density_statuses[(2,)] == ((0, 0), (1, 2))
+    assert reloaded.evaluate("target/cell", candidate) == expected
+    assert not reloaded.append_density_statuses((2,), ((1, 2), (0, 0)))
+
+    shard = tmp_path / "worker-shard.jsonl"
+    extra_id = "target/other-cell"
+    extra_moments = {(1, 1): Fraction(5, 17)}
+    shard.write_text(
+        json.dumps(
+            moment_cache.j_functional_record(
+                reloaded.context_hash, extra_id, extra_moments
+            ),
+            sort_keys=True,
+        )
+        + "\n"
+    )
+    reloaded.ingest(shard, retain=False)
+    assert extra_id not in reloaded.values
+    ingested = moment_cache.JFunctionalCache(
+        path, context=context, rational=Fraction
+    )
+    assert ingested.values[extra_id] == extra_moments
 
 
 def test_batched_modular_checkpoint_loader(tmp_path):

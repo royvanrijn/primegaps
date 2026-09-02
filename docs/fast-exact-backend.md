@@ -122,6 +122,7 @@ PYTHONPATH=src sage -python scripts/run_fast_exact_j.py \
   --k 49 \
   --candidate reproduction/240/independent-reproducer/candidate-k49-d21.json \
   --workers 12 --chunk-size 32 --compiled \
+  --moment-cache .research/work/k49-J-functionals.jsonl \
   --output .research/work/fast-k49-J.jsonl
 
 PYTHONPATH=src python scripts/finalize_fast_exact.py \
@@ -200,3 +201,16 @@ parallel workers and appends in the parent process, avoiding concurrent writes.
 In a one-group exact check, cache replay returned the identical numerator and
 denominator while reducing worker time from 0.844 seconds to 0.00044 seconds;
 process startup then dominated the 0.033-second wall time.
+
+`run_fast_exact_j.py --moment-cache PATH` now does the analogous J contraction.
+Its cache context excludes the candidate and degree but binds `k`, every support
+parameter, and the density/geometry implementations. Each functional key binds
+the target signature, density and slice status, exact support cell, and monomial
+exponent. The file also records the complete active density-status index for
+each target, so a fully cached coefficient-only replay does not reconstruct
+target densities merely to rediscover zero statuses. Workers return fresh
+moments through temporary per-task shards, and the parent validates and appends
+them without sending large rational dictionaries through multiprocessing IPC;
+a higher-degree run computes only missing exponent pairs. Exact moment caching
+is intentionally unavailable for the modular runner, whose coefficient ring is
+not rational.

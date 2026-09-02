@@ -10,6 +10,7 @@ from pathlib import Path
 HEADER_SCHEMA = "primegaps-fast-exact-moment-cache-v1"
 RECORD_SCHEMA = "primegaps-fast-exact-I-moments-v1"
 J_RECORD_SCHEMA = "primegaps-fast-exact-J-functionals-v1"
+J_STATUS_RECORD_SCHEMA = "primegaps-fast-exact-J-density-statuses-v1"
 
 
 def canonical_bytes(value) -> bytes:
@@ -24,6 +25,27 @@ def value_hash(value) -> str:
 
 def rational_payload(value) -> list[str]:
     return [str(value.numerator), str(value.denominator)]
+
+
+def j_density_status_record(context_hash, target, statuses):
+    return {
+        "schema": J_STATUS_RECORD_SCHEMA,
+        "context_sha256": context_hash,
+        "target": list(target),
+        "statuses": [list(status) for status in statuses],
+    }
+
+
+def j_functional_record(context_hash, functional_id, moments):
+    return {
+        "schema": J_RECORD_SCHEMA,
+        "context_sha256": context_hash,
+        "functional_id": str(functional_id),
+        "moments": {
+            f"{exponent[0]},{exponent[1]}": rational_payload(value)
+            for exponent, value in moments.items()
+        },
+    }
 
 
 class IMomentCache:
@@ -141,6 +163,7 @@ class JFunctionalCache:
         self.context_hash = value_hash(context)
         self.rational = rational
         self.values: dict[str, dict[tuple[int, int], object]] = {}
+        self.density_statuses: dict[tuple[int, ...], tuple[tuple[int, int], ...]] = {}
         if self.path.exists():
             self._load()
         else:
@@ -164,26 +187,91 @@ class JFunctionalCache:
         ):
             raise ValueError("moment-cache context mismatch")
         for line_number, line in enumerate(lines[1:], 2):
-            record = json.loads(line)
-            if (
-                record.get("schema") != J_RECORD_SCHEMA
-                or record.get("context_sha256") != self.context_hash
+            self._load_record(json.loads(line), line_number)
+
+    def _load_record(self, record, line_number, *, retain=True):
+        if record.get("context_sha256") != self.context_hash:
+            raise ValueError(
+                f"invalid J-functional record on line {line_number}"
+            )
+        if record.get("schema") == J_STATUS_RECORD_SCHEMA:
+            target = tuple(int(value) for value in record["target"])
+            statuses = tuple(
+                sorted(
+                    tuple(int(value) for value in status)
+                    for status in record["statuses"]
+                )
+            )
+            if any(
+                len(status) != 2 or min(status) < 0 for status in statuses
             ):
                 raise ValueError(
-                    f"invalid J-functional record on line {line_number}"
+                    f"invalid J density status on line {line_number}"
                 )
-            functional_id = record["functional_id"]
-            bucket = self.values.setdefault(functional_id, {})
-            for raw_exponent, payload in record["moments"].items():
-                exponent = tuple(int(value) for value in raw_exponent.split(","))
-                if len(exponent) != 2:
-                    raise ValueError(f"invalid exponent on line {line_number}")
-                value = self.rational(int(payload[0]), int(payload[1]))
-                if exponent in bucket and bucket[exponent] != value:
-                    raise ValueError(
-                        f"conflicting cached J functional {functional_id}"
-                    )
+            existing = self.density_statuses.get(target)
+            if existing is not None and existing != statuses:
+                raise ValueError(
+                    f"conflicting cached J density statuses for {target}"
+                )
+            if retain:
+                self.density_statuses[target] = statuses
+            return
+        if record.get("schema") != J_RECORD_SCHEMA:
+            raise ValueError(
+                f"invalid J-functional record on line {line_number}"
+            )
+        functional_id = record["functional_id"]
+        bucket = self.values.get(functional_id, {})
+        for raw_exponent, payload in record["moments"].items():
+            exponent = tuple(int(value) for value in raw_exponent.split(","))
+            if len(exponent) != 2:
+                raise ValueError(f"invalid exponent on line {line_number}")
+            value = self.rational(int(payload[0]), int(payload[1]))
+            if exponent in bucket and bucket[exponent] != value:
+                raise ValueError(
+                    f"conflicting cached J functional {functional_id}"
+                )
+            if retain:
+                if functional_id not in self.values:
+                    bucket = self.values.setdefault(functional_id, {})
                 bucket[exponent] = value
+
+    def ingest(self, path, *, retain=True):
+        """Validate and append a worker-produced record shard."""
+        with Path(path).open() as source, self.path.open("a") as destination:
+            for line_number, line in enumerate(source, 1):
+                record = json.loads(line)
+                self._load_record(record, line_number, retain=retain)
+                destination.write(json.dumps(record, sort_keys=True) + "\n")
+
+    def append_density_statuses(self, target, statuses):
+        """Record the complete nonzero density-status set for one target.
+
+        This small index lets a replay enumerate active support cells without
+        reconstructing the target density merely to discover where it is
+        nonzero.  It is candidate-independent and must agree exactly if seen
+        again.
+        """
+        target = tuple(int(value) for value in target)
+        statuses = tuple(
+            sorted(
+                set(tuple(int(value) for value in status) for status in statuses)
+            )
+        )
+        if any(len(status) != 2 or min(status) < 0 for status in statuses):
+            raise ValueError("J density statuses must be non-negative pairs")
+        existing = self.density_statuses.get(target)
+        if existing is not None:
+            if existing != statuses:
+                raise ValueError(
+                    f"conflicting J density statuses for {target}"
+                )
+            return False
+        self.density_statuses[target] = statuses
+        record = j_density_status_record(self.context_hash, target, statuses)
+        with self.path.open("a") as stream:
+            stream.write(json.dumps(record, sort_keys=True) + "\n")
+        return True
 
     def missing(self, functional_id, exponents):
         bucket = self.values.get(str(functional_id), {})
