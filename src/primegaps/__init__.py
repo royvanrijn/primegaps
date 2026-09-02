@@ -11,11 +11,17 @@ from .integrals import (
     monomial,
 )
 from .distribution import (
+    ANALYTIC_CONSTRAINTS,
+    ANALYTIC_CONSTRAINT_IDS,
+    AnalyticConstraint,
+    ConstraintFailure,
     DistributionCertificate,
     Minorant,
     RegionCell,
     cells_from_support,
+    constraint_failures,
     is_certified,
+    support_constraint_failures,
 )
 from .symmetric import (
     FactorialMomentTable,
@@ -31,12 +37,28 @@ from .symmetric import (
     monomial_symmetric_polynomial,
     simplex_marginal_pairing,
 )
+from .shadow_prices import (
+    CandidateDiagnostic,
+    ConstraintRelaxation,
+    ScoredSupport,
+    ShadowPriceExperiment,
+    rank_constraint_relaxations,
+)
 
 __all__ = [
+    "ANALYTIC_CONSTRAINTS",
+    "ANALYTIC_CONSTRAINT_IDS",
+    "AnalyticConstraint",
+    "ConstraintFailure",
+    "CandidateDiagnostic",
+    "ConstraintRelaxation",
     "DistributionCertificate",
     "Minorant",
     "RegionCell",
+    "ScoredSupport",
+    "ShadowPriceExperiment",
     "cells_from_support",
+    "constraint_failures",
     "is_certified",
     "ExactSupportParameters",
     "FactorialMomentTable",
@@ -57,6 +79,8 @@ __all__ = [
     "load_sparse_symmetric_terms",
     "monomial",
     "monomial_symmetric_polynomial",
+    "rank_constraint_relaxations",
     "simplex_marginal_pairing",
     "small_cube_coefficients",
+    "support_constraint_failures",
 ]

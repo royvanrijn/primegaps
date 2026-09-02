@@ -23,6 +23,71 @@ Q = Fraction
 PAPER_EPSILON = Q(1, 10**10)
 
 
+@dataclass(frozen=True)
+class AnalyticConstraint:
+    """Stable identifier and provenance for one relaxable theorem condition.
+
+    These identifiers are also used by the numerical shadow-price experiment.
+    Relaxing one of them is a counterfactual calculation and never produces a
+    distribution certificate.
+    """
+
+    identifier: str
+    description: str
+    source: str
+    diagnostic_kind: str = "necessary-inequality"
+
+
+ANALYTIC_CONSTRAINTS = (
+    AnalyticConstraint("P2.1", "2*xi1 + 3*xi2 < 2", "Proposition 2"),
+    AnalyticConstraint("P2.2", "xi2 <= xi3", "Proposition 2"),
+    AnalyticConstraint("P2.3", "xi1 + 9*xi2 < 4", "Proposition 2"),
+    AnalyticConstraint("P2.4", "2*xi1 + xi2 > 1", "Proposition 2"),
+    AnalyticConstraint("P2.5", "17*xi2 < 7", "Proposition 2"),
+    AnalyticConstraint("P2.domain.xi1.lower", "xi1 > 0", "Proposition 2"),
+    AnalyticConstraint("P2.domain.xi1.upper", "xi1 < 1", "Proposition 2"),
+    AnalyticConstraint("P2.domain.xi2.lower", "xi2 > 0", "Proposition 2"),
+    AnalyticConstraint("P2.domain.xi2.upper", "xi2 < 1", "Proposition 2"),
+    AnalyticConstraint("P2.domain.xi3.lower", "xi3 > 0", "Proposition 2"),
+    AnalyticConstraint("P2.domain.xi3.upper", "xi3 < 1", "Proposition 2"),
+    AnalyticConstraint("P3.I", "global Type I inequality", "Proposition 3 (I)"),
+    AnalyticConstraint("P3.II.range", "global Type II range inequality", "Proposition 3 (II)"),
+    AnalyticConstraint("P3.II.delta", "global Type II delta inequality", "Proposition 3 (II)"),
+    AnalyticConstraint("P3.III", "global Type III inequality", "Proposition 3 (III)"),
+    AnalyticConstraint(
+        "P3.local.A",
+        "universal Type I partition witness",
+        "Proposition 3 (A)",
+        "sufficient-witness-search",
+    ),
+    AnalyticConstraint(
+        "P3.local.B",
+        "universal Type IIa partition witness",
+        "Proposition 3 (B)",
+        "sufficient-witness-search",
+    ),
+    AnalyticConstraint(
+        "P3.local.C",
+        "universal Type IIb partition witness",
+        "Proposition 3 (C)",
+        "sufficient-witness-search",
+    ),
+    AnalyticConstraint(
+        "P3.local.D",
+        "universal Type IIc partition witness",
+        "Proposition 3 (D)",
+        "sufficient-witness-search",
+    ),
+    AnalyticConstraint(
+        "P3.local.E",
+        "universal Type III partition witness",
+        "Proposition 3 (E)",
+        "sufficient-witness-search",
+    ),
+)
+ANALYTIC_CONSTRAINT_IDS = tuple(item.identifier for item in ANALYTIC_CONSTRAINTS)
+
+
 def _q(value: int | float | str | Q) -> Q:
     """Convert public decimal inputs without importing their binary error."""
     if isinstance(value, Q):
@@ -109,6 +174,17 @@ class Check:
     passed: bool
     statement: str
     source: str
+
+
+@dataclass(frozen=True)
+class ConstraintFailure:
+    """One failed analytic check, for diagnostics and counterfactual screens."""
+
+    constraint_id: str
+    left_cell: str
+    right_cell: str
+    detail: str
+    diagnostic_kind: str
 
 
 @dataclass(frozen=True)
@@ -458,6 +534,71 @@ def is_certified(
             "For Type IIc, moduli with omega_0 <= 0 are assigned to Bombieri–Vinogradov; Proposition 3(D)'s factorization is checked on 0 <= omega_0 <= omega.",
         ),
     )
+
+
+def constraint_failures(
+    region_a: RegionCell,
+    region_b: RegionCell,
+    minorant: Minorant,
+) -> tuple[ConstraintFailure, ...]:
+    """Report every failed relaxable check without weakening ``is_certified``.
+
+    This is a diagnostic API for counterfactual optimization. In particular,
+    absence of a local partition witness is only a failure of the implemented
+    sufficient witness family, not a proof that Proposition 3 cannot apply.
+    Structural mismatches such as unequal deltas are rejected with
+    ``ValueError`` because they are not analytic constraints one may relax.
+    """
+    if region_a.delta != region_b.delta:
+        raise ValueError("cell deltas differ")
+    if region_a.support_max != region_b.support_max:
+        raise ValueError("cells do not name the same full-support A_n")
+
+    labels = (region_a.label or "unlabelled", region_b.label or "unlabelled")
+    kinds = {item.identifier: item.diagnostic_kind for item in ANALYTIC_CONSTRAINTS}
+    failures: list[ConstraintFailure] = []
+
+    def add(identifier: str, detail: str) -> None:
+        failures.append(ConstraintFailure(identifier, *labels, detail, kinds[identifier]))
+
+    for check in _proposition_2_checks(minorant):
+        if not check.passed:
+            add(check.name, check.statement)
+
+    # Empty Xi cells impose no modulus-distribution demand. BV cells require
+    # only a valid Proposition 2 minorant.
+    if region_a.is_empty or region_b.is_empty:
+        return tuple(failures)
+    modulus_bound = region_a.a_upper + region_b.a_upper
+    if modulus_bound <= Q(1, 2):
+        return tuple(failures)
+
+    for check in _proposition_3_global_checks(region_a.delta, region_a.support_max, minorant):
+        if not check.passed:
+            add(check.name, check.statement)
+
+    if region_a.large_count + region_b.large_count == 0:
+        return tuple(failures)
+    omega = modulus_bound / 2 - Q(1, 4)
+    for condition, capacities in _local_conditions(region_a, region_b, minorant, omega):
+        if _partition_witness(condition, capacities, region_a, region_b) is None:
+            identifier = f"P3.local.{condition[0]}"
+            detail = "capacities=" + ",".join(_show(value) for value in capacities)
+            add(identifier, detail)
+    return tuple(failures)
+
+
+def support_constraint_failures(
+    parameters: object,
+    minorant: Minorant,
+) -> tuple[ConstraintFailure, ...]:
+    """Aggregate analytic failures over every Cartesian pair of support cells."""
+    cells = cells_from_support(parameters)
+    failures: list[ConstraintFailure] = []
+    for left in cells:
+        for right in cells:
+            failures.extend(constraint_failures(left, right, minorant))
+    return tuple(failures)
 
 
 def cells_from_support(parameters: object) -> tuple[RegionCell, ...]:

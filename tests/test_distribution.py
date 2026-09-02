@@ -1,6 +1,14 @@
 from fractions import Fraction
 
-from primegaps.distribution import Minorant, RegionCell, cells_from_support, is_certified
+from primegaps.distribution import (
+    ANALYTIC_CONSTRAINT_IDS,
+    Minorant,
+    RegionCell,
+    cells_from_support,
+    constraint_failures,
+    is_certified,
+    support_constraint_failures,
+)
 from primegaps.support import stadlmann_240_parameters
 
 
@@ -64,3 +72,27 @@ def test_decimal_inputs_produce_exact_boundary_decisions():
     certificate = is_certified(left, right, PUBLISHED_MINORANT)
     assert certificate
     assert certificate.modulus_exponent_bound == Fraction(1, 2)
+
+
+def test_constraint_diagnostics_do_not_weaken_the_published_certificate():
+    assert "P3.II.delta" in ANALYTIC_CONSTRAINT_IDS
+    assert "P3.local.D" in ANALYTIC_CONSTRAINT_IDS
+    assert not support_constraint_failures(stadlmann_240_parameters(), PUBLISHED_MINORANT)
+
+
+def test_constraint_diagnostics_report_all_global_failures():
+    cell = RegionCell("0.26", 0, 0, "0.028")
+    failures = constraint_failures(cell, cell, PUBLISHED_MINORANT)
+    identifiers = {failure.constraint_id for failure in failures}
+    assert identifiers == {"P3.I", "P3.II.range", "P3.II.delta", "P3.III"}
+
+
+def test_constraint_diagnostics_reject_structural_mismatch():
+    left = RegionCell("0.26", 0, 0, "0.028", support_max="0.26")
+    right = RegionCell("0.26", 0, 0, "0.027", support_max="0.26")
+    try:
+        constraint_failures(left, right, PUBLISHED_MINORANT)
+    except ValueError as exc:
+        assert "deltas differ" in str(exc)
+    else:  # pragma: no cover - defensive assertion
+        raise AssertionError("structural mismatch was treated as relaxable")
