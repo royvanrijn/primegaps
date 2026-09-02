@@ -12,6 +12,7 @@ dependencies = ["numpy>=2.0"]
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 sparse = ["scipy>=1.13"]
+exact = ["gmpy2>=2.1"]
 
 [project.scripts]
 primegaps-proof = "primegaps.proof_backend:main"
