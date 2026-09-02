@@ -20,10 +20,24 @@ from .modular_exact import (
     rational_residue,
 )
 from .moment_cache import IMomentCache, JFunctionalCache
+from .j_block import (
+    JBlockOperator,
+    MarginalMap,
+    accumulate_feature_gram_blocks,
+    factorized_feature_values,
+    load_block_operator,
+    save_block_operator,
+)
 
 __all__ = [
     "IMomentCache",
     "JFunctionalCache",
+    "JBlockOperator",
+    "MarginalMap",
+    "accumulate_feature_gram_blocks",
+    "factorized_feature_values",
+    "load_block_operator",
+    "save_block_operator",
     "apply_zero_block",
     "crt",
     "descending_primes",

@@ -4,11 +4,13 @@ import json
 from pathlib import Path
 import sys
 
+import numpy as np
 import pytest
 
 from primegaps.fast_exact import fast_i as fast
-from primegaps.fast_exact import fast_j, moment_cache
+from primegaps.fast_exact import fast_j, j_block, moment_cache
 from primegaps.fast_exact import compiled_poly, modular_exact
+from primegaps.symmetric import simplex_marginal_pairing
 
 
 HERE = Path(__file__).resolve().parent
@@ -435,4 +437,386 @@ def test_batched_modular_checkpoint_loader(tmp_path):
     assert reconstruct.load_modular(path) == (
         (101, {(): 7, (2,): 11}),
         (103, {(): 9, (2,): 13}),
+    )
+
+
+def test_hankel_block_contraction_avoids_polynomial_product():
+    left = (
+        {(0, 0): Fraction(2), (1, 0): Fraction(-3)},
+        {(0, 1): Fraction(5, 2)},
+    )
+    right = (
+        {(0, 0): Fraction(-4), (0, 2): Fraction(7)},
+        {(1, 1): Fraction(3, 5)},
+    )
+    moments = {
+        (x_power, z_power): Fraction(2 * x_power - z_power + 7, 11)
+        for x_power in range(3)
+        for z_power in range(4)
+    }
+    actual = j_block.contract_polynomial_families(
+        left, right, moments, dtype=object
+    )
+    expected = []
+    for left_polynomial in left:
+        row = []
+        for right_polynomial in right:
+            product = verifier.kernel._poly_mul(left_polynomial, right_polynomial)
+            row.append(sum(
+                coefficient * moments[exponent]
+                for exponent, coefficient in product.items()
+            ))
+        expected.append(row)
+    assert actual.tolist() == expected
+
+
+def test_signature_pair_route_index_matches_reference_scan():
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    pair_groups = verifier.grouped_signature_pairs(feature_groups, 3)
+    index = j_block.signature_pair_route_index(pair_groups)
+    for left, right in index:
+        signature_symmetry = 1 if left == right else 2
+        expected = tuple(
+            (tuple(target), structure // signature_symmetry)
+            for target, contributions in pair_groups.items()
+            for route_left, route_right, structure in contributions
+            if route_left == left and route_right == right
+        )
+        assert index[(left, right)] == expected
+
+
+def test_j_block_operator_matches_frozen_exact_j():
+    dimension = 3
+    basis = (((), 0), ((2,), 0), ((2, 2), 1))
+    coefficients = np.asarray(
+        [Fraction(2), Fraction(-3, 2), Fraction(1, 3)], dtype=object
+    )
+    marginal_map = j_block.MarginalMap.from_basis(basis)
+    signatures = tuple(marginal_map.feature_keys)
+    blocks = {}
+    for left_index, left_signature in enumerate(signatures):
+        left_keys = marginal_map.feature_keys[left_signature]
+        for right_signature in signatures[left_index:]:
+            right_keys = marginal_map.feature_keys[right_signature]
+            block = np.empty((len(left_keys), len(right_keys)), dtype=object)
+            routes = verifier.product_signatures(
+                dimension - 1, left_signature, right_signature
+            )
+            for row, (left_power, left_slack) in enumerate(left_keys):
+                for column, (right_power, right_slack) in enumerate(right_keys):
+                    block[row, column] = sum(
+                        structure * verifier.j_orbit(
+                            dimension - 1,
+                            target,
+                            left_power,
+                            left_slack,
+                            right_power,
+                            right_slack,
+                        )
+                        for target, structure in routes
+                    )
+            blocks[(left_signature, right_signature)] = block
+    operator = j_block.JBlockOperator(marginal_map, blocks)
+    terms = tuple(
+        verifier.Term(signature, slack, coefficient)
+        for (signature, slack), coefficient in zip(basis, coefficients)
+    )
+    expected = verifier.exact_j(terms, dimension)
+    assert operator.quadratic(coefficients) == expected
+    applied = operator.matvec(coefficients)
+    assert sum(left * right for left, right in zip(coefficients, applied)) == expected
+
+
+def test_streamed_feature_gram_blocks_match_dense_j_matrix():
+    basis = (((), 0), ((2,), 0), ((2, 2), 1))
+    marginal_map = j_block.MarginalMap.from_basis(basis)
+    rng = np.random.default_rng(20260902)
+    coefficients = rng.standard_normal(len(basis))
+    all_weights = rng.random(11)
+    all_values = {
+        signature: rng.standard_normal((11, len(keys)))
+        for signature, keys in marginal_map.feature_keys.items()
+    }
+
+    blocks = None
+    for selection in (slice(0, 4), slice(4, 11)):
+        blocks = j_block.accumulate_feature_gram_blocks(
+            marginal_map,
+            {
+                signature: values[selection]
+                for signature, values in all_values.items()
+            },
+            all_weights[selection],
+            blocks=blocks,
+        )
+    operator = j_block.JBlockOperator(marginal_map, blocks)
+
+    design = np.zeros((11, len(basis)))
+    for basis_index, routes in enumerate(marginal_map.routes):
+        for signature, position in routes:
+            design[:, basis_index] += all_values[signature][:, position]
+    dense_j = design.T @ (all_weights[:, None] * design)
+    assert np.allclose(operator.matvec(coefficients), dense_j @ coefficients)
+    assert np.allclose(
+        operator.quadratic(coefficients),
+        coefficients @ dense_j @ coefficients,
+    )
+
+
+def test_j_block_scipy_linear_operator_matches_dense_eigenvalue():
+    scipy = pytest.importorskip("scipy.sparse.linalg")
+    marginal_map = j_block.MarginalMap.from_basis(
+        (((), 0), ((2,), 0), ((2, 2), 1))
+    )
+    rng = np.random.default_rng(311)
+    values = {
+        signature: rng.standard_normal((12, len(keys)))
+        for signature, keys in marginal_map.feature_keys.items()
+    }
+    weights = rng.random(12)
+    operator = j_block.JBlockOperator(
+        marginal_map,
+        j_block.accumulate_feature_gram_blocks(marginal_map, values, weights),
+    )
+    dense = np.column_stack([
+        operator.matvec(np.eye(operator.shape[0])[:, index])
+        for index in range(operator.shape[0])
+    ])
+    eigenvalue = scipy.eigsh(
+        operator.as_scipy_linear_operator(),
+        k=1,
+        which="LA",
+        return_eigenvectors=False,
+    )[0]
+    assert np.isclose(eigenvalue, np.linalg.eigvalsh(dense)[-1])
+
+
+def test_factorized_features_reconstruct_sparse_marginals():
+    basis = (((3, 1), 0), ((2,), 1), ((), 2))
+    marginal_map = j_block.MarginalMap.from_basis(basis)
+    rng = np.random.default_rng(47)
+    point_count = 7
+    signature_values = {
+        signature: rng.standard_normal(point_count)
+        for signature in marginal_map.feature_keys
+    }
+    radial_values = rng.standard_normal((4, 3, point_count))
+    power_scale = 1.75
+    values = j_block.factorized_feature_values(
+        marginal_map,
+        signature_values,
+        radial_values,
+        power_scale=power_scale,
+    )
+    coefficients = rng.standard_normal(len(basis))
+    reconstructed = np.zeros(point_count)
+    for coefficient, routes in zip(coefficients, marginal_map.routes):
+        for signature, position in routes:
+            reconstructed += coefficient * values[signature][:, position]
+    expected = np.zeros(point_count)
+    for coefficient, (signature, slack) in zip(coefficients, basis):
+        expected += coefficient * signature_values[signature] * radial_values[0, slack]
+        for power in set(signature):
+            erased = list(signature)
+            erased.remove(power)
+            erased = tuple(sorted(erased, reverse=True))
+            expected += (
+                coefficient
+                * signature_values[erased]
+                * power_scale**power
+                * radial_values[power, slack]
+            )
+    assert np.allclose(reconstructed, expected)
+
+
+def test_numerical_j_builder_features_match_dense_qmc_marginals():
+    pytest.importorskip("scipy")
+    builder = load(
+        "test_numerical_j_block_builder",
+        ROOT / "scripts" / "build_numerical_j_block_operator.py",
+    )
+    qmc = builder.qmc_verifier
+    k = 7
+    degree = 5
+    basis = qmc.basis_indices(degree)
+    marginal_map = j_block.MarginalMap.from_basis(basis)
+    points = qmc.simplex_points(k - 1, qmc.R, 5, 73)
+    coordinate_scale = k / (qmc.U * qmc.U)
+    blocks = builder.evaluated_blocks(
+        points,
+        marginal_map,
+        degree,
+        k,
+        coordinate_scale,
+        legal=True,
+    )
+    reconstructed = np.zeros((len(points), len(basis)))
+    for basis_index, routes in enumerate(marginal_map.routes):
+        for signature, position in routes:
+            reconstructed[:, basis_index] += blocks[signature][:, position]
+    expected = qmc.marginal_features(
+        points,
+        basis,
+        qmc.all_partitions(degree // 2),
+        degree,
+        k,
+        coordinate_scale,
+    )
+    assert np.allclose(reconstructed, expected, rtol=2e-14, atol=2e-14)
+
+    unrestricted = j_block.JBlockOperator(
+        marginal_map,
+        builder.unrestricted_blocks(marginal_map, degree, k),
+    )
+    assembled = np.column_stack([
+        unrestricted.matvec(np.eye(len(basis))[:, index])
+        for index in range(len(basis))
+    ])
+    assert np.allclose(
+        assembled,
+        qmc.unrestricted_marginal_gram(k, degree),
+        rtol=2e-13,
+        atol=2e-13,
+    )
+
+    total_room = np.asarray([0.24])
+    lo = np.asarray([0.01])
+    hi = np.asarray([0.20])
+    high_degree = builder.integrated_jacobi_moments(
+        total_room, lo, hi, 13, 27, 49
+    )[13, 27, 0]
+    nodes, weights = np.polynomial.legendre.leggauss(64)
+    half = (hi[0] - lo[0]) / 2
+    middle = (hi[0] + lo[0]) / 2
+    coordinate = middle + half * nodes
+    radial_coordinate = (total_room[0] - coordinate) / qmc.U
+    reference = half * np.dot(
+        weights,
+        coordinate**26
+        * qmc.eval_jacobi_basis(27, 49, radial_coordinate)[:, 27],
+    )
+    assert np.isclose(high_degree, reference, rtol=2e-13, atol=0.0)
+
+
+def test_block_operator_persistence_roundtrip(tmp_path):
+    marginal_map = j_block.MarginalMap.from_basis((((), 0), ((2,), 1)))
+    rng = np.random.default_rng(11)
+    values = {
+        signature: rng.standard_normal((8, len(keys)))
+        for signature, keys in marginal_map.feature_keys.items()
+    }
+    blocks = j_block.accumulate_feature_gram_blocks(
+        marginal_map, values, rng.random(8)
+    )
+    original = j_block.JBlockOperator(marginal_map, blocks)
+    directory = tmp_path / "operator"
+    j_block.save_block_operator(directory, original, metadata={"seed": 11})
+    loaded = j_block.load_block_operator(directory)
+    candidate = np.asarray([0.75, -1.25])
+    assert np.array_equal(loaded.matvec(candidate), original.matvec(candidate))
+    assert json.loads((directory / "manifest.json").read_text())["metadata"] == {
+        "seed": 11
+    }
+
+
+def test_unrestricted_feature_blocks_match_closed_simplex_pairing():
+    dimension = 3
+    basis = (((), 0), ((2,), 0), ((2, 2), 1))
+    coefficients = np.asarray(
+        [Fraction(2), Fraction(-3, 2), Fraction(1, 3)], dtype=object
+    )
+    marginal_map = j_block.MarginalMap.from_basis(basis)
+    signatures = tuple(marginal_map.feature_keys)
+    blocks = {
+        (left, right): j_block.unrestricted_signature_pair_block(
+            left,
+            right,
+            marginal_map.feature_keys[left],
+            marginal_map.feature_keys[right],
+            common_dimension=dimension - 1,
+            outer_radius=verifier.U,
+            marginal_radius=verifier.R,
+            dtype=object,
+        )
+        for left_index, left in enumerate(signatures)
+        for right in signatures[left_index:]
+    }
+    operator = j_block.JBlockOperator(marginal_map, blocks)
+    expected = Fraction(0)
+    for row, ((left_signature, left_slack), left_coefficient) in enumerate(
+        zip(basis, coefficients)
+    ):
+        for column in range(row, len(basis)):
+            right_signature, right_slack = basis[column]
+            symmetry = 1 if row == column else 2
+            expected += (
+                symmetry
+                * left_coefficient
+                * coefficients[column]
+                * simplex_marginal_pairing(
+                    dimension,
+                    verifier.U,
+                    verifier.R,
+                    left_slack,
+                    left_signature,
+                    right_slack,
+                    right_signature,
+                )
+            )
+    assert operator.quadratic(coefficients) == expected
+
+
+def test_target_functionals_compile_to_float_j_blocks():
+    dimension = 3
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    pair_groups = verifier.grouped_signature_pairs(feature_groups, dimension)
+    _values, functionals, statuses = fast_j.evaluate_target_chunk_cached(
+        tuple(pair_groups),
+        dimension=dimension,
+        feature_groups=feature_groups,
+        pair_groups=pair_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+        functional_values={},
+        density_statuses={},
+    )
+    marginal_map = j_block.MarginalMap.from_basis(
+        (term.signature, term.slack) for term in terms
+    )
+    signatures = tuple(marginal_map.feature_keys)
+    blocks = {}
+    for left_index, left_signature in enumerate(signatures):
+        for right_signature in signatures[left_index:]:
+            blocks[(left_signature, right_signature)] = (
+                j_block.compile_signature_pair_block(
+                    left_signature,
+                    right_signature,
+                    left_keys=marginal_map.feature_keys[left_signature],
+                    right_keys=marginal_map.feature_keys[right_signature],
+                    pair_groups=pair_groups,
+                    functional_values=functionals,
+                    density_statuses=statuses,
+                    common_dimension=dimension - 1,
+                    verifier=verifier,
+                    rational=Fraction,
+                )
+            )
+    operator = j_block.JBlockOperator(marginal_map, blocks)
+    coefficients = np.asarray([float(term.coefficient) for term in terms])
+    assert np.isclose(
+        operator.quadratic(coefficients),
+        float(verifier.exact_j(terms, dimension)),
+        rtol=2e-14,
+        atol=2e-14,
     )
