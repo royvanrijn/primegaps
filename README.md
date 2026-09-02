@@ -4,9 +4,18 @@ Exploratory code around Julia Stadlmann's 2026 bounded-prime-gaps paper
 [arXiv:2608.31126](https://arxiv.org/abs/2608.31126), which improves the unconditional
 bound from `H_1 <= 246` to `H_1 <= 240`.
 
-The immediate goal is to reproduce the paper's `k=49`, degree-21 generalized
-eigenvalue certificate and then probe `k=48,47,...`. This repository contains
-independently checkable layers of that reconstruction:
+The paper's `k=49`, degree-21 variational certificate has now been reproduced
+with exact rational arithmetic.  For one fixed 846-term rational polynomial,
+the independently assembled value is
+
+    49 J(F) / I(F) = 1.0011632465949216560417861678682244509240906847502...
+
+With the same support and degree at `k=48`, the exact baseline is
+
+    48 J(F) / I(F) = 0.9969233513526357503888760066573328995217614432838...
+    1 - 48 J(F) / I(F) = 0.0030766486473642496111239933426671004782385567162...
+
+This repository contains independently checkable layers of the reconstruction:
 
 - the published support `T_k(delta, A, B, epsilon)`;
 - generation/counting of the symmetric-polynomial basis used by Polymath/Stadlmann;
@@ -19,9 +28,9 @@ independently checkable layers of that reconstruction:
 - an exact-rational distribution-region oracle for support-cell pairs;
 - notes on what is and is not yet reproduced.
 
-**Nothing in this repository currently proves a bound below 240.** The exact
-integral kernel is now independently testable, but symmetry-compressed `k=49`
-matrix assembly and the published certificate are not yet reproduced.
+This reproduces the variational certificate used for `H_1 <= 240`; it does not
+claim a bound below 240. See [the exact 240 reproduction](docs/reproduction-240.md)
+for conventions, commands, hashes, independent checks, and the `k=48` status.
 
 See [the Section 5 engine notes](docs/section5-engine.md) for the reconstructed
 formulas, source errata, exact API, and verification boundary.

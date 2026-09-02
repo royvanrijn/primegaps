@@ -1,0 +1,8683 @@
+{
+  "basis_dimension": 846,
+  "degree": 21,
+  "k": 48,
+  "radial_coordinate": "(U-sum(t)) with U=521/2000",
+  "rationalization_significant_digits": 12,
+  "schema": "primegaps-stadlmann-rational-candidate-v1",
+  "source_vector": ".research/work/reproduction-240/independent-reproducer/unrestricted-orthogonal-k48-d21.npz",
+  "terms": [
+    {
+      "denominator": 5000000000,
+      "numerator": 656792517871,
+      "signature": [],
+      "slack_power": 0
+    },
+    {
+      "denominator": 10000000,
+      "numerator": -1780891331771,
+      "signature": [],
+      "slack_power": 1
+    },
+    {
+      "denominator": 50000,
+      "numerator": 4160869926313,
+      "signature": [],
+      "slack_power": 2
+    },
+    {
+      "denominator": 2,
+      "numerator": -34626993793,
+      "signature": [],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 1981489071578,
+      "signature": [],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -136513160332700,
+      "signature": [],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 5954462807890000,
+      "signature": [],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -169736843002600000,
+      "signature": [],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 3200279067316000000,
+      "signature": [],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -38670485368080000000,
+      "signature": [],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 249637175932900000000,
+      "signature": [],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 174776362039400000000,
+      "signature": [],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -16812526224020000000000,
+      "signature": [],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 86447626761510000000000,
+      "signature": [],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": 635466298633700000000000,
+      "signature": [],
+      "slack_power": 14
+    },
+    {
+      "denominator": 1,
+      "numerator": -10290402492550000000000000,
+      "signature": [],
+      "slack_power": 15
+    },
+    {
+      "denominator": 1,
+      "numerator": 55971131394460000000000000,
+      "signature": [],
+      "slack_power": 16
+    },
+    {
+      "denominator": 1,
+      "numerator": -160210768634500000000000000,
+      "signature": [],
+      "slack_power": 17
+    },
+    {
+      "denominator": 1,
+      "numerator": 310813512610300000000000000,
+      "signature": [],
+      "slack_power": 18
+    },
+    {
+      "denominator": 1,
+      "numerator": -306745146722200000000000000,
+      "signature": [],
+      "slack_power": 19
+    },
+    {
+      "denominator": 1,
+      "numerator": -1917667911594000000000000000,
+      "signature": [],
+      "slack_power": 20
+    },
+    {
+      "denominator": 1,
+      "numerator": 6364868295858000000000000000,
+      "signature": [],
+      "slack_power": 21
+    },
+    {
+      "denominator": 10000000,
+      "numerator": -2734774420477,
+      "signature": [
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 5000,
+      "numerator": 2111320013639,
+      "signature": [
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 10,
+      "numerator": -2070722653253,
+      "signature": [
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 43813735020880,
+      "signature": [
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -4966017148650000,
+      "signature": [
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 332260133628900000,
+      "signature": [
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -13859175298530000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 373416636455000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -6614783805033000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 75325844198560000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -466094302026900000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -233710725971400000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 29612197726540000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": -196916824794700000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": 10811913959390000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 14
+    },
+    {
+      "denominator": 1,
+      "numerator": 5183979297444000000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 15
+    },
+    {
+      "denominator": 1,
+      "numerator": -19739977194450000000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 16
+    },
+    {
+      "denominator": 1,
+      "numerator": 25764967584040000000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 17
+    },
+    {
+      "denominator": 1,
+      "numerator": -121219864375400000000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 18
+    },
+    {
+      "denominator": 1,
+      "numerator": 437700194926300000000000000000,
+      "signature": [
+        2
+      ],
+      "slack_power": 19
+    },
+    {
+      "denominator": 1000,
+      "numerator": 418379605367,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 10,
+      "numerator": -8385290239593,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 446150642521000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -96856634611120000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 10840346341310000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -698455892224400000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 27518188740200000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -689717274688500000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 11278266379970000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -119726224473700000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 727258958503000000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -379296410649200000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -32512771137000000000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 216965979924000000000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": -175309197443500000000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 14
+    },
+    {
+      "denominator": 1,
+      "numerator": -2246084818217000000000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 15
+    },
+    {
+      "denominator": 1,
+      "numerator": 505323852003800000000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 16
+    },
+    {
+      "denominator": 1,
+      "numerator": 22012390547210000000000000000000,
+      "signature": [
+        2,
+        2
+      ],
+      "slack_power": 17
+    },
+    {
+      "denominator": 10,
+      "numerator": -4006571006087,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1358221896326000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -814531194946700000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 182117192717400000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -19998954113990000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1226367554640000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -44862097912700000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 1020962185814000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -14940554016420000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 144063261757200000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -861991256561800000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 1444786667017000000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 22137538785120000000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": -139408776420200000000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": -448782617963000000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 14
+    },
+    {
+      "denominator": 1,
+      "numerator": 1224859300981000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2
+      ],
+      "slack_power": 15
+    },
+    {
+      "denominator": 1,
+      "numerator": 355882184888700,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -1921707689153000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1248031062836000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -280479833950900000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 29779331498280000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -1710797651929000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 56804942778590000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -1130476044038000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 13960737270190000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -115454215321100000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 679980746078600000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -1857967552314000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -8036106318074000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 51988626233940000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": -1650216010392000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 3438251267712000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -1677939961567000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 334704986417100000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -32924451099120000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1737383662119000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -51089933717350000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 836929988662700000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -7614363288673000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 45087711074970000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -270289259539000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 1059214288044000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 4983280651656000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -8622463888983000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 2317710598848000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -291995315689300000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 21978712368690000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -1042681100364000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 27562113117610000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -338520472311200000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 1397314187835000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 1757176177282000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -1663412957500000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 13832502672700000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -3653661339395000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 229283851450500000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -1580436490179000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 69339803627510000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -5748303808709000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 53938128962310000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -15390942711050000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 18604002849410000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 5132841225638000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -352565539388600000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -7870082902919000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 281077345971100000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -13431771141680000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -145878586636700000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -4019178582156000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 474166461670700000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 113599752706400000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 236818383878400000000000000000000000000,
+      "signature": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 250,
+      "numerator": 67438710103,
+      "signature": [
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 2,
+      "numerator": -420468838101,
+      "signature": [
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 91498218314900,
+      "signature": [
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -20223215891100000,
+      "signature": [
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 2491562833136000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -174136866726200000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 7256295046862000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -187781281327300000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 3112529355449000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -33093143942220000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 198094273378700000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -21297481800820000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -10067570334700000000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 65914400876350000000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": -47481669809720000000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 14
+    },
+    {
+      "denominator": 1,
+      "numerator": -767286424938800000000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 15
+    },
+    {
+      "denominator": 1,
+      "numerator": 671368109690800000000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 16
+    },
+    {
+      "denominator": 1,
+      "numerator": 5543897909401000000000000000000,
+      "signature": [
+        4
+      ],
+      "slack_power": 17
+    },
+    {
+      "denominator": 1,
+      "numerator": -331998388225,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 255515693579700,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -131050041054200000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 33333619045670000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -4308982468539000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 296929766883600000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -11719266896950000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 278057306731400000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -4138854613042000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 40184186250340000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -242416986947500000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 388661522746400000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 6834446496819000000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": -43816666068600000000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": 10069900551970000000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 14
+    },
+    {
+      "denominator": 1,
+      "numerator": 346861077827500000000000000000000,
+      "signature": [
+        4,
+        2
+      ],
+      "slack_power": 15
+    },
+    {
+      "denominator": 1,
+      "numerator": 159639300326100,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -79605278293140000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 112287482359200000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -41186141438160000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 5841228080845000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -398197983653600000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 14667565952900000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -307915910148400000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 3865746106685000000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -32250956403950000000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 196885547309700000000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -574387230583000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -2326133099790000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 15671918109400000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": 48311591615210000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -351499202240300000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 4819050307755000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 31246946038280000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -5539841424399000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 383170885500300000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -13040028436450000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 228697676384900000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -2079980097832000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 12149412246360000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -79593881333740000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 333119267401700000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 843644909650500000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 316000177752400000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -102940543582600000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -2199176877152000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 2498262482036000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -212144587420500000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 7041234058448000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -95075989513320000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 349955121648500000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 1037702900170000000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -2999928036521000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1373545545340000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -112984199621100000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -16960069059920000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 1386430207513000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 5838146966129000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -1600783938625000000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 18127646711440000000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 1829605595606000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -2139778531756000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 629628207968500000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -13124880360820000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -2205069036934000000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 56158871369840000000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 2395224561750000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -7485157094539000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -682417426063400000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 54183384114300000000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 4526058549595000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 20827569211830000000000000000000000000,
+      "signature": [
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 26726804647910,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 77087970696780000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -17168493347080000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -2581056680312000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 951339248645200000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -88136561987390000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 3748288019552000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -83879763389780000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 1073594432783000000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -9011309426471000000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 56403031413030000000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -172916521778200000000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -656061122957800000000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 4584424979346000000000000000000000,
+      "signature": [
+        4,
+        4
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": 719666129373900000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -336795113267100000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 84680992547780000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -4487551396693000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -532373785045100000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 75620034899350000000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -3261313420977000000000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 62538538948940000000000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -573329806703600000000000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 3292398115178000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -22980376592770000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 100748420221700000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -2166093672319000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 580071445283700000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -124752808370000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 10930469643850000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -328256274560300000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -30967967814410000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 1724873726600000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -26763294255440000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 91098575639220000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 412012400162400000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 3799570870289000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -449633886738800000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 17927409282860000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -5377182919456000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 917079197943600000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -10412489407080000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -402192224971600000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 5915423876586000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -5147590545510000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 139843890712700000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 202218351306800000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -11841267851470000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -625937962803700000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 14781892560040000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 5932650925666000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -981277101395400000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -225650939944100000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 17405568423140000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -3506689670546000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 2458384215935000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -2070127042565000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -94052648187040000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -32872737711920000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 4526690043053000000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -380547950424000000000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 405966989629200000000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 399486191389300000000000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -7491526197985000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 24761744332580000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 139099845302800000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 4529918955930000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 564142964632100000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -34013769241330000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 1993836529869000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 409314255301800000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -7817412153172000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -88541387359650000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 1848309675338000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -6857040995982000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -1143060931189000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 130066694918000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -11107559165460000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -179789563936600000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 4845205471255000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 7017942800105000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1014274834111000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -115143453454200000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 9796627049341000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -3806340117783000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -127383415845900000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -4713526323584000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -1418781017187000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 73349401980290000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -6042055748226000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -52441195448350000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1709595921724000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 4983504958956000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1527500631148000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -57470648236150000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 4761867723671000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -2663138120880000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -713308832260000000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -1469477359562000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -599731879122700000000000000000000000,
+      "signature": [
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 2,
+      "numerator": -284872874305,
+      "signature": [
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 121567845896400,
+      "signature": [
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -20156936346690000,
+      "signature": [
+        6
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 2528116555442000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -360646309352400000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 30320936158830000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -1371150150795000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 34762695061940000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -528777390001200000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 5158390350661000000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -31352959474820000000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 47094081338690000000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 987011436321100000000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": -6419350587663000000000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": 2762445697286000000000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 14
+    },
+    {
+      "denominator": 1,
+      "numerator": 45950545635450000000000000000000,
+      "signature": [
+        6
+      ],
+      "slack_power": 15
+    },
+    {
+      "denominator": 1,
+      "numerator": 184488428781000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -224315198920600000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 22658059386330000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -1542184627957000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 344787141860200000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -35943596651030000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 1667553610060000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -38542442878700000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 494090156914300000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -4136842272346000000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 26359407351010000000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -82922083124710000000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -314780291381900000000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 2217453048339000000000000000000000,
+      "signature": [
+        6,
+        2
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": -182272191203100000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 378801913181600000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -19088791427450000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -2011160413738000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -43023600450580000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 26205500956510000000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -1422414928903000000000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 28937104747570000000000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -262269162077300000000000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 1469404225814000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -10859858309160000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 49331736802470000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 273442370798800000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -595735848217500000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 26876142890610000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 6224591726513000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -476419255328200000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -2404531489594000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 727510250292200000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -12827788579240000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 39961812006440000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 238702161987300000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -639559489843700000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 864083470990500000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -72833033616800000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -6167784013769000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 772808680726500000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -15599618129650000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -161175477635100000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 3233447649177000000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 512236333136200000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -1139464356214000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 126584976699100000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 635737471487400000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -480131227446200000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 11735571276890000000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 1514821214509000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1288376883784000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -93182815255230000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 3151061084106000000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -2754970048597000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -841142794253800000000000000000000000,
+      "signature": [
+        6,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -152637277784000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -10135473657600000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 2796104037199000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -1902556545123000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 119371508429600000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 2972088031821000000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -343960399063300000000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 7911738986246000000000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -73015897013940000000000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 402144663993900000000000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -3084285703450000000000000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 14408593957810000000000000000000000,
+      "signature": [
+        6,
+        4
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 121514652587400000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 113117699153600000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 2493399608353000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 2206434149083000000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -268804958648700000000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 3661702024579000000000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 164918111560400000000000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -3602854053584000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 10891081867480000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 77790770067600000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -170745193993800000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -382399511799900000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -29342424405490000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 493639707362500000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 289212635319600000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -6852143172441000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -33755056818810000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 1002940123963000000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 411199157350700000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 882288617527400000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 60040696650760000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -4444171053186000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -137895306114300000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 3778378170147000000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -472262137613700000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -1297203915921000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -45241936297750000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 3986679592618000000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 74890675713430000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 902987502114000000000000000000000000,
+      "signature": [
+        6,
+        4,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 303374389371300000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -61603602503790000000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -16623977494190000000000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 918678497683700000000000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 101872516232100000000000000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -2710679743652000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -5006492394894000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 297832506021200000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -507575524658800000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 162460464907600000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 31307617878720000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -2806919726007000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -39851840387710000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1253247237636000000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 470681284145500000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -321286035381200000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -23013981723790000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 2222995644312000000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -223583732836600000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 290448406565500000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 544773265466000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 101295686038700000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -10513837050020000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 944365594570800000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -282218892719700000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -21157869478530000000000000000000000,
+      "signature": [
+        6,
+        4,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 154218544687700000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 72459455886260000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 2636008578094000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 328330504995700000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -64406572285340000000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1513732685008000000000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 13036357719070000000000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -479577819207900000000000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 1371367280838000000000000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 12421739054530000000000000000000000,
+      "signature": [
+        6,
+        6
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -253196742215400000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -202223850432400000000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -8314698636146000000000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 393487557312100000000000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 60125429264970000000000000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -1678086484729000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -1346825012311000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 156406818095800000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 406266136822100000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 423262529145600000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 13334920754240000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -1274012065625000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -25563672736480000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 786464030178900000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -489433500781900000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -589950661586200000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -9043518882313000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 1022958453082000000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 288300973278200000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 402847077742800000000000000000000000,
+      "signature": [
+        6,
+        6,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 24757702581740000000000000,
+      "signature": [
+        6,
+        6,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 92929733325700000000000000000,
+      "signature": [
+        6,
+        6,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 6061744093644000000000000000000,
+      "signature": [
+        6,
+        6,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -575850294085500000000000000000000,
+      "signature": [
+        6,
+        6,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -7401464567827000000000000000000000,
+      "signature": [
+        6,
+        6,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 250425109424500000000000000000000000,
+      "signature": [
+        6,
+        6,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -33176616344700000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -135895333086100000000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -4236759725839000000000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 450714893336200000000000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 31270444643570000000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 103040469721800000000000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -26179217146190000000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 8119298739545000000000000000000000,
+      "signature": [
+        6,
+        6,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -18353552484550000000000000000,
+      "signature": [
+        6,
+        6,
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -30898758063660000000000000000000,
+      "signature": [
+        6,
+        6,
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -717943693377800000000000000000000,
+      "signature": [
+        6,
+        6,
+        6
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 79759290257700000000000000000000000,
+      "signature": [
+        6,
+        6,
+        6
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 11828999713590000000000000000000,
+      "signature": [
+        6,
+        6,
+        6,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 21865804487830000000000000000000000,
+      "signature": [
+        6,
+        6,
+        6,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 29938433477410,
+      "signature": [
+        8
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -37520032817390000,
+      "signature": [
+        8
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 4354310696010000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 23415408777970000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -5301605857765000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -1344246544770000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 104163473168200000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -2763658294003000000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 36369923458220000000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": -304347699706600000000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 2010732588401000000000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": -6737437108736000000000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -24253953631910000000000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 12
+    },
+    {
+      "denominator": 1,
+      "numerator": 177371780227000000000000000000000,
+      "signature": [
+        8
+      ],
+      "slack_power": 13
+    },
+    {
+      "denominator": 1,
+      "numerator": -23178694483970000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 69102002192520000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -7645492369294000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -263974137271200000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 49654952308990000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -190166762695100000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -81381001584590000000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 2104860072921000000000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -19149733905580000000000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 101235569370800000000000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -841130683876700000000000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 4103106230301000000000000000000000,
+      "signature": [
+        8,
+        2
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": -11273715387170000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -99957027977940000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 14200229906920000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 239405644566400000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -101530646914700000000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 2371796027895000000000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 35083433839370000000000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -1008879390921000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 2703214527793000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 25757257827910000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 65115115136730000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 88201761451910000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -23801007892160000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 502020854943700000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 110394611327200000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -3159893658036000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -5493326776188000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 323782792941900000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -152707002066500000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1285867730571000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 27795250262550000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -1415290595076000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -55514430305970000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1655744182718000000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 341035952762000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -79980713377120000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -15719315658160000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 1088558241509000000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -411425469386100000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 19665375677760000000000000000000000,
+      "signature": [
+        8,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 70972167333560000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 20211944805950000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 3542329351305000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 74413061436090000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -38761109078980000000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1012572931671000000000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 6541011858951000000000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -280956102725600000000000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 773483657029500000000000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 7625604007708000000000000000000000,
+      "signature": [
+        8,
+        4
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -109018282085100000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -77309967853050000000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -7519278420927000000000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 384652202613900000000000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 36751309565300000000000000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -1110108047918000000000000000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -353352037530600000000000000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 95781300912470000000000000000000000,
+      "signature": [
+        8,
+        4,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 167048771401000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 184557097738200000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 10176770394120000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -885200509731100000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -16036701251980000000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 527604297583800000000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -187724123578500000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -270686199478400000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -6365884599320000000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 663665076523700000000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 92806509104960000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 184816704944000000000000000000000000,
+      "signature": [
+        8,
+        4,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 46102713730390000000000000,
+      "signature": [
+        8,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 61152996236790000000000000000,
+      "signature": [
+        8,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 3985020196726000000000000000000,
+      "signature": [
+        8,
+        4,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -378072738629600000000000000000000,
+      "signature": [
+        8,
+        4,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -4653128934323000000000000000000000,
+      "signature": [
+        8,
+        4,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 165896174791800000000000000000000000,
+      "signature": [
+        8,
+        4,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -52397513495090000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -89132461589560000000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -2648952821117000000000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 284761768444300000000000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 33856014197040000000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 65589360212140000000000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -1490813087918000000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 11343189341150000000000000000000000,
+      "signature": [
+        8,
+        4,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -48776787287390000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -31480569433610000000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -1207321165129000000000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 73913593496250000000000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 6489910428949000000000000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -203799480315200000000000000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 216632301965700000000000000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 13865202925610000000000000000000000,
+      "signature": [
+        8,
+        6
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 71519015511000000000000000,
+      "signature": [
+        8,
+        6,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 62456913122970000000000000000,
+      "signature": [
+        8,
+        6,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1676960876545000000000000000000,
+      "signature": [
+        8,
+        6,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -172976769691600000000000000000000,
+      "signature": [
+        8,
+        6,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -2677322328775000000000000000000000,
+      "signature": [
+        8,
+        6,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 91708078184870000000000000000000000,
+      "signature": [
+        8,
+        6,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -80374390601670000000000000000,
+      "signature": [
+        8,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -84339763324910000000000000000000,
+      "signature": [
+        8,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -1066883719712000000000000000000000,
+      "signature": [
+        8,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 132763121809600000000000000000000000,
+      "signature": [
+        8,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 47802830717410000000000000000000,
+      "signature": [
+        8,
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 57134520775720000000000000000000000,
+      "signature": [
+        8,
+        6,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -19261771778570000000000000000,
+      "signature": [
+        8,
+        6,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -21916697619180000000000000000000,
+      "signature": [
+        8,
+        6,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -427902240959100000000000000000000,
+      "signature": [
+        8,
+        6,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 49230588983790000000000000000000000,
+      "signature": [
+        8,
+        6,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 11614324733970000000000000000000,
+      "signature": [
+        8,
+        6,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 15163429646200000000000000000000000,
+      "signature": [
+        8,
+        6,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 2343108264950000000000000000000,
+      "signature": [
+        8,
+        6,
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 2712673219040000000000000000000000,
+      "signature": [
+        8,
+        6,
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 10480718734030000000000000,
+      "signature": [
+        8,
+        8
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 8263092734426000000000000000,
+      "signature": [
+        8,
+        8
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 160841290512100000000000000000,
+      "signature": [
+        8,
+        8
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -17979586975300000000000000000000,
+      "signature": [
+        8,
+        8
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -258755403651500000000000000000000,
+      "signature": [
+        8,
+        8
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 9184893778089000000000000000000000,
+      "signature": [
+        8,
+        8
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -11143495015710000000000000000,
+      "signature": [
+        8,
+        8,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -10593411422730000000000000000000,
+      "signature": [
+        8,
+        8,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -103170053448200000000000000000000,
+      "signature": [
+        8,
+        8,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 13975248862660000000000000000000000,
+      "signature": [
+        8,
+        8,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 6494525440977000000000000000000,
+      "signature": [
+        8,
+        8,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 6997127399467000000000000000000000,
+      "signature": [
+        8,
+        8,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1785383763545000000000000000000,
+      "signature": [
+        8,
+        8,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1833996210241000000000000000000000,
+      "signature": [
+        8,
+        8,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -3556283725896000,
+      "signature": [
+        10
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 4164378484639000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -757251147033700000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -7784052202292000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 4882434477263000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -119648956040200000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -2625649116626000000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 98951218266700000000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -917379558495100000000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 4576497556613000000000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -41690396932710000000000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 10
+    },
+    {
+      "denominator": 1,
+      "numerator": 214280060984400000000000000000000,
+      "signature": [
+        10
+      ],
+      "slack_power": 11
+    },
+    {
+      "denominator": 1,
+      "numerator": 961299169952900000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -4861423864677000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1464486548840000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -21993145219760000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -8087483872847000000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 252880607508700000000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 604133053606200000000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -51047793992830000000000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 125267514727600000000000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 1569543754232000000000000000000000,
+      "signature": [
+        10,
+        2
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": 5070854956225000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 2923295817622000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -2371123660350000000000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 112980277121000000000000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 7951167000498000000000000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -268687880109600000000000000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 161973981514500000000000000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 19570418690520000000000000000000000,
+      "signature": [
+        10,
+        2,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": -12318668891340000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 14178659595960000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 2646913267019000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -197109972675900000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -3692722901741000000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 129876925166900000000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 19507126970270000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -27449941085380000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -1455343284757000000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 136424319211000000000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -19879939244110000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 18170628179740000000000000000000000,
+      "signature": [
+        10,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -14290506407980000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -8307116683723000000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -669776920052000000000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 43029039176470000000000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 2531177348895000000000000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -86727296014200000000000000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 114814957676900000000000000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 5575681815638000000000000000000000,
+      "signature": [
+        10,
+        4
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 20339623605970000000000000,
+      "signature": [
+        10,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 17853041977420000000000000000,
+      "signature": [
+        10,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 835486980211000000000000000000,
+      "signature": [
+        10,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -80149194643530000000000000000000,
+      "signature": [
+        10,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -1071369295980000000000000000000000,
+      "signature": [
+        10,
+        4,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 39913696109300000000000000000000000,
+      "signature": [
+        10,
+        4,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -22164165791300000000000000000,
+      "signature": [
+        10,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -25035243938400000000000000000000,
+      "signature": [
+        10,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -501531685057500000000000000000000,
+      "signature": [
+        10,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 57760587160800000000000000000000000,
+      "signature": [
+        10,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 12391495586380000000000000000000,
+      "signature": [
+        10,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 17059365849830000000000000000000000,
+      "signature": [
+        10,
+        4,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -9837299473108000000000000000,
+      "signature": [
+        10,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -8728830455738000000000000000000,
+      "signature": [
+        10,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -178747318922800000000000000000000,
+      "signature": [
+        10,
+        4,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 20893180053820000000000000000000000,
+      "signature": [
+        10,
+        4,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 5722394962284000000000000000000,
+      "signature": [
+        10,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 5961548968684000000000000000000000,
+      "signature": [
+        10,
+        4,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 6667997381142000000000000,
+      "signature": [
+        10,
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 5033642929523000000000000000,
+      "signature": [
+        10,
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 115801238268500000000000000000,
+      "signature": [
+        10,
+        6
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -12763658797150000000000000000000,
+      "signature": [
+        10,
+        6
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -169143611349900000000000000000000,
+      "signature": [
+        10,
+        6
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 6239937918676000000000000000000000,
+      "signature": [
+        10,
+        6
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -7081433309133000000000000000,
+      "signature": [
+        10,
+        6,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -6466914550171000000000000000000,
+      "signature": [
+        10,
+        6,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -72953271683130000000000000000000,
+      "signature": [
+        10,
+        6,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 9662217171471000000000000000000000,
+      "signature": [
+        10,
+        6,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 4101577875671000000000000000000,
+      "signature": [
+        10,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 4267537630911000000000000000000000,
+      "signature": [
+        10,
+        6,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1282269067485000000000000000000,
+      "signature": [
+        10,
+        6,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1189933953652000000000000000000000,
+      "signature": [
+        10,
+        6,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -893462745606500000000000000,
+      "signature": [
+        10,
+        8
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -761541445311100000000000000000,
+      "signature": [
+        10,
+        8
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -6006484389273000000000000000000,
+      "signature": [
+        10,
+        8
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 879424212980600000000000000000000,
+      "signature": [
+        10,
+        8
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 500138242495500000000000000000,
+      "signature": [
+        10,
+        8,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 484044025422800000000000000000000,
+      "signature": [
+        10,
+        8,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 36238603768200000000000000000,
+      "signature": [
+        10,
+        10
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 32378068920100000000000000000000,
+      "signature": [
+        10,
+        10
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 428278234926400000,
+      "signature": [
+        12
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 24647069745390000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 74425424248120000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -2090710150711000000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -377665155996600000000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 13311713926910000000000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -19594997413420000000000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": -1772905796628000000000000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 4310091703611000000000000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 8
+    },
+    {
+      "denominator": 1,
+      "numerator": 60864793700110000000000000000000,
+      "signature": [
+        12
+      ],
+      "slack_power": 9
+    },
+    {
+      "denominator": 1,
+      "numerator": -320489965735400000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -483176506138700000000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -121027463399800000000000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 7293151472568000000000000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 355925822088800000000000000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -13200924607580000000000000000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 22531997296600000000000000000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 772073971833700000000000000000000,
+      "signature": [
+        12,
+        2
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 132484240547000000000000,
+      "signature": [
+        12,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1434188653700000000000000000,
+      "signature": [
+        12,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 135712119270700000000000000000,
+      "signature": [
+        12,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -11820359071560000000000000000000,
+      "signature": [
+        12,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -158802275219400000000000000000000,
+      "signature": [
+        12,
+        2,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 6219495019369000000000000000000000,
+      "signature": [
+        12,
+        2,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 39723635406330000000000000,
+      "signature": [
+        12,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -2234691324355000000000000000000,
+      "signature": [
+        12,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -75685291058450000000000000000000,
+      "signature": [
+        12,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 8146125132906000000000000000000000,
+      "signature": [
+        12,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -199182527630800000000000000000,
+      "signature": [
+        12,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1531851724540000000000000000000000,
+      "signature": [
+        12,
+        2,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1446456231674000000000000,
+      "signature": [
+        12,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 1070670875711000000000000000,
+      "signature": [
+        12,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 38893041048610000000000000000,
+      "signature": [
+        12,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -4050507802455000000000000000000,
+      "signature": [
+        12,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -46259086717030000000000000000000,
+      "signature": [
+        12,
+        4
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 1854449201274000000000000000000000,
+      "signature": [
+        12,
+        4
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -1512502070477000000000000000,
+      "signature": [
+        12,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -1398403695607000000000000000000,
+      "signature": [
+        12,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -23455053432670000000000000000000,
+      "signature": [
+        12,
+        4,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 2912150410264000000000000000000000,
+      "signature": [
+        12,
+        4,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 855292987496900000000000000000,
+      "signature": [
+        12,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 924821866317000000000000000000000,
+      "signature": [
+        12,
+        4,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 398845013760900000000000000000,
+      "signature": [
+        12,
+        4,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 320008164904300000000000000000000,
+      "signature": [
+        12,
+        4,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -406368563598700000000000000,
+      "signature": [
+        12,
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -323513935928900000000000000000,
+      "signature": [
+        12,
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -3049155916816000000000000000000,
+      "signature": [
+        12,
+        6
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 435451012678500000000000000000000,
+      "signature": [
+        12,
+        6
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 226969553429900000000000000000,
+      "signature": [
+        12,
+        6,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 204764612822400000000000000000000,
+      "signature": [
+        12,
+        6,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 25878197519190000000000000000,
+      "signature": [
+        12,
+        8
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 22261386040410000000000000000000,
+      "signature": [
+        12,
+        8
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -46883264553140000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -37459315929170000000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -3778940567418000000000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 259969088512600000000000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 11008340261450000000000000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": -429055935831300000000000000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": 1025830051482000000000000000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 6
+    },
+    {
+      "denominator": 1,
+      "numerator": 21200099542360000000000000000000,
+      "signature": [
+        14
+      ],
+      "slack_power": 7
+    },
+    {
+      "denominator": 1,
+      "numerator": 51791809204560000000000,
+      "signature": [
+        14,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 77497383046820000000000000,
+      "signature": [
+        14,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 4323165794675000000000000000,
+      "signature": [
+        14,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -418179683832000000000000000000,
+      "signature": [
+        14,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -4798200872316000000000000000000,
+      "signature": [
+        14,
+        2
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 199655218962500000000000000000000,
+      "signature": [
+        14,
+        2
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -46280309167920000000000000,
+      "signature": [
+        14,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -104675851301600000000000000000,
+      "signature": [
+        14,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -2474010479632000000000000000000,
+      "signature": [
+        14,
+        2,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 292281614511400000000000000000000,
+      "signature": [
+        14,
+        2,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 23027414930270000000000000000,
+      "signature": [
+        14,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 69186401350660000000000000000000,
+      "signature": [
+        14,
+        2,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -68967303382350000000000000,
+      "signature": [
+        14,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -54163180240710000000000000000,
+      "signature": [
+        14,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -705111620104100000000000000000,
+      "signature": [
+        14,
+        4
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 95003813187480000000000000000000,
+      "signature": [
+        14,
+        4
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 38066453785540000000000000000,
+      "signature": [
+        14,
+        4,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 34142251525830000000000000000000,
+      "signature": [
+        14,
+        4,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 8862758504571000000000000000,
+      "signature": [
+        14,
+        6
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 7019163035190000000000000000000,
+      "signature": [
+        14,
+        6
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 2971391199476000000000,
+      "signature": [
+        16
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 2790183060851000000000000,
+      "signature": [
+        16
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 92025416237060000000000000,
+      "signature": [
+        16
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": -9908448470627000000000000000,
+      "signature": [
+        16
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": -107923817892200000000000000000,
+      "signature": [
+        16
+      ],
+      "slack_power": 4
+    },
+    {
+      "denominator": 1,
+      "numerator": 4596579119253000000000000000000,
+      "signature": [
+        16
+      ],
+      "slack_power": 5
+    },
+    {
+      "denominator": 1,
+      "numerator": -2744314454395000000000000,
+      "signature": [
+        16,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -3398057596912000000000000000,
+      "signature": [
+        16,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -54555818034770000000000000000,
+      "signature": [
+        16,
+        2
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 7082221454059000000000000000000,
+      "signature": [
+        16,
+        2
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 1424724157715000000000000000,
+      "signature": [
+        16,
+        2,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 2122276084798000000000000000000,
+      "signature": [
+        16,
+        2,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1206088766259000000000000000,
+      "signature": [
+        16,
+        4
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 935451584447900000000000000000,
+      "signature": [
+        16,
+        4
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -90532299561760000000000,
+      "signature": [
+        18
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": -82658117815380000000000000,
+      "signature": [
+        18
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": -838161177847800000000000000,
+      "signature": [
+        18
+      ],
+      "slack_power": 2
+    },
+    {
+      "denominator": 1,
+      "numerator": 124106081993600000000000000000,
+      "signature": [
+        18
+      ],
+      "slack_power": 3
+    },
+    {
+      "denominator": 1,
+      "numerator": 46187926897290000000000000,
+      "signature": [
+        18,
+        2
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 48808487675750000000000000000,
+      "signature": [
+        18,
+        2
+      ],
+      "slack_power": 1
+    },
+    {
+      "denominator": 1,
+      "numerator": 1032414480851000000000000,
+      "signature": [
+        20
+      ],
+      "slack_power": 0
+    },
+    {
+      "denominator": 1,
+      "numerator": 884785328676900000000000000,
+      "signature": [
+        20
+      ],
+      "slack_power": 1
+    }
+  ]
+}

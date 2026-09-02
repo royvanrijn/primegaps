@@ -1,0 +1,10 @@
+{
+  "candidate_sha256": "c840f99232b6c821b1f63aa81e496d1e850a4f5b482e5822fbf537c06be90815",
+  "degree": 21,
+  "exact_termwise_match": true,
+  "k": 49,
+  "rationalization_significant_digits": 12,
+  "schema": "primegaps-stadlmann-candidate-binding-v1",
+  "term_count": 846,
+  "vector_sha256": "38df9473f2f8a31887adb7c6a1141d5d2d1ff31afa34f7de1e861a65577e3128"
+}

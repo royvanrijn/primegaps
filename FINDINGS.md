@@ -67,6 +67,12 @@ Source: Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126v1.
   semantic matrix hashes and replays both quadratic forms using Python integers.
   This mirrors the
   paper's strategy: floating point locates `c`; exact arithmetic proves it.
+- The `k=49`, `D=21` bottleneck has now been reproduced end-to-end. A fixed
+  846-term decimal-rational candidate was contracted by exact rational,
+  symmetry-compressed `I` and `J` evaluators over the published support. Cheap
+  replay checks all source/candidate/support/signature hashes and gives
+  `49J/I = 1.0011632465949216560417861678682244509240906847502...`, hence
+  `49J-I > 0` exactly.
 - Proposition 2/3 distribution feasibility is now executable through
   `primegaps.is_certified`. It checks the Harman-minorant inequalities, the
   global Type I/II/III hypotheses, and continuous support-cell partition
@@ -92,9 +98,8 @@ Section 5 confirms that all required integrals are represented as polynomials in
 small/large-coordinate integrals reduce to matrix products of these vectors.
 It only sketches the multidimensional coefficient recurrence and says that the
 full implementation will be uploaded later. The present reconstruction supplies
-exact closed forms and a low-dimensional reference assembler. The remaining
-engineering problem is symmetry-compressed assembly at `k=49`, not the rational
-integral kernel itself.
+exact closed forms, a low-dimensional reference assembler, and the
+symmetry-compressed assembly used for the exact `k=49` reproduction.
 
 ## Coupled-optimization plan
 
@@ -114,20 +119,16 @@ single distribution exponent.
 
 ## Current gate / next milestone
 
-This repository still does **not** independently reproduce `k=49`. The next
-milestone is now narrower and has a tested combinatorial backend: combine the
-PrimeGapsLib-style signature DAG, factorial-moment tables, and grouped transforms
-with the verified C/D status kernel, replacing the reference status enumeration.
-Then reproduce the paper's intermediate matrix data or certificate when it
-becomes available.
-After that:
+The exact `k=49`, `D=21` gate is complete. With the same published support,
+degree, rationalization rule, and frozen evaluator, `k=48` gives
+`48J/I = 0.9969233513526357503888760066573328995...`, an exact deficit
+`1-48J/I = 0.0030766486473642496111239933426671005...`.
+Next:
 
-1. reproduce the paper's `k=49`, D=21 quotient > 1;
-2. same support, `k=48`, D=21;
-3. D=22,23,... until threshold or D=27;
-4. jointly optimize the simple support family;
-5. enable full Proposition 3 / Harman-minorant degrees of freedom;
-6. expand to multi-regime support geometry only if useful.
+1. D=22,23,... until threshold or D=27;
+2. jointly optimize the simple support family;
+3. enable full Proposition 3 / Harman-minorant degrees of freedom;
+4. expand to multi-regime support geometry only if useful.
 
 No result below 240 should be claimed until an exact/rational certificate has
 been independently verified.
