@@ -231,6 +231,56 @@ constant analytic volume weight.  These remain numerical screening values, not
 an exact certificate or a global optimum.  See
 [the full frontier and reproducibility notes](docs/p3ii-delta-frontier.md).
 
+Subsequent fixed-candidate calibration found that uniform sampling inside those
+translated strata is itself not a reliable high-degree threshold estimator. At
+the independently audited safe endpoint and degree 21, `2^15` samples per
+stratum gave normalized `kJ=1.0000632111` instead of the independently
+replicated importance-control value `0.9999667252`, and estimated
+`I=0.9999951011` instead of the exact `0.9989116509`. The exact-count partition
+is valid, but the rare high-leverage polynomial tail inside a boundary stratum
+still needs importance sampling or deterministic integration. The published
+translated-simplex frontier must therefore be treated as superseded as a
+quantitative crossing estimate pending recalculation.
+
+## Candidate-space J accumulation
+
+The numerical J bottleneck is no longer target routing or persistent
+signature-pair blocks. Each integration batch now forms the candidate feature
+matrix `G=FM` and performs one candidate-space Gram update; a projected run
+forms `GQ` before accumulation. At degree 27 this reduces the stored
+upper-triangle from 31,546,512 marginal-feature entries to 3,191,601 candidate
+entries. A real 256-row batch took 69 ms for feature evaluation, 11 ms to form
+`G`, and 28 ms for the Gram update. Four complete D27, `2^15` legal-minus-
+unrestricted corrections took 13.9--14.8 seconds each after a one-time analytic
+unrestricted build.
+
+Raw full D27 matrices are still too ill-conditioned to optimize directly.
+Projecting each batch before accumulation and cross-validating nested
+unrestricted eigenspaces gives a stable four-direction subspace: with the D21
+direction included, the four-seed training value is `1.0004338031` and the
+leave-one-out minimum is `1.0003994559`. Prefix eight already overfits. The
+rationalized prefix-four candidate has four independent `2^17` estimates of
+normalized `kJ` between `1.0002556783` and `1.0004605125` (mean
+`1.0003688580`, standard error `4.40e-5`). Its exact normalized unrestricted-
+simplex `I` is `0.9999955585079013`. Since the legal support is a subset of that
+simplex and `F^2` is nonnegative, this is an exact upper bound for legal `I`;
+the abandoned legal-`I` checkpoint is not on the certification critical path.
+This is still a numerical `J` discovery, not a certificate: exact legal `J`
+remains the final gate. The exact target-free unrestricted contraction gives
+normalized `kJ_simplex=1.0005162874604419` in 442.5 seconds. Consequently the
+only remaining exact variational calculation is the B-boundary correction,
+which must be greater than `-0.0005207289525405`. The four independent
+numerical corrections range from `-0.0002606091` to `-0.0000557749`.
+
+The same `p^T H q` rewrite is exact on the certificate path, but it is not yet
+a cache-fill speedup by itself. On the old 23-pair D21 benchmark, a Python/GMP
+Hankel contraction did not finish in 390 seconds and a Sage/FLINT-matrix form
+did not finish in 180 seconds. The measured cost is construction of a separate
+density-weighted moment table for every pair and cell. The next exact change is
+therefore to persist raw moments once per geometry cell and batch every density
+correlation from that table. The direct target and per-pair fallbacks must not
+be used for the full D27 correction.
+
 The analytic loss behind the active branch has also been traced. It comes from
 the final `m` term in the Type-IIc `wts3` estimate, through
 `48*omega+16*delta_star-4*gamma<-1`; it is not removable by epsilon or dyadic

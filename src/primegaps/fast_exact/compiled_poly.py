@@ -63,6 +63,37 @@ class FlintEncodedPolynomialBackend:
     def add_scaled(self, target, source, scalar):
         return target + int(scalar) * source
 
+    def contract_bilinear(self, left, right, moments):
+        """Evaluate an exact moment-Hankel bilinear form inside Sage/FLINT."""
+        from sage.all import matrix, vector
+
+        left_exponents = tuple(left)
+        right_exponents = tuple(right)
+        left_vector = vector(
+            self.base_ring,
+            [self._coefficient(left[exponent]) for exponent in left_exponents],
+        )
+        right_vector = vector(
+            self.base_ring,
+            [self._coefficient(right[exponent]) for exponent in right_exponents],
+        )
+        hankel = matrix(
+            self.base_ring,
+            len(left_exponents),
+            len(right_exponents),
+            [
+                self._coefficient(
+                    moments[(left_x + right_x, left_z + right_z)]
+                )
+                for left_x, left_z in left_exponents
+                for right_x, right_z in right_exponents
+            ],
+        )
+        value = left_vector * hankel * right_vector
+        return self.rational(
+            int(value.numerator()), int(value.denominator())
+        )
+
     def terms(self, polynomial):
         for encoded_power, coefficient in polynomial.dict().items():
             x_power, z_power = divmod(int(encoded_power), self.stride)

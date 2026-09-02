@@ -238,6 +238,140 @@ def test_flint_pair_first_j_matches_target_first_reference():
     ) == expected
 
 
+def test_signature_pair_scalar_matches_target_group_sum():
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    pair_groups = verifier.grouped_signature_pairs(feature_groups, 3)
+    targets, routes = fast_j.pair_routes(pair_groups, tuple(pair_groups))
+    expected_groups = fast_j.evaluate_target_chunk(
+        targets,
+        dimension=3,
+        feature_groups=feature_groups,
+        pair_groups=pair_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+    )
+    density_cache = {}
+    actual = fast_j.evaluate_signature_pair_chunk_scalar(
+        tuple(routes),
+        pair_route_map=routes,
+        dimension=3,
+        feature_groups=feature_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+        target_density_cache=density_cache,
+        slice_cache={},
+    )
+    assert actual == sum(expected_groups.values(), Fraction())
+    assert set(density_cache) == set(targets)
+
+
+def test_flint_signature_pair_scalar_matches_target_group_sum():
+    pytest.importorskip("sage.all")
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    pair_groups = verifier.grouped_signature_pairs(feature_groups, 3)
+    targets, routes = fast_j.pair_routes(pair_groups, tuple(pair_groups))
+    backend = compiled_poly.FlintEncodedPolynomialBackend(
+        stride=64, rational=Fraction
+    )
+    expected = sum(
+        fast_j.evaluate_target_chunk(
+            targets,
+            dimension=3,
+            feature_groups=feature_groups,
+            pair_groups=pair_groups,
+            verifier=verifier,
+            orbit_size=reference.monomial_symmetric_orbit_size,
+            rational=Fraction,
+            polynomial_backend=backend,
+            slice_cache={},
+        ).values(),
+        Fraction(),
+    )
+    actual = fast_j.evaluate_signature_pair_chunk_scalar(
+        tuple(routes),
+        pair_route_map=routes,
+        dimension=3,
+        feature_groups=feature_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+        polynomial_backend=backend,
+        target_density_cache={},
+        slice_cache={},
+    )
+    assert actual == expected
+
+
+def test_exact_j_control_variate_matches_legal_minus_closed_unrestricted():
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    dimension = 3
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    pair_groups = verifier.grouped_signature_pairs(feature_groups, dimension)
+    legal = sum(
+        fast_j.evaluate_target_chunk(
+            tuple(pair_groups),
+            dimension=dimension,
+            feature_groups=feature_groups,
+            pair_groups=pair_groups,
+            verifier=verifier,
+            orbit_size=reference.monomial_symmetric_orbit_size,
+            rational=Fraction,
+        ).values(),
+        Fraction(),
+    )
+    correction = sum(
+        fast_j.evaluate_target_chunk(
+            tuple(pair_groups),
+            dimension=dimension,
+            feature_groups=feature_groups,
+            pair_groups=pair_groups,
+            verifier=verifier,
+            orbit_size=reference.monomial_symmetric_orbit_size,
+            rational=Fraction,
+            control_variate=True,
+        ).values(),
+        Fraction(),
+    )
+    features = verifier.marginal_features(terms)
+    unrestricted = Fraction()
+    for left_index, left in enumerate(features):
+        left_signature, left_power, left_slack, left_coefficient = left
+        for right_index in range(left_index, len(features)):
+            right_signature, right_power, right_slack, right_coefficient = features[right_index]
+            feature_symmetry = 1 if left_index == right_index else 2
+            unrestricted += (
+                feature_symmetry
+                * left_coefficient
+                * right_coefficient
+                * j_block.unrestricted_feature_pairing(
+                    dimension - 1,
+                    verifier.U,
+                    verifier.R,
+                    left_signature,
+                    (left_power, left_slack),
+                    right_signature,
+                    (right_power, right_slack),
+                )
+            )
+    assert legal == unrestricted + correction
+
+
 def test_candidate_independent_moment_cache(tmp_path):
     signature = (2,)
     slacks = (0, 1, 3)
@@ -387,6 +521,26 @@ def test_j_functional_cache_extends_across_degree(tmp_path):
     assert fast_j.evaluate_density_functional(
         candidate, moments, Fraction
     ) == expected
+
+    right = {(0, 1): Fraction(5, 4), (1, 0): Fraction(-2, 7)}
+    bilinear = fast_j.evaluate_density_bilinear(
+        candidate,
+        right,
+        density,
+        kind="xintervals",
+        cell=cell,
+        verifier=verifier,
+        rational=Fraction,
+    )
+    explicit = fast_j.integrate_product_on_cell(
+        density,
+        verifier.kernel._poly_mul(candidate, right),
+        kind="xintervals",
+        cell=cell,
+        verifier=verifier,
+        rational=Fraction,
+    )
+    assert bilinear == explicit
 
     path = tmp_path / "j-moments.jsonl"
     context = {"kind": "J", "k": 3, "support": "test"}
@@ -566,6 +720,55 @@ def test_streamed_feature_gram_blocks_match_dense_j_matrix():
         operator.quadratic(coefficients),
         coefficients @ dense_j @ coefficients,
     )
+
+
+def test_candidate_and_projected_batch_grams_match_signature_blocks():
+    basis = (((), 0), ((2,), 0), ((2, 2), 1), ((4, 2), 2))
+    marginal_map = j_block.MarginalMap.from_basis(basis)
+    rng = np.random.default_rng(20260903)
+    values = {
+        signature: rng.standard_normal((17, len(keys)))
+        for signature, keys in marginal_map.feature_keys.items()
+    }
+    weights = rng.random(17)
+    projection = rng.standard_normal((len(basis), 3))
+
+    candidate_values = j_block.candidate_feature_values(marginal_map, values)
+    candidate_gram = j_block.accumulate_candidate_gram(candidate_values, weights)
+    blocks = j_block.accumulate_feature_gram_blocks(
+        marginal_map, values, weights
+    )
+    operator = j_block.JBlockOperator(marginal_map, blocks)
+    expected = np.column_stack([
+        operator.matvec(np.eye(len(basis))[:, index])
+        for index in range(len(basis))
+    ])
+    assert np.allclose(candidate_gram, expected)
+
+    mapped = marginal_map.forward_matrix(projection)
+    projected = j_block.projected_feature_values(
+        marginal_map, values, projection, mapped_projection=mapped
+    )
+    assert np.allclose(projected, candidate_values @ projection)
+    projected_gram = j_block.accumulate_candidate_gram(projected, weights)
+    assert np.allclose(projected_gram, projection.T @ expected @ projection)
+
+
+def test_symmetric_cross_difference_matches_two_gram_updates_and_skips_equal_rows():
+    rng = np.random.default_rng(20260904)
+    unrestricted = rng.standard_normal((19, 5))
+    legal = unrestricted.copy()
+    legal[[2, 7, 13]] += rng.standard_normal((3, 5))
+    weights = rng.random(19)
+    correction, active = j_block.accumulate_gram_difference(
+        legal, unrestricted, weights
+    )
+    expected = (
+        legal.T @ (weights[:, None] * legal)
+        - unrestricted.T @ (weights[:, None] * unrestricted)
+    )
+    assert active == 3
+    assert np.allclose(correction, expected)
 
 
 def test_j_block_scipy_linear_operator_matches_dense_eigenvalue():

@@ -186,6 +186,54 @@ def evaluate_density_functional(candidate, moments, rational):
     )
 
 
+def evaluate_density_bilinear(
+    left,
+    right,
+    density,
+    *,
+    kind,
+    cell,
+    verifier,
+    rational,
+    polynomial_backend=None,
+):
+    """Evaluate ``integral density*left*right`` without forming either product.
+
+    The density-weighted monomial moments form a Hankel-like table indexed by
+    exponent sums.  This is the exact scalar counterpart of the block-operator
+    Hankel contraction.
+    """
+    if not left or not right or not density:
+        return rational(0)
+    required = tuple(sorted({
+        (left_x + right_x, left_z + right_z)
+        for left_x, left_z in left
+        for right_x, right_z in right
+    }))
+    moments = density_weighted_moments(
+        density,
+        required,
+        kind=kind,
+        cell=cell,
+        verifier=verifier,
+        rational=rational,
+    )
+    if polynomial_backend is not None and hasattr(
+        polynomial_backend, "contract_bilinear"
+    ):
+        return polynomial_backend.contract_bilinear(left, right, moments)
+    return sum(
+        (
+            left_coefficient
+            * right_coefficient
+            * moments[(left_x + right_x, left_z + right_z)]
+            for (left_x, left_z), left_coefficient in left.items()
+            for (right_x, right_z), right_coefficient in right.items()
+        ),
+        rational(0),
+    )
+
+
 def _exact_payload(value):
     if isinstance(value, (tuple, list)):
         return [_exact_payload(item) for item in value]
@@ -489,8 +537,14 @@ def evaluate_target_chunk(
     positive_cache: dict | None = None,
     polynomial_backend=None,
     slice_cache: dict | None = None,
+    control_variate: bool = False,
 ):
-    """Return exact J contributions for a chunk of product signatures."""
+    """Return exact J contributions for a chunk of product signatures.
+
+    With ``control_variate=True`` return only ``J_legal-J_unrestricted``.
+    Geometry cells on which both marginal slice families agree are skipped.
+    The unrestricted scalar can then be supplied by the closed simplex form.
+    """
     targets, routes = pair_routes(pair_groups, targets)
     common_dimension = dimension - 1
     maximum_offset = int(verifier.R // verifier.DELTA)
@@ -498,7 +552,7 @@ def evaluate_target_chunk(
         targets,
         common_dimension=common_dimension,
         delta=verifier.DELTA,
-        max_large=len(verifier.B),
+        max_large=(maximum_offset if control_variate else len(verifier.B)),
         max_offset_count=maximum_offset,
         rational=rational,
         orbit_size=orbit_size,
@@ -523,7 +577,11 @@ def evaluate_target_chunk(
         for target in targets
     }
 
-    for large in range(min(common_dimension, len(verifier.B)) + 1):
+    largest_common_count = min(
+        common_dimension,
+        maximum_offset if control_variate else len(verifier.B),
+    )
+    for large in range(largest_common_count + 1):
         for shifted in range(maximum_offset - large + 1):
             active = tuple(
                 target
@@ -535,27 +593,51 @@ def evaluate_target_chunk(
             total_offset = (large + shifted) * verifier.DELTA
             large_offset = large * verifier.DELTA
             for left_large in (False, True):
-                if large + int(left_large) > len(verifier.B):
+                left_legal = large + int(left_large) <= len(verifier.B)
+                if not control_variate and not left_legal:
                     continue
-                left_limit = verifier._support_limit(large, left_large)
+                left_limit = (
+                    verifier._support_limit(large, left_large)
+                    if left_legal else None
+                )
                 for right_large in (False, True):
-                    if large + int(right_large) > len(verifier.B):
+                    right_legal = large + int(right_large) <= len(verifier.B)
+                    if not control_variate and not right_legal:
                         continue
-                    right_limit = verifier._support_limit(large, right_large)
-                    specs = (
-                        verifier.RadialSlice(
-                            0, 0, left_large, support_limit=left_limit
-                        ),
-                        verifier.RadialSlice(
-                            0, 0, right_large, support_limit=right_limit
-                        ),
+                    right_limit = (
+                        verifier._support_limit(large, right_large)
+                        if right_legal else None
                     )
+                    specs = tuple(
+                        spec
+                        for allowed, spec in (
+                            (
+                                left_legal,
+                                verifier.RadialSlice(
+                                    0, 0, left_large, support_limit=left_limit
+                                ),
+                            ),
+                            (
+                                right_legal,
+                                verifier.RadialSlice(
+                                    0, 0, right_large, support_limit=right_limit
+                                ),
+                            ),
+                        )
+                        if allowed
+                    )
+                    geometry_specs = specs
+                    if control_variate:
+                        geometry_specs += (
+                            verifier.RadialSlice(0, 0, left_large),
+                            verifier.RadialSlice(0, 0, right_large),
+                        )
                     kind, cells = verifier._slice_geometry(
                         large > 0,
                         common_dimension > large,
                         total_offset,
                         large_offset,
-                        specs,
+                        geometry_specs,
                     )
                     iterable = cells if kind != "point" else (cells[0],)
                     for cell in iterable:
@@ -570,6 +652,8 @@ def evaluate_target_chunk(
 
                         left_polys = {}
                         right_polys = {}
+                        full_left_polys = {}
+                        full_right_polys = {}
                         candidate = {
                             target: (
                                 {}
@@ -602,7 +686,12 @@ def evaluate_target_chunk(
                                     if slice_cache is None
                                     else slice_cache.get(slice_key)
                                 )
-                                if left_poly is None:
+                                if left_poly is None and not left_legal:
+                                    left_poly = (
+                                        {} if polynomial_backend is None
+                                        else polynomial_backend.zero()
+                                    )
+                                elif left_poly is None:
                                     left_poly = verifier._linear_slice_polynomial(
                                         feature_groups[left],
                                         left_large,
@@ -633,7 +722,12 @@ def evaluate_target_chunk(
                                     if slice_cache is None
                                     else slice_cache.get(slice_key)
                                 )
-                                if right_poly is None:
+                                if right_poly is None and not right_legal:
+                                    right_poly = (
+                                        {} if polynomial_backend is None
+                                        else polynomial_backend.zero()
+                                    )
+                                elif right_poly is None:
                                     right_poly = verifier._linear_slice_polynomial(
                                         feature_groups[right],
                                         right_large,
@@ -649,6 +743,74 @@ def evaluate_target_chunk(
                                     if slice_cache is not None:
                                         slice_cache[slice_key] = right_poly
                                 right_polys[right] = right_poly
+                            if control_variate:
+                                full_left_poly = full_left_polys.get(left)
+                                if full_left_poly is None:
+                                    slice_key = (
+                                        left,
+                                        left_large,
+                                        None,
+                                        total_offset,
+                                        large_offset,
+                                        sample,
+                                    )
+                                    full_left_poly = (
+                                        None
+                                        if slice_cache is None
+                                        else slice_cache.get(slice_key)
+                                    )
+                                    if full_left_poly is None:
+                                        full_left_poly = verifier._linear_slice_polynomial(
+                                            feature_groups[left],
+                                            left_large,
+                                            None,
+                                            total_offset,
+                                            large_offset,
+                                            sample,
+                                        )
+                                        if polynomial_backend is not None:
+                                            full_left_poly = polynomial_backend.from_dict(
+                                                full_left_poly
+                                            )
+                                        if slice_cache is not None:
+                                            slice_cache[slice_key] = full_left_poly
+                                    full_left_polys[left] = full_left_poly
+                                full_right_poly = full_right_polys.get(right)
+                                if full_right_poly is None:
+                                    slice_key = (
+                                        right,
+                                        right_large,
+                                        None,
+                                        total_offset,
+                                        large_offset,
+                                        sample,
+                                    )
+                                    full_right_poly = (
+                                        None
+                                        if slice_cache is None
+                                        else slice_cache.get(slice_key)
+                                    )
+                                    if full_right_poly is None:
+                                        full_right_poly = verifier._linear_slice_polynomial(
+                                            feature_groups[right],
+                                            right_large,
+                                            None,
+                                            total_offset,
+                                            large_offset,
+                                            sample,
+                                        )
+                                        if polynomial_backend is not None:
+                                            full_right_poly = polynomial_backend.from_dict(
+                                                full_right_poly
+                                            )
+                                        if slice_cache is not None:
+                                            slice_cache[slice_key] = full_right_poly
+                                    full_right_polys[right] = full_right_poly
+                                if (
+                                    left_poly == full_left_poly
+                                    and right_poly == full_right_poly
+                                ):
+                                    continue
                             product = (
                                 verifier.kernel._poly_mul(
                                     left_poly, right_poly
@@ -658,6 +820,24 @@ def evaluate_target_chunk(
                                     left_poly, right_poly
                                 )
                             )
+                            if control_variate:
+                                full_product = (
+                                    verifier.kernel._poly_mul(
+                                        full_left_poly, full_right_poly
+                                    )
+                                    if polynomial_backend is None
+                                    else polynomial_backend.multiply(
+                                        full_left_poly, full_right_poly
+                                    )
+                                )
+                                if polynomial_backend is None:
+                                    add_scaled_in_place(
+                                        product, full_product, -1, rational
+                                    )
+                                else:
+                                    product = polynomial_backend.add_scaled(
+                                        product, full_product, -1
+                                    )
                             for target, structure in selected:
                                 if polynomial_backend is None:
                                     add_scaled_in_place(
@@ -700,3 +880,163 @@ def evaluate_target_chunk(
                                     answers[target], contribution
                                 )
     return answers
+
+
+def evaluate_signature_pair_chunk_scalar(
+    pairs,
+    *,
+    pair_route_map,
+    dimension: int,
+    feature_groups,
+    verifier,
+    orbit_size,
+    rational,
+    positive_cache: dict | None = None,
+    target_density_cache=None,
+    polynomial_backend=None,
+    slice_cache: dict | None = None,
+):
+    """Contract a chunk of signature pairs directly to one exact J scalar.
+
+    ``pair_route_map[(left, right)]`` contains ``(target, structure)`` rows.
+    Target densities are combined *before* candidate slice multiplication and
+    geometry integration.  The slice product is not formed: its coefficient
+    vectors are contracted against density-weighted exponent-sum moments.
+
+    This is the exact-certificate counterpart of :class:`JBlockOperator`: it
+    contracts only the supplied candidate rather than materializing every
+    entry of every candidate-independent block.
+    """
+    pairs = tuple((tuple(left), tuple(right)) for left, right in pairs)
+    if not pairs:
+        return rational(0)
+    missing_pairs = set(pairs) - set(pair_route_map)
+    if missing_pairs:
+        raise KeyError(f"missing signature-pair routes: {sorted(missing_pairs)[:3]}")
+    common_dimension = dimension - 1
+    maximum_offset = int(verifier.R // verifier.DELTA)
+
+    def density_groups(target):
+        grouped = (
+            None
+            if target_density_cache is None
+            else target_density_cache.get(target)
+        )
+        if grouped is None:
+            grouped = target_densities(
+                (target,),
+                common_dimension=common_dimension,
+                delta=verifier.DELTA,
+                max_large=len(verifier.B),
+                max_offset_count=maximum_offset,
+                rational=rational,
+                orbit_size=orbit_size,
+                positive_cache=positive_cache,
+            )[target]
+            if target_density_cache is not None:
+                target_density_cache[target] = grouped
+        return grouped
+
+    densities = {
+        target: density_groups(target)
+        for pair in pairs
+        for target, _structure in pair_route_map[pair]
+    }
+    combined = {}
+    for pair in pairs:
+        grouped = {}
+        for target, structure in pair_route_map[pair]:
+            for status, density in densities[target].items():
+                bucket = grouped.setdefault(status, {})
+                add_scaled_in_place(bucket, density, structure, rational)
+        combined[pair] = grouped
+    answer = rational(0)
+    for large in range(min(common_dimension, len(verifier.B)) + 1):
+        for shifted in range(maximum_offset - large + 1):
+            status = (large, shifted)
+            active_pairs = tuple(
+                pair for pair in pairs if status in combined[pair]
+            )
+            if not active_pairs:
+                continue
+            total_offset = (large + shifted) * verifier.DELTA
+            large_offset = large * verifier.DELTA
+            for left_large in (False, True):
+                if large + int(left_large) > len(verifier.B):
+                    continue
+                left_limit = verifier._support_limit(large, left_large)
+                for right_large in (False, True):
+                    if large + int(right_large) > len(verifier.B):
+                        continue
+                    right_limit = verifier._support_limit(large, right_large)
+                    specs = (
+                        verifier.RadialSlice(
+                            0, 0, left_large, support_limit=left_limit
+                        ),
+                        verifier.RadialSlice(
+                            0, 0, right_large, support_limit=right_limit
+                        ),
+                    )
+                    kind, cells = verifier._slice_geometry(
+                        large > 0,
+                        common_dimension > large,
+                        total_offset,
+                        large_offset,
+                        specs,
+                    )
+                    iterable = cells if kind != "point" else (cells[0],)
+                    for cell in iterable:
+                        if kind == "polygons":
+                            _polygon, sample = cell
+                        elif kind in ("xintervals", "zintervals"):
+                            _start, _end, sample = cell
+                        elif kind == "point":
+                            sample = cell
+                        else:
+                            continue
+                        slice_polys = {}
+                        for left, right in active_pairs:
+                            polynomials = []
+                            for signature, is_large, limit in (
+                                (left, left_large, left_limit),
+                                (right, right_large, right_limit),
+                            ):
+                                key = (
+                                    signature,
+                                    is_large,
+                                    limit,
+                                    total_offset,
+                                    large_offset,
+                                    sample,
+                                )
+                                polynomial = slice_polys.get(key)
+                                if polynomial is None:
+                                    polynomial = (
+                                        None
+                                        if slice_cache is None
+                                        else slice_cache.get(key)
+                                    )
+                                    if polynomial is None:
+                                        polynomial = verifier._linear_slice_polynomial(
+                                            feature_groups[signature],
+                                            is_large,
+                                            limit,
+                                            total_offset,
+                                            large_offset,
+                                            sample,
+                                        )
+                                        if slice_cache is not None:
+                                            slice_cache[key] = polynomial
+                                    slice_polys[key] = polynomial
+                                polynomials.append(polynomial)
+                            answer += evaluate_density_bilinear(
+                                polynomials[0],
+                                polynomials[1],
+                                combined[(left, right)][status],
+                                kind=kind,
+                                cell=cell,
+                                verifier=verifier,
+                                rational=rational,
+                                polynomial_backend=polynomial_backend,
+                            )
+    return answer

@@ -84,6 +84,29 @@ class MarginalMap:
                 blocks[signature][position] += coefficient
         return blocks
 
+    def forward_matrix(self, coefficients, *, dtype=None):
+        """Apply the sparse marginal map to several candidate vectors at once.
+
+        The input has shape ``(candidate_dimension, projected_dimension)``.
+        This is the useful orientation for projected J: each returned marginal
+        block can be multiplied into its evaluated feature matrix, avoiding the
+        construction of either signature-pair blocks or the full candidate
+        feature matrix.
+        """
+        matrix = np.asarray(coefficients, dtype=dtype)
+        if matrix.ndim != 2 or matrix.shape[0] != len(self.basis):
+            raise ValueError("candidate matrix has the wrong dimension")
+        blocks = {
+            signature: np.zeros(
+                (len(keys), matrix.shape[1]), dtype=matrix.dtype
+            )
+            for signature, keys in self.feature_keys.items()
+        }
+        for row, routes in zip(matrix, self.routes):
+            for signature, position in routes:
+                blocks[signature][position] += row
+        return blocks
+
     def transpose(self, feature_blocks, *, dtype=None):
         if dtype is None:
             dtype = np.result_type(*(
@@ -217,6 +240,143 @@ def accumulate_feature_gram_blocks(
             else:
                 result[key] = contribution
     return result
+
+
+def candidate_feature_values(marginal_map: MarginalMap, feature_values):
+    """Assemble ``G = F M`` directly in candidate space.
+
+    Rows are integration points and columns are candidate coefficients.  This
+    discards the much larger intermediate signature-pair operator and lets one
+    integration batch be accumulated with a single BLAS rank-k update.
+    """
+    expected_signatures = set(marginal_map.feature_keys)
+    if set(feature_values) != expected_signatures:
+        missing = expected_signatures - set(feature_values)
+        extra = set(feature_values) - expected_signatures
+        raise ValueError(
+            f"feature signature mismatch: missing={sorted(missing)}, "
+            f"extra={sorted(extra)}"
+        )
+    point_count = None
+    dtype = None
+    values = {}
+    for signature, keys in marginal_map.feature_keys.items():
+        matrix = np.asarray(feature_values[signature])
+        if matrix.ndim != 2 or matrix.shape[1] != len(keys):
+            raise ValueError(
+                f"feature values for {signature} have shape {matrix.shape}, "
+                f"expected (*, {len(keys)})"
+            )
+        if point_count is None:
+            point_count = matrix.shape[0]
+        elif matrix.shape[0] != point_count:
+            raise ValueError("feature blocks have inconsistent row counts")
+        dtype = matrix.dtype if dtype is None else np.result_type(dtype, matrix.dtype)
+        values[signature] = matrix
+    result = np.zeros((point_count or 0, len(marginal_map.basis)), dtype=dtype)
+    for column, routes in enumerate(marginal_map.routes):
+        for signature, position in routes:
+            result[:, column] += values[signature][:, position]
+    return result
+
+
+def projected_feature_values(
+    marginal_map: MarginalMap,
+    feature_values,
+    projection,
+    *,
+    mapped_projection=None,
+):
+    """Compute ``G Q`` without first materializing candidate-space ``G``.
+
+    ``mapped_projection`` may be reused across all integration batches.  It is
+    exactly ``marginal_map.forward_matrix(projection)``.
+    """
+    projection = np.asarray(projection)
+    if projection.ndim != 2 or projection.shape[0] != len(marginal_map.basis):
+        raise ValueError("projection has the wrong candidate dimension")
+    mapped = (
+        marginal_map.forward_matrix(projection)
+        if mapped_projection is None
+        else mapped_projection
+    )
+    if set(feature_values) != set(marginal_map.feature_keys):
+        raise ValueError("feature signature mismatch")
+    if set(mapped) != set(marginal_map.feature_keys):
+        raise ValueError("mapped projection signature mismatch")
+    point_count = None
+    result_dtype = projection.dtype
+    for signature, keys in marginal_map.feature_keys.items():
+        values = np.asarray(feature_values[signature])
+        coefficient_block = np.asarray(mapped[signature])
+        if values.ndim != 2 or values.shape[1] != len(keys):
+            raise ValueError(f"feature values for {signature} have the wrong shape")
+        if coefficient_block.shape != (len(keys), projection.shape[1]):
+            raise ValueError(f"mapped projection for {signature} has the wrong shape")
+        if point_count is None:
+            point_count = values.shape[0]
+        elif values.shape[0] != point_count:
+            raise ValueError("feature blocks have inconsistent row counts")
+        result_dtype = np.result_type(
+            result_dtype, values.dtype, coefficient_block.dtype
+        )
+    result = np.zeros(
+        (point_count or 0, projection.shape[1]), dtype=result_dtype
+    )
+    for signature in marginal_map.feature_keys:
+        result += np.asarray(feature_values[signature]) @ np.asarray(mapped[signature])
+    return result
+
+
+def accumulate_candidate_gram(values, weights, *, gram=None):
+    """Accumulate ``values.T @ diag(weights) @ values`` with one rank-k update."""
+    values = np.asarray(values)
+    weights = np.asarray(weights)
+    if values.ndim != 2 or weights.shape != (values.shape[0],):
+        raise ValueError("values/weights have incompatible shapes")
+    contribution = values.T @ (weights[:, None] * values)
+    contribution = (contribution + contribution.T) / 2
+    if gram is None:
+        return contribution
+    if np.asarray(gram).shape != contribution.shape:
+        raise ValueError("existing Gram matrix has the wrong shape")
+    gram += contribution
+    return gram
+
+
+def accumulate_gram_difference(legal, unrestricted, weights, *, gram=None):
+    """Accumulate legal-minus-unrestricted using the symmetric cross form.
+
+    Algebraically this is
+    ``sym((legal + unrestricted).T W (legal - unrestricted))``.  Rows that
+    agree exactly are omitted before the matrix multiplication; callers can
+    therefore pass complete exact-m cells without paying for interior rows.
+    """
+    legal = np.asarray(legal)
+    unrestricted = np.asarray(unrestricted)
+    weights = np.asarray(weights)
+    if legal.shape != unrestricted.shape or legal.ndim != 2:
+        raise ValueError("legal and unrestricted values must have equal 2D shape")
+    if weights.shape != (legal.shape[0],):
+        raise ValueError("weights have the wrong shape")
+    difference = legal - unrestricted
+    active = np.any(difference != 0, axis=1)
+    if np.any(active):
+        left = legal[active] + unrestricted[active]
+        right = difference[active]
+        cross = left.T @ (weights[active, None] * right)
+        contribution = (cross + cross.T) / 2
+    else:
+        contribution = np.zeros(
+            (legal.shape[1], legal.shape[1]),
+            dtype=np.result_type(legal.dtype, unrestricted.dtype, weights.dtype),
+        )
+    if gram is None:
+        return contribution, int(active.sum())
+    if np.asarray(gram).shape != contribution.shape:
+        raise ValueError("existing Gram matrix has the wrong shape")
+    gram += contribution
+    return gram, int(active.sum())
 
 
 def factorized_feature_values(
@@ -586,7 +746,11 @@ def compile_signature_pair_block(
     if common_dimension < max(len(left_signature), len(right_signature)):
         raise ValueError("common dimension is smaller than a marginal signature")
     maximum_offset = int(verifier.R // verifier.DELTA)
-    for large in range(min(common_dimension, len(verifier.B)) + 1):
+    largest_common_count = min(
+        common_dimension,
+        maximum_offset if control_variate else len(verifier.B),
+    )
+    for large in range(largest_common_count + 1):
         for shifted in range(maximum_offset - large + 1):
             density_status = (large, shifted)
             active_routes = tuple(
@@ -599,21 +763,44 @@ def compile_signature_pair_block(
             total_offset = (large + shifted) * verifier.DELTA
             large_offset = large * verifier.DELTA
             for left_large in (False, True):
-                if large + int(left_large) > len(verifier.B):
+                left_legal = large + int(left_large) <= len(verifier.B)
+                if not control_variate and not left_legal:
                     continue
-                left_limit = verifier._support_limit(large, left_large)
+                left_limit = (
+                    verifier._support_limit(large, left_large)
+                    if left_legal else None
+                )
                 for right_large in (False, True):
-                    if large + int(right_large) > len(verifier.B):
+                    right_legal = large + int(right_large) <= len(verifier.B)
+                    if not control_variate and not right_legal:
                         continue
-                    right_limit = verifier._support_limit(large, right_large)
-                    geometry_specs = (
-                        verifier.RadialSlice(
-                            0, 0, left_large, support_limit=left_limit
-                        ),
-                        verifier.RadialSlice(
-                            0, 0, right_large, support_limit=right_limit
-                        ),
+                    right_limit = (
+                        verifier._support_limit(large, right_large)
+                        if right_legal else None
                     )
+                    geometry_specs = tuple(
+                        spec
+                        for allowed, spec in (
+                            (
+                                left_legal,
+                                verifier.RadialSlice(
+                                    0, 0, left_large, support_limit=left_limit
+                                ),
+                            ),
+                            (
+                                right_legal,
+                                verifier.RadialSlice(
+                                    0, 0, right_large, support_limit=right_limit
+                                ),
+                            ),
+                        )
+                        if allowed
+                    )
+                    if control_variate:
+                        geometry_specs += (
+                            verifier.RadialSlice(0, 0, left_large),
+                            verifier.RadialSlice(0, 0, right_large),
+                        )
                     kind, cells = verifier._slice_geometry(
                         large > 0,
                         common_dimension > large,
@@ -668,17 +855,23 @@ def compile_signature_pair_block(
                                 sample,
                             )
 
-                        left_polynomials = tuple(
-                            feature_polynomial(
-                                left_signature, key, left_large, left_limit
+                        left_polynomials = (
+                            tuple(
+                                feature_polynomial(
+                                    left_signature, key, left_large, left_limit
+                                )
+                                for key in left_keys
                             )
-                            for key in left_keys
+                            if left_legal else tuple({} for _key in left_keys)
                         )
-                        right_polynomials = tuple(
-                            feature_polynomial(
-                                right_signature, key, right_large, right_limit
+                        right_polynomials = (
+                            tuple(
+                                feature_polynomial(
+                                    right_signature, key, right_large, right_limit
+                                )
+                                for key in right_keys
                             )
-                            for key in right_keys
+                            if right_legal else tuple({} for _key in right_keys)
                         )
                         if control_variate:
                             full_left_polynomials = tuple(

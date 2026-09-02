@@ -37,26 +37,43 @@ def main():
         "boundary_cells": 0,
     }
     by_large = {}
-    for large in range(min(common_dimension, len(verifier.B)) + 1):
+    for large in range(min(common_dimension, maximum_offset) + 1):
         subtotal = {key: 0 for key in counts}
         for shifted in range(maximum_offset - large + 1):
             total_offset = (large + shifted) * verifier.DELTA
             large_offset = large * verifier.DELTA
             for left_large in (False, True):
-                if large + int(left_large) > len(verifier.B):
-                    continue
-                left_limit = verifier._support_limit(large, left_large)
+                left_legal = large + int(left_large) <= len(verifier.B)
+                left_limit = (
+                    verifier._support_limit(large, left_large)
+                    if left_legal else None
+                )
                 for right_large in (False, True):
-                    if large + int(right_large) > len(verifier.B):
-                        continue
-                    right_limit = verifier._support_limit(large, right_large)
-                    geometry_specs = (
-                        verifier.RadialSlice(
-                            0, 0, left_large, support_limit=left_limit
-                        ),
-                        verifier.RadialSlice(
-                            0, 0, right_large, support_limit=right_limit
-                        ),
+                    right_legal = large + int(right_large) <= len(verifier.B)
+                    right_limit = (
+                        verifier._support_limit(large, right_large)
+                        if right_legal else None
+                    )
+                    geometry_specs = tuple(
+                        spec
+                        for allowed, spec in (
+                            (
+                                left_legal,
+                                verifier.RadialSlice(
+                                    0, 0, left_large, support_limit=left_limit
+                                ),
+                            ),
+                            (
+                                right_legal,
+                                verifier.RadialSlice(
+                                    0, 0, right_large, support_limit=right_limit
+                                ),
+                            ),
+                        )
+                        if allowed
+                    ) + (
+                        verifier.RadialSlice(0, 0, left_large),
+                        verifier.RadialSlice(0, 0, right_large),
                     )
                     kind, cells = verifier._slice_geometry(
                         large > 0,
@@ -79,11 +96,27 @@ def main():
                         else:
                             continue
                         cell_count += 1
-                        legal_left = verifier._slice_polynomial(
-                            geometry_specs[0], total_offset, large_offset, sample
+                        legal_left = (
+                            verifier._slice_polynomial(
+                                verifier.RadialSlice(
+                                    0, 0, left_large, support_limit=left_limit
+                                ),
+                                total_offset,
+                                large_offset,
+                                sample,
+                            )
+                            if left_legal else {}
                         )
-                        legal_right = verifier._slice_polynomial(
-                            geometry_specs[1], total_offset, large_offset, sample
+                        legal_right = (
+                            verifier._slice_polynomial(
+                                verifier.RadialSlice(
+                                    0, 0, right_large, support_limit=right_limit
+                                ),
+                                total_offset,
+                                large_offset,
+                                sample,
+                            )
+                            if right_legal else {}
                         )
                         full_left = verifier._slice_polynomial(
                             verifier.RadialSlice(0, 0, left_large),

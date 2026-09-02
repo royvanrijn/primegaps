@@ -23,9 +23,13 @@ from .moment_cache import IMomentCache, JFunctionalCache
 from .j_block import (
     JBlockOperator,
     MarginalMap,
+    accumulate_candidate_gram,
     accumulate_feature_gram_blocks,
+    accumulate_gram_difference,
+    candidate_feature_values,
     factorized_feature_values,
     load_block_operator,
+    projected_feature_values,
     save_block_operator,
 )
 
@@ -34,7 +38,10 @@ __all__ = [
     "JFunctionalCache",
     "JBlockOperator",
     "MarginalMap",
+    "accumulate_candidate_gram",
     "accumulate_feature_gram_blocks",
+    "accumulate_gram_difference",
+    "candidate_feature_values",
     "factorized_feature_values",
     "load_block_operator",
     "save_block_operator",
@@ -43,6 +50,7 @@ __all__ = [
     "descending_primes",
     "orbit_status_densities",
     "positive_status_density",
+    "projected_feature_values",
     "rational_reconstruction",
     "rational_residue",
     "signature_moments",

@@ -174,8 +174,9 @@ def radial_values(points, degree, k, *, legal, support):
 
 
 def evaluated_blocks(
-    points, marginal_map, degree, k, coordinate_scale, *, legal, support
+    points, marginal_map, degree, k, coordinate_scale, *, legal, support=None
 ):
+    support = default_support() if support is None else support
     signature_values = qmc_verifier.monomial_symmetric_values(
         points,
         qmc_verifier.all_partitions(degree // 2),
