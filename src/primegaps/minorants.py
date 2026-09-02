@@ -8,6 +8,7 @@ equidistribution checker to cover.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from fractions import Fraction
 from math import log
 
 import numpy as np
@@ -193,3 +194,139 @@ def baker_irving_base_loss(eta: float, order: int = 96) -> float:
     regimes, _, _ = baker_irving_parameters(eta)
     loss_a, _ = stadlmann_loss_components(regimes.xi2, order)
     return loss_a
+
+
+@dataclass(frozen=True)
+class RationalInterval:
+    """Closed interval with exact rational endpoints."""
+
+    lower: Fraction
+    upper: Fraction
+
+    def __post_init__(self) -> None:
+        if self.upper < self.lower:
+            raise ValueError("interval upper endpoint is below its lower endpoint")
+
+
+def log_fraction_enclosure(
+    value: Fraction, terms: int = 12
+) -> RationalInterval:
+    """Rigorously enclose ``log(value)`` using the atanh series.
+
+    All arithmetic, including the geometric remainder bound, is rational.
+    ``terms`` is the largest included zero-based series index.
+    """
+    if value <= 0:
+        raise ValueError("logarithm requires a positive value")
+    if terms < 0:
+        raise ValueError("terms must be nonnegative")
+    if value < 1:
+        reflected = log_fraction_enclosure(1 / value, terms)
+        return RationalInterval(-reflected.upper, -reflected.lower)
+    if value == 1:
+        return RationalInterval(Fraction(0), Fraction(0))
+
+    z = (value - 1) / (value + 1)
+    z_squared = z * z
+    power = z
+    partial = Fraction(0)
+    for index in range(terms + 1):
+        partial += power / (2 * index + 1)
+        power *= z_squared
+    partial *= 2
+    remainder = 2 * power / ((2 * terms + 3) * (1 - z_squared))
+    return RationalInterval(partial, partial + remainder)
+
+
+def type_iic_gamma_cutoff(
+    support_max: Fraction, delta: Fraction, epsilon: Fraction
+) -> Fraction:
+    """Upper gamma endpoint of Proposition 3's Case IIc."""
+    omega = support_max - Fraction(1, 4)
+    return Fraction(1, 3) + 8 * omega + Fraction(7, 3) * delta + 3 * epsilon
+
+
+def type_iic_middle_high_loss_enclosure(
+    gamma_upper: Fraction,
+    *,
+    xi2: Fraction = Fraction(2, 5),
+    parts: int = 128,
+    log_terms: int = 12,
+) -> RationalInterval:
+    r"""Enclose a mandatory positive Type-IIc Buchstab-branch mass.
+
+    This is the high-sum slice of the positive middle term in the Buchstab
+    identity, with ``gamma=1-alpha1-alpha2`` and
+    ``gamma/2 <= alpha2 <= (1-gamma)/2``.  Here the Buchstab argument lies in
+    ``[1,2]``, so its value is exact and the normalized mass is
+
+    ``integral log((2-3g)/g)/(g(1-g)) dg`` from ``xi2`` to ``gamma_upper``.
+
+    The result is a rigorous enclosure obtained from monotone rational
+    rectangles and :func:`log_fraction_enclosure`.  It is only a subset of the
+    mass that a complete Type-IIc deletion would remove.
+    """
+    if parts < 1:
+        raise ValueError("parts must be positive")
+    if log_terms < 0:
+        raise ValueError("log_terms must be nonnegative")
+    if gamma_upper <= xi2:
+        return RationalInterval(Fraction(0), Fraction(0))
+    if xi2 < Fraction(2, 5) or gamma_upper >= Fraction(1, 2):
+        raise ValueError("enclosure requires 2/5 <= xi2 < gamma_upper < 1/2")
+
+    width = (gamma_upper - xi2) / parts
+    lower = Fraction(0)
+    upper = Fraction(0)
+    for index in range(parts):
+        left = xi2 + index * width
+        right = left + width
+        # (2-3g)/g decreases and g(1-g) increases on [2/5,1/2].
+        log_lower = log_fraction_enclosure(
+            (2 - 3 * right) / right, log_terms
+        ).lower
+        log_upper = log_fraction_enclosure(
+            (2 - 3 * left) / left, log_terms
+        ).upper
+        lower += width * log_lower / (right * (1 - right))
+        upper += width * log_upper / (left * (1 - left))
+    return RationalInterval(lower, upper)
+
+
+@dataclass(frozen=True)
+class OptimisticMinorantScreen:
+    """Cheap no-K rejection using a rigorous mandatory-loss enclosure."""
+
+    loss: RationalInterval
+    retained_mass_upper: Fraction
+    raw_score_cap: Fraction
+    optimistic_score_upper: Fraction
+    required_raw_score_lower: Fraction
+    survives: bool
+
+
+def optimistic_no_k_screen(
+    loss: RationalInterval, raw_score_cap: Fraction
+) -> OptimisticMinorantScreen:
+    """Bound ``rho * max_F(kJ/I)`` before any candidate-specific I/J/K work.
+
+    For a proof-bearing rejection, ``raw_score_cap`` itself must be a valid
+    upper bound for the chosen function space.  A measured score may still be
+    supplied for a discovery-stage gate, but does not become rigorous merely
+    by passing through this function.
+    """
+    if raw_score_cap <= 0:
+        raise ValueError("raw score cap must be positive")
+    if loss.lower < 0 or loss.lower >= 1:
+        raise ValueError("loss lower bound must lie in [0,1)")
+    retained_mass_upper = 1 - loss.lower
+    required = 1 / retained_mass_upper
+    optimistic = retained_mass_upper * raw_score_cap
+    return OptimisticMinorantScreen(
+        loss=loss,
+        retained_mass_upper=retained_mass_upper,
+        raw_score_cap=raw_score_cap,
+        optimistic_score_upper=optimistic,
+        required_raw_score_lower=required,
+        survives=optimistic >= 1,
+    )

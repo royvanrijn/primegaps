@@ -3,9 +3,9 @@
 Status date: 2026-09-02.
 
 This is a durable synthesis of the local append-only research store. It does
-not turn numerical observations into theorems. The audit read all 45
-pre-existing records in 21 ledger shards, including negative and refuted
-records, and checked all 71
+not turn numerical observations into theorems. The latest structural replay
+read all 48 records in 24 ledger shards, including negative and refuted
+records, and checked all 79
 referenced immutable objects by SHA-256. The current arXiv entry remains
 `2608.31126v1` at this date.
 
@@ -34,6 +34,7 @@ referenced immutable objects by SHA-256. The current arXiv entry remains
 | Nominal `D=22` calibration | The emitted rational polynomial has exact `48J/I=0.2686576479...`; the builder used the wrong Jacobi conversion for its intended vector. | Exact value valid, calibration refuted. |
 | Support-adapted summary bases | Stable low-degree spaces score around `0.84` at best in the checked `k=49` screen. | Negative; angular information is essential. |
 | Harman/Buchstab catalog | Retained-mass estimates and conditional exceptional-region choices are available. | Numerical quadrature lacks interval enclosures. |
+| Surgical Type-IIc deletion | The bad demand occurs in the core negative and positive direct Type-II Buchstab terms, not exceptional pieces A/B. A rigorously enclosed mandatory positive slice costs at least `0.07158848` mass. | Deletion-only variants are rejected; a genuinely new signed identity is not ruled out. |
 | Modular exact J | Checked residues agree, but one prime is no faster than rational FLINT and many primes are required. | Correct but currently negative for performance. |
 
 ## Analytic target
@@ -69,13 +70,13 @@ absolute-value and supremum steps. No such lemma is currently proved.
 ## Research-store integrity
 
 All ledger JSON parses, dependency targets resolve, and every referenced
-immutable object exists with the recorded content hash. Six historical records
+immutable object exists with the recorded content hash. Seven records
 have a `record_sha256` that does not equal the canonical JSON body currently in
 their shard: the distribution-region record, the three PrimeGapsLib records,
-the first support-geometry audit, and the legal-support-geometry record. Their
-claims have separate source/test or object evidence, but their ledger identity
-needs an append-only correction from the owning agent; this audit does not
-rewrite another agent's history.
+the first support-geometry audit, the legal-support-geometry record, and the
+Type-IIc incomplete-average record. Their claims have separate source/test or
+object evidence, but their ledger identity needs an append-only correction from
+the owning agent; this audit does not rewrite another agent's history.
 
 Replay this structural audit without rerunning any mathematical experiment:
 
@@ -93,6 +94,8 @@ runs are not promoted merely because output files exist.
 1. Build a stable full-support matrix constructor using the exact moment caches.
 2. Resolve a legal higher-degree candidate before launching more expensive
    exact contractions.
-3. Prove or refute the required incomplete-range Type-IIc saving.
+3. Prove or refute the required incomplete-range Type-IIc saving. Do not spend
+   on deletion-only minorants of the current Buchstab identity: their rigorous
+   optimistic no-`K` gate already fails.
 4. Preserve negative results and append corrections rather than overwriting
    historical ledgers.

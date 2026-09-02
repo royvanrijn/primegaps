@@ -159,3 +159,55 @@ Gauss--Legendre quadrature to the remaining three dimensions. It records the
 change between orders 96 and 160 for every candidate. A proof-bearing optimizer
 must replace or enclose these values with certified interval integration before
 using a close mass comparison as a theorem.
+
+## Surgical Type-IIc deletion gate
+
+The exceptional pieces `A` and `B` are not the source of the active
+`P3.II.delta.branch2` condition.  Tracing the earlier Buchstab identity shows
+that the core decomposition already contains two direct Type-II terms in the
+Case-IIc gamma interval:
+
+- a negative one-prime term, which is the necessary correction on rough
+  semiprimes and cannot simply be deleted from a pointwise minorant;
+- a positive two-prime middle term, whose high-sum slice can be deleted but is
+  far too massive.
+
+For the positive term put `gamma=1-alpha1-alpha2`.  On
+
+```text
+2/5 <= gamma <= gamma_c,
+gamma/2 <= alpha2 <= (1-gamma)/2,
+```
+
+the Buchstab function is in its exact `omega(u)=1/u` range.  The normalized
+mass of this slice is
+
+```text
+integral_[2/5,gamma_c]
+  log((2-3 gamma)/gamma)/(gamma(1-gamma)) d gamma.
+```
+
+At the far counterfactual endpoint
+`A_max=913600001/3600000000`, this mandatory subset has the rigorous enclosure
+
+```text
+0.071588483537845070 < loss < 0.071771543742745046.
+```
+
+Thus even the optimistic candidate that resolves the negative branch for free
+has `rho<0.928411516462154930`.  Against the recorded raw degree-21 endpoint
+score `1.000670218`, its no-`K` score is below `0.929033754571895163`; it would
+need a raw score above `1.077108569064980194` to survive.  No full `I/J/K`
+calculation is justified.
+
+The enclosure uses rational atanh-series logarithm bounds and monotone interval
+rectangles, not a difference between floating-point quadrature orders.  Replay
+the cheap gate with
+
+```bash
+PYTHONPATH=src python scripts/screen_surgical_minorant.py
+```
+
+This rejects sign-preserving branch deletions of the current Buchstab identity.
+It does not rule out a genuinely new signed identity or a support family with a
+raw quotient above `1.0771`.

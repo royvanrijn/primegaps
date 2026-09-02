@@ -1,13 +1,20 @@
+from fractions import Fraction
+from math import log
+
 import pytest
 
 from primegaps.minorants import (
     baker_irving_base_loss,
     baker_irving_parameters,
     discard_variants,
+    log_fraction_enclosure,
+    optimistic_no_k_screen,
     regime_frontier,
     stadlmann_admissible,
     stadlmann_loss_components,
     stadlmann_xi1_interval,
+    type_iic_gamma_cutoff,
+    type_iic_middle_high_loss_enclosure,
 )
 
 
@@ -49,3 +56,32 @@ def test_baker_irving_mapping_and_loss_identity():
     stadlmann_a, _ = stadlmann_loss_components(0.40481, order=24)
     assert base == pytest.approx(stadlmann_a, rel=1e-12)
     assert base > 0.0
+
+
+def test_rational_log_enclosure_contains_reference_value():
+    enclosure = log_fraction_enclosure(Fraction(797, 401), terms=10)
+    assert float(enclosure.lower) < log(797 / 401) < float(enclosure.upper)
+    assert float(enclosure.upper - enclosure.lower) < 1e-10
+
+
+def test_surgical_type_iic_branch_fails_optimistic_mass_gate():
+    endpoint = Fraction(913600001, 3600000000)
+    cutoff = type_iic_gamma_cutoff(
+        endpoint, Fraction(7, 250), Fraction(1, 10_000_000_000)
+    )
+    assert cutoff == Fraction(38600000227, 90000000000)
+    loss = type_iic_middle_high_loss_enclosure(cutoff)
+    assert float(loss.lower) > 0.0715
+    assert float(loss.upper) < 0.0718
+    assert float(loss.upper - loss.lower) < 0.0002
+
+    screen = optimistic_no_k_screen(loss, Fraction("1.000670218"))
+    assert not screen.survives
+    assert float(screen.retained_mass_upper) < 0.9285
+    assert float(screen.optimistic_score_upper) < 0.93
+    assert float(screen.required_raw_score_lower) > 1.077
+
+
+def test_empty_type_iic_slice_has_zero_loss():
+    loss = type_iic_middle_high_loss_enclosure(Fraction(2, 5))
+    assert loss.lower == loss.upper == 0
