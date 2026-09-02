@@ -88,11 +88,12 @@ assert matrices.I[0][0] == Fraction(1, 8)
 ```
 
 A basis function is a sparse mapping from an exponent tuple to a rational
-coefficient. All returned entries are `Fraction` objects. The current matrix
-assembler is a reference implementation for low-dimensional audit and uses an
-explicit status decomposition. The C/D coefficient functions are separate so
-a future symmetry-compressed `k=49` assembler can reuse the established exact
-kernel without changing its arithmetic.
+coefficient. All returned entries are `Fraction` objects. This matrix assembler
+remains the low-dimensional audit oracle and uses an explicit status
+decomposition. The symmetry-compressed `k=49` contraction is now implemented
+in the frozen 240 reproducer and the accelerated exact backend; both were
+checked against this reference kernel before their full runs. They reuse the
+same C/D arithmetic without making this deliberately simple API scalable.
 
 ## Source errata and conventions
 

@@ -44,6 +44,11 @@ See [the `P3.II.delta` frontier](docs/p3ii-delta-frontier.md) for the primary
 analytic counterfactual target, the full numerical `A_max -> lambda_48` curve,
 the estimated crossing of 1, and the next binding constraint.
 
+See [the research status audit](docs/research-status.md) for a ledger-wide
+summary of exact results, numerical screens, negative experiments, superseded
+work, and the present blockers. In particular, no degree or legal-support
+experiment currently supplies an exact `k=48` certificate.
+
 See [the PrimeGapsLib cross-pollination notes](docs/primegapslib-crosspollination.md)
 for the monomial-signature representation, nilpotent factorial-moment ladder,
 closed simplex/marginal formulas, sparse grouped contraction, and exact replay

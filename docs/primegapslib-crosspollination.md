@@ -133,6 +133,10 @@ is nevertheless substantial:
 - assemble upper triangles directly into packed exact storage;
 - keep expensive generation separate from a small hash-and-arithmetic replay.
 
-The next integration step is to replace each full-simplex degree scalar with the
-already verified C/D status kernel while retaining this signature DAG and
-grouped transform architecture.
+That integration is complete for the fixed degree-21 Stadlmann candidates: the
+frozen 240 reproducer replaces the full-simplex scalar by the verified C/D
+status kernel, and the accelerated backend preserves the signature DAG and
+grouped contractions while adding candidate-independent moment caches. The
+remaining integration problem is a numerically stable full-support matrix
+constructor for discovering higher-degree vectors; it must not fall back to the
+refuted monomial-basis floating-point replay.

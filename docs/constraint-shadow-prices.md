@@ -83,9 +83,9 @@ the baseline, so this grid assigns Type IIc a measured zero. The other 18 IDs
 are `unprobed`, not zero-valued.
 
 This pilot is a numerical screen over a narrow candidate family, not a global
-optimum or exact matrix certificate. Its actionable conclusion is therefore
-comparative: the global Type-II delta inequality is already worth roughly
-`2.8e-3` in the present degree-21 screen, while the nearby Type-IIc `B` moves
-show no gain. A higher-resolution, paired rerun and a wider endpoint search up
-to the next surviving constraint should precede promotion of the numerical
-value to a checked research claim.
+optimum or exact matrix certificate. Its comparative ranking remains useful:
+the global Type-II delta inequality dominates the nearby Type-IIc `B` moves.
+Its numerical endpoint estimate is superseded by the higher-resolution,
+translated-simplex [`P3.II.delta` frontier](p3ii-delta-frontier.md), which
+removes the old unbounded importance weight and measures the complete interval
+to the next surviving constraint.

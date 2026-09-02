@@ -81,8 +81,10 @@ checks passed:
 - finalization independently derives the expected `I` and `J` signature sets
   from the candidate and rejects missing, duplicate, foreign, or mixed-context
   rows;
-- the repository test suite passes (`43 passed`), including tracked hash,
-  exact-identity, status-DP, low-dimensional `I`/`J`, and grouped-`J` checks.
+- the current repository test suite passes (`65 passed, 2 skipped` in the
+  non-Sage environment), including tracked hash, exact-identity, status-DP,
+  low-dimensional `I`/`J`, grouped-`J`, cache, and frontier checks. The two
+  skipped tests exercise optional Sage/FLINT kernels.
 
 ## Reproducibility boundary
 

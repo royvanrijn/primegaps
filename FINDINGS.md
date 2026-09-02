@@ -1,6 +1,6 @@
 # Findings / reconstruction status
 
-Date: 2026-09-01
+Date: 2026-09-02
 
 Source: Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126v1.
 
@@ -96,6 +96,39 @@ Source: Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126v1.
   conditions using exact rational order-statistic witnesses. The published
   support's full Cartesian product of `(j,m)` cells is certified (empty cells
   are identified vacuously), including its non-BV `A_1+A_1=0.506` pairs.
+- Exact J functionals can now be cached independently of the candidate and
+  polynomial degree. A fully cached replay does not rebuild target densities or
+  reintegrate support geometry; higher-degree runs request only absent exponent
+  pairs. This removes a major repeated cost, but it is an acceleration result,
+  not a new variational certificate.
+
+## Negative and inconclusive `k=48` searches
+
+The higher-degree and support searches completed after the original status
+write-up do not establish a bound below 240:
+
+- An unrestricted deterministic degree sweep (which omits the published `B`
+  cutoffs) reaches `0.9982088741, 0.9985996972, 0.9992942888, 0.9996691406,
+  1.0000734506, 1.0003862453` at `D=22,...,27` under its aggressive spectral
+  cutoff. The apparent first crossing at `D=26` is therefore a discovery proxy,
+  not a value on the legal support. The corresponding randomized cutoff
+  correction and a floating-point exact replay were refuted by impossible
+  quotients and catastrophic cancellation. Exact `I` for one `D=24` candidate
+  is positive, but exact `J` is incomplete at `224/7338` groups.
+- Column generation from the exact `D=21` candidate added 1,032 of the 1,680
+  unused columns through `D=27`; its unrestricted proxy stopped below one at
+  `0.9980139970`. An earlier nominal `D=22` candidate evaluates exactly to
+  `48J/I=0.2686576479...`, but that vector was produced with an incorrect
+  signature-dependent Jacobi conversion and is refuted as a calibration of the
+  intended eigendirection.
+- Compact support-adapted trial spaces depending only on total mass, large-count
+  stratum, and large-coordinate excess were not competitive. Their best stable
+  checked degree-4 screen was about `0.84`, far below the exact global
+  degree-21 `k=49` quotient.
+- A legal irregular-support search at degree 21 found no geometry that closes
+  `k=48`. At the exact `P3.II.delta` ceiling the strongest recorded legal screen
+  remains `lambda_48=0.9982613325` with replicate SE `3.0018e-6`. The former
+  `delta=0.014` lead is now rejected as a heavy-tail estimator artifact.
 
 ## Distribution statement endpoint issue
 
@@ -159,6 +192,15 @@ constant analytic volume weight.  These remain numerical screening values, not
 an exact certificate or a global optimum.  See
 [the full frontier and reproducibility notes](docs/p3ii-delta-frontier.md).
 
+The analytic loss behind the active branch has also been traced. It comes from
+the final `m` term in the Type-IIc `wts3` estimate, through
+`48*omega+16*delta_star-4*gamma<-1`; it is not removable by epsilon or dyadic
+bookkeeping. Reaching the numerical crossing requires an exponent saving
+`0.0211710816` in that term. Uniformly improving the complete exponential sum
+or the outer `H^4` pair count is impossible by the recorded sharp examples, so
+any useful lemma must retain cancellation in the actual incomplete ranges
+before the current absolute-value/supremum steps. No such lemma is proved.
+
 ## Current gate / next milestone
 
 The exact `k=49`, `D=21` gate is complete. With the same published support,
@@ -167,13 +209,19 @@ degree, rationalization rule, and frozen evaluator, `k=48` gives
 `1-48J/I = 0.0030766486473642496111239933426671005...`.
 Next:
 
-1. turn the `P3.II.delta` crossing support into an exact/rational `k=48`
-   certificate candidate;
-2. determine what analytic input could supply the measured `0.0004411`
-   relaxation without violating `P3.II.range`;
-3. run D=22,23,... until threshold or D=27;
-4. jointly optimize the simple support family, then enable the full Proposition
-   3 / Harman-minorant degrees of freedom.
+1. build a numerically stable full-support matrix constructor, reusing the exact
+   candidate-independent I/J moment caches, so higher-degree eigenspaces can be
+   evaluated without the refuted monomial-basis float replay;
+2. use that constructor to resolve the incomplete `D=24` candidate or generate
+   a better legal-support candidate before spending on `D=25--27` exact jobs;
+3. investigate the actual short-rectangle Type-IIc completion before the
+   triangle inequality and either prove the required averaged saving or record
+   a counterexample;
+4. only after those gates, jointly optimize support and Harman-minorant degrees
+   of freedom.
 
 No result below 240 should be claimed until an exact/rational certificate has
 been independently verified.
+
+The ledger-wide classification, including superseded and negative experiments,
+is recorded in [the research status audit](docs/research-status.md).
