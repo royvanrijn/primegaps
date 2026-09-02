@@ -73,6 +73,23 @@ Source: Julia Stadlmann, *Bounded gaps between primes*, arXiv:2608.31126v1.
   replay checks all source/candidate/support/signature hashes and gives
   `49J/I = 1.0011632465949216560417861678682244509240906847502...`, hence
   `49J-I > 0` exactly.
+- An accelerated exact backend now preserves that frozen evaluator as an oracle
+  while changing the implementation: it collapses zero-coordinate density
+  transitions combinatorially, assembles J feature-pair-first, uses carry-free
+  FLINT polynomial encoding over `QQ` or `GF(p)`, supports bounded CRT rational
+  reconstruction, and persists candidate-independent I/J moments. Exact I
+  assembly uses about one quarter of the original summed worker-task time at
+  both `k=48` and `k=49`; every one of the 2,714 rows matches the frozen result.
+  At `k=48`, all
+  2,714 accelerated J rows also match; a lightly contended prototype used
+  3.84x less summed worker-task time and 1.84x less wall time despite half as
+  many workers. The manifest-bound `k=49` J run also matches all 2,714 rows,
+  uses 3.47x less summed worker-task time, and reproduces the exact
+  positive `49J-I`; the accelerated backend has therefore passed its oracle
+  gate. The same manifest-bound code at `k=48` reproduces the exact published
+  deficit. The modular backend is exact in checked
+  residues but showed no single-prime speed advantage, so the FLINT rational
+  path remains the default until geometry can be shared across batched primes.
 - Proposition 2/3 distribution feasibility is now executable through
   `primegaps.is_certified`. It checks the Harman-minorant inequalities, the
   global Type I/II/III hypotheses, and continuous support-cell partition
@@ -117,6 +134,31 @@ would raise the final eigenvalue most. That turns analytic theorem improvement
 into a targeted separation-oracle problem instead of blindly maximizing a
 single distribution exponent.
 
+## Primary analytic target: `P3.II.delta`
+
+The first measured analytic relaxation is now the primary target.  In the
+fixed degree-21 two-band family with `delta=0.028`, support `epsilon=0.0085`,
+and the published prime-indicator minorant, `P3.II.delta` binds exactly at
+`A_max=0.2531666666`.  Relaxing it alone leaves a finite interval until
+`P3.II.range` binds at `A_max=0.253777778055...`; no local witness becomes
+binding first.
+
+A 26-point translated-simplex stratified-QMC frontier gives an essentially
+linear `A_max -> lambda_48` curve.  An independent local screen estimates the
+crossing at `A_max=0.2536077308`, with randomized-QMC 95% interval
+`[0.2536068027,0.2536086590]` and slope `3.94309718`.  This is a relaxation of
+about `0.0004410642` beyond the unrelaxed analytic ceiling (or `0.0006077308`
+beyond the paper's `A_max=0.253`).  At `A_max=0.2537`,
+`lambda_48=1.0003636695`; at the next constraint it is `1.0006702180`.
+
+The former Dirichlet-tilted finite screen is superseded: an unbounded
+importance weight in its `m=2` denominator correction created a long right tail
+and placed the crossing too far left.  The replacement samples each exact
+large-coordinate-count stratum as a translated residual simplex with a
+constant analytic volume weight.  These remain numerical screening values, not
+an exact certificate or a global optimum.  See
+[the full frontier and reproducibility notes](docs/p3ii-delta-frontier.md).
+
 ## Current gate / next milestone
 
 The exact `k=49`, `D=21` gate is complete. With the same published support,
@@ -125,10 +167,13 @@ degree, rationalization rule, and frozen evaluator, `k=48` gives
 `1-48J/I = 0.0030766486473642496111239933426671005...`.
 Next:
 
-1. D=22,23,... until threshold or D=27;
-2. jointly optimize the simple support family;
-3. enable full Proposition 3 / Harman-minorant degrees of freedom;
-4. expand to multi-regime support geometry only if useful.
+1. turn the `P3.II.delta` crossing support into an exact/rational `k=48`
+   certificate candidate;
+2. determine what analytic input could supply the measured `0.0004411`
+   relaxation without violating `P3.II.range`;
+3. run D=22,23,... until threshold or D=27;
+4. jointly optimize the simple support family, then enable the full Proposition
+   3 / Harman-minorant degrees of freedom.
 
 No result below 240 should be claimed until an exact/rational certificate has
 been independently verified.

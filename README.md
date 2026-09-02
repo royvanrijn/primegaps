@@ -32,8 +32,17 @@ This reproduces the variational certificate used for `H_1 <= 240`; it does not
 claim a bound below 240. See [the exact 240 reproduction](docs/reproduction-240.md)
 for conventions, commands, hashes, independent checks, and the `k=48` status.
 
+See [the faster exact backend](docs/fast-exact-backend.md) for the independently
+checked closed-zero recurrence, pair-first J assembly, FLINT and modular
+polynomial kernels, reusable moment caches, benchmarks, and checkpointed run
+commands. The original reproduction remains the trust oracle.
+
 See [the Section 5 engine notes](docs/section5-engine.md) for the reconstructed
 formulas, source errata, exact API, and verification boundary.
+
+See [the `P3.II.delta` frontier](docs/p3ii-delta-frontier.md) for the primary
+analytic counterfactual target, the full numerical `A_max -> lambda_48` curve,
+the estimated crossing of 1, and the next binding constraint.
 
 See [the PrimeGapsLib cross-pollination notes](docs/primegapslib-crosspollination.md)
 for the monomial-signature representation, nilpotent factorial-moment ladder,
