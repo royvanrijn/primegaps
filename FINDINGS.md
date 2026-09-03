@@ -130,6 +130,16 @@ write-up do not establish a bound below 240:
   remains `lambda_48=0.9982613325` with replicate SE `3.0018e-6`. The former
   `delta=0.014` lead is now rejected as a heavy-tail estimator artifact.
 
+- A first sparse positive-semidefinite sum-of-squares screen used an
+  oracle-derived induced four-cycle, 60 localized D7 components, and `2^16`
+  scrambled-Sobol points per exact-count stratum. At both `k=47` and `k=46`
+  the full SDP optimizer had numerical rank one and matched the best legal
+  rank-one clique to within `5.1e-9` relative; it therefore showed no advantage,
+  far below the proposed `2.2%` signal threshold. A signed four-cycle control
+  does produce the expected rank-two `sqrt(2)` advantage, so the null result is
+  not a solver degeneracy. This rejects only the first D7 bank, not all sparse
+  support graphs; see [the sparse SOS screen](docs/sparse-sos.md).
+
 ## Distribution statement endpoint issue
 
 The printed Type IIc condition in Proposition 3 quantifies
@@ -316,6 +326,30 @@ has rigorously enclosed normalized mass
 far endpoint is below `0.929033754571895163`. A survivor would need a raw score
 above `1.077108569064980194`. No full `I/J/K` run is warranted for deletion-only
 variants of this decomposition.
+
+## Minimum-breakthrough inversion (D21)
+
+A simultaneous-slack optimizer now evaluates every registered Proposition 2/3
+condition rather than waiving one condition at a time. With unit raw-exponent
+weights, fixed `delta=0.028`, `epsilon=0.0085`, and prime-indicator minorant
+`(0.38,0.4,0.4)`, the independently validated D21 grid leaders are: `k=47`,
+`A=0.2548` with the current B profile (cost `0.048633324`); `k=46`, `A=0.2560`
+with the current B profile (cost `0.109833324`); `k=43`, `A=0.2596` with outer
+`B_2=0.16`, `B_m=0.18` for `m>=3` (cost `0.319379991`); and `k=42`, the same B
+relaxation at `A=0.2610` (cost `0.399333324`). Four independent `2^17`-point
+importance-control replicates put every selected direction above one, and the
+respective mean-minus-two-SE values are `1.0003471032`, `1.0002649501`,
+`1.0004399482`, and `1.0003383769`.
+
+The unchanged-B candidates at the first apparent crossings for `k=43,42`
+failed independent validation, while the simultaneous B relaxation at the same
+endpoint passed; this reverses their discovery-only ranking. Perfect removal
+of local support restrictions at the current asymmetric endpoint remains below
+one for all four k. At unrestricted symmetric exponent `theta=0.525`, full D21
+clears only `k=47,46`; `theta=0.60` and `66/107` clear all four. These are
+finite-grid numerical leads, not theorem certificates or global optima. D27 is
+excluded from this benchmark. Full vectors and controls are documented in
+[the minimum-breakthrough note](docs/minimum-breakthrough.md).
 
 ## Current gate / next milestone
 

@@ -14,6 +14,7 @@ from .distribution import (
     ANALYTIC_CONSTRAINTS,
     ANALYTIC_CONSTRAINT_IDS,
     AnalyticConstraint,
+    AnalyticSlack,
     ConstraintFailure,
     DistributionCertificate,
     Minorant,
@@ -22,6 +23,12 @@ from .distribution import (
     constraint_failures,
     is_certified,
     support_constraint_failures,
+    support_constraint_slacks,
+)
+from .breakthrough import (
+    BreakthroughDiagnostic,
+    MinimumBreakthroughExperiment,
+    minimum_breakthrough,
 )
 from .symmetric import (
     FactorialMomentTable,
@@ -49,11 +56,14 @@ __all__ = [
     "ANALYTIC_CONSTRAINTS",
     "ANALYTIC_CONSTRAINT_IDS",
     "AnalyticConstraint",
+    "AnalyticSlack",
+    "BreakthroughDiagnostic",
     "ConstraintFailure",
     "CandidateDiagnostic",
     "ConstraintRelaxation",
     "DistributionCertificate",
     "Minorant",
+    "MinimumBreakthroughExperiment",
     "RegionCell",
     "ScoredSupport",
     "ShadowPriceExperiment",
@@ -79,8 +89,10 @@ __all__ = [
     "load_sparse_symmetric_terms",
     "monomial",
     "monomial_symmetric_polynomial",
+    "minimum_breakthrough",
     "rank_constraint_relaxations",
     "simplex_marginal_pairing",
     "small_cube_coefficients",
     "support_constraint_failures",
+    "support_constraint_slacks",
 ]
