@@ -1,0 +1,40 @@
+name: Fetch BGP212 manuscript
+
+on:
+  push:
+    paths:
+      - .github/workflows/fetch-bgp212.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch manuscript
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifact/pages
+          curl --fail --location --retry 5 --retry-all-errors \
+            --dump-header artifact/http-headers.txt \
+            https://primegaps.axiommath.ai/bgp212.pdf \
+            --output artifact/bgp212.pdf
+          file artifact/bgp212.pdf | tee artifact/file.txt
+          sha256sum artifact/bgp212.pdf | tee artifact/sha256.txt
+          pdfinfo artifact/bgp212.pdf | tee artifact/pdfinfo.txt
+          pdftotext -layout artifact/bgp212.pdf artifact/bgp212.txt
+          pages=$(pdfinfo artifact/bgp212.pdf | awk '/^Pages:/ {print $2}')
+          pdftoppm -png -r 130 -f 1 -l "$pages" \
+            artifact/bgp212.pdf artifact/pages/page >/dev/null 2>&1
+
+      - name: Upload manuscript bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: bgp212-manuscript
+          path: artifact
+          if-no-files-found: error
+          retention-days: 7
