@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 
 from primegaps.fast_exact import fast_i as fast
-from primegaps.fast_exact import fast_j, j_block, moment_cache
+from primegaps.fast_exact import arb_j, fast_j, j_block, moment_cache
 from primegaps.fast_exact import compiled_poly, modular_exact
 from primegaps.symmetric import simplex_marginal_pairing
 
@@ -90,6 +90,68 @@ def test_positive_core_is_reused_across_k():
         )
         assert actual == expected
     assert len(cache) == 1
+
+
+def test_single_status_density_matches_filtered_full_recurrence():
+    cases = (
+        ((), 3),
+        ((2,), 4),
+        ((4, 2), 6),
+        ((6, 4, 2), 8),
+    )
+    for signature, k in cases:
+        full = fast.orbit_status_densities(
+            signature,
+            k=k,
+            delta=Fraction(7, 250),
+            max_large=min(5, k),
+            max_offset_count=min(6, k),
+            rational=Fraction,
+        )
+        for large in range(min(5, k) + 1):
+            for shifted in range(min(6, k) - large + 1):
+                expected = {
+                    state: coefficient
+                    for state, coefficient in full.items()
+                    if state[:2] == (large, shifted)
+                }
+                actual = fast.orbit_status_density(
+                    signature,
+                    k=k,
+                    delta=Fraction(7, 250),
+                    large=large,
+                    shifted=shifted,
+                    rational=Fraction,
+                )
+                assert actual == expected
+
+
+def test_target_single_status_density_matches_all_statuses():
+    targets = ((), (2,), (4, 2), (2, 2, 2))
+    status = (2, 1)
+    full = fast_j.target_densities(
+        targets,
+        common_dimension=5,
+        delta=Fraction(7, 250),
+        max_large=4,
+        max_offset_count=4,
+        rational=Fraction,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+    )
+    actual = fast_j.target_status_densities(
+        targets,
+        status,
+        common_dimension=5,
+        delta=Fraction(7, 250),
+        rational=Fraction,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+    )
+    expected = {
+        target: {status: grouped[status]}
+        for target, grouped in full.items()
+        if status in grouped
+    }
+    assert actual == expected
 
 
 def test_validation():
@@ -370,6 +432,142 @@ def test_exact_j_control_variate_matches_legal_minus_closed_unrestricted():
                 )
             )
     assert legal == unrestricted + correction
+
+    _targets, routes = fast_j.pair_routes(pair_groups, tuple(pair_groups))
+    pair_correction = fast_j.evaluate_signature_pair_chunk_scalar(
+        tuple(routes),
+        pair_route_map=routes,
+        dimension=dimension,
+        feature_groups=feature_groups,
+        verifier=verifier,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+        rational=Fraction,
+        target_density_cache={},
+        slice_cache={},
+        control_variate=True,
+    )
+    assert pair_correction == correction
+
+
+def test_density_weighted_moments_reuse_raw_cell_geometry():
+    class CountingVerifier:
+        def __init__(self):
+            self.calls = []
+
+        def _polygon_monomial_moment(self, x_power, z_power, _polygon):
+            self.calls.append((x_power, z_power))
+            return Fraction(x_power + 2 * z_power + 1, 7)
+
+    counting = CountingVerifier()
+    raw = {}
+    cell = (((Fraction(), Fraction()),), (Fraction(), Fraction()))
+    first = fast_j.density_weighted_moments(
+        {(0, 0): Fraction(2), (1, 0): Fraction(3)},
+        ((0, 0), (0, 1)),
+        kind="polygons",
+        cell=cell,
+        verifier=counting,
+        rational=Fraction,
+        raw_moments=raw,
+    )
+    second = fast_j.density_weighted_moments(
+        {(0, 0): Fraction(5), (0, 1): Fraction(-1)},
+        ((0, 0), (1, 0)),
+        kind="polygons",
+        cell=cell,
+        verifier=counting,
+        rational=Fraction,
+        raw_moments=raw,
+    )
+    assert first and second
+    assert sorted(counting.calls) == [(0, 0), (0, 1), (1, 0), (1, 1)]
+    assert set(raw) == set(counting.calls)
+
+
+def test_boundary_cell_first_arb_contains_exact_control_variate():
+    pytest.importorskip("sage.all")
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    dimension = 3
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    pair_groups = verifier.grouped_signature_pairs(feature_groups, dimension)
+    targets, routes = fast_j.pair_routes(pair_groups, tuple(pair_groups))
+    maximum_offset = int(verifier.R // verifier.DELTA)
+    densities = fast_j.target_densities(
+        targets,
+        common_dimension=dimension - 1,
+        delta=verifier.DELTA,
+        max_large=maximum_offset,
+        max_offset_count=maximum_offset,
+        rational=Fraction,
+        orbit_size=reference.monomial_symmetric_orbit_size,
+    )
+    backend = compiled_poly.FlintEncodedPolynomialBackend(
+        stride=64, rational=Fraction
+    )
+    interval = None
+    cells = tuple(arb_j.iter_boundary_cells(
+        common_dimension=dimension - 1, verifier=verifier
+    ))
+    assert cells
+    for cell in cells:
+        target_polynomials = arb_j.target_correction_polynomials(
+            routes,
+            feature_groups,
+            cell,
+            verifier=verifier,
+            polynomial_backend=backend,
+        )
+        contribution, statistics = arb_j.contract_cell_real_ball(
+            target_polynomials,
+            densities,
+            cell,
+            verifier=verifier,
+            polynomial_backend=backend,
+            precision=128,
+        )
+        assert statistics["raw_moments"] <= statistics["integrand_terms"]
+        interval = contribution if interval is None else interval + contribution
+
+    exact = sum(
+        fast_j.evaluate_target_chunk(
+            targets,
+            dimension=dimension,
+            feature_groups=feature_groups,
+            pair_groups=pair_groups,
+            verifier=verifier,
+            orbit_size=reference.monomial_symmetric_orbit_size,
+            rational=Fraction,
+            control_variate=True,
+        ).values(),
+        Fraction(),
+    )
+    from sage.all import QQ
+    assert interval.contains_exact(QQ(exact.numerator) / exact.denominator)
+
+
+def test_slice_regime_key_implies_identical_candidate_slice_operators():
+    terms = (
+        verifier.Term((), 1, Fraction(2)),
+        verifier.Term((2,), 0, Fraction(-3, 2)),
+        verifier.Term((2, 2), 1, Fraction(1, 3)),
+    )
+    feature_groups = verifier.grouped_marginal_coefficients(terms)
+    grouped = {}
+    for cell in arb_j.iter_boundary_cells(
+        common_dimension=2, verifier=verifier
+    ):
+        key = arb_j.slice_regime_key(cell, verifier=verifier)
+        families = arb_j._slice_families(
+            feature_groups, cell, verifier=verifier
+        )
+        if key in grouped:
+            assert families == grouped[key]
+        else:
+            grouped[key] = families
 
 
 def test_candidate_independent_moment_cache(tmp_path):

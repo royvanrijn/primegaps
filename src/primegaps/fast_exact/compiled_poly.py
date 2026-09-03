@@ -94,6 +94,79 @@ class FlintEncodedPolynomialBackend:
             int(value.numerator()), int(value.denominator())
         )
 
+    def integrate_trilinear(
+        self,
+        left,
+        right,
+        density,
+        *,
+        kind,
+        cell,
+        verifier,
+        raw_moments,
+        ring_moments=None,
+    ):
+        """Contract ``density*left*right`` with one shared raw cell table.
+
+        FLINT performs the small polynomial convolution and all additions over
+        ``QQ``.  Only the resulting monomials touch geometry, and both the raw
+        rational moments and their ``QQ`` conversions are cached across every
+        signature pair evaluated on the cell.
+        """
+        if not left or not right or not density:
+            return self.rational(0)
+        if ring_moments is None:
+            ring_moments = {}
+        integrand = self.from_dict(left) * self.from_dict(right) * self.from_dict(density)
+        return self.integrate_encoded_moments(
+            integrand,
+            kind=kind,
+            cell=cell,
+            verifier=verifier,
+            raw_moments=raw_moments,
+            ring_moments=ring_moments,
+        )
+
+    def integrate_encoded_moments(
+        self,
+        integrand,
+        *,
+        kind,
+        cell,
+        verifier,
+        raw_moments,
+        ring_moments=None,
+    ):
+        """Dot one already-accumulated FLINT polynomial with cell moments."""
+        answer = self.base_ring.zero()
+        if ring_moments is None:
+            ring_moments = {}
+        # Imported lazily to keep this backend's module import independent of
+        # the exact J orchestration code.
+        from .fast_j import geometry_monomial_moment
+
+        for encoded_power, coefficient in integrand.dict().items():
+            x_power, z_power = divmod(int(encoded_power), self.stride)
+            exponent = (x_power, z_power)
+            try:
+                moment = ring_moments[exponent]
+            except KeyError:
+                try:
+                    raw = raw_moments[exponent]
+                except KeyError:
+                    raw = geometry_monomial_moment(
+                        exponent,
+                        kind=kind,
+                        cell=cell,
+                        verifier=verifier,
+                        rational=self.rational,
+                    )
+                    raw_moments[exponent] = raw
+                moment = self._coefficient(raw)
+                ring_moments[exponent] = moment
+            answer += coefficient * moment
+        return self.rational(int(answer.numerator()), int(answer.denominator()))
+
     def terms(self, polynomial):
         for encoded_power, coefficient in polynomial.dict().items():
             x_power, z_power = divmod(int(encoded_power), self.stride)
@@ -149,6 +222,48 @@ class FlintEncodedPolynomialBackend:
         if kind == "empty":
             return self.rational(0)
         raise ValueError(f"unknown geometry kind {kind!r}")
+
+
+class ArbEncodedPolynomialBackend:
+    """Carry-free bivariate polynomials over an outward-rounded Arb field."""
+
+    is_ball_backend = True
+
+    def __init__(self, *, precision: int = 128, stride: int = 256, rational):
+        if stride < 2:
+            raise ValueError("stride must be at least two")
+        from sage.all import PolynomialRing, RealBallField
+
+        self.precision = int(precision)
+        self.stride = int(stride)
+        self.rational = rational
+        self.base_ring = RealBallField(self.precision)
+        self.ring = PolynomialRing(self.base_ring, "q")
+
+    def _coefficient(self, value):
+        numerator, denominator = _numerator_denominator(value)
+        return self.base_ring(numerator) / self.base_ring(denominator)
+
+    def from_dict(self, polynomial):
+        encoded = {}
+        for (x_power, z_power), coefficient in polynomial.items():
+            if not 0 <= z_power < self.stride:
+                raise ValueError(
+                    f"z exponent {z_power} exceeds stride {self.stride}"
+                )
+            encoded[x_power * self.stride + z_power] = self._coefficient(
+                coefficient
+            )
+        return self.ring(encoded)
+
+    def zero(self):
+        return self.ring.zero()
+
+    def multiply(self, left, right):
+        return left * right
+
+    def add_scaled(self, target, source, scalar):
+        return target + int(scalar) * source
 
 
 class FlintModularEncodedPolynomialBackend:

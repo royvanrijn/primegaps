@@ -71,6 +71,60 @@ def target_densities(
     return answer
 
 
+def target_status_densities(
+    targets,
+    status,
+    *,
+    common_dimension: int,
+    delta,
+    rational,
+    orbit_size,
+    positive_cache: dict | None = None,
+):
+    """Build normalized density polynomials for one boundary status only."""
+    large, shifted = map(int, status)
+    answer = {}
+    for target in targets:
+        density = fast_i.orbit_status_density(
+            target,
+            k=common_dimension,
+            delta=delta,
+            large=large,
+            shifted=shifted,
+            rational=rational,
+            positive_cache=positive_cache,
+        )
+        if not density:
+            continue
+        orbit = orbit_size(target, common_dimension)
+        polynomial = {}
+        for (
+            density_large,
+            density_shifted,
+            large_power,
+            small_power,
+        ), coefficient in fast_i.normalized_density_terms(
+            density, common_dimension
+        ):
+            if (density_large, density_shifted) != (large, shifted):
+                raise AssertionError("single-status density escaped its bucket")
+            exponent = (
+                0 if large_power is None else large_power,
+                0 if small_power is None else small_power,
+            )
+            polynomial[exponent] = polynomial.get(exponent, rational(0)) + (
+                orbit * coefficient
+            )
+        polynomial = {
+            exponent: coefficient
+            for exponent, coefficient in polynomial.items()
+            if coefficient
+        }
+        if polynomial:
+            answer[target] = {(large, shifted): polynomial}
+    return answer
+
+
 def add_scaled_in_place(target, source, scalar, rational):
     """Accumulate scalar*source without temporary scale/add dictionaries."""
     for exponent, coefficient in source.items():
@@ -154,6 +208,7 @@ def density_weighted_moments(
     cell,
     verifier,
     rational,
+    raw_moments=None,
 ):
     """Build the reusable functional L(e)=integral density*x^e.
 
@@ -161,18 +216,31 @@ def density_weighted_moments(
     not on candidate coefficients.  They can therefore be persisted and
     extended when a higher degree asks for additional exponents.
     """
+    # Geometry is independent of the target density.  A caller evaluating many
+    # densities on the same cell should pass one mutable table here: the first
+    # request integrates a monomial and every later density/pair reuses it.
+    # This cache deliberately contains *raw* cell moments, not density-weighted
+    # moments, so it is reusable across every target and signature pair.
+    if raw_moments is None:
+        raw_moments = {}
     answer = {}
     for exponent in candidate_exponents:
         x_power, z_power = exponent
         value = rational(0)
         for (density_x, density_z), coefficient in density.items():
-            value += coefficient * geometry_monomial_moment(
-                (x_power + density_x, z_power + density_z),
-                kind=kind,
-                cell=cell,
-                verifier=verifier,
-                rational=rational,
-            )
+            raw_exponent = (x_power + density_x, z_power + density_z)
+            try:
+                moment = raw_moments[raw_exponent]
+            except KeyError:
+                moment = geometry_monomial_moment(
+                    raw_exponent,
+                    kind=kind,
+                    cell=cell,
+                    verifier=verifier,
+                    rational=rational,
+                )
+                raw_moments[raw_exponent] = moment
+            value += coefficient * moment
         answer[tuple(exponent)] = value
     return answer
 
@@ -196,6 +264,8 @@ def evaluate_density_bilinear(
     verifier,
     rational,
     polynomial_backend=None,
+    raw_moments=None,
+    backend_raw_moments=None,
 ):
     """Evaluate ``integral density*left*right`` without forming either product.
 
@@ -205,6 +275,21 @@ def evaluate_density_bilinear(
     """
     if not left or not right or not density:
         return rational(0)
+    if polynomial_backend is not None and hasattr(
+        polynomial_backend, "integrate_trilinear"
+    ):
+        if raw_moments is None:
+            raw_moments = {}
+        return polynomial_backend.integrate_trilinear(
+            left,
+            right,
+            density,
+            kind=kind,
+            cell=cell,
+            verifier=verifier,
+            raw_moments=raw_moments,
+            ring_moments=backend_raw_moments,
+        )
     required = tuple(sorted({
         (left_x + right_x, left_z + right_z)
         for left_x, left_z in left
@@ -217,6 +302,7 @@ def evaluate_density_bilinear(
         cell=cell,
         verifier=verifier,
         rational=rational,
+        raw_moments=raw_moments,
     )
     if polynomial_backend is not None and hasattr(
         polynomial_backend, "contract_bilinear"
@@ -895,6 +981,7 @@ def evaluate_signature_pair_chunk_scalar(
     target_density_cache=None,
     polynomial_backend=None,
     slice_cache: dict | None = None,
+    control_variate: bool = False,
 ):
     """Contract a chunk of signature pairs directly to one exact J scalar.
 
@@ -902,6 +989,9 @@ def evaluate_signature_pair_chunk_scalar(
     Target densities are combined *before* candidate slice multiplication and
     geometry integration.  The slice product is not formed: its coefficient
     vectors are contracted against density-weighted exponent-sum moments.
+
+    With ``control_variate=True`` this returns only
+    ``J_legal-J_unrestricted`` and skips cells where both slice families agree.
 
     This is the exact-certificate counterpart of :class:`JBlockOperator`: it
     contracts only the supplied candidate rather than materializing every
@@ -927,7 +1017,7 @@ def evaluate_signature_pair_chunk_scalar(
                 (target,),
                 common_dimension=common_dimension,
                 delta=verifier.DELTA,
-                max_large=len(verifier.B),
+                max_large=(maximum_offset if control_variate else len(verifier.B)),
                 max_offset_count=maximum_offset,
                 rational=rational,
                 orbit_size=orbit_size,
@@ -951,7 +1041,25 @@ def evaluate_signature_pair_chunk_scalar(
                 add_scaled_in_place(bucket, density, structure, rational)
         combined[pair] = grouped
     answer = rational(0)
-    for large in range(min(common_dimension, len(verifier.B)) + 1):
+    encoded_polynomials = {}
+
+    def encoded(polynomial):
+        key = id(polynomial)
+        cached = encoded_polynomials.get(key)
+        if cached is None or cached[0] is not polynomial:
+            cached = (polynomial, polynomial_backend.from_dict(polynomial))
+            encoded_polynomials[key] = cached
+        return cached[1]
+
+    accumulate_cell = (
+        polynomial_backend is not None
+        and hasattr(polynomial_backend, "integrate_encoded_moments")
+    )
+    largest_common_count = min(
+        common_dimension,
+        maximum_offset if control_variate else len(verifier.B),
+    )
+    for large in range(largest_common_count + 1):
         for shifted in range(maximum_offset - large + 1):
             status = (large, shifted)
             active_pairs = tuple(
@@ -962,21 +1070,44 @@ def evaluate_signature_pair_chunk_scalar(
             total_offset = (large + shifted) * verifier.DELTA
             large_offset = large * verifier.DELTA
             for left_large in (False, True):
-                if large + int(left_large) > len(verifier.B):
+                left_legal = large + int(left_large) <= len(verifier.B)
+                if not control_variate and not left_legal:
                     continue
-                left_limit = verifier._support_limit(large, left_large)
+                left_limit = (
+                    verifier._support_limit(large, left_large)
+                    if left_legal else None
+                )
                 for right_large in (False, True):
-                    if large + int(right_large) > len(verifier.B):
+                    right_legal = large + int(right_large) <= len(verifier.B)
+                    if not control_variate and not right_legal:
                         continue
-                    right_limit = verifier._support_limit(large, right_large)
-                    specs = (
-                        verifier.RadialSlice(
-                            0, 0, left_large, support_limit=left_limit
-                        ),
-                        verifier.RadialSlice(
-                            0, 0, right_large, support_limit=right_limit
-                        ),
+                    right_limit = (
+                        verifier._support_limit(large, right_large)
+                        if right_legal else None
                     )
+                    specs = tuple(
+                        spec
+                        for allowed, spec in (
+                            (
+                                left_legal,
+                                verifier.RadialSlice(
+                                    0, 0, left_large, support_limit=left_limit
+                                ),
+                            ),
+                            (
+                                right_legal,
+                                verifier.RadialSlice(
+                                    0, 0, right_large, support_limit=right_limit
+                                ),
+                            ),
+                        )
+                        if allowed
+                    )
+                    if control_variate:
+                        specs += (
+                            verifier.RadialSlice(0, 0, left_large),
+                            verifier.RadialSlice(0, 0, right_large),
+                        )
                     kind, cells = verifier._slice_geometry(
                         large > 0,
                         common_dimension > large,
@@ -995,12 +1126,26 @@ def evaluate_signature_pair_chunk_scalar(
                         else:
                             continue
                         slice_polys = {}
+                        raw_moments = {}
+                        backend_raw_moments = {}
+                        cell_integrand = (
+                            polynomial_backend.zero() if accumulate_cell else None
+                        )
                         for left, right in active_pairs:
                             polynomials = []
-                            for signature, is_large, limit in (
-                                (left, left_large, left_limit),
-                                (right, right_large, right_limit),
-                            ):
+                            requests = (
+                                (left, left_large, left_limit, left_legal),
+                                (right, right_large, right_limit, right_legal),
+                            )
+                            if control_variate:
+                                requests += (
+                                    (left, left_large, None, True),
+                                    (right, right_large, None, True),
+                                )
+                            for signature, is_large, limit, allowed in requests:
+                                if not allowed:
+                                    polynomials.append({})
+                                    continue
                                 key = (
                                     signature,
                                     is_large,
@@ -1029,14 +1174,67 @@ def evaluate_signature_pair_chunk_scalar(
                                             slice_cache[key] = polynomial
                                     slice_polys[key] = polynomial
                                 polynomials.append(polynomial)
-                            answer += evaluate_density_bilinear(
+                            if control_variate and (
+                                polynomials[0] == polynomials[2]
+                                and polynomials[1] == polynomials[3]
+                            ):
+                                continue
+                            density = combined[(left, right)][status]
+                            if accumulate_cell:
+                                legal_product = polynomial_backend.multiply(
+                                    polynomial_backend.multiply(
+                                        encoded(polynomials[0]), encoded(polynomials[1])
+                                    ),
+                                    encoded(density),
+                                )
+                                cell_integrand = polynomial_backend.add_scaled(
+                                    cell_integrand, legal_product, 1
+                                )
+                                if control_variate:
+                                    full_product = polynomial_backend.multiply(
+                                        polynomial_backend.multiply(
+                                            encoded(polynomials[2]),
+                                            encoded(polynomials[3]),
+                                        ),
+                                        encoded(density),
+                                    )
+                                    cell_integrand = polynomial_backend.add_scaled(
+                                        cell_integrand, full_product, -1
+                                    )
+                                continue
+                            legal = evaluate_density_bilinear(
                                 polynomials[0],
                                 polynomials[1],
-                                combined[(left, right)][status],
+                                density,
                                 kind=kind,
                                 cell=cell,
                                 verifier=verifier,
                                 rational=rational,
                                 polynomial_backend=polynomial_backend,
+                                raw_moments=raw_moments,
+                                backend_raw_moments=backend_raw_moments,
+                            )
+                            if control_variate:
+                                legal -= evaluate_density_bilinear(
+                                    polynomials[2],
+                                    polynomials[3],
+                                    density,
+                                    kind=kind,
+                                    cell=cell,
+                                    verifier=verifier,
+                                    rational=rational,
+                                    polynomial_backend=polynomial_backend,
+                                    raw_moments=raw_moments,
+                                    backend_raw_moments=backend_raw_moments,
+                                )
+                            answer += legal
+                        if accumulate_cell and cell_integrand:
+                            answer += polynomial_backend.integrate_encoded_moments(
+                                cell_integrand,
+                                kind=kind,
+                                cell=cell,
+                                verifier=verifier,
+                                raw_moments=raw_moments,
+                                ring_moments=backend_raw_moments,
                             )
     return answer

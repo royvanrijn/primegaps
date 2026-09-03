@@ -37,6 +37,10 @@ checked closed-zero recurrence, pair-first J assembly, FLINT and modular
 polynomial kernels, reusable moment caches, benchmarks, and checkpointed run
 commands. The original reproduction remains the trust oracle.
 
+See [the boundary-only Arb J certifier](docs/boundary-j-arb-certifier.md) for
+the outward-rounded legal-minus-unrestricted scalar verifier, its frozen D21
+oracle calibration, and the detached D27 checkpoint workflow.
+
 See [the Section 5 engine notes](docs/section5-engine.md) for the reconstructed
 formulas, source errata, exact API, and verification boundary.
 

@@ -132,6 +132,101 @@ def apply_zero_block(
     return {state: value for state, value in answer.items() if value}
 
 
+def apply_zero_block_status(
+    positive_density: dict[State, object],
+    zero_count: int,
+    *,
+    large: int,
+    shifted: int,
+    rational,
+) -> dict[State, object]:
+    """Complete only one requested status after the positive-coordinate DP.
+
+    This is the single coefficient of the same multinomial convolution used by
+    :func:`apply_zero_block`.  It avoids constructing every other
+    ``(large, shifted)`` bucket when a boundary-cell worker needs just one.
+    """
+    if zero_count < 0:
+        raise ValueError("zero_count must be non-negative")
+    if large < 0 or shifted < 0:
+        raise ValueError("status counts must be non-negative")
+    answer = defaultdict(rational)
+    for (
+        positive_large,
+        positive_shifted,
+        large_power,
+        small_power,
+    ), coefficient in positive_density.items():
+        added_large = large - positive_large
+        added_shifted = shifted - positive_shifted
+        if (
+            added_large < 0
+            or added_shifted < 0
+            or added_large + added_shifted > zero_count
+        ):
+            continue
+        multiplier = (
+            comb(zero_count, added_large)
+            * comb(zero_count - added_large, added_shifted)
+            * (-1) ** added_shifted
+        )
+        answer[(large, shifted, large_power, small_power)] += (
+            coefficient * multiplier
+        )
+    return {state: value for state, value in answer.items() if value}
+
+
+def orbit_status_density(
+    signature: Iterable[int],
+    *,
+    k: int,
+    delta,
+    large: int,
+    shifted: int,
+    rational,
+    positive_cache: dict | None = None,
+) -> dict[State, object]:
+    """Return exactly one ``(large, shifted)`` density bucket.
+
+    The recurrence is truncated at the requested status and the zero block is
+    extracted directly.  This is algebraically identical to filtering
+    :func:`orbit_status_densities`, but has bounded output and substantially
+    smaller intermediate state for low boundary statuses.
+    """
+    signature = tuple(int(value) for value in signature)
+    if len(signature) > k:
+        raise ValueError("signature is longer than k")
+    if large < 0 or shifted < 0 or large > k or large + shifted > k:
+        return {}
+    cache_key = (
+        signature,
+        str(delta),
+        large,
+        large + shifted,
+        rational.__module__,
+        rational.__name__,
+    )
+    if positive_cache is not None and cache_key in positive_cache:
+        positive = positive_cache[cache_key]
+    else:
+        positive = positive_status_density(
+            signature,
+            delta=delta,
+            max_large=large,
+            max_offset_count=large + shifted,
+            rational=rational,
+        )
+        if positive_cache is not None:
+            positive_cache[cache_key] = positive
+    return apply_zero_block_status(
+        positive,
+        k - len(signature),
+        large=large,
+        shifted=shifted,
+        rational=rational,
+    )
+
+
 def orbit_status_densities(
     signature: Iterable[int],
     *,
