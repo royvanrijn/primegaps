@@ -1,0 +1,398 @@
+\documentclass[11pt]{amsart}
+
+\usepackage[a4paper,left=2.7cm,right=2.7cm,top=2.7cm,bottom=2.7cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[shortlabels]{enumitem}
+\usepackage{booktabs}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[colorlinks=true,citecolor=MidnightBlue,linkcolor=BrickRed,urlcolor=MidnightBlue]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Pcal}{\mathcal P}
+\newcommand{\Tcal}{\mathcal T}
+\newcommand{\DHL}{\operatorname{DHL}}
+\title[Bounded gaps between primes]{Bounded gaps between primes:\
+towards the bound $H_1\leq236$}
+\author{\NoCaseChange{Roy van Rijn}}
+\date{Working draft, 3 September 2026}
+\thanks{This is a conditional research draft.  It does not claim an unconditional
+improvement until the analytic and computational obligations stated in the paper
+have been discharged.}
+\hypersetup{
+  pdftitle={Bounded gaps between primes: towards the bound H1 <= 236},
+  pdfauthor={Roy van Rijn},
+  pdfsubject={A conditional route to the prime-gap bound 236},
+  pdfkeywords={bounded prime gaps, Maynard--Tao sieve, equidistribution,
+    exact certificate, Lean formalization}
+}
+
+\begin{document}
+
+\begin{abstract}
+We describe a route from the bound $H_1\leq240$ of Stadlmann to the next
+admissible-tuple threshold $H_1\leq236$.  The argument uses the Maynard--Tao
+sieve on a two-band support, an extension of the Type~IIc distribution range,
+and a fixed degree-$27$ rational variational candidate in $48$ variables.  The
+finite tuple calculation, the prime-gap endgame, the candidate metadata, and
+the scalar certificate arithmetic have been checked in Lean against a pinned
+revision of PrimeGapsLib.  At the time of this draft, the outward-rounded
+boundary integral calculation and the final analytic review remain open.  We
+state the remaining hypotheses separately so that the completed components can
+be audited without treating numerical evidence as a theorem.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:introduction}
+
+Let $p_n$ denote the $n$-th prime and put
+\[
+  H_1=\liminf_{n\to\infty}(p_{n+1}-p_n).
+\]
+Zhang proved that $H_1$ is finite~\cite{Zhang2014}.  The Maynard--Tao sieve
+subsequently led to much smaller bounds~\cite{Maynard2015}, and the Polymath8b
+project obtained $H_1\leq246$~\cite{PolymathVSS}.  Stadlmann combined the
+Bombieri--Vinogradov range with distribution estimates for moduli having a
+large smooth factor and proved $H_1\leq240$~\cite{Stadlmann2026}.
+
+The next finite threshold is supplied by an admissible $48$-tuple of diameter
+$236$.  Thus it is enough to establish $\DHL[48,2]$: every admissible
+$48$-tuple has infinitely many translates containing at least two primes.  The
+purpose of this paper is to isolate a concrete route to that statement and to
+make the computational and analytic proof boundaries explicit.
+
+\begin{theorem}[Conditional assembly]\label{thm:conditional}
+Assume the distribution estimate in Proposition~\ref{prop:distribution} and
+the certified variational inequality in Proposition~\ref{prop:variational}.
+Then
+\[
+  H_1\leq236.
+\]
+\end{theorem}
+
+\paragraph{Current status.}
+The hypotheses of Theorem~\ref{thm:conditional} are not both certified at
+the date of this draft.  In particular, the theorem is not an unconditional
+claim that $H_1\leq236$.
+
+\subsection{Proof strategy}
+
+We follow the organization of Stadlmann's proof while replacing the two pieces
+that determine the numerical threshold.  First, we use the same shaped-support
+version of the Maynard--Tao sieve and reduce $\DHL[48,2]$ to a distribution
+statement and a strict inequality between two quadratic integrals.  Second, we
+extend the terminal Type~IIc inequality just far enough to permit the rational
+endpoint $A_2=2029/8000$.  Third, for one fixed rational polynomial $F$, we
+evaluate the unrestricted part of the integrals exactly and enclose only the
+support-boundary correction.  Finally, an explicit admissible tuple converts
+$\DHL[48,2]$ to the asserted prime-gap bound.
+
+The proof is arranged so that expensive computation is never implicit in a
+test.  A source candidate, its exact unrestricted contractions, and the
+outward-rounded boundary result are hash-identified artifacts.  Cheap replay
+checks the hashes and exact inequalities.  The finite endgame is proved in
+Lean using PrimeGapsLib~\cite{PrimeGapsLib}.
+
+\subsection{Structure of the paper}
+
+Section~\ref{sec:sieve} records the shaped-support sieve reduction.
+Section~\ref{sec:distribution} states the distribution improvement and the
+new Type~IIc terminal condition.  Section~\ref{sec:parameters} fixes the exact
+parameters.  Section~\ref{sec:certificate} describes the rational variational
+certificate.  Section~\ref{sec:endgame} gives the formalized finite endgame,
+and Section~\ref{sec:assembly} lists the precise remaining certification steps.
+
+\subsection{Notation}
+
+Lower-case Roman letters generally denote integers, and $p$ denotes a prime.
+We write $1_{\Pcal}$ for the prime indicator, $P(y)=\prod_{p<y}p$, and use
+Vinogradov notation with subscripts to indicate permitted dependence.  All
+rational endpoint comparisons in the final parameter and certificate checks
+are meant literally, not as floating-point comparisons.
+
+\section{The shaped-support sieve}\label{sec:sieve}
+
+We recall only the portion of the Maynard--Stadlmann framework needed for the
+present parameters.  Full sieve asymptotics may be taken from
+\cite{Stadlmann2026}; their formalization is a separate part of the program
+described below.
+
+\begin{definition}[Two-band support]\label{def:support}
+Let $k\geq1$, $\delta,\varepsilon>0$, and
+\[
+  -\varepsilon=A_0<A_1<A_2<\tfrac12-\varepsilon.
+\]
+For each band $j\in\{1,2\}$ let $(B_{j,m})_{m\geq1}$ be nondecreasing.  We
+write $\Tcal_k(\delta,\mathbf A,\mathbf B,\varepsilon)$ for the union over
+$j=1,2$ of the points $\mathbf t\in[0,1]^k$ satisfying
+\[
+ A_{j-1}+\varepsilon\leq \sum_{i=1}^k t_i<A_j+\varepsilon,
+ \qquad
+ \sum_{i:t_i>\delta}t_i\leq B_{j,m},
+ \quad m=\#\{i:t_i>\delta\}.
+\]
+\end{definition}
+
+Let $F$ be a symmetric square-integrable function supported on this region.
+Write
+\[
+ I(F)=\int_{\Tcal_k}F(\mathbf t)^2\,d\mathbf t
+\]
+and let $J(F)$ denote the one-coordinate marginal quadratic integral appearing
+in the Maynard--Tao sieve.  We use the normalization in which the required
+strict inequality is
+\begin{equation}\label{eq:variational-target}
+  kJ(F)>I(F).
+\end{equation}
+
+\begin{proposition}[Shaped-support sieve criterion]\label{prop:sieve}
+Suppose the prime indicator has the required equidistribution for every modulus
+arising from a pair of points in
+$\Tcal_k(\delta,\mathbf A,\mathbf B,\varepsilon)$.  If a symmetric $F$
+supported on this region satisfies \eqref{eq:variational-target}, then
+$\DHL[k,2]$ holds.
+\end{proposition}
+
+\begin{remark}
+For the parameters below we use the prime indicator itself.  Consequently no
+minorant-loss $K$ term occurs in \eqref{eq:variational-target}.  This is the
+same simplification used in the final $240$ specialization of
+\cite{Stadlmann2026}.
+\end{remark}
+
+\paragraph{Formalization boundary.}
+Before unconditional promotion, Proposition~\ref{prop:sieve} must be
+transcribed with all uniformity and smoothing hypotheses and connected to the
+formal $k=48$ statement in Lean.
+
+\section{The distribution estimate}\label{sec:distribution}
+
+The only parameter face that prevents the published distribution criterion
+from reaching the endpoint used here is the terminal Type~IIc estimate.  Put
+\[
+  \omega=A_2-\frac14,
+  \qquad \gamma=\frac25.
+\]
+The incomplete-rectangle analysis leads to the following replacement for the
+old terminal condition.
+
+\begin{proposition}[Incomplete-rectangle Type~IIc estimate]
+\label{prop:distribution}
+For the originating Type~IIc family in the Harman decomposition, retain the
+actual incomplete ranges, affine congruence, conductor reductions, and source
+divisors.  If
+\begin{equation}\label{eq:typeiic}
+  6-22\gamma+72\delta+216\omega<0,
+\end{equation}
+then the Type~IIc contribution has the power saving required by the
+distribution criterion for the support in Definition~\ref{def:support}.
+Together with the unchanged Type~I, Type~II, and Type~III estimates, this gives
+the equidistribution hypothesis of Proposition~\ref{prop:sieve}.
+\end{proposition}
+
+We indicate the source of the saving.  Write
+\[
+ G=(\lambda,\widetilde\lambda)=w_2g,
+ \qquad \lambda=Ga,\quad\widetilde\lambda=Gb,
+ \qquad (a,b)=1.
+\]
+For tuples inherited from the pre-completion sum, $G$ divides the shift
+parameter and the lifted variables lie on an affine line
+\[
+  aY-bX=d\{cj+(a-b)B\}.
+\]
+For $g$ above the critical threshold, one-dimensional completion on this line
+supplies the missing factor.  For small $g$, the two-dimensional Fourier slice
+is a rank-three Kloosterman pullback.  Translated correlations are controlled
+using geometric irreducibility and trace-function quasi-orthogonality
+\cite{Katz1988,FKM2017}; a Plancherel average replaces the false pointwise
+bound at zero frequency.
+
+The conductor bookkeeping is part of the assertion.  In particular, the
+A-process uses the source divisor $q_A$, not an unproved smooth factor of the
+whole modulus.  The factors coming from $(q_0,t)$, $(q_0,s)$, and the
+phase-dead part $(q_3,t)$ remain visible through the completion argument.
+
+\paragraph{Verification boundary.}
+A complete typeset proof of Proposition~\ref{prop:distribution}, including
+the inactive parameter faces and all endpoint uniformity, must be independently
+reviewed.  The repository contains checked derivations and hostile finite and
+exponent audits, but those are not a substitute for this proof.
+
+\section{Permissible parameters}\label{sec:parameters}
+
+We fix
+\begin{equation}\label{eq:parameters}
+ k=48,\quad
+ \delta=\frac7{250},\quad
+ \varepsilon=\frac{17}{2000},\quad
+ \mathbf A=\left(-\frac{17}{2000},\frac{23}{100},
+                         \frac{2029}{8000}\right).
+\end{equation}
+Only the first seven large-coordinate counts can be active.  The two rows of
+$\mathbf B$ are
+\begin{align*}
+ \mathbf B_1&=\left(\frac9{50},\frac9{50},
+  \frac15,\frac15,\frac15,\frac15,\frac15\right),\\
+ \mathbf B_2&=\left(\frac3{20},\frac3{20},
+  \frac{17}{100},\frac{17}{100},\frac{17}{100},
+  \frac{17}{100},\frac{17}{100}\right).
+\end{align*}
+The outer and shared-coordinate radii are respectively
+\[
+ A_2+\varepsilon=\frac{2097}{8000},
+ \qquad A_2-\varepsilon=\frac{1961}{8000}.
+\]
+
+For these parameters, $\omega=29/8000$, and the left side of
+\eqref{eq:typeiic} is exactly
+\[
+  6-22\left(\frac25\right)+72\left(\frac7{250}\right)
+      +216\left(\frac{29}{8000}\right)=-\frac1{1000}.
+\]
+Thus the selected rational endpoint lies strictly inside the proposed
+Type~IIc range.  The remaining distribution faces are checked by an
+exact-rational finite oracle implementing the support-cell criteria from
+\cite{Stadlmann2026}.
+
+\paragraph{Matching requirement.}
+The finite oracle and Proposition~\ref{prop:distribution} must be matched line
+by line: the same strict epsilon convention, support rows, modulus
+factorization, and minorant choice must occur in both.
+
+\section{The variational certificate}\label{sec:certificate}
+
+The candidate is a symmetric rational polynomial of degree at most $27$ in
+$48$ variables, represented by $2526$ nonzero orbit coefficients.  Its
+canonical source file has SHA-256 digest
+\begin{center}
+{\small\ttfamily d1cecf4db18f29da80cb2f5784ecfb9ee98ccc1221055b4a45ed3844427339ac}.
+\end{center}
+The coefficient table is supplied as ancillary material rather than printed in
+the paper.
+
+After a common positive normalization, exact rational contraction on the
+outer simplex gives
+\begin{align}
+ I_{\rm legal}&\leq I_{\rm simplex}
+      =0.9999955585079013\ldots,\label{eq:Iupper}\\
+ 48J_{\rm unrestricted}&=1.0005162874604419\ldots.
+      \label{eq:Junrestricted}
+\end{align}
+The first inequality uses only containment of the legal support in the outer
+simplex and nonnegativity of $F^2$.
+
+Let $\Delta_B$ be the normalized legal-minus-unrestricted boundary correction
+to $48J$.  Equations \eqref{eq:Iupper} and
+\eqref{eq:Junrestricted} reduce the remaining numerical task to
+\begin{equation}\label{eq:boundary-target}
+  \Delta_B>-0.0005207289525405\ldots.
+\end{equation}
+No floating-point value is used to certify this inequality.  The implementation
+partitions the boundary contribution into finitely many geometry cells,
+evaluates every cell with outward-rounded Arb balls, and sums the resulting
+rational endpoints.  The final lower endpoint is then compared with the exact
+rational difference $I_{\rm simplex}-48J_{\rm unrestricted}$.
+
+\begin{proposition}[Variational certificate]\label{prop:variational}
+For the exact parameters \eqref{eq:parameters} and the rational candidate
+identified above, the legal-support integrals satisfy
+\[
+  48J(F)>I(F).
+\]
+\end{proposition}
+
+\paragraph{Current status.}
+Proposition~\ref{prop:variational} remains pending until the full boundary run
+is complete, its checkpoint and manifest hashes are frozen, and the
+outward-rounding semantics are connected to the integral decomposition.  The
+existing numerical corrections are discovery evidence only.
+
+\section{The admissible tuple and formal endgame}\label{sec:endgame}
+
+Consider the set
+\begin{multline*}
+\mathcal H=\{0,6,8,14,18,24,26,48,50,54,56,60,66,68,74,78,\\
+80,84,90,96,98,104,110,116,120,126,134,138,144,150,158,164,\\
+168,176,180,186,188,194,200,204,206,210,216,224,228,230,234,236\}.
+\end{multline*}
+It contains $48$ elements and has diameter $236$.  It is admissible: for every
+prime $p\leq47$ an explicit residue class is omitted, while for $p>48$ the
+cardinality bound is automatic.  Such tuples are tabulated in the narrow
+admissible tuple data of Sutherland~\cite{Sutherland}.
+
+The following implication is already machine checked.
+
+\begin{proposition}[Formalized endgame]\label{prop:endgame}
+If $\DHL[48,2]$ holds, then infinitely many consecutive prime gaps have size at
+most $236$.
+\end{proposition}
+
+The Lean proof verifies the cardinality, diameter, and admissibility of
+$\mathcal H$ by decision procedures and then applies the generic interval-to-
+consecutive-gap argument from PrimeGapsLib.  The project pins the PrimeGapsLib
+commit, Lean toolchain, Mathlib revision, and complete transitive dependency
+manifest.  No expensive variational computation is run by the Lean build.
+
+\section{Assembly and certification status}\label{sec:assembly}
+
+Assuming Propositions~\ref{prop:distribution} and
+\ref{prop:variational}, Proposition~\ref{prop:sieve} gives
+$\DHL[48,2]$.  Proposition~\ref{prop:endgame} then proves
+Theorem~\ref{thm:conditional}.
+
+For clarity, the status of each logical layer is as follows.
+\begin{center}
+\begin{tabular}{@{}p{0.31\linewidth}p{0.57\linewidth}@{}}
+\toprule
+Layer & Status at this draft \\
+\midrule
+Admissible $48$-tuple and diameter $236$ & Checked independently and in Lean.\\
+Exact unrestricted $I$ and $48J$ & Exact rational computations frozen and
+replayed; scalar comparison formalized in Lean.\\
+Boundary correction $\Delta_B$ & Full outward-rounded calculation in progress;
+final certificate not yet claimed.\\
+Type~IIc extension & Research proof and adversarial audits recorded; complete
+typeset proof and independent human review pending.\\
+Shaped-support sieve bridge & Mathematical criterion available from the
+Stadlmann framework; exact specialization and Lean connection to $\DHL[48,2]$
+pending.\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Reproducibility}
+
+The repository separates expensive computation from replay.  Candidate files,
+checkpoints, manifests, and exact contractions are identified by SHA-256.  The
+default tests verify schemas, hashes, exact rational identities, and theorem
+interfaces without repeating the boundary integration.  The Lean target can be
+built with
+\begin{verbatim}
+cd formalization
+lake build PrimeGaps236
+\end{verbatim}
+After completion, the D27 finalizer emits an exact rational lower endpoint.  A
+guarded exporter accepts only a complete, certification-eligible, hash-matched,
+strictly crossing result and produces a small Lean theorem whose rational
+comparison is proved by kernel-checked normalization.
+
+\section*{Acknowledgements and declaration of generative AI use}
+
+OpenAI Codex was used during literature search, computational experimentation,
+consistency checking, Lean formalization, and preparation of this manuscript.
+The author reviewed the mathematical claims and assumes full responsibility for
+the contents.  Repository and archive identifiers will be added before
+circulation.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+
+\end{document}

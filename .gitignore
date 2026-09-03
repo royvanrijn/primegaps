@@ -6,6 +6,9 @@ __pycache__/
 # Local, reproducible research ledgers, artifacts, scratch work, and archives
 .research/
 
+# Lean build products (the manifest in formalization/ remains tracked)
+.lake/
+
 # C extensions
 *.so
 
@@ -216,6 +219,16 @@ tempCodeRunnerFile.py
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# LaTeX build products for the Gap 236 manuscript
+/paper/gap236/*.aux
+/paper/gap236/*.bbl
+/paper/gap236/*.blg
+/paper/gap236/*.fdb_latexmk
+/paper/gap236/*.fls
+/paper/gap236/*.log
+/paper/gap236/*.out
+/paper/gap236/*.pdf
 
 # Streamlit
 .streamlit/secrets.toml

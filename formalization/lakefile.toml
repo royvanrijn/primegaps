@@ -1,0 +1,12 @@
+name = "Gap236Formalization"
+version = "0.1.0"
+defaultTargets = ["PrimeGaps236"]
+
+[[require]]
+name = "PrimeGapsLib"
+git = "https://github.com/AxiomMath/PrimeGapsLib.git"
+rev = "1faa7b14e82ddebc2772dfb9153922f01b106477"
+
+[[lean_lib]]
+name = "PrimeGaps236"
+roots = ["PrimeGaps236", "Gap236Endgame"]

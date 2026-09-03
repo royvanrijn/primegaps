@@ -354,6 +354,7 @@ def projected_importance_correction(
     """Stream the calibrated importance correction directly through ``GQ``."""
     q.U, q.R, q.DELTA = support["U"], support["R"], support["delta"]
     basis = tuple(q.basis_indices(degree))
+    parts = q.all_partitions(degree // 2)
     marginal_map = MarginalMap.from_basis(basis)
     mapped_projection = marginal_map.forward_matrix(projection)
     coordinate_scale = k / (q.U * q.U)
@@ -379,6 +380,7 @@ def projected_importance_correction(
     matrix_i = np.array(base_i, copy=True)
     matrix_j = np.array(base_j, copy=True)
     changed_rows = 0
+    changed_i_rows = 0
     started = time.perf_counter()
     completed = 0
     for component_index, component in enumerate(q.IMPORTANCE_COMPONENTS):
@@ -387,8 +389,34 @@ def projected_importance_correction(
             k - 1, q.R, component_log2, component_seed, component
         )
         weights = q.importance_weights(points, q.R) / sample_n
+        i_points = q.importance_simplex_points(
+            k, q.U, component_log2, component_seed - 1_000_003, component
+        )
+        i_weights = q.importance_weights(i_points, q.U) / sample_n
         for batch in range(batches):
             selection = slice(batch * batch_n, (batch + 1) * batch_n)
+            current_i = i_points[selection]
+            full_i_points = (
+                current_i * (control_u / support["U"])
+                if coupled_endpoint else current_i
+            )
+            try:
+                if coupled_endpoint:
+                    q.U = control_u
+                full_i = q.features(
+                    full_i_points, basis, parts, degree, k,
+                    k / (control_u * control_u),
+                ) @ projection
+            finally:
+                q.U = support["U"]
+            legal_i = q.features(
+                current_i, basis, parts, degree, k, coordinate_scale
+            ) @ projection
+            legal_i[~support_acceptance(current_i, support)] = 0.0
+            matrix_i, changed_i = accumulate_gram_difference(
+                legal_i, full_i, i_weights[selection], gram=matrix_i
+            )
+            changed_i_rows += changed_i
             current = points[selection]
             legal_blocks = builder.evaluated_blocks(
                 current, marginal_map, degree, k, coordinate_scale,
@@ -429,16 +457,19 @@ def projected_importance_correction(
                 "completed_batches": completed,
                 "total_batches": component_count * batches,
                 "changed_rows": changed_rows,
+                "changed_i_rows": changed_i_rows,
                 "elapsed_seconds": time.perf_counter() - started,
             }), flush=True)
-    return matrix_i, matrix_j, [{
-        "form": "J",
+    common = {
         "sampler": "symmetric Dirichlet importance mixture",
         "coupled_control_endpoint": coupled_endpoint,
         "control_U": control_u,
         "control_R": control_r,
-        "changed_rows": changed_rows,
-    }], time.perf_counter() - started
+    }
+    return matrix_i, matrix_j, [
+        {"form": "I", **common, "changed_rows": changed_i_rows},
+        {"form": "J", **common, "changed_rows": changed_rows},
+    ], time.perf_counter() - started
 
 
 def main():

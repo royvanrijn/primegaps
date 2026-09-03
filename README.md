@@ -85,11 +85,16 @@ the dominant source-loss classes. Neither substitutes for running the upstream A
 
 - [`docs/primegaps186-impact.md`](docs/primegaps186-impact.md): audit and research pivot to 186/182.
 - [`docs/bgp212-impact.md`](docs/bgp212-impact.md): the 212 construction and remaining additive ideas.
+- [`docs/formalization-gap236.md`](docs/formalization-gap236.md): reusable historical Lean endgame architecture.
+- [`paper/gap236/README.md`](paper/gap236/README.md): conditional historical Gap236 manuscript and proof boundaries.
 - [`docs/reproduction-240.md`](docs/reproduction-240.md): exact Stadlmann `H_1 <= 240` replay.
 - [`docs/boundary-j-arb-certifier.md`](docs/boundary-j-arb-certifier.md): scalar rigorous boundary verifier.
 - [`docs/fast-exact-backend.md`](docs/fast-exact-backend.md): accelerated exact assembly and caches.
+- [`docs/section5-engine.md`](docs/section5-engine.md): reconstructed distribution formulas and exact API.
+- [`docs/p3ii-delta-frontier.md`](docs/p3ii-delta-frontier.md): historical support-extension numerical study.
 - [`docs/typeiic-incomplete-rectangles.md`](docs/typeiic-incomplete-rectangles.md): experimental Type-IIc work.
 - [`docs/minimum-breakthrough.md`](docs/minimum-breakthrough.md): coupled analytic slack diagnostics.
+- [`docs/primegapslib-crosspollination.md`](docs/primegapslib-crosspollination.md): reusable sparse exact-integration ideas.
 - [`docs/research-status.md`](docs/research-status.md): historical ledger through the pre-186 phase.
 - [`FINDINGS.md`](FINDINGS.md): detailed reconstruction notes and negative experiments.
 

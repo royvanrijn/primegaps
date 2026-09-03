@@ -22,6 +22,7 @@ ROOT = next(
     if (parent / "pyproject.toml").is_file()
 )
 FROZEN = ROOT / "reproduction" / "240" / "independent-reproducer"
+DEFAULT_VERIFIER_PATH = FROZEN / "exact_symmetric_verifier.py"
 DP_PATH = (
     ROOT / "reproduction" / "240" / "symmetry-assembler-design"
     / "orbit_status_densities.py"
@@ -54,12 +55,21 @@ def file_hash(path):
     return digest.hexdigest()
 
 
+def load_module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def bind_manifest(args):
     payload = {
         "schema": "primegaps-fast-exact-I-checkpoint-v1",
         "k": args.k,
         "candidate_sha256": file_hash(args.candidate),
-        "verifier_sha256": file_hash(FROZEN / "exact_symmetric_verifier.py"),
+        "verifier_sha256": file_hash(args.verifier or DEFAULT_VERIFIER_PATH),
         "orbit_helpers_sha256": file_hash(DP_PATH),
         "fast_i_sha256": file_hash(Path(fast_i.__file__)),
         "runner_sha256": file_hash(Path(__file__)),
@@ -129,11 +139,16 @@ def worker(signature):
 
 
 def main():
+    global verifier
     parser = argparse.ArgumentParser()
     parser.add_argument("--k", type=int, required=True)
     parser.add_argument("--candidate", type=Path, required=True)
     parser.add_argument("--workers", type=int, default=16)
     parser.add_argument("--limit", type=int)
+    parser.add_argument(
+        "--verifier", type=Path,
+        help="exact support adapter; defaults to the frozen 240 verifier",
+    )
     parser.add_argument(
         "--moment-cache", type=Path,
         help="append/reuse candidate-independent exact I moments",
@@ -141,11 +156,22 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
 
+    if args.verifier is not None:
+        verifier = load_module("fast_i_support_adapter", args.verifier)
+        if hasattr(verifier, "configure_rational"):
+            verifier.configure_rational(gmpy2.mpq)
+        else:
+            verifier.Fraction = gmpy2.mpq
+            verifier.kernel.Fraction = gmpy2.mpq
+
     bind_manifest(args)
 
     global DIMENSION, GROUPS, MOMENT_VALUES
     DIMENSION = args.k
-    terms = verifier.rational_terms_from_candidate(args.candidate, args.k)
+    if hasattr(verifier, "load_candidate"):
+        _degree, terms = verifier.load_candidate(args.candidate, args.k)
+    else:
+        terms = verifier.rational_terms_from_candidate(args.candidate, args.k)
     atoms = verifier.aggregate_i_atoms(terms, args.k)
     GROUPS = {}
     for (signature, slack), coefficient in atoms.items():
@@ -158,7 +184,7 @@ def main():
             "delta": str(verifier.DELTA),
             "total_cap": str(verifier.U),
             "large_caps": [str(value) for value in verifier.B],
-            "verifier_sha256": file_hash(FROZEN / "exact_symmetric_verifier.py"),
+            "verifier_sha256": file_hash(args.verifier or DEFAULT_VERIFIER_PATH),
         }
         cache = moment_cache.IMomentCache(
             args.moment_cache, context=context, rational=gmpy2.mpq

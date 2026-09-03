@@ -63,7 +63,35 @@ fixed support + fixed rational variational witness
 
 The last arrow is not new number theory.  It is the same finite/endgame argument as
 PrimeGapsLib's `Gaps246.thm_main`, with `48` and `236` substituted for `50` and
-`246`.  A source-level adapter is tracked at `formalization/Gap236Endgame.lean`.
+`246`. It is now compiled as `Gaps236.frequently_prime_gap_le_236_of_dhl48`;
+`formalization/Gap236Endgame.lean` remains as a compatibility facade for the old
+theorem name.
+
+## Compiled project
+
+The formalization is a standalone Lake project. PrimeGapsLib is pinned to commit
+`1faa7b14e82ddebc2772dfb9153922f01b106477`, Lean is pinned to `v4.33.0-rc1`, and
+`formalization/lake-manifest.json` locks the complete transitive dependency graph.
+Build it from a clean checkout with:
+
+```bash
+cd formalization
+lake build PrimeGaps236
+```
+
+The current modules are:
+
+- `PrimeGaps236/DHL.lean`: generic `DHL2 k` and the `DHL48` specialization;
+- `PrimeGaps236/Tuple.lean`: H48, its three decidable finite facts, and the complete
+  conditional endgame;
+- `PrimeGaps236/Stadlmann/Profile.lean`: SHA-256 identity and exact metadata for the
+  active 2,526-term D27 candidate and its support parameters;
+- `PrimeGaps236/Stadlmann/BoundaryCertificate.lean`: the exact recorded unrestricted
+  `I` and `48J` values and the ordered-field reduction for a rigorous boundary lower
+  enclosure.
+
+There are no axioms or `sorry`s standing in for the shaped-support analytic theorem.
+The absence of a theorem constructing `DHL48` is deliberate and visible.
 
 ## Explicit H48 witness
 
@@ -115,7 +143,7 @@ support and, at the safe endpoint, the new incomplete-rectangle Type-IIc input.
 Therefore the missing formal bridge is the **support/distribution -> DHL48** theorem,
 not the tuple/endgame.
 
-A clean future PrimeGapsLib-style module should have a new theorem interface such as
+A clean future PrimeGapsLib-style module should prove a theorem with an interface such as
 
 ```text
 Stadlmann48Certificate -> Stadlmann48Distribution -> DHL48
@@ -129,22 +157,47 @@ analytic hypotheses (including the reviewed Type-IIc replacement).
 
 | Layer | Gap246 analogue | Gap236 status |
 |---|---|---|
-| finite tuple | `H50`, `card_H50`, `diameter_H50`, `admissible_H50` | explicit H48; exact Python replay; Lean source adapter added |
-| variational witness | `ExistsEpsCert 50` | D27 prefix-four candidate; unrestricted pieces exact; Arb boundary certificate currently running |
+| finite tuple | `H50`, `card_H50`, `diameter_H50`, `admissible_H50` | compiled Lean proofs of H48 cardinality, diameter, and admissibility |
+| variational witness | `ExistsEpsCert 50` | exact D27 profile and unrestricted scalars compiled; Arb boundary certificate currently running; analytic enclosure soundness pending |
 | distribution theorem | Bombieri--Vinogradov + split-support theorem | Stadlmann Proposition 2/3 plus checked incomplete-rectangle Type-IIc improvement; full human/typeset review still required |
 | positivity / DHL | `Gaps246.prop_witness` + `Gaps246.thm_dhl` | mathematical bridge still to be written/formalized for shaped support |
-| final gap endgame | `Gaps246.thm_main` | same argument after `DHL48`; source adapter tracked |
+| final gap endgame | `Gaps246.thm_main` | compiled theorem `DHL48 ->` infinitely many consecutive gaps `<= 236` |
+
+## D27 handoff
+
+When the detached calculation completes, finalize it first:
+
+```bash
+scripts/run_d27_boundary_certificate.sh finalize
+```
+
+If and only if that result is complete, certification-eligible, hash-matched to the
+fixed exact inputs, and strictly crossing, render its arithmetic theorem with:
+
+```bash
+python scripts/export_d27_lean_certificate.py \
+  --result .research/work/failed-experiment-revival/failed-ranker-20260902/arb-d27-boundary-full-v4-result.json \
+  --output formalization/PrimeGaps236/Stadlmann/D27Certificate.lean
+cd formalization
+lake env lean PrimeGaps236/Stadlmann/D27Certificate.lean
+```
+
+The exporter rejects partial or non-crossing results, and the generated proof uses
+kernel-checked `norm_num` to prove the final rational comparison inside Lean. This generated
+theorem is only the scalar arithmetic gate. A separate analytic proof must still
+connect Arb's outward-rounded cell enclosures to the legal-support integral.
 
 ## Promotion rule
 
 Do not state a proved unconditional `H_1 <= 236` merely because the Lean endgame
-adapter is straightforward.  Promote the final result only after both independent
-gates pass:
+is compiled. Promote the final result only after all three remaining links pass:
 
 1. the fixed D27 rational candidate has a rigorous legal-support variational
-   certificate (the current Arb calculation is designed to provide this); and
+   certificate, including formal soundness of the outward-rounded enclosure;
 2. the new Type-IIc theorem is fully reviewed with all hypotheses matching the
-   support used by that certificate.
+   support used by that certificate; and
+3. the shaped-support variational and distribution statements are connected to
+   `DHL48` in Lean.
 
 Once those hold, expressing the result in the PrimeGapsLib/Cicada proof framing is a
 strong presentation choice: the genuinely new work is isolated to one analytic DHL48

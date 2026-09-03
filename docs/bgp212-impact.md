@@ -152,14 +152,20 @@ exact rational variational calculation is supplied to the Lean development as a
 hypothesis. At this status date, the public `AxiomMath/PrimeGapsLib` repository
 still contains the 246 formalization rather than the new 212 sources.
 
-Therefore the first external dependency is the release of the rational vector,
-packing certificates, and formal source. Until then we can import the exact
-parameter datum and analytic constraints, but cannot independently reproduce
-`4.0043840983...`.
+The exact Table 3 datum, every Appendix B/Table 6 row, all five unsimplified
+modulus classes, and the quantified Proposition 7.8(A)--(E) packing problem are
+now encoded in `primegaps.bgp212`. This import found two harmless stale-edit
+discrepancies in the draft; see `reproduction/212/README.md`.
+
+The remaining external dependency is the release of the rational vector,
+packing certificate trees, and formal source. The vector can alternatively be
+reconstructed with our numerical pipeline and exactified independently. The
+packing trees must be obtained or independently regenerated before the
+arithmetic half is a replay rather than an encoded obligation.
 
 ## Recommended next actions
 
-- Encode the new support and all Table 6 inequalities in the exact oracle.
+- Reconstruct the D21 vector on the exact new support and replay its quotient.
 - Add the displayed H45 tuple and verify cardinality, diameter, and admissibility.
 - Obtain or reconstruct the D21 rational witness and reproduce its exact quotient.
 - Run the stable projected search at `k=44`, first at D21 and then D22--D27.

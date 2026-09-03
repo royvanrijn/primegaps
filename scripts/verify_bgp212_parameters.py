@@ -13,6 +13,16 @@ from fractions import Fraction
 import json
 from pathlib import Path
 
+from primegaps.bgp212 import (
+    modulus_classes,
+    packing_problem,
+    parameters,
+    recomputed_table6_rows,
+    reported_table6_rows,
+    section_9_stale_datum_discrepancy,
+    table6_source_discrepancies,
+)
+
 
 def F(value: str | int) -> Fraction:
     return Fraction(value)
@@ -52,9 +62,11 @@ def main() -> None:
         type=Path,
         default=Path("reproduction/212/paper-parameters.json"),
     )
+    parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     data = json.loads(args.manifest.read_text())
     support = data["physical_support"]
+    baseline = parameters()
 
     k = int(data["theorem"]["k"])
     omega = F(support["omega"])
@@ -77,6 +89,14 @@ def main() -> None:
         F(cap_data.get(str(index), cap_data["tail"]))
         for index in range(1, int(F(1) / delta) + 1)
     ]
+    assert k == baseline.k
+    assert omega == baseline.omega
+    assert (a0, a1) == (baseline.a0, baseline.a1)
+    assert eps_s == baseline.support_epsilon
+    assert delta == baseline.delta
+    assert (xi1, xi2, xi3) == (baseline.xi1, baseline.xi2, baseline.xi3)
+    assert eps_a == baseline.analytic_epsilon
+    assert tuple(caps) == baseline.rough_caps
     checks: list[dict] = []
     checks.append(check("support delta positive", F(0), delta, strict=True))
     checks.append(check("support A1 below half minus epsilon", a1, F(1) / 2 - eps_s, strict=True))
@@ -124,8 +144,21 @@ def main() -> None:
             raise AssertionError(f"H45 is not admissible modulo {prime}")
         omissions[str(prime)] = missing
 
+    def table_row(row) -> dict[str, object]:
+        return {
+            "identifier": row.identifier,
+            "condition": row.condition,
+            "left": str(row.left),
+            "right": str(row.right),
+            "slack": str(row.slack),
+            "strict": row.strict,
+            "use": row.use,
+            "verification": row.verification,
+        }
+
+    packing = packing_problem(baseline)
     output = {
-        "schema": "primegaps.bgp212.parameter-replay.v1",
+        "schema": "primegaps.bgp212.parameter-replay.v2",
         "source_pdf_sha256": data["source"]["pdf_sha256"],
         "checks_passed": len(checks),
         "checks": checks,
@@ -135,9 +168,63 @@ def main() -> None:
             "admissible": True,
             "omitted_residues": omissions,
         },
+        "modulus_classes": [item.as_dict() for item in modulus_classes()],
+        "continuous_packing_problem": {
+            "quantifiers": (
+                "for every ordered rough profile in Xi and every condition A-E; "
+                "Condition D is uniform in gamma and omega0; there exists a "
+                "condition-specific set partition satisfying all capacities"
+            ),
+            "rough_profile_domain": {
+                "coordinate_interval": [str(baseline.delta), "1"],
+                "left_sum_cap": "B[m]",
+                "right_sum_cap": "B[m']",
+                "maximum_nonempty_count": packing.maximum_count,
+                "ordered_positive_count_pairs": len(packing.ordered_positive_count_pairs),
+            },
+            "conditions": [
+                {
+                    "identifier": condition.identifier,
+                    "source": condition.source,
+                    "parameter_domains": [
+                        {
+                            "variable": domain.variable,
+                            "lower": str(domain.lower),
+                            "upper": str(domain.upper),
+                        }
+                        for domain in condition.parameter_domains
+                    ],
+                    "partition_requirements": [
+                        {
+                            "name": requirement.name,
+                            "capacities": [capacity.as_dict() for capacity in requirement.capacities],
+                        }
+                        for requirement in condition.partition_requirements
+                    ],
+                }
+                for condition in packing.conditions
+            ],
+            "expected_root_count": packing.expected_root_count,
+            "reported_successful_roots": packing.reported_successful_roots,
+            "verification_status": "reported; certificate trees unavailable",
+        },
+        "table6": {
+            "reported_rows": [table_row(row) for row in reported_table6_rows()],
+            "recomputed_rows": [table_row(row) for row in recomputed_table6_rows(baseline)],
+            "source_discrepancies": list(table6_source_discrepancies(baseline)),
+        },
+        "section9_stale_datum": section_9_stale_datum_discrepancy(baseline),
         "not_replayed": data["unreleased_replay_inputs"],
     }
-    print(json.dumps(output, indent=2, sort_keys=True))
+    rendered = json.dumps(output, indent=2, sort_keys=True) + "\n"
+    if args.output is None:
+        print(rendered, end="")
+    else:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        temporary = args.output.with_suffix(args.output.suffix + ".tmp")
+        temporary.write_text(rendered)
+        temporary.replace(args.output)
+        print(args.output)
 
 
 if __name__ == "__main__":
