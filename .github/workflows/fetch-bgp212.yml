@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   fetch:
@@ -22,7 +22,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y poppler-utils dnsutils
 
-      - name: Fetch manuscript, site metadata, and source snapshot
+      - name: Fetch manuscript and render it
         shell: bash
         run: |
           set -euo pipefail
@@ -35,31 +35,6 @@ jobs:
             --output artifact/bgp212.pdf
           curl --fail --location https://primegaps.axiommath.ai/ \
             --output artifact/site/index.html || true
-          curl --fail --location https://primegaps.axiommath.ai/robots.txt \
-            --output artifact/site/robots.txt || true
-          curl --fail --location https://primegaps.axiommath.ai/sitemap.xml \
-            --output artifact/site/sitemap.xml || true
-          python3 - <<'PY'
-          from html.parser import HTMLParser
-          from pathlib import Path
-
-          class Links(HTMLParser):
-              def __init__(self):
-                  super().__init__()
-                  self.values = []
-              def handle_starttag(self, tag, attrs):
-                  for key, value in attrs:
-                      if key in {"href", "src"} and value:
-                          self.values.append((tag, key, value))
-
-          path = Path("artifact/site/index.html")
-          parser = Links()
-          if path.exists():
-              parser.feed(path.read_text(errors="replace"))
-          Path("artifact/site/links.txt").write_text(
-              "".join(f"{tag}\t{key}\t{value}\n" for tag, key, value in parser.values)
-          )
-          PY
           file artifact/bgp212.pdf | tee artifact/file.txt
           sha256sum artifact/bgp212.pdf | tee artifact/sha256.txt
           pdfinfo artifact/bgp212.pdf | tee artifact/pdfinfo.txt
@@ -67,7 +42,18 @@ jobs:
           pages=$(pdfinfo artifact/bgp212.pdf | awk '/^Pages:/ {print $2}')
           pdftoppm -png -r 130 -f 1 -l "$pages" \
             artifact/bgp212.pdf artifact/pages/page >/dev/null 2>&1
-          git archive --format=tar.gz --output=artifact/primegaps-source.tar.gz HEAD
+
+      - name: Publish temporary PDF branch for rendered inspection
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "primegaps research bot"
+          git config user.email "actions@users.noreply.github.com"
+          mkdir -p external
+          cp artifact/bgp212.pdf external/bgp212.pdf
+          git add -f external/bgp212.pdf
+          git commit -m "Temporary BGP212 PDF mirror for inspection"
+          git push --force origin HEAD:refs/heads/bgp212-source
 
       - name: Upload manuscript bundle
         uses: actions/upload-artifact@v4
