@@ -34,6 +34,9 @@ jobs:
           curl --fail --location --retry 5 --retry-all-errors \
             https://raw.githubusercontent.com/openai/PrimeGaps186/main/Challenge.lean \
             --output artifact/Challenge.lean
+          curl --fail --location --retry 5 --retry-all-errors \
+            https://raw.githubusercontent.com/openai/PrimeGaps186/main/PrimeGaps186.lean \
+            --output artifact/PrimeGaps186.lean
           pdfinfo artifact/short_gaps_numerics.pdf | tee artifact/pdfinfo.txt
           pdftotext -layout artifact/short_gaps_numerics.pdf artifact/short_gaps_numerics.txt
           pages=$(pdfinfo artifact/short_gaps_numerics.pdf | awk '/^Pages:/ {print $2}')
