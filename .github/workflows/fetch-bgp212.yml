@@ -14,13 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v4
+
       - name: Install utilities
         shell: bash
         run: |
           sudo apt-get update
           sudo apt-get install -y poppler-utils dnsutils
 
-      - name: Fetch manuscript and site metadata
+      - name: Fetch manuscript, site metadata, and source snapshot
         shell: bash
         run: |
           set -euo pipefail
@@ -65,6 +67,7 @@ jobs:
           pages=$(pdfinfo artifact/bgp212.pdf | awk '/^Pages:/ {print $2}')
           pdftoppm -png -r 130 -f 1 -l "$pages" \
             artifact/bgp212.pdf artifact/pages/page >/dev/null 2>&1
+          git archive --format=tar.gz --output=artifact/primegaps-source.tar.gz HEAD
 
       - name: Upload manuscript bundle
         uses: actions/upload-artifact@v4
