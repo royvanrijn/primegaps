@@ -15,6 +15,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from fractions import Fraction
+from functools import lru_cache
 from itertools import permutations, product
 from typing import Iterable
 
@@ -185,6 +186,34 @@ class ConstraintFailure:
     right_cell: str
     detail: str
     diagnostic_kind: str
+
+
+@dataclass(frozen=True)
+class AnalyticSlack:
+    """Least additive exponent slack for one registered analytic condition.
+
+    Global and Proposition 2 inequalities use their closed-boundary shortfall.
+    For a local Proposition 3 condition, the slack is added to every displayed
+    bin capacity and minimized over the implemented universal partition
+    witnesses. It therefore measures this executable sufficient witness
+    family, not every possible use of Proposition 3.
+    """
+
+    constraint_id: str
+    slack: Q
+    diagnostic_kind: str
+    worst_left_cell: str | None = None
+    worst_right_cell: str | None = None
+
+    def as_dict(self) -> dict[str, object]:
+        return {
+            "constraint_id": self.constraint_id,
+            "slack": _show(self.slack),
+            "slack_float": float(self.slack),
+            "diagnostic_kind": self.diagnostic_kind,
+            "worst_left_cell": self.worst_left_cell,
+            "worst_right_cell": self.worst_right_cell,
+        }
 
 
 @dataclass(frozen=True)
@@ -390,6 +419,74 @@ def _partition_witness(
                             explanation,
                         )
     return None
+
+
+def _partition_uniform_slack(
+    capacities: tuple[Q, ...],
+    a: RegionCell,
+    b: RegionCell,
+) -> Q:
+    """Least common additive capacity slack in the implemented witness family."""
+    return _partition_uniform_slack_values(
+        capacities,
+        a.large_count,
+        a.large_sum_bound,
+        a.delta,
+        b.large_count,
+        b.large_sum_bound,
+    )
+
+
+@lru_cache(maxsize=None)
+def _partition_uniform_slack_values(
+    capacities: tuple[Q, ...],
+    count_a: int,
+    total_a: Q,
+    delta: Q,
+    count_b: int,
+    total_b: Q,
+) -> Q:
+    """Cached value-only implementation, independent of cell labels/endpoints."""
+    bin_count = len(capacities)
+    options_a = _group_bound_options(
+        count_a, total_a, delta, bin_count - 1
+    )
+    options_b = _group_bound_options(
+        count_b, total_b, delta, bin_count - 1
+    )
+    best: Q | None = None
+    for primary in range(bin_count):
+        side_bins = tuple(index for index in range(bin_count) if index != primary)
+        for order in permutations(side_bins):
+            for bounds_a, primary_a in options_a:
+                for bounds_b, primary_b in options_b:
+                    worst = [Q(0)] * bin_count
+                    worst[primary] = primary_a + primary_b
+                    for position, target in enumerate(order):
+                        worst[target] = bounds_a[position] + bounds_b[position]
+                    required = max(
+                        (mass - capacity for mass, capacity in zip(worst, capacities)),
+                        default=Q(0),
+                    )
+                    required = max(Q(0), required)
+                    if best is None or required < best:
+                        best = required
+    if best is None:  # pragma: no cover - every condition has at least one bin
+        raise ValueError("local condition has no partition assignments")
+    return best
+
+
+@lru_cache(maxsize=None)
+def _group_bound_options(
+    count: int,
+    total_bound: Q,
+    delta: Q,
+    side_bin_count: int,
+) -> tuple[tuple[tuple[Q, ...], Q], ...]:
+    return tuple(
+        _group_bin_bounds(count, total_bound, delta, counts)
+        for counts in _count_vectors(count, side_bin_count)
+    )
 
 
 def _local_conditions(
@@ -599,6 +696,78 @@ def support_constraint_failures(
         for right in cells:
             failures.extend(constraint_failures(left, right, minorant))
     return tuple(failures)
+
+
+def support_constraint_slacks(
+    parameters: object,
+    minorant: Minorant,
+) -> tuple[AnalyticSlack, ...]:
+    """Return simultaneous additive slacks for every analytic constraint.
+
+    The maximum shortfall over all nonvacuous support-cell pairs is used for a
+    theorem condition, because one relaxed statement must cover the complete
+    Cartesian support. Strict inequalities are measured against their closure:
+    equality has zero numerical slack but is still not a certificate.
+    """
+    cells = cells_from_support(parameters)
+    registry = {item.identifier: item for item in ANALYTIC_CONSTRAINTS}
+    values = {identifier: Q(0) for identifier in ANALYTIC_CONSTRAINT_IDS}
+    locations: dict[str, tuple[str | None, str | None]] = {
+        identifier: (None, None) for identifier in ANALYTIC_CONSTRAINT_IDS
+    }
+
+    def update(identifier: str, slack: Q, left=None, right=None) -> None:
+        slack = max(Q(0), slack)
+        if slack > values[identifier]:
+            values[identifier] = slack
+            locations[identifier] = (left, right)
+
+    x1, x2, x3 = minorant.xi1, minorant.xi2, minorant.xi3
+    update("P2.1", 2 * x1 + 3 * x2 - 2)
+    update("P2.2", x2 - x3)
+    update("P2.3", x1 + 9 * x2 - 4)
+    update("P2.4", 1 - 2 * x1 - x2)
+    update("P2.5", 17 * x2 - 7)
+    for index, value in enumerate((x1, x2, x3), 1):
+        update(f"P2.domain.xi{index}.lower", -value)
+        update(f"P2.domain.xi{index}.upper", value - 1)
+
+    for left_index, left in enumerate(cells):
+        for right in cells[left_index:]:
+            if left.is_empty or right.is_empty:
+                continue
+            modulus_bound = left.a_upper + right.a_upper
+            if modulus_bound <= Q(1, 2):
+                continue
+            for check in _proposition_3_global_checks(
+                left.delta, left.support_max, minorant
+            ):
+                left_text, relation, right_text = check.statement.split()
+                lhs, rhs = Q(left_text), Q(right_text)
+                shortfall = rhs - lhs if relation in (">", ">=") else lhs - rhs
+                update(check.name, shortfall, left.label, right.label)
+
+            if left.large_count + right.large_count == 0:
+                continue
+            omega = modulus_bound / 2 - Q(1, 4)
+            for condition, capacities in _local_conditions(left, right, minorant, omega):
+                identifier = f"P3.local.{condition[0]}"
+                update(
+                    identifier,
+                    _partition_uniform_slack(capacities, left, right),
+                    left.label,
+                    right.label,
+                )
+
+    return tuple(
+        AnalyticSlack(
+            identifier,
+            values[identifier],
+            registry[identifier].diagnostic_kind,
+            *locations[identifier],
+        )
+        for identifier in ANALYTIC_CONSTRAINT_IDS
+    )
 
 
 def cells_from_support(parameters: object) -> tuple[RegionCell, ...]:
