@@ -1,0 +1,61 @@
+{
+  "schema": "primegaps.bgp212.paper-parameters.v1",
+  "source": {
+    "title": "A New Bound for Small Gaps Between Primes",
+    "status": "preliminary draft",
+    "date": "2026-09-03",
+    "url": "https://primegaps.axiommath.ai/bgp212.pdf",
+    "pdf_sha256": "2b307ae26046dffd2153fe7466e5a9a302976dc3ba5142151a8a8104a37b3d80",
+    "pages": 46
+  },
+  "theorem": {
+    "k": 45,
+    "tuple_diameter": 212,
+    "rescaled_variational_threshold": "4",
+    "reported_rescaled_quotient_decimal": "4.00438409833460131937",
+    "basis_degree": 21,
+    "basis_dimension": 846,
+    "coefficient_vector_available_in_pdf": false
+  },
+  "physical_support": {
+    "omega": "7/1000",
+    "A": ["-1/125", "257/1000"],
+    "support_epsilon": "1/125",
+    "total_cap": "53/200",
+    "marginal_cap": "249/1000",
+    "delta": "41/2500",
+    "rough_caps": {
+      "1": "777/5000",
+      "2": "794/5000",
+      "3": "875/5000",
+      "4": "917/5000",
+      "5": "953/5000",
+      "6": "983/5000",
+      "7": "1016/5000",
+      "8": "1042/5000",
+      "9": "1063/5000",
+      "10": "1081/5000",
+      "tail_from": 11,
+      "tail": "1081/5000"
+    },
+    "xi": ["19/50", "2/5", "2/5"],
+    "analytic_epsilon": "1/10000000000"
+  },
+  "rescaled_support": {
+    "scale": 4,
+    "L": "53/50",
+    "tau": "249/250",
+    "g": "41/625"
+  },
+  "h45": [
+    0, 2, 12, 14, 24, 26, 30, 36, 44, 50, 54, 56, 60, 66, 72,
+    74, 80, 84, 92, 96, 102, 110, 114, 116, 122, 126, 134, 140,
+    144, 150, 156, 162, 164, 170, 176, 180, 182, 186, 192, 194,
+    200, 204, 206, 210, 212
+  ],
+  "unreleased_replay_inputs": [
+    "the 846-entry exact rational coefficient vector",
+    "the 455 exact continuum-packing root certificates",
+    "the accompanying BGP212 Lean source"
+  ]
+}

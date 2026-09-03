@@ -1,0 +1,46 @@
+{
+  "schema": "primegaps.bgp212.exploratory-d21-frontier.v1",
+  "status": "non-rigorous discovery diagnostic",
+  "support": "BGP212 Table 3",
+  "degree": 21,
+  "basis_dimension": 846,
+  "projection": "top 8 unrestricted generalized eigenvectors",
+  "sampler": "existing symmetric Dirichlet importance-mixture control variate",
+  "log2_samples": 16,
+  "seeds": [61401, 61402, 61403],
+  "paper_k45_physical_quotient": 1.0010960245836503,
+  "raw_means": {
+    "45": 1.000971178388277,
+    "44": 0.9969196056904917,
+    "43": 0.9927003506675753,
+    "42": 0.9875507779752559
+  },
+  "raw_standard_deviations": {
+    "45": 0.00010105358999500581,
+    "44": 0.00043862733427775015,
+    "43": 0.0010942386795785965,
+    "42": 0.0002666835431989271
+  },
+  "additive_k45_calibration": 0.00012484619537324138,
+  "calibrated_heuristic": {
+    "44": 0.9970444518858649,
+    "43": 0.9928251968629486,
+    "42": 0.9876756241706291
+  },
+  "heuristic_deficit_to_one": {
+    "44": 0.0029555481141351,
+    "43": 0.0071748031370514,
+    "42": 0.0123243758293709
+  },
+  "tuple_consequences": {
+    "44": 210,
+    "43": 200,
+    "42": 196
+  },
+  "warnings": [
+    "This is not a lower bound, upper bound, certificate, or global optimum.",
+    "The published BGP212 coefficient vector was unavailable, so calibration uses only its reported scalar quotient.",
+    "The restricted top-eight space can miss legal-support directions; larger projected spaces were numerically less stable in the current estimator.",
+    "Paired order-of-magnitude differences are more meaningful than individual Monte Carlo values."
+  ]
+}
