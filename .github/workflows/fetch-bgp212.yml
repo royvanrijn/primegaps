@@ -7,13 +7,17 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   fetch:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Install PDF utilities
         shell: bash
         run: |
@@ -36,6 +40,19 @@ jobs:
           pages=$(pdfinfo artifact/bgp212.pdf | awk '/^Pages:/ {print $2}')
           pdftoppm -png -r 130 -f 1 -l "$pages" \
             artifact/bgp212.pdf artifact/pages/page >/dev/null 2>&1
+
+      - name: Publish temporary PDF branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "primegaps research bot"
+          git config user.email "actions@users.noreply.github.com"
+          git switch -C bgp212-source
+          mkdir -p external
+          cp artifact/bgp212.pdf external/bgp212.pdf
+          git add external/bgp212.pdf
+          git commit -m "Pin BGP212 manuscript for analysis"
+          git push --force origin HEAD:bgp212-source
 
       - name: Upload manuscript bundle
         uses: actions/upload-artifact@v4
