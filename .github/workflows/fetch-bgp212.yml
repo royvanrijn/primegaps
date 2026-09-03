@@ -22,17 +22,27 @@ jobs:
         shell: bash
         run: |
           sudo apt-get update
-          sudo apt-get install -y poppler-utils
+          sudo apt-get install -y poppler-utils dnsutils
 
-      - name: Fetch manuscript
+      - name: Fetch manuscript and site metadata
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p artifact/pages
+          mkdir -p artifact/pages artifact/site
+          dig +short primegaps.axiommath.ai A > artifact/site/dns-a.txt
+          dig +short primegaps.axiommath.ai CNAME > artifact/site/dns-cname.txt
           curl --fail --location --retry 5 --retry-all-errors \
             --dump-header artifact/http-headers.txt \
             https://primegaps.axiommath.ai/bgp212.pdf \
             --output artifact/bgp212.pdf
+          curl --fail --location https://primegaps.axiommath.ai/ \
+            --output artifact/site/index.html || true
+          curl --fail --location https://primegaps.axiommath.ai/robots.txt \
+            --output artifact/site/robots.txt || true
+          curl --fail --location https://primegaps.axiommath.ai/sitemap.xml \
+            --output artifact/site/sitemap.xml || true
+          grep -Eo 'href=["'"'][^"'"']+|src=["'"'][^"'"']+' \
+            artifact/site/index.html > artifact/site/links.txt || true
           file artifact/bgp212.pdf | tee artifact/file.txt
           sha256sum artifact/bgp212.pdf | tee artifact/sha256.txt
           pdfinfo artifact/bgp212.pdf | tee artifact/pdfinfo.txt
