@@ -41,6 +41,11 @@ See [the boundary-only Arb J certifier](docs/boundary-j-arb-certifier.md) for
 the outward-rounded legal-minus-unrestricted scalar verifier, its frozen D21
 oracle calibration, and the detached D27 checkpoint workflow.
 
+See [the Gap 236 formalization crosswalk](docs/formalization-gap236.md) for the
+pinned AxiomMath/PrimeGapsLib theorem architecture, the explicit admissible
+48-tuple of diameter 236, and the exact separation between the reusable
+finite/endgame proof and the new shaped-support/distribution `DHL48` obligation.
+
 See [the Section 5 engine notes](docs/section5-engine.md) for the reconstructed
 formulas, source errata, exact API, and verification boundary.
 
