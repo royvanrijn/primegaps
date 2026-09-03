@@ -1,12 +1,27 @@
 # primegaps
 
 Exploratory code around Julia Stadlmann's 2026 bounded-prime-gaps paper
-[arXiv:2608.31126](https://arxiv.org/abs/2608.31126), which improves the unconditional
-bound from `H_1 <= 246` to `H_1 <= 240`.
+[arXiv:2608.31126](https://arxiv.org/abs/2608.31126), its exact computational
+reconstruction, and attempts to improve the unconditional prime-gap bound.
+
+## Current external baseline
+
+A preliminary Axiom Math draft dated 2026-09-03 now proves `H_1 <= 212` via
+`DHL[45,2]`, a degree-21 rational variational witness, and an explicit
+admissible 45-tuple of diameter 212. This supersedes 236 as a prospective record
+target.
+
+The new draft still uses degree 21 and the old terminal Type-IIc wall. The
+projected higher-degree search, boundary-only Arb certifier, experimental
+incomplete-range Type-IIc saving, and multi-band optimizer in this repository
+may therefore remain additive after rebasing them on the new support. The next
+record targets are `DHL[44,2] -> H_1 <= 210` and `DHL[43,2] -> H_1 <= 200`.
+See [the BGP212 impact analysis](docs/bgp212-impact.md) for the exact parameter
+datum, what is superseded, and the conditional Type-II headroom calculation.
 
 ## Current status
 
-The paper's `k=49`, degree-21 variational certificate has been reproduced with
+Stadlmann's `k=49`, degree-21 variational certificate has been reproduced with
 exact rational arithmetic. For one fixed 846-term rational polynomial, the
 independently assembled value is
 
@@ -17,17 +32,19 @@ With the same published support and degree at `k=48`, the exact baseline is
     48 J(F) / I(F) = 0.9969233513526357503888760066573328995217614432838...
     1 - 48 J(F) / I(F) = 0.0030766486473642496111239933426671004782385567162...
 
-The active route to `H_1 <= 236` uses a different, fixed 2,526-term `k=48`,
+The in-progress pre-212 experiment uses a different, fixed 2,526-term `k=48`,
 degree-27 rational candidate on the analytically extended two-band support at
-`A=2029/8000`. Two parts of its variational comparison are already exact:
+`A=2029/8000`. It is no longer a record attempt, but remains an independent
+validation of the higher-degree discovery and rigorous certification pipeline.
+Two parts of its variational comparison are already exact:
 
     I_legal <= I_simplex = 0.9999955585079013...
     48 J_unrestricted     = 1.0005162874604419...
 
-The remaining variational gate is an outward-rounded Arb calculation of the
+The remaining gate is an outward-rounded Arb calculation of the
 legal-minus-unrestricted `J` boundary correction. It must prove that the
-normalized correction is greater than `-0.0005207289525405...`. The detached,
-checkpointed D27 calculation is currently running; monitor or resume it with
+normalized correction is greater than `-0.0005207289525405...`. Monitor or
+resume the detached checkpoint with
 
     scripts/run_d27_boundary_certificate.sh status
     scripts/run_d27_boundary_certificate.sh start
@@ -36,11 +53,9 @@ and finalize it after completion with
 
     scripts/run_d27_boundary_certificate.sh finalize
 
-A passing scalar certificate would supply the missing `k=48` variational
-inequality. Combined with the independently checked admissible 48-tuple of
-diameter 236, the Maynard--Stadlmann implication would give `H_1 <= 236`.
-That bound is **not yet claimed**: the calculation must finish and replay, and
-the new Type-IIc incomplete-rectangle theorem supporting `A=2029/8000` still
+A passing scalar certificate would rigorously validate the fixed `k=48`
+variational candidate. It would not improve the current external 212 bound. The
+new Type-IIc incomplete-rectangle theorem supporting `A=2029/8000` also still
 needs a fully typeset proof and independent human review before promotion into
 the production distribution oracle.
 
@@ -73,9 +88,10 @@ oracle calibration, the precise D27 acceptance test, and the detached
 checkpoint workflow.
 
 See [the Gap 236 formalization crosswalk](docs/formalization-gap236.md) for the
-pinned AxiomMath/PrimeGapsLib theorem architecture, the explicit admissible
-48-tuple of diameter 236, and the exact separation between the reusable
-finite/endgame proof and the new shaped-support/distribution `DHL48` obligation.
+pinned AxiomMath/PrimeGapsLib theorem architecture and the separation between
+the reusable finite/endgame proof and a shaped-support distribution theorem.
+Its numeric target is now historically superseded, but the formal architecture
+remains reusable for 212 and below.
 
 See [the Section 5 engine notes](docs/section5-engine.md) for the reconstructed
 formulas, source errata, exact API, and verification boundary.
@@ -90,9 +106,9 @@ score gates, independent importance-control validation, and unrestricted
 distribution-exponent controls.
 
 See [the Type-IIc incomplete-rectangle theorem](docs/typeiic-incomplete-rectangles.md)
-for the checked analytic saving on the originating rectangles, its safe
-endpoint `A=2029/8000`, and the precise verification boundary. The production
-distribution oracle remains unchanged pending a fully typeset human review.
+for the experimental analytic saving on the originating rectangles, its safe
+endpoint `A=2029/8000`, and the precise verification boundary. The result must
+be re-derived for the BGP212 parameter family before it can be used there.
 
 See [the research status audit](docs/research-status.md) for the ledger-wide
 classification through the pre-D27-certificate phase: exact results, numerical
@@ -140,7 +156,7 @@ pytest
 
 `primegaps.is_certified(region_a, region_b, minorant)` checks the
 Bombieri--Vinogradov range first and otherwise applies the hypotheses of
-Propositions 2 and 3.  A positive result includes exact rational checks for all
+Propositions 2 and 3. A positive result includes exact rational checks for all
 global Type I/II/III inequalities and universal partition witnesses for the
 continuous `Xi(B_a,B_b,m_a,m_b,delta)` cell; it does not rely on sampling.
 
@@ -158,7 +174,7 @@ print(certificate.as_dict())
 
 The oracle is sound but conservative: a negative answer says that these
 implemented theorem witnesses do not certify the pair, not that every possible
-partition argument must fail.  Decimal strings are recommended for exact input.
+partition argument must fail. Decimal strings are recommended for exact input.
 
 The scan prints the published parameters, basis dimensions for degree 21 and 27,
 and a Monte-Carlo support-geometry diagnostic. The latter is deliberately *not* a
