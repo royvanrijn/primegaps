@@ -1,0 +1,585 @@
+{
+  "inputs": {
+    "physical_input": "reproduction/186/physical-parity-input.json",
+    "physical_input_sha256": "e9513f9956230a2524f1eba77e6e874e2ce3835bf138526aff40ab2619135a78",
+    "score_record": "experiments/physical_parity_viability.json",
+    "score_record_sha256": "e027723f36dce7d5675aab623fe4e5363913ce27b16dcc82cf817debc264ce2b"
+  },
+  "physical_geometry": {
+    "crude_pair_support_exponent": 0.5485994,
+    "largest_target_fragment_exponent": 0.19036992747781897,
+    "outer_radius": "2742997/2624989",
+    "rho_star": "2624989/10000000",
+    "warning": "The pair-support/beta ratio is a scale diagnostic, not a proved level of distribution for the rough sieve."
+  },
+  "rows": [
+    {
+      "beta": 0.250001,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.250001,
+          0.5
+        ],
+        "semiprime_strip_width": 0.24999900000000003,
+        "triprime_prime_times_semiprime": {
+          "complementary_semiprime_exponent_range": [
+            0.500002,
+            0.7499990000000001
+          ],
+          "simplex_slack": 0.24999700000000002,
+          "single_factor_exponent_range": [
+            0.250001,
+            0.49999800000000005
+          ]
+        }
+      },
+      "constants": {
+        "beta": 0.250001,
+        "gross_signed_condition": 7.161031583774038,
+        "liouville_mean": -0.04861002485865315,
+        "omega_choose_1": 3.638864851285397,
+        "omega_choose_2": 1.5402578959435096,
+        "omega_choose_3": 0.14721698020054072,
+        "prime": 1.0,
+        "rough_carrier": 2.245823935542428,
+        "semiprime": 1.0986069553418876,
+        "signed_identity": 1.0,
+        "triprime": 0.14721698020054072
+      },
+      "detector_degree": 3,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.0017628964321890757,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.002641084362784935,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 1.0,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2,
+          "A3": 3
+        },
+        "factorial": "A1 - 2*A2 + 3*A3",
+        "liouville": "(A0 - L)/2 - A3"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 0.9523887528671549,
+        "crude_pair_support_exponent_in_beta_units": 2.19438882244471,
+        "headroom_above_largest_target_fragment_exponent": 0.059631072522181
+      }
+    },
+    {
+      "beta": 0.275,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.275,
+          0.5
+        ],
+        "semiprime_strip_width": 0.22499999999999998,
+        "triprime_prime_times_semiprime": {
+          "complementary_semiprime_exponent_range": [
+            0.55,
+            0.725
+          ],
+          "simplex_slack": 0.17499999999999993,
+          "single_factor_exponent_range": [
+            0.275,
+            0.44999999999999996
+          ]
+        }
+      },
+      "constants": {
+        "beta": 0.275,
+        "gross_signed_condition": 5.723219529569731,
+        "liouville_mean": -0.10106755121333959,
+        "omega_choose_1": 3.150205439580536,
+        "omega_choose_2": 1.1808048823924326,
+        "omega_choose_3": 0.07046810840144306,
+        "prime": 1.0,
+        "rough_carrier": 2.0398686655895464,
+        "semiprime": 0.9694005571881035,
+        "signed_identity": 1.0,
+        "triprime": 0.07046810840144306
+      },
+      "detector_degree": 3,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.00220577892645988,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.0033045890411155547,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.7992171885595084,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2,
+          "A3": 3
+        },
+        "factorial": "A1 - 2*A2 + 3*A3",
+        "liouville": "(A0 - L)/2 - A3"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.04762343766012,
+        "crude_pair_support_exponent_in_beta_units": 1.9949069090909088,
+        "headroom_above_largest_target_fragment_exponent": 0.08463007252218105
+      }
+    },
+    {
+      "beta": 0.3,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.3,
+          0.5
+        ],
+        "semiprime_strip_width": 0.2,
+        "triprime_prime_times_semiprime": {
+          "complementary_semiprime_exponent_range": [
+            0.6,
+            0.7
+          ],
+          "simplex_slack": 0.10000000000000009,
+          "single_factor_exponent_range": [
+            0.3,
+            0.4
+          ]
+        }
+      },
+      "constants": {
+        "beta": 0.3,
+        "gross_signed_condition": 4.661185271200098,
+        "liouville_mean": -0.1753682920837366,
+        "omega_choose_1": 2.762594178187228,
+        "omega_choose_2": 0.9152963178000245,
+        "omega_choose_3": 0.022666152470940268,
+        "prime": 1.0,
+        "rough_carrier": 1.8699640128581438,
+        "semiprime": 0.8472978603872037,
+        "signed_identity": 0.9999999999999999,
+        "triprime": 0.022666152470940268
+      },
+      "detector_degree": 3,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.0027083577020267733,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.004057527739601138,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.6509097490593023,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2,
+          "A3": 3
+        },
+        "factorial": "A1 - 2*A2 + 3*A3",
+        "liouville": "(A0 - L)/2 - A3"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.142861931992858,
+        "crude_pair_support_exponent_in_beta_units": 1.8286646666666666,
+        "headroom_above_largest_target_fragment_exponent": 0.10963007252218102
+      }
+    },
+    {
+      "beta": 0.325,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.325,
+          0.5
+        ],
+        "semiprime_strip_width": 0.175,
+        "triprime_prime_times_semiprime": {
+          "complementary_semiprime_exponent_range": [
+            0.65,
+            0.675
+          ],
+          "simplex_slack": 0.02499999999999991,
+          "single_factor_exponent_range": [
+            0.325,
+            0.35
+          ]
+        }
+      },
+      "constants": {
+        "beta": 0.325,
+        "gross_signed_condition": 3.940432897418951,
+        "liouville_mean": -0.2705193967278561,
+        "omega_choose_1": 2.46599573289753,
+        "omega_choose_2": 0.7351082243547378,
+        "omega_choose_3": 0.0014069052706484656,
+        "prime": 1.0,
+        "rough_carrier": 1.7322944138134408,
+        "semiprime": 0.7308875085427924,
+        "signed_identity": 1.0,
+        "triprime": 0.0014069052706484656
+      },
+      "detector_degree": 3,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.003203748765293674,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.004799698162530038,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.5502605108386139,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2,
+          "A3": 3
+        },
+        "factorial": "A1 - 2*A2 + 3*A3",
+        "liouville": "(A0 - L)/2 - A3"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.2381004263255961,
+        "crude_pair_support_exponent_in_beta_units": 1.6879981538461537,
+        "headroom_above_largest_target_fragment_exponent": 0.13463007252218104
+      }
+    },
+    {
+      "beta": 0.33333233333333334,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.33333233333333334,
+          0.5
+        ],
+        "semiprime_strip_width": 0.16666766666666666,
+        "triprime_prime_times_semiprime": {
+          "complementary_semiprime_exponent_range": [
+            0.6666646666666667,
+            0.6666676666666667
+          ],
+          "simplex_slack": 2.9999999999752447e-06,
+          "single_factor_exponent_range": [
+            0.33333233333333334,
+            0.3333353333333333
+          ]
+        }
+      },
+      "constants": {
+        "beta": 0.33333233333333334,
+        "gross_signed_condition": 3.772606722496281,
+        "liouville_mean": -0.3068483194569297,
+        "omega_choose_1": 2.3863033611873905,
+        "omega_choose_2": 0.6931516806240703,
+        "omega_choose_3": 2.024999999980249e-11,
+        "prime": 1.0,
+        "rough_carrier": 1.6931516805835702,
+        "semiprime": 0.6931516805633203,
+        "signed_identity": 0.9999999999999999,
+        "triprime": 2.024999999980249e-11
+      },
+      "detector_degree": 3,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.003346269027871347,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.005013214980648779,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.5268244775018888,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2,
+          "A3": 3
+        },
+        "factorial": "A1 - 2*A2 + 3*A3",
+        "liouville": "(A0 - L)/2 - A3"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.2698427815634021,
+        "crude_pair_support_exponent_in_beta_units": 1.645803137409412,
+        "headroom_above_largest_target_fragment_exponent": 0.14296240585551437
+      }
+    },
+    {
+      "beta": 0.3333343333333333,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.3333343333333333,
+          0.5
+        ],
+        "semiprime_strip_width": 0.1666656666666667,
+        "triprime_prime_times_semiprime": null
+      },
+      "constants": {
+        "beta": 0.3333343333333333,
+        "gross_signed_condition": 3.772570722253282,
+        "liouville_mean": -0.3068573194366795,
+        "omega_choose_1": 2.386285361126641,
+        "omega_choose_2": 0.6931426805633205,
+        "omega_choose_3": 0.0,
+        "prime": 1.0,
+        "rough_carrier": 1.6931426805633205,
+        "semiprime": 0.6931426805633205,
+        "signed_identity": 1.0,
+        "triprime": 0.0
+      },
+      "detector_degree": 2,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.0033463009600754093,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.005013262819899731,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.5268194502592942,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2
+        },
+        "factorial": "A1 - 2*A2",
+        "liouville": "(A0 - L)/2"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.2698504006429487,
+        "crude_pair_support_exponent_in_beta_units": 1.6457932626202123,
+        "headroom_above_largest_target_fragment_exponent": 0.14296440585551431
+      }
+    },
+    {
+      "beta": 0.35,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.35,
+          0.5
+        ],
+        "semiprime_strip_width": 0.15000000000000002,
+        "triprime_prime_times_semiprime": null
+      },
+      "constants": {
+        "beta": 0.35,
+        "gross_signed_condition": 3.476156833624895,
+        "liouville_mean": -0.3809607915937764,
+        "omega_choose_1": 2.2380784168124475,
+        "omega_choose_2": 0.6190392084062236,
+        "omega_choose_3": 0.0,
+        "prime": 1.0,
+        "rough_carrier": 1.6190392084062237,
+        "semiprime": 0.6190392084062236,
+        "signed_identity": 1.0000000000000002,
+        "triprime": 0.0
+      },
+      "detector_degree": 2,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.003631641963824808,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.005440746618325767,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.4854268261435143,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2
+        },
+        "factorial": "A1 - 2*A2",
+        "liouville": "(A0 - L)/2"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.3333389206583341,
+        "crude_pair_support_exponent_in_beta_units": 1.5674268571428571,
+        "headroom_above_largest_target_fragment_exponent": 0.159630072522181
+      }
+    },
+    {
+      "beta": 0.4,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.4,
+          0.5
+        ],
+        "semiprime_strip_width": 0.09999999999999998,
+        "triprime_prime_times_semiprime": null
+      },
+      "constants": {
+        "beta": 0.4,
+        "gross_signed_condition": 2.6218604324326567,
+        "liouville_mean": -0.5945348918918358,
+        "omega_choose_1": 1.8109302162163283,
+        "omega_choose_2": 0.4054651081081642,
+        "omega_choose_3": 0.0,
+        "prime": 1.0,
+        "rough_carrier": 1.4054651081081642,
+        "semiprime": 0.4054651081081642,
+        "signed_identity": 0.9999999999999999,
+        "triprime": 0.0
+      },
+      "detector_degree": 2,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.004814961495915856,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.007213537495497651,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.36612887427747837,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2
+        },
+        "factorial": "A1 - 2*A2",
+        "liouville": "(A0 - L)/2"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.5238159093238106,
+        "crude_pair_support_exponent_in_beta_units": 1.3714984999999997,
+        "headroom_above_largest_target_fragment_exponent": 0.20963007252218105
+      }
+    },
+    {
+      "beta": 0.45,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.45,
+          0.5
+        ],
+        "semiprime_strip_width": 0.04999999999999999,
+        "triprime_prime_times_semiprime": null
+      },
+      "constants": {
+        "beta": 0.45,
+        "gross_signed_condition": 1.8026827818486049,
+        "liouville_mean": -0.7993293045378488,
+        "omega_choose_1": 1.4013413909243024,
+        "omega_choose_2": 0.20067069546215124,
+        "omega_choose_3": 0.0,
+        "prime": 1.0,
+        "rough_carrier": 1.2006706954621513,
+        "semiprime": 0.20067069546215124,
+        "signed_identity": 1.0,
+        "triprime": 0.0
+      },
+      "detector_degree": 2,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.007002983085511468,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.010491523371582864,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.2517350692787403,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2
+        },
+        "factorial": "A1 - 2*A2",
+        "liouville": "(A0 - L)/2"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.714292897989287,
+        "crude_pair_support_exponent_in_beta_units": 1.2191097777777777,
+        "headroom_above_largest_target_fragment_exponent": 0.25963007252218107
+      }
+    },
+    {
+      "beta": 0.49,
+      "bilinear_geometry": {
+        "semiprime_smaller_factor_exponent_range": [
+          0.49,
+          0.5
+        ],
+        "semiprime_strip_width": 0.010000000000000009,
+        "triprime_prime_times_semiprime": null
+      },
+      "constants": {
+        "beta": 0.49,
+        "gross_signed_condition": 1.160021338454797,
+        "liouville_mean": -0.9599946653863007,
+        "omega_choose_1": 1.0800106692273985,
+        "omega_choose_2": 0.040005334613699206,
+        "omega_choose_3": 0.0,
+        "prime": 1.0,
+        "rough_carrier": 1.0400053346136993,
+        "semiprime": 0.040005334613699206,
+        "signed_identity": 1.0,
+        "triprime": 0.0
+      },
+      "detector_degree": 2,
+      "dimension_budgets": {
+        "38": {
+          "absolute_error_budget_I": 0.012785563997447236,
+          "common_relative_error_budget": 0.010882693801688607,
+          "ideal_score": 1.0127855639974472
+        },
+        "39": {
+          "absolute_error_budget_I": 0.019277481394203377,
+          "common_relative_error_budget": 0.016303914342220213,
+          "ideal_score": 1.0192774813942034
+        }
+      },
+      "gross_condition_relative_to_first_beta": 0.161990814435626,
+      "identity": {
+        "coefficients": {
+          "A1": 1,
+          "A2": -2
+        },
+        "factorial": "A1 - 2*A2",
+        "liouville": "(A0 - L)/2"
+      },
+      "roughness_geometry": {
+        "beta_in_rho_star_units": 1.866674488921668,
+        "crude_pair_support_exponent_in_beta_units": 1.119590612244898,
+        "headroom_above_largest_target_fragment_exponent": 0.299630072522181
+      }
+    }
+  ],
+  "schema": "primegaps.physical-parity-beta-sweep.v1",
+  "score_independence": "The full-face physical scores are held fixed; only the exact signed rough-almost-prime decomposition and its error amplification vary.",
+  "status": "checked-elementary-tradeoff-on-exploratory-physical-scores"
+}

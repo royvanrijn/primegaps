@@ -369,14 +369,44 @@ the limits shrink to `0.264108%` and `0.176290%`.  A four-mesh direct-
 convolution calculation and the published `k=40` hybrid calibration support
 the extrapolation, but it is not a rigorous enclosure.
 
-The missing theorem is now explicit.  After expanding the squared physical
-Selberg weight, one must obtain Liouville/Mobius cancellation across its signed
-family of lcm congruences, with polynomial-size structured moduli.  A
-Friedlander--Iwaniec-style bilinear axiom for the induced nonnegative sequence
-would suffice.  Present quantitative two-point correlation results only permit
-polylogarithmic moduli and do not cover this heavily conditioned weight.  The
-derivation, mesh table, replay command and precise bilinear form are in
+The generated-modulus reach has now been resolved numerically for `k=39`.
+Writing `E_{i,theta}` for the erased-coordinate operator restricted by
+`rho*(outer total + retained-face total) <= theta`, and
+`Lambda_39(theta)=rho*lambda_max(sum_i E_{i,theta}^*E_{i,theta},I)`, the
+production extrapolation gives `0.9787438843` at `theta=1/2`, `0.9913935182`
+at `0.51`, and `1.0025203787` at `0.52`.  The primary crossing bracket is
+`[0.517625,0.517750]`, with interpolation `0.51766554`; independent fitting
+choices range from about `0.51760` to `0.51767`.  The answer is therefore the
+middle regime: strictly above one-half, but far short of the full `0.5485994`
+envelope.  This is a float64 mesh experiment, not a certificate or a theorem.
+
+After expanding the squared physical Selberg weight, the direct signed target
+requires Liouville cancellation across its structured, polynomial-size lcm
+congruences.  The initially proposed Friedlander--Iwaniec `B_F` route for the
+already rough nonnegative sequence is false.  In every nonempty active block,
+the inner variable is forced prime; at the required value `C=1`, its Mobius
+sign is constant for fixed outer variable and the outer absolute value gives a
+positive mass rather than cancellation.  The proposal also omitted the
+`(log x)^-222` saving, the physical coefficient norm, and the separate
+`D>x^(2/3)` remainder axiom.  The complete indexed block family and
+classification are in [the dyadic audit](docs/bf-dyadic-audit.md); the
+numerical derivation and direct target `(P)` remain in
 [the physical-parity note](docs/physical-parity-viability.md).
+
+The roughness endpoint has now been swept rather than frozen.  The ideal score
+stays unchanged, while the direct factorial-moment condition number decreases
+monotonically from `7.1610315838` at `beta=0.250001` to `3.7725887222` at the
+`1/3` transition.  Strictly above `1/3`, the exact detector becomes
+`N-2*C(N,2)=(1-lambda_L)/2`: the triprime constant and its prime-times-semiprime
+bilinear block disappear.  At `beta=1/3+epsilon` the k=39 and k=38 common
+relative-error budgets are approximately `0.5013%` and `0.3346%`, about 1.9
+times the quarter-rough budgets.  At `beta=0.4` they rise to `0.7214%` and
+`0.4815%`, with condition number `2.6218604324`.  These gains cost the deeper
+condition `P^-(m)>x^beta`; the recorded physical pair-support-to-beta ratio
+falls from `2.1944` to `1.6458` at the transition and is only a scale
+diagnostic, not a distribution theorem.  The first analytic target is therefore
+just above `1/3`, with `0.4` a secondary target if the rough sieve has enough
+depth.
 
 ## Current gate / next milestone
 
@@ -395,9 +425,10 @@ Next:
    promote only the safe rational endpoint into the distribution oracle;
 4. only after those gates, jointly optimize support and Harman-minorant degrees
    of freedom.
-5. on the independent physical-parity branch, derive the explicit dyadic
-   asymptotic-sieve decomposition of `(B_F)` and its blockwise error constants
-   before attempting a new correlation theorem.
+5. on the independent physical-parity branch, replace the refuted `(B_F)`
+   architecture with a decomposition that retains cancellation between rough
+   factor-count sectors before the outer absolute value; specify the discrete
+   physical lcm coefficients and their residue-coloured norms first.
 
 No result below 240 should be claimed until an exact/rational certificate has
 been independently verified.

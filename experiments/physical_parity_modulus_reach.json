@@ -1,0 +1,783 @@
+{
+  "crossing": {
+    "fixed_finest_vector": {
+      "linear_interpolation": 0.5176655396274978,
+      "lower_score": 0.9999535605064318,
+      "lower_theta": "4141/8000",
+      "upper_score": 1.0000967521698563,
+      "upper_theta": "2071/4000"
+    },
+    "separately_optimized_crosscheck": {
+      "linear_interpolation": 0.5176397798799385,
+      "lower_score": 0.9999830739256692,
+      "lower_theta": "4141/8000",
+      "upper_score": 1.0001262252435528,
+      "upper_theta": "2071/4000"
+    }
+  },
+  "definition": {
+    "edge_condition": "rho_star * (outer_total_upper + retained_face_total_upper) <= theta",
+    "endpoint_convention": "conservative upper cell endpoints",
+    "grid_condition": "rho_star*h*(2*r+a+2*k-1) <= theta, q=r+a",
+    "operator": "sum_i || E_{i,theta} F ||^2 on the full face"
+  },
+  "dimension": 39,
+  "inputs": [
+    {
+      "matrix_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n1024.npz",
+      "matrix_sha256": "3e3b34fe560350af363784eb3d6ae1f185a4404b2eec1f2a8795cd0ee828361b",
+      "result_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n1024.json",
+      "result_sha256": "b32c31fb7dabaeb05c8c2f5150ab6cd06fbb7fbe5f5c608a5bcd0563bbb7c819"
+    },
+    {
+      "matrix_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n2048.npz",
+      "matrix_sha256": "d54dbafc9bcd30bc102854e8fcbda237b39aedfa961b6da5b70d19edcc872921",
+      "result_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n2048.json",
+      "result_sha256": "82c3409aef4c25c888e152c293377c6f609e7999fd89c55b99f446a0bd6f0735"
+    },
+    {
+      "matrix_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n4096.npz",
+      "matrix_sha256": "33237cf70946bfdd4d2e24ebbaf336195f93161080e8448867497eed54e0605a",
+      "result_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n4096.json",
+      "result_sha256": "35ad56a09370c2834008d88a8e917c355cf6d98defc6dff3e3790bd2ebf8832a"
+    },
+    {
+      "matrix_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n8192.npz",
+      "matrix_sha256": "2d5adaff520271f462d3ea81f676d665b8f73804382db5d56806e33f667a9893",
+      "result_path": ".research/work/minimal-modulus-reach-k39/root-20260904/production-n8192.json",
+      "result_sha256": "7cbdd258d8c3a01607434babb1596f9e363a25a38f0e52cb24940477d9256644"
+    }
+  ],
+  "meshes": [
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "production_intervals": 98304,
+  "rho_star": "2624989/10000000",
+  "rows": [
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9765000039217419
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.9765159419514984
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.9765212980752902
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.9765216916731478
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.9765216916731478
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.9765216916731478
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 0.9789052310681117,
+        "production": 0.9787098584658741
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 0.9789424767211296,
+        "production": 0.9787438843389862
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9570510330882851,
+        "2048": 0.9687661173868702,
+        "4096": 0.9740187034347776,
+        "8192": 0.9765216916731478
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9589074143555144,
+        "2048": 0.9691040541090511,
+        "4096": 0.9740577515938279,
+        "8192": 0.9765216916731478
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 0.9789770259770887,
+        "production": 0.9787727434779032
+      },
+      "theta": "1/2",
+      "theta_float": 0.5
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9891204760042112
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.9891352603455812
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.989140691779746
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.9891410505805999
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.9891410505805999
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.9891410505805999
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 0.9915900413551494,
+        "production": 0.9913889781069287
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 0.9915950110830593,
+        "production": 0.9913935182161109
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9697314197339639,
+        "2048": 0.9813072928670866,
+        "4096": 0.9866084440437847,
+        "8192": 0.9891410505805999
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9714755295156687,
+        "2048": 0.9816232238917093,
+        "4096": 0.9866434180370561,
+        "8192": 0.9891410505805999
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 0.9916303734380568,
+        "production": 0.9914232472504456
+      },
+      "theta": "51/100",
+      "theta_float": 0.51
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9948864669731579
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.9949011826418387
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.994905678734725
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.9949059845605777
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.9949059845605777
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.9949059845605777
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 0.9972830385124937,
+        "production": 0.9970878251538967
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 0.9973208899851932,
+        "production": 0.9971224044753161
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.975753692870931,
+        "2048": 0.9872282300979148,
+        "4096": 0.9924189061044928,
+        "8192": 0.9949059845605777
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9773906631155397,
+        "2048": 0.9875153972057463,
+        "4096": 0.9924505415369363,
+        "8192": 0.9949059845605777
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 0.9973533414895832,
+        "production": 0.9971497039227251
+      },
+      "theta": "103/200",
+      "theta_float": 0.515
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9970945986593259
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.9971086365644953
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.9971126125789969
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.9971129030175722
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.9971129030175722
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.9971129030175722
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 0.9995236129196831,
+        "production": 0.9993254524716073
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 0.9995277736261502,
+        "production": 0.9993292534969307
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9781905057061129,
+        "2048": 0.9894411471605641,
+        "4096": 0.994626841737115,
+        "8192": 0.9971129030175722
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9797537106285273,
+        "2048": 0.9897245071602908,
+        "4096": 0.9946581233772743,
+        "8192": 0.9971129030175722
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 0.9995596636790745,
+        "production": 0.9993560732377227
+      },
+      "theta": "517/1000",
+      "theta_float": 0.517
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9976355451981235
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.9976493600309202
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.9976531987103745
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.997653488150843
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.997653488150843
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.997653488150843
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0000980460483353,
+        "production": 0.9998971847078924
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.0001025069912615,
+        "production": 0.9999012600150938
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9784031319789562,
+        "2048": 0.9898606190657153,
+        "4096": 0.9951301672164459,
+        "8192": 0.997653488150843
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9800433756620889,
+        "2048": 0.9901577325868138,
+        "4096": 0.9951629466100548,
+        "8192": 0.997653488150843
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.0001359860444097,
+        "production": 0.9999294184425827
+      },
+      "theta": "207/400",
+      "theta_float": 0.5175
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9977431844829641
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.9977569525885888
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.9977607635803867
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.9977610529926669
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.9977610529926669
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.9977610529926669
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0002239894465494,
+        "production": 1.0000222557183456
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.0001487937853388,
+        "production": 0.9999535605064318
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9787525276321707,
+        "2048": 0.9900095062334242,
+        "4096": 0.9952752581364571,
+        "8192": 0.9977610529926669
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9803316258549803,
+        "2048": 0.990301480060686,
+        "4096": 0.9953064443286402,
+        "8192": 0.9977610529926669
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.0001837460100598,
+        "production": 0.9999830739256692
+      },
+      "theta": "4141/8000",
+      "theta_float": 0.517625
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9978864155657625
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.997900120357413
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.9979038943387397
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.9979041838066669
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.9979041838066669
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.9979041838066669
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0003351784597265,
+        "production": 1.0001362013027013
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.0002919963580075,
+        "production": 1.0000967521698563
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9787066884439662,
+        "2048": 0.9901531961282953,
+        "4096": 0.9954184462512681,
+        "8192": 0.9979041838066669
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9803316258549803,
+        "2048": 0.990444902098767,
+        "4096": 0.9954496112253851,
+        "8192": 0.9979041838066669
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.0003269017332639,
+        "production": 1.0001262252435528
+      },
+      "theta": "2071/4000",
+      "theta_float": 0.51775
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 0.9981718837037212
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 0.998185458610627
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 0.998189158299741
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 0.9981894482078105
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 0.9981894482078105
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 0.9981894482078105
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0006204724336003,
+        "production": 1.0004214833280358
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.0005774056619627,
+        "production": 1.0003821395553172
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9789974625493694,
+        "2048": 0.9904395721076679,
+        "4096": 0.9957038234640438,
+        "8192": 0.9981894482078105
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9806186315416151,
+        "2048": 0.9907307394159779,
+        "4096": 0.9957349457048593,
+        "8192": 0.9981894482078105
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.000612216949769,
+        "production": 1.0004115316079771
+      },
+      "theta": "259/500",
+      "theta_float": 0.518
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 1.0002349092014555
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 1.0002474374028756
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 1.0002505881795545
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 1.0002508962091228
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 1.0002508962091228
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 1.0002508962091228
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0026759946604227,
+        "production": 1.0024758431998593
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.0027247444749499,
+        "production": 1.002520378732705
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9813304877181114,
+        "2048": 0.9925484288952718,
+        "4096": 0.9977302275239007,
+        "8192": 1.0002508962091228
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9828644514141408,
+        "2048": 0.9928305948702069,
+        "4096": 0.9977625141094726,
+        "8192": 1.0002508962091228
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.0027542266287848,
+        "production": 1.0025450448177013
+      },
+      "theta": "13/25",
+      "theta_float": 0.52
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 1.0051068357898383
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 1.0051171271364805
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 1.0051191167681819
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 1.0051195773483406
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 1.0051195773483406
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 1.0051195773483406
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0075647907292682,
+        "production": 1.0073636593805992
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.007565435873505,
+        "production": 1.007364248753967
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9860634243564147,
+        "2048": 0.997368157676342,
+        "4096": 1.0026047448070918,
+        "8192": 1.0051195773483406
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.987558310409304,
+        "2048": 0.9976431364154906,
+        "4096": 1.002635193979708,
+        "8192": 1.0051195773483406
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.0075961971079888,
+        "production": 1.00739010865475
+      },
+      "theta": "21/40",
+      "theta_float": 0.525
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 1.0093187309105927
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 1.009328582433193
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 1.0093300689693465
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 1.0093306466774354
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 1.0093306466774354
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 1.0093306466774354
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0117350812877999,
+        "production": 1.011537079044995
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.0117519747676877,
+        "production": 1.0115525121319866
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9905830998612964,
+        "2048": 1.0017030432698828,
+        "4096": 1.0068487153977173,
+        "8192": 1.0093306466774354
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9918727744218766,
+        "2048": 1.0019417807799753,
+        "4096": 1.0068752524941875,
+        "8192": 1.0093306466774354
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.0117784797447782,
+        "production": 1.0115747824484544
+      },
+      "theta": "53/100",
+      "theta_float": 0.53
+    },
+    {
+      "finest_mesh_cutoff_sensitivity": [
+        {
+          "cutoff": 1e-08,
+          "retained_dimension": 62,
+          "score": 1.0169997464416816
+        },
+        {
+          "cutoff": 1e-09,
+          "retained_dimension": 70,
+          "score": 1.017008232331974
+        },
+        {
+          "cutoff": 1e-10,
+          "retained_dimension": 75,
+          "score": 1.0170095627410296
+        },
+        {
+          "cutoff": 1e-11,
+          "retained_dimension": 77,
+          "score": 1.0170096786768705
+        },
+        {
+          "cutoff": 1e-12,
+          "retained_dimension": 77,
+          "score": 1.0170096786768705
+        },
+        {
+          "cutoff": 1e-13,
+          "retained_dimension": 77,
+          "score": 1.0170096786768705
+        }
+      ],
+      "fixed_finest_vector_quadratic_all_four": {
+        "continuum": 1.0194878286448301,
+        "production": 1.019282299184996
+      },
+      "fixed_finest_vector_quadratic_last_three": {
+        "continuum": 1.0194825550503681,
+        "production": 1.0192774814776537
+      },
+      "fixed_finest_vector_scores": {
+        "1024": 0.9989984917544905,
+        "2048": 1.009434043726091,
+        "4096": 1.014510634664992,
+        "8192": 1.0170096786768705
+      },
+      "optimized_mesh_scores": {
+        "1024": 0.9994308621503781,
+        "2048": 1.0095225559452754,
+        "4096": 1.0145211147678088,
+        "8192": 1.0170096786768705
+      },
+      "optimized_quadratic_last_three": {
+        "continuum": 1.0194910989177954,
+        "production": 1.0192845867461542
+      },
+      "theta": "2742997/5000000",
+      "theta_float": 0.5485994
+    }
+  ],
+  "schema": "primegaps.physical-parity-modulus-reach-analysis.v1",
+  "status": "exploratory-float64-mesh-extrapolation-not-a-certificate"
+}

@@ -13,20 +13,21 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter, defaultdict
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from fractions import Fraction
 from functools import cache
 from hashlib import sha256
 import json
 from itertools import product
-from math import comb, log, prod
+from math import comb, prod
 from pathlib import Path
 import tempfile
 
 import numpy as np
 from scipy import linalg
-from scipy.integrate import quad
 from scipy.signal import fftconvolve
+
+from primegaps.parity import rough_factor_constants as compute_rough_factor_constants
 
 
 def repository_root() -> Path:
@@ -165,49 +166,15 @@ def truncated_convolution(left: np.ndarray, right: np.ndarray, length: int) -> n
 
 
 def rough_factor_constants(beta: float) -> dict[str, float]:
-    """Leading x/log(x) constants for beta-rough N=1,2,3 integers.
+    """Serialize the reusable degree-two/three rough constants for this run.
 
-    Prime powers and repeated prime factors are lower order at this scale.  The
-    beta=1/4 endpoint is interpreted as the limit from above.
+    Prime powers and repeated prime factors are lower order at this scale.
     """
-    if not 0.25 <= beta < 1 / 3:
-        raise ValueError("the degree-three detector requires 1/4 <= beta < 1/3")
-    semiprime = log((1.0 - beta) / beta)
-
-    def outer(u: float) -> float:
-        upper = 1.0 - beta - u
-        if upper <= beta:
-            return 0.0
-        value, _ = quad(
-            lambda v: 1.0 / (u * v * (1.0 - u - v)),
-            beta,
-            upper,
-            epsabs=2e-13,
-            epsrel=2e-13,
-        )
-        return value
-
-    triprime, _ = quad(
-        outer,
-        beta,
-        1.0 - 2.0 * beta,
-        epsabs=2e-12,
-        epsrel=2e-12,
-    )
-    triprime /= 6.0
-    first = 1.0 + 2.0 * semiprime + 3.0 * triprime
-    second = semiprime + 3.0 * triprime
-    third = triprime
-    signed = first - 2.0 * second + 3.0 * third
+    constants = compute_rough_factor_constants(beta)
     return {
-        "prime": 1.0,
-        "semiprime": semiprime,
-        "triprime": triprime,
-        "omega_choose_1": first,
-        "omega_choose_2": second,
-        "omega_choose_3": third,
-        "signed_identity": signed,
-        "gross_signed_condition": first + 2.0 * second + 3.0 * third,
+        **asdict(constants),
+        "detector_degree": constants.detector_degree,
+        "rough_carrier": constants.rough_carrier,
     }
 
 

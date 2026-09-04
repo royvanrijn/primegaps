@@ -27,14 +27,24 @@ target is
 DHL[39,2] -> H_1 <= 182.
 ```
 
-An idealized parity extension shows that the frozen physical geometry has latent score:
-a perfect quarter-rough prime-sector projector extrapolates to `1.0192774814` for `k=39`
-and `1.0127855640` for `k=38`. The originally proposed Friedlander--Iwaniec bilinear route
-is, however, structurally impossible: its mandatory `C=1` blocks force the inner rough
-variable to be prime, so the Mobius terms have one sign before the outer absolute value.
-A viable parity theorem must retain prime/semiprime/triprime cancellation globally, after
-CRT-coloured coefficient aggregation. See
-[`docs/physical-parity-viability.md`](docs/physical-parity-viability.md).
+An idealized parity extension of the physical state has now passed its numerical viability gate.
+The frozen full-face model extrapolates to `1.0192774814` for `k=39` and `1.0127855640` for
+`k=38`. Sweeping the roughness threshold shows that `beta=1/3+epsilon` is the natural first
+analytic target: the exact detector drops from degree three to degree two, its cancellation
+condition falls from `7.1610` to `3.7726`, and the triprime bilinear block disappears. This is
+not a theorem. A subsequent dyadic audit refutes the proposed Friedlander--Iwaniec `B_F`
+route for the already rough sequence: its active inner variable is forced prime, so the outer
+absolute value destroys the needed Mobius cancellation. The direct signed Liouville target
+remains open and now requires a decomposition that preserves factor-count cancellation globally
+after CRT-coloured coefficient aggregation. See
+[`docs/physical-parity-viability.md`](docs/physical-parity-viability.md) and
+[`docs/bf-dyadic-audit.md`](docs/bf-dyadic-audit.md).
+
+Artificially cutting the full-face operator by its generated outer-plus-inner
+modulus exponent puts the first scanned `k=39` crossing at about `theta=0.5176`:
+`Lambda_39(0.517625)=0.9999536` and
+`Lambda_39(0.517750)=1.0000968`.  Thus this idealized model needs more than
+`1/2`, but not the full `0.5485994` envelope.
 
 See [`docs/primegaps186-impact.md`](docs/primegaps186-impact.md) for the construction,
 conditionality audit, exact margin/loss ledger, integration plan and proposed `k=39`
@@ -85,19 +95,26 @@ Exact finite/rational checks that do not require the expensive physical-integral
 python scripts/verify_h40_tuple.py
 python scripts/check_primegaps186_margin.py
 python scripts/check_physical_parity_viability.py
+python scripts/check_physical_parity_modulus_reach.py
+python scripts/sweep_physical_parity_beta.py
+python scripts/check_bf_dyadic_audit.py
 ```
 
 The first verifies both the published 40-tuple of diameter 186 and its admissible 39-element
 prefix of diameter 182. The second replays Corollary 2.6's exact rational margin and identifies
-the dominant source-loss classes. The third replays only the idealized parity arithmetic and
-recorded mesh scores; it does not supply a parity theorem. None substitutes for running the
-upstream Arb certificate.
+the dominant source-loss classes. The final four replay the idealized physical-parity score,
+locate its generated-modulus crossing, map its beta-dependent cancellation tradeoff, and check
+the obstruction to the proposed asymptotic-sieve route. None substitutes for running the
+upstream Arb certificate or proving a
+valid replacement for the direct rough weighted Liouville target.
 
 ## Key documents
 
 - [`docs/primegaps186-impact.md`](docs/primegaps186-impact.md): audit and research pivot to 186/182.
-- [`docs/physical-parity-viability.md`](docs/physical-parity-viability.md): ideal quarter-rough
-  geometry score, proof that the proposed F-I route is impossible, and sector-coupled alternatives.
+- [`docs/physical-parity-viability.md`](docs/physical-parity-viability.md): roughness-threshold
+  sweep, `k=39/38` viability, the direct signed parity target and sector-coupled alternatives.
+- [`docs/bf-dyadic-audit.md`](docs/bf-dyadic-audit.md): complete indexed block family and
+  refutation of the proposed asymptotic-sieve `B_F` route.
 - [`docs/bgp212-impact.md`](docs/bgp212-impact.md): the 212 construction and remaining additive ideas.
 - [`docs/formalization-gap236.md`](docs/formalization-gap236.md): reusable historical Lean endgame architecture.
 - [`paper/gap236/README.md`](paper/gap236/README.md): conditional historical Gap236 manuscript and proof boundaries.
