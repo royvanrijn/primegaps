@@ -27,11 +27,13 @@ target is
 DHL[39,2] -> H_1 <= 182.
 ```
 
-An idealized parity extension of the physical state has now passed its numerical viability gate.
-After restricting a target to `x^(1/4+epsilon)`-rough values and using the exact degree-three
-factorial-moment prime detector, the frozen full-face model extrapolates to `1.0192774814` for
-`k=39` and `1.0127855640` for `k=38`. This is not a theorem: it identifies a weighted,
-polynomial-modulus Liouville bilinear estimate as the missing input. See
+An idealized parity extension shows that the frozen physical geometry has latent score:
+a perfect quarter-rough prime-sector projector extrapolates to `1.0192774814` for `k=39`
+and `1.0127855640` for `k=38`. The originally proposed Friedlander--Iwaniec bilinear route
+is, however, structurally impossible: its mandatory `C=1` blocks force the inner rough
+variable to be prime, so the Mobius terms have one sign before the outer absolute value.
+A viable parity theorem must retain prime/semiprime/triprime cancellation globally, after
+CRT-coloured coefficient aggregation. See
 [`docs/physical-parity-viability.md`](docs/physical-parity-viability.md).
 
 See [`docs/primegaps186-impact.md`](docs/primegaps186-impact.md) for the construction,
@@ -87,13 +89,15 @@ python scripts/check_physical_parity_viability.py
 
 The first verifies both the published 40-tuple of diameter 186 and its admissible 39-element
 prefix of diameter 182. The second replays Corollary 2.6's exact rational margin and identifies
-the dominant source-loss classes. Neither substitutes for running the upstream Arb certificate.
+the dominant source-loss classes. The third replays only the idealized parity arithmetic and
+recorded mesh scores; it does not supply a parity theorem. None substitutes for running the
+upstream Arb certificate.
 
 ## Key documents
 
 - [`docs/primegaps186-impact.md`](docs/primegaps186-impact.md): audit and research pivot to 186/182.
-- [`docs/physical-parity-viability.md`](docs/physical-parity-viability.md): quarter-rough prime
-  detector, `k=39/38` viability and the missing parity-breaking bilinear estimate.
+- [`docs/physical-parity-viability.md`](docs/physical-parity-viability.md): ideal quarter-rough
+  geometry score, proof that the proposed F-I route is impossible, and sector-coupled alternatives.
 - [`docs/bgp212-impact.md`](docs/bgp212-impact.md): the 212 construction and remaining additive ideas.
 - [`docs/formalization-gap236.md`](docs/formalization-gap236.md): reusable historical Lean endgame architecture.
 - [`paper/gap236/README.md`](paper/gap236/README.md): conditional historical Gap236 manuscript and proof boundaries.
