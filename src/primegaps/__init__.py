@@ -51,6 +51,15 @@ from .shadow_prices import (
     ShadowPriceExperiment,
     rank_constraint_relaxations,
 )
+from .parity import (
+    ParityContributions,
+    RoughFactorConstants,
+    degree_three_prime_indicator,
+    liouville_third_moment_prime_indicator,
+    parity_contributions,
+    parity_error_budget,
+    rough_factor_constants,
+)
 
 __all__ = [
     "ANALYTIC_CONSTRAINTS",
@@ -63,8 +72,10 @@ __all__ = [
     "ConstraintRelaxation",
     "DistributionCertificate",
     "Minorant",
+    "ParityContributions",
     "MinimumBreakthroughExperiment",
     "RegionCell",
+    "RoughFactorConstants",
     "ScoredSupport",
     "ShadowPriceExperiment",
     "cells_from_support",
@@ -83,16 +94,21 @@ __all__ = [
     "exact_ijk_matrices",
     "exact_j_entry",
     "exact_k_entry",
+    "degree_three_prime_indicator",
     "evaluate_sparse_symmetric_certificate",
     "factorial_moment",
     "large_simplex_coefficients",
     "load_sparse_symmetric_terms",
     "monomial",
     "monomial_symmetric_polynomial",
+    "liouville_third_moment_prime_indicator",
     "minimum_breakthrough",
+    "parity_contributions",
+    "parity_error_budget",
     "rank_constraint_relaxations",
     "simplex_marginal_pairing",
     "small_cube_coefficients",
+    "rough_factor_constants",
     "support_constraint_failures",
     "support_constraint_slacks",
 ]

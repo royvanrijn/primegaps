@@ -351,6 +351,33 @@ finite-grid numerical leads, not theorem certificates or global optima. D27 is
 excluded from this benchmark. Full vectors and controls are documented in
 [the minimum-breakthrough note](docs/minimum-breakthrough.md).
 
+## Physical parity viability
+
+A genuinely different prime detector has passed its idealized numerical gate.
+For `beta=0.250001`, a beta-rough target has at most three prime factors, so
+`1_{Omega=1}=Omega-2*C(Omega,2)+3*C(Omega,3)`.  The associated leading rough
+constants are `3.6388648513`, `1.5402578959`, and `0.1472169802`; their signed
+combination is exactly one, but their absolute signed condition number is
+`7.1610315838`.
+
+Adding those three arithmetic states to the frozen PrimeGaps186 full physical
+face and reoptimizing the 77-dimensional trial gives production-mesh
+predictions `1.0192774814` at `k=39` and `1.0127855640` at `k=38`.  The final
+normalized parity errors may therefore be at most `0.0192774814 I` and
+`0.0127855640 I`; if all three unsigned terms have the same relative error,
+the limits shrink to `0.264108%` and `0.176290%`.  A four-mesh direct-
+convolution calculation and the published `k=40` hybrid calibration support
+the extrapolation, but it is not a rigorous enclosure.
+
+The missing theorem is now explicit.  After expanding the squared physical
+Selberg weight, one must obtain Liouville/Mobius cancellation across its signed
+family of lcm congruences, with polynomial-size structured moduli.  A
+Friedlander--Iwaniec-style bilinear axiom for the induced nonnegative sequence
+would suffice.  Present quantitative two-point correlation results only permit
+polylogarithmic moduli and do not cover this heavily conditioned weight.  The
+derivation, mesh table, replay command and precise bilinear form are in
+[the physical-parity note](docs/physical-parity-viability.md).
+
 ## Current gate / next milestone
 
 The exact `k=49`, `D=21` gate is complete. With the same published support,
@@ -368,6 +395,9 @@ Next:
    promote only the safe rational endpoint into the distribution oracle;
 4. only after those gates, jointly optimize support and Harman-minorant degrees
    of freedom.
+5. on the independent physical-parity branch, derive the explicit dyadic
+   asymptotic-sieve decomposition of `(B_F)` and its blockwise error constants
+   before attempting a new correlation theorem.
 
 No result below 240 should be claimed until an exact/rational certificate has
 been independently verified.

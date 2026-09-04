@@ -27,6 +27,13 @@ target is
 DHL[39,2] -> H_1 <= 182.
 ```
 
+An idealized parity extension of the physical state has now passed its numerical viability gate.
+After restricting a target to `x^(1/4+epsilon)`-rough values and using the exact degree-three
+factorial-moment prime detector, the frozen full-face model extrapolates to `1.0192774814` for
+`k=39` and `1.0127855640` for `k=38`. This is not a theorem: it identifies a weighted,
+polynomial-modulus Liouville bilinear estimate as the missing input. See
+[`docs/physical-parity-viability.md`](docs/physical-parity-viability.md).
+
 See [`docs/primegaps186-impact.md`](docs/primegaps186-impact.md) for the construction,
 conditionality audit, exact margin/loss ledger, integration plan and proposed `k=39`
 experiments.
@@ -75,6 +82,7 @@ Exact finite/rational checks that do not require the expensive physical-integral
 ```bash
 python scripts/verify_h40_tuple.py
 python scripts/check_primegaps186_margin.py
+python scripts/check_physical_parity_viability.py
 ```
 
 The first verifies both the published 40-tuple of diameter 186 and its admissible 39-element
@@ -84,6 +92,8 @@ the dominant source-loss classes. Neither substitutes for running the upstream A
 ## Key documents
 
 - [`docs/primegaps186-impact.md`](docs/primegaps186-impact.md): audit and research pivot to 186/182.
+- [`docs/physical-parity-viability.md`](docs/physical-parity-viability.md): quarter-rough prime
+  detector, `k=39/38` viability and the missing parity-breaking bilinear estimate.
 - [`docs/bgp212-impact.md`](docs/bgp212-impact.md): the 212 construction and remaining additive ideas.
 - [`docs/formalization-gap236.md`](docs/formalization-gap236.md): reusable historical Lean endgame architecture.
 - [`paper/gap236/README.md`](paper/gap236/README.md): conditional historical Gap236 manuscript and proof boundaries.

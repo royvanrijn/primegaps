@@ -1,0 +1,134 @@
+{
+  "beta": 0.250001,
+  "calibration": {
+    "continuum_score": 1.0004095492928904,
+    "mesh_scores": {
+      "1024": 0.9783318892975916,
+      "2048": 0.9898808734566323,
+      "4096": 0.9952711921218146,
+      "8192": 0.9978718658941157
+    },
+    "predicted_production_score": 1.000200481558648,
+    "prediction_minus_published_lower": -5.597843770521749e-06,
+    "published_rigorous_lower_endpoint_score": 1.0002060794024186
+  },
+  "dimensions": [
+    {
+      "dimension": 39,
+      "factorial_contributions_normalized_by_I": {
+        "minus_2_choose_2": -3.139900377749671,
+        "plus_3_choose_3": 0.45016485839180237,
+        "plus_omega": 3.709013000752072
+      },
+      "finest_mesh_vector_scores": {
+        "1024": 0.9989984916680108,
+        "2048": 1.0094340437479552,
+        "4096": 1.014510634696387,
+        "8192": 1.0170096786634855
+      },
+      "gross_absolute_contribution": 7.299078236893545,
+      "parity_error_budget": {
+        "common_relative_error_budget_across_unsigned_terms": 0.002641084362784935,
+        "eta_max_for_abs_error_le_eta_I": 0.019277481394203377
+      },
+      "quadratic_in_inverse_mesh": {
+        "all_mesh_continuum_score_crosscheck": 1.019487828604815,
+        "all_mesh_production_score_crosscheck": 1.0192822991483022,
+        "continuum_score": 1.019482554959172,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production_mesh_score": 1.0192774813942034,
+        "separately_optimized_continuum_score_crosscheck": 1.0194910988342074,
+        "separately_optimized_production_score_crosscheck": 1.0192845866698519
+      },
+      "separately_optimized_mesh_scores": {
+        "1024": 0.9994308620925039,
+        "2048": 1.0095225559169965,
+        "4096": 1.014521114787043,
+        "8192": 1.0170096786634855
+      },
+      "signed_sum": 1.0192774813942032
+    },
+    {
+      "dimension": 38,
+      "factorial_contributions_normalized_by_I": {
+        "minus_2_choose_2": -3.1199019236893375,
+        "plus_3_choose_3": 0.447297696967217,
+        "plus_omega": 3.685389790719568
+      },
+      "finest_mesh_vector_scores": {
+        "1024": 0.9931745067765065,
+        "2048": 1.0032600359278367,
+        "4096": 1.0081706845511285,
+        "8192": 1.010589579066999
+      },
+      "gross_absolute_contribution": 7.252589411376122,
+      "parity_error_budget": {
+        "common_relative_error_budget_across_unsigned_terms": 0.0017628964321890759,
+        "eta_max_for_abs_error_le_eta_I": 0.012785563997447236
+      },
+      "quadratic_in_inverse_mesh": {
+        "all_mesh_continuum_score_crosscheck": 1.012988721462595,
+        "all_mesh_production_score_crosscheck": 1.012789706420926,
+        "continuum_score": 1.0129841870523528,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production_mesh_score": 1.0127855639974472,
+        "separately_optimized_continuum_score_crosscheck": 1.0129921933284536,
+        "separately_optimized_production_score_crosscheck": 1.0127922261113942
+      },
+      "separately_optimized_mesh_scores": {
+        "1024": 0.9935784373758111,
+        "2048": 1.0033423633216283,
+        "4096": 1.0081804026453765,
+        "8192": 1.010589579066999
+      },
+      "signed_sum": 1.0127855639974475
+    }
+  ],
+  "inputs": [
+    {
+      "matrices": ".research/work/parity-rough/codex-20260904/matrices-n1024.npz",
+      "matrices_sha256": "a53419917435cf928daa102b61041716df22d6cc944339a2e4118076fffacf31",
+      "result": ".research/work/parity-rough/codex-20260904/result-n1024.json",
+      "result_sha256": "f6e75bcf3c73107858b22bac820b7c087d1ddbe59a1ab2d44b63231f40997912"
+    },
+    {
+      "matrices": ".research/work/parity-rough/codex-20260904/matrices-n2048.npz",
+      "matrices_sha256": "c87e18e718054263473f238c097a667148239970de248f01a954ba6003c15e0a",
+      "result": ".research/work/parity-rough/codex-20260904/result-n2048.json",
+      "result_sha256": "ae3df42fc73116166ff6de5ee7fc1d6c0f0c1217fe53f4b18d25cf845d93aa0f"
+    },
+    {
+      "matrices": ".research/work/parity-rough/codex-20260904/matrices-n4096.npz",
+      "matrices_sha256": "7b930cbac236fcf4e449108b49fac6429f15148d06a5130e2875eb68e6337068",
+      "result": ".research/work/parity-rough/codex-20260904/result-n4096.json",
+      "result_sha256": "5a39b3e8df0bca9243b1da2a1b75c89a53610ef8c9ebd805dfe5152597d04159"
+    },
+    {
+      "matrices": ".research/work/parity-rough/codex-20260904/matrices-n8192.npz",
+      "matrices_sha256": "ea7b88c95775aa8d5e55d4529f757a6e924cfeefd9dea802c7f8a223731ff2eb",
+      "result": ".research/work/parity-rough/codex-20260904/result-n8192.json",
+      "result_sha256": "260196c8b51264a4952b0a9b1fec43496b4f2bef47ff9390b8404f89bd99d34a"
+    }
+  ],
+  "production_intervals": 98304,
+  "rough_factor_constants": {
+    "gross_signed_condition": 7.161031583774038,
+    "omega_choose_1": 3.638864851285397,
+    "omega_choose_2": 1.5402578959435096,
+    "omega_choose_3": 0.14721698020054072,
+    "prime": 1.0,
+    "semiprime": 1.0986069553418876,
+    "signed_identity": 1.0,
+    "triprime": 0.14721698020054072
+  },
+  "schema": "primegaps.physical-parity-production-extrapolation.v1",
+  "status": "exploratory-float64-mesh-extrapolation-not-a-certificate"
+}
