@@ -1,0 +1,230 @@
+{
+  "conclusion": {
+    "best_next_step": "Specify whether the intended event is max over nonlargest fragments j>=2 and whether the PPP law is conditioned on the selected radial slice; then derive and validate the modified renewal initial condition before MC.",
+    "decision": "INCONCLUSIVE",
+    "statement": "No E[C]/P(B) viability conclusion is valid for the stated event. Replace B by the source-faithful nonlargest event (or add the omitted largest-witness cover) before estimation."
+  },
+  "cover_inventory": {
+    "activation_convention": "xi < p",
+    "cap_convention": "p <= z",
+    "high_convention": "p > split",
+    "low_components": 22,
+    "low_endpoint_convention": "(left,right]",
+    "rank_endpoint_convention": "(left,right]",
+    "rank_two_components": 12,
+    "third_factorial_components": 1,
+    "total_components": 35
+  },
+  "parameters": {
+    "grid_step": {
+      "decimal": 1.062983822587963e-05,
+      "fraction": "2742997/258046918656"
+    },
+    "mu": {
+      "decimal": 2.5,
+      "fraction": "5/2"
+    },
+    "n": 40,
+    "radial_cell_first": 95599,
+    "radial_cell_last": 98263,
+    "radial_lower": {
+      "decimal": 1.0166236774089747,
+      "fraction": "16430591763736936545249922448197799591/16161921199408696007503616565983946000"
+    },
+    "radial_upper": {
+      "decimal": 1.0449449871186451,
+      "fraction": "269644834091/258046918656"
+    },
+    "split": {
+      "decimal": 0.2089826195207935,
+      "fraction": "13481830255/64511729664"
+    },
+    "threshold": {
+      "decimal": 1.0449558074337872,
+      "fraction": "14400682015049/13781139750220"
+    },
+    "xi": {
+      "decimal": 3.361384605702541e-05,
+      "fraction": "1038826867984921151804142858423732482601802307/30904730932085735018956267409864291787032494080000"
+    },
+    "z": {
+      "decimal": 0.49513786456147313,
+      "fraction": "31942200065/64511729664"
+    }
+  },
+  "schema": "primegaps.direct-source-barrier-viability.v1",
+  "stage_1": {
+    "boundary_checks": [
+      {
+        "bad": false,
+        "cover": 0.0,
+        "first_violation": null,
+        "majorizes": true,
+        "name": "empty",
+        "nonzero_cover_components": {},
+        "points": []
+      },
+      {
+        "bad": false,
+        "cover": 0.0,
+        "first_violation": null,
+        "majorizes": true,
+        "name": "at_activation_excluded",
+        "nonzero_cover_components": {},
+        "points": [
+          "1038826867984921151804142858423732482601802307/30904730932085735018956267409864291787032494080000"
+        ]
+      },
+      {
+        "bad": false,
+        "cover": 0.0,
+        "first_violation": null,
+        "majorizes": true,
+        "name": "just_above_activation",
+        "nonzero_cover_components": {},
+        "points": [
+          "10285424819918704324012818441253375310240444641607/305987434971145891276794726830339522643886080000000000"
+        ]
+      },
+      {
+        "bad": false,
+        "cover": 1.9265020524691013e-08,
+        "first_violation": null,
+        "majorizes": true,
+        "name": "at_split_low_inclusive_high_exclusive",
+        "nonzero_cover_components": {
+          "low.L22": 1.9265020524691013e-08
+        },
+        "points": [
+          "13481830255/64511729664"
+        ]
+      },
+      {
+        "bad": false,
+        "cover": 0.0,
+        "first_violation": null,
+        "majorizes": true,
+        "name": "just_above_split",
+        "nonzero_cover_components": {},
+        "points": [
+          "6458551626811398133583620019891259947607886082601802307/30904730932085735018956267409864291787032494080000000000"
+        ]
+      },
+      {
+        "bad": true,
+        "cover": 0.0,
+        "first_violation": {
+          "barrier_value": "386575469972482987/338685290501406720",
+          "excess": "32664308770638763/338685290501406720",
+          "fragment": "386575469972482987/846713226253516800",
+          "fragments_at_or_above": 1,
+          "inclusive_prefix_mass": "386575469972482987/846713226253516800",
+          "index": 1
+        },
+        "majorizes": false,
+        "name": "one_large_mid",
+        "nonzero_cover_components": {},
+        "points": [
+          "386575469972482987/846713226253516800"
+        ]
+      },
+      {
+        "bad": true,
+        "cover": 0.0,
+        "first_violation": {
+          "barrier_value": "159711000325/129023459328",
+          "excess": "32664308770638763/169342645250703360",
+          "fragment": "31942200065/64511729664",
+          "fragments_at_or_above": 1,
+          "inclusive_prefix_mass": "31942200065/64511729664",
+          "index": 1
+        },
+        "majorizes": false,
+        "name": "one_large_at_cap",
+        "nonzero_cover_components": {},
+        "points": [
+          "31942200065/64511729664"
+        ]
+      },
+      {
+        "bad": true,
+        "cover": 1.0,
+        "first_violation": {
+          "barrier_value": "297105518218779617337719462523800497338525975151041453061/284323524575188762174397660170751484440698945536000000000",
+          "excess": "1038826867984921151804142858423732482601802307/12361892372834294007582506963945716714812997632000000000",
+          "fragment": "99035172755521884421675278502263689608672556450241453061/394893784132206614131107861348265950612081868800000000000",
+          "fragments_at_or_above": 2,
+          "inclusive_prefix_mass": "2376844145535199777028877021766946407014495177309758546939/3554044057189859527179970752134393555508736819200000000000",
+          "index": 2
+        },
+        "majorizes": true,
+        "name": "two_large_barely_violating_at_second",
+        "nonzero_cover_components": {
+          "rank_two.P9": 1.0
+        },
+        "points": [
+          "148552759073550281723379951524657320053644216925758546939/355404405718985952717997075213439355550873681920000000000",
+          "99035172755521884421675278502263689608672556450241453061/394893784132206614131107861348265950612081868800000000000"
+        ]
+      },
+      {
+        "bad": true,
+        "cover": 1.0,
+        "first_violation": {
+          "barrier_value": "159711000325/129023459328",
+          "excess": "32664308770638763/169342645250703360",
+          "fragment": "31942200065/64511729664",
+          "fragments_at_or_above": 1,
+          "inclusive_prefix_mass": "31942200065/64511729664",
+          "index": 1
+        },
+        "majorizes": true,
+        "name": "three_above_split",
+        "nonzero_cover_components": {
+          "third_factorial.H": 1.0
+        },
+        "points": [
+          "31942200065/64511729664",
+          "3229275813925112500784270585847701403015809282601802307/15452365466042867509478133704932145893516247040000000000",
+          "6458551626811398133583620019891259947607886082601802307/30904730932085735018956267409864291787032494080000000000"
+        ]
+      }
+    ],
+    "counterexample": {
+      "bad_event_reason": "mu*z > T",
+      "cover_value": 0,
+      "mu_z_minus_T": {
+        "decimal": 0.19288885396989564,
+        "fraction": "32664308770638763/169342645250703360"
+      },
+      "points": [
+        "31942200065/64511729664"
+      ],
+      "reason_cover_is_zero": "the point is above every low bin; rank-two requires a second point; choose(N_(split,infinity),3)=choose(1,3)=0"
+    },
+    "passed": false,
+    "source_semantics": "The upstream cover majorizes nonlargest order-5/2 failures only, after separate largest-fragment cap arguments. The requested B includes the largest fragment."
+  },
+  "stage_reached": "stage_1_semantic_validation",
+  "stages_not_run": {
+    "monte_carlo": "not run because the required pointwise majorization failed",
+    "renewal_dp_256": "not run because the required pointwise majorization failed",
+    "renewal_dp_512": "not run because the required pointwise majorization failed",
+    "stress_test": "not run because C_eta is not a majorant of the stated B_eta",
+    "weighted_root_side": "not run"
+  },
+  "status": "INCONCLUSIVE",
+  "upstream": {
+    "group": "G2 / outer_h25 / outer order-5/2",
+    "radial_cap_slice": "sole group slice, radial cell sums 95599..98263, aligned cap 46580h",
+    "repository": "https://github.com/openai/PrimeGaps186",
+    "revision": "61340d0b74163003b32756bb16e91d9209a5e330",
+    "source_locations": {
+      "lean_group_and_endpoints": "PrimeGaps186.lean:736-893",
+      "lean_radial_mask_and_cover": "PrimeGaps186.lean:927-997",
+      "numerical_note": "short_gaps_numerics.pdf, equations (1.12), (1.23)-(1.26), (1.34)-(1.47); Lemmas 1.4-1.7",
+      "python_component_schedule": "prime_gap_186_certificate.py:264-339",
+      "python_group_derivation": "prime_gap_186_certificate.py:200-261,342-425"
+    }
+  }
+}

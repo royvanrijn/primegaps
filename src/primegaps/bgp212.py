@@ -689,3 +689,24 @@ def section_9_stale_datum_discrepancy(p: BGP212Parameters | None = None) -> dict
         "table3_combination": str(3 * p.a1 + p.delta),
         "section9_printed_combination": str(3 * printed_a1 + printed_delta),
     }
+
+
+def section_9_support_prose_discrepancy(
+    p: BGP212Parameters | None = None,
+) -> dict[str, object]:
+    """Record the old cap values retained in the proof of Lemma 9.1.
+
+    The lemma statement uses the symbolic cap function ``C`` and is compatible
+    with Table 3.  Its concluding prose instead substitutes the earlier
+    ``(3/20, 3/20, 17/100, ...)`` physical cap sequence.  Those displayed
+    values are not the Table 3 sequence used by the new support.
+    """
+
+    p = parameters() if p is None else p
+    actual = tuple(4 * cap for cap in p.rough_caps[:3])
+    return {
+        "location": "proof of Lemma 9.1",
+        "printed_rescaled_caps": ["31/50", "31/50", "17/25"],
+        "table3_rescaled_caps_first_three": [str(value) for value in actual],
+        "symbolic_lemma_statement_uses_table3_C": True,
+    }

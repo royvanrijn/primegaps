@@ -154,8 +154,9 @@ still contains the 246 formalization rather than the new 212 sources.
 
 The exact Table 3 datum, every Appendix B/Table 6 row, all five unsimplified
 modulus classes, and the quantified Proposition 7.8(A)--(E) packing problem are
-now encoded in `primegaps.bgp212`. This import found two harmless stale-edit
-discrepancies in the draft; see `reproduction/212/README.md`.
+now encoded in `primegaps.bgp212`. This import found three stale-edit
+discrepancies in the draft; see `reproduction/212/README.md`. All three leave
+the symbolic statements or relevant inequality signs unchanged.
 
 The remaining external dependency is the release of the rational vector,
 packing certificate trees, and formal source. The vector can alternatively be

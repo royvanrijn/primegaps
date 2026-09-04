@@ -30,7 +30,7 @@ packing problem. Pass `--output result.json` to persist it atomically.
 
 ## Source audit
 
-The exact replay exposes two apparent stale-edit issues in the preliminary
+The exact replay exposes three apparent stale-edit issues in the preliminary
 draft rather than silently normalizing them:
 
 - Appendix B prints the first Type-II range wall as
@@ -41,6 +41,10 @@ draft rather than silently normalizing them:
   while Table 3 gives `257/1000` and `41/2500`. The two pairs have the same
   combination `3*A_1+delta=3937/5000`, so the subsequent dominant-wall slack
   is unchanged.
+- The proof of Lemma 9.1 substitutes the old rescaled caps
+  `(31/50, 31/50, 17/25, ...)`; Table 3 instead starts
+  `(777/1250, 397/625, 7/10, ...)`. The lemma statement itself remains symbolic
+  in `C`, so this is stale explanatory prose rather than a changed statement.
 
 These are transcription-level findings about the public draft, not objections
 to the sign of the relevant analytic margins.

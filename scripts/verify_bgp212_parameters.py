@@ -20,6 +20,7 @@ from primegaps.bgp212 import (
     recomputed_table6_rows,
     reported_table6_rows,
     section_9_stale_datum_discrepancy,
+    section_9_support_prose_discrepancy,
     table6_source_discrepancies,
 )
 
@@ -214,6 +215,7 @@ def main() -> None:
             "source_discrepancies": list(table6_source_discrepancies(baseline)),
         },
         "section9_stale_datum": section_9_stale_datum_discrepancy(baseline),
+        "section9_stale_support_prose": section_9_support_prose_discrepancy(baseline),
         "not_replayed": data["unreleased_replay_inputs"],
     }
     rendered = json.dumps(output, indent=2, sort_keys=True) + "\n"

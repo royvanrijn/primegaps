@@ -7,6 +7,7 @@ from primegaps.bgp212 import (
     recomputed_table6_rows,
     reported_table6_rows,
     section_9_stale_datum_discrepancy,
+    section_9_support_prose_discrepancy,
     table6_source_discrepancies,
 )
 
@@ -126,3 +127,14 @@ def test_section9_stale_components_cancel_in_the_combined_wall():
     assert discrepancy["table3_A1"] != discrepancy["section9_printed_A1"]
     assert discrepancy["table3_delta"] != discrepancy["section9_printed_delta"]
     assert discrepancy["table3_combination"] == discrepancy["section9_printed_combination"] == "3937/5000"
+
+
+def test_section9_lemma_proof_retains_old_support_caps():
+    discrepancy = section_9_support_prose_discrepancy()
+    assert discrepancy["printed_rescaled_caps"] == ["31/50", "31/50", "17/25"]
+    assert discrepancy["table3_rescaled_caps_first_three"] == [
+        "777/1250",
+        "397/625",
+        "7/10",
+    ]
+    assert discrepancy["symbolic_lemma_statement_uses_table3_C"] is True
