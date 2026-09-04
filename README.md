@@ -27,18 +27,38 @@ target is
 DHL[39,2] -> H_1 <= 182.
 ```
 
-An idealized parity extension of the physical state has now passed its numerical viability gate.
-The frozen full-face model extrapolates to `1.0192774814` for `k=39` and `1.0127855640` for
-`k=38`. Sweeping the roughness threshold shows that `beta=1/3+epsilon` is the natural first
-analytic target: the exact detector drops from degree three to degree two, its cancellation
-condition falls from `7.1610` to `3.7726`, and the triprime bilinear block disappears. This is
-not a theorem. A subsequent dyadic audit refutes the proposed Friedlander--Iwaniec `B_F`
-route for the already rough sequence: its active inner variable is forced prime, so the outer
-absolute value destroys the needed Mobius cancellation. The direct signed Liouville target
-remains open and now requires a decomposition that preserves factor-count cancellation globally
-after CRT-coloured coefficient aggregation. See
+The idealized full-face parity extension has latent numerical margin, but the
+actual signed hybrid restoration removes it at the frozen geometry. The
+restored 77-dimensional upper screen extrapolates to `0.9943709810` for `k=39`
+and `0.9883950587` for `k=38`, before any of the 97 nonnegative source losses
+are charged. Trial-only reoptimization is therefore a no-go; geometry or
+hybrid/source parameters must move. An exact source-predicate oracle also
+finds no `H_{5/2}` false negative in 373,857 finite configurations and replays
+a strict-overcoverage witness for each of the three order-`5/2` groups, so the
+grouped predicate is a safe majorant rather than an equivalence. See
+[`docs/physical-restoration-factorization.md`](docs/physical-restoration-factorization.md).
+
+Separately, the ideal full-face parity branch still crosses one if its missing
+prime-sector theorem can justify that face. Sweeping the roughness threshold
+makes `beta=1/3+epsilon` the natural first analytic target: the
+exact detector drops from degree three to degree two, its cancellation
+condition falls from `7.1610` to `3.7726`, and the triprime bilinear block
+disappears. A dyadic audit refutes the proposed Friedlander--Iwaniec `B_F`
+route for the already rough sequence: its active inner variable is forced prime,
+so the outer absolute value destroys the needed Mobius cancellation. The direct
+signed Liouville target requires a decomposition that preserves factor-count
+cancellation globally after CRT-coloured coefficient aggregation. See
 [`docs/physical-parity-viability.md`](docs/physical-parity-viability.md) and
 [`docs/bf-dyadic-audit.md`](docs/bf-dyadic-audit.md).
+
+The first reduced discrete compiler now maps compatible divisor pairs to their
+actual CRT-coloured coefficients. Its blockwise projected cancellation ratio
+remains `8.51--37.36` after CRT aggregation across four finite scales, but the
+fully summed prime/semiprime ratio is exactly one and the within-residue ratio
+is only `1.026--1.041`. Thus the finite signal is global cancellation across
+CRT-coloured blocks, not local factor-count cancellation. This is a qualified
+viability result, not an asymptotic estimate; see
+[`docs/physical-parity-crt-finite.md`](docs/physical-parity-crt-finite.md).
 
 Artificially cutting the full-face operator by its generated outer-plus-inner
 modulus exponent puts the first scanned `k=39` crossing at about `theta=0.5176`:
@@ -98,15 +118,19 @@ python scripts/check_physical_parity_viability.py
 python scripts/check_physical_parity_modulus_reach.py
 python scripts/sweep_physical_parity_beta.py
 python scripts/check_bf_dyadic_audit.py
+python scripts/check_physical_parity_crt_finite.py
+python scripts/check_physical_restored_operator.py
+python scripts/check_physical_factorization_oracle.py
 ```
 
 The first verifies both the published 40-tuple of diameter 186 and its admissible 39-element
 prefix of diameter 182. The second replays Corollary 2.6's exact rational margin and identifies
-the dominant source-loss classes. The final four replay the idealized physical-parity score,
-locate its generated-modulus crossing, map its beta-dependent cancellation tradeoff, and check
-the obstruction to the proposed asymptotic-sieve route. None substitutes for running the
-upstream Arb certificate or proving a
-valid replacement for the direct rough weighted Liouville target.
+the dominant source-loss classes. The remaining checks replay the idealized physical-parity
+score, locate its generated-modulus crossing, map its beta-dependent cancellation tradeoff,
+and check the obstruction to the proposed asymptotic-sieve route, the reduced CRT-coloured
+gate, the signed restoration screen, and the exact source-predicate oracle. None
+substitutes for running the upstream Arb certificate or proving a valid replacement for the
+direct rough weighted Liouville target.
 
 ## Key documents
 
@@ -115,6 +139,10 @@ valid replacement for the direct rough weighted Liouville target.
   sweep, `k=39/38` viability, the direct signed parity target and sector-coupled alternatives.
 - [`docs/bf-dyadic-audit.md`](docs/bf-dyadic-audit.md): complete indexed block family and
   refutation of the proposed asymptotic-sieve `B_F` route.
+- [`docs/physical-parity-crt-finite.md`](docs/physical-parity-crt-finite.md): reduced discrete
+  coefficient compiler, CRT norms, singular decay and prime/semiprime cancellation gate.
+- [`docs/physical-restoration-factorization.md`](docs/physical-restoration-factorization.md):
+  signed 77-dimensional restoration screen and exact source oracle versus grouped `H_{5/2}`.
 - [`docs/bgp212-impact.md`](docs/bgp212-impact.md): the 212 construction and remaining additive ideas.
 - [`docs/formalization-gap236.md`](docs/formalization-gap236.md): reusable historical Lean endgame architecture.
 - [`paper/gap236/README.md`](paper/gap236/README.md): conditional historical Gap236 manuscript and proof boundaries.

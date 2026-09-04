@@ -146,6 +146,17 @@ the elementary cover proof is:
 This is the argument in equations (1.36)–(1.47). It proves
 \(C\geq1_{B_{\mathrm{nl}}}\), not \(C\geq1_B\).
 
+An exact rational oracle now reconstructs the 29 old and 43 new source rows
+and compares the union of the order-three row predicates directly with the
+three grouped nonlargest \(H_{5/2}\) predicates, after the largest-fragment and
+opposite-root guards assumed by Lemma 1.4. It finds no false negative in
+373,857 finite critical and seeded cell configurations, and gives an exact
+strict-overcoverage witness in every group. This confirms the important
+logical boundary: grouped \(H_{5/2}\) is a safe majorant in the source proof,
+not an equivalent reformulation. The census is not itself a proof of the
+general implication; see
+[the executable oracle](physical-restoration-factorization.md#exact-factorization-oracle).
+
 For the stated event, take \(\Pi=\{z\}\). Since \(\mu z>T\), \(B\) occurs at
 index one. The point is above all low bins, rank two requires at least two
 points, and \({1\choose3}=0\). Therefore \(C=0\).

@@ -1,0 +1,2706 @@
+{
+  "assumptions": [
+    "three non-target colours use the actual H39 shifts 2,36,48 relative to target shift 0",
+    "four CRT prime atoms 5,7,11,13 and no presieving limit; the chosen three residues are nonzero and distinct at every atom",
+    "coarse physical fragment sizes 0.18,0.22,0.26,0.30 are attached independently of the small CRT-prime labels",
+    "k=39 physical trial restricted to three active coordinates; the other 36 coordinates are zero",
+    "divisor pairs are compatible only when a shared prime has the same colour",
+    "progression errors are count(q,a)-total/phi(q), centered separately in the prime and rough-semiprime sectors",
+    "z=floor((2X)^(1/3)) and both semiprime factors exceed z",
+    "Lambda is normalized to unit discrete l2 separately at each X and mesh vector"
+  ],
+  "inputs": {
+    "physical_input": {
+      "path": "reproduction/186/physical-parity-input.json",
+      "sha256": "e9513f9956230a2524f1eba77e6e874e2ce3835bf138526aff40ab2619135a78"
+    },
+    "vector_input": {
+      "path": "reproduction/186/physical-parity-k39-vectors.json",
+      "sha256": "e4fa954f39f66ce519bf9750c87259fd0e1be4e22a1669fbeb07fbacb61614cf",
+      "source": {
+        "array": "k39_selected_vector",
+        "experiment": "experiments/physical_parity_viability.py",
+        "matrix_archives": {
+          "k39_n4096": "7b930cbac236fcf4e449108b49fac6429f15148d06a5130e2875eb68e6337068",
+          "k39_n8192": "ea7b88c95775aa8d5e55d4529f757a6e924cfeefd9dea802c7f8a223731ff2eb"
+        }
+      },
+      "vectors": {
+        "k39_n4096": {
+          "length": 77
+        },
+        "k39_n8192": {
+          "length": 77
+        }
+      }
+    }
+  },
+  "scales": [
+    {
+      "common_reduced_model": {
+        "active_reduced_colours": 3,
+        "actual_full_atom_modulus_exponent": 0.5359055276385543,
+        "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+          0.10125465634276028,
+          0.12242315276300093,
+          0.15085891783543404,
+          0.1613688006973589
+        ],
+        "actual_maximum_prime_exponent": 0.1613688006973589,
+        "ambient_trial_dimension": 39,
+        "coarse_physical_fragment_sizes": [
+          0.18,
+          0.22,
+          0.26,
+          0.3
+        ],
+        "colour_shifts": [
+          2,
+          36,
+          48
+        ],
+        "compatible_pair_terms_after_support": 8455,
+        "configuration_count": 256,
+        "coordinate_colours": 3,
+        "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+        "local_residues_by_prime": {
+          "11": [
+            9,
+            8,
+            7
+          ],
+          "13": [
+            11,
+            3,
+            4
+          ],
+          "5": [
+            3,
+            4,
+            2
+          ],
+          "7": [
+            5,
+            6,
+            1
+          ]
+        },
+        "maximum_generated_modulus": 5005,
+        "one_prime_exponent_envelope": 0.19036992747781895,
+        "pair_modulus_exponent_envelope": 0.5485994,
+        "pre_normalization_l2": 9.335131572940733e-05,
+        "prime_atoms": [
+          5,
+          7,
+          11,
+          13
+        ],
+        "supported_configuration_count": 211,
+        "target_minus_colour_residue_integers": [
+          -2,
+          -36,
+          -48
+        ],
+        "target_shift": 0
+      },
+      "sector_enumeration": {
+        "degree_two_finite_carrier": true,
+        "effective_beta_log_x_z": 0.3476231261656648,
+        "interval": [
+          8000001,
+          16000000
+        ],
+        "prime_count": 491353,
+        "rough_semiprime_count": 316814,
+        "roughness_cutoff_z": 251,
+        "x": 8000000
+      },
+      "trial_normalizations": {
+        "k39_n4096": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.10125465634276028,
+            0.12242315276300093,
+            0.15085891783543404,
+            0.1613688006973589
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.335131572940733e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        },
+        "k39_n8192": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.10125465634276028,
+            0.12242315276300093,
+            0.15085891783543404,
+            0.1613688006973589
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.709384487874921e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        }
+      },
+      "trials": {
+        "k39_n4096": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 2.220446049250313e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6411182603585783,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04704126415547185,
+                "sum_abs_raw_coefficients": 0.04704126415547185,
+                "sum_grouped_abs_squared": 0.002212880533344881
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.4723653849331473,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17383120866753324,
+                "sum_abs_raw_coefficients": 0.25594305446316684,
+                "sum_grouped_abs_squared": 0.005047418937890815
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.386038240643401,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15310672546109588,
+                "sum_abs_raw_coefficients": 0.21221177638876956,
+                "sum_grouped_abs_squared": 0.00390695357612702
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.4983618674636405,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.4766159732770128,
+                "sum_abs_raw_coefficients": 1.1907591730593583,
+                "sum_grouped_abs_squared": 0.016697214610777354
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.409677315136683,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.9751099145655645,
+                "sum_abs_raw_coefficients": 2.3497002408935095,
+                "sum_grouped_abs_squared": 0.05821272086742658
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.25908914601645,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3812185134983268,
+                "sum_abs_raw_coefficients": 0.8612066061045955,
+                "sum_grouped_abs_squared": 0.029674729105949798
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.10036321727082,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.3986977388153667,
+                "sum_abs_raw_coefficients": 7.133866499133765,
+                "sum_grouped_abs_squared": 0.047174731202827
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.903021042102071,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.9236107721748503,
+                "sum_abs_raw_coefficients": 5.584282548437804,
+                "sum_grouped_abs_squared": 0.1653563577608414
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.920843482959864,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9516508676830218,
+                "sum_abs_raw_coefficients": 9.60376845325096,
+                "sum_grouped_abs_squared": 0.0881796836660939
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 24.42795991408696,
+              "median": 3.4227237857517134,
+              "min": 1.0,
+              "p25": 2.2474197584785363,
+              "p75": 3.836488918778814
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.480882978298244,
+            "sum_abs_raw_pair_coefficients": 27.238779615887402,
+            "sum_q_a_abs_c_squared": 0.4164626902612788
+          },
+          "parity_cancellation": {
+            "E_prime": -7.6533854071324345,
+            "E_prime_minus_2_E_semiprime": -23.586541559985484,
+            "E_semiprime": 7.966578076426526,
+            "after_crt_aggregation": {
+              "across_block_ratio": 18.55690335022026,
+              "cancellation_ratio": 19.095559866407626,
+              "gross": 450.3982164002143,
+              "projected_block_l1": 437.69317209460405,
+              "within_block_prime_semiprime_ratio": 1.0290272846725244
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 53.220434611105695,
+              "cancellation_ratio": 54.985679910391575,
+              "gross": 1296.9220244105097,
+              "projected_block_l1": 1255.2859927953343,
+              "within_block_prime_semiprime_ratio": 1.0331685622671996
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 2.879500799927885,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.4498416228630241,
+                "16": 1.0000000000000002,
+                "2": 0.7445603837912094,
+                "4": 0.9318937264212964,
+                "8": 0.9961541761554231
+              },
+              "frobenius_squared": 0.4164626902612788,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.43283051238219633,
+                0.3503417874684987,
+                0.2551319089644982,
+                0.11368842014688628,
+                0.11205515211437853,
+                0.08121898081123814,
+                0.07363003897034004,
+                0.04677410796057432,
+                0.031182320725547163,
+                0.021949833152916723,
+                0.01213102008125436,
+                0.000590080587677875,
+                2.519801493005798e-17,
+                9.970367443331575e-18,
+                1.8518236294472356e-18,
+                3.533158301272436e-20
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8094202636969855,
+                0.5894499155346345,
+                0.2626626748682116,
+                0.258889216237676,
+                0.18764615360462497,
+                0.17011286603871292,
+                0.10806564376236032,
+                0.0720427969690193,
+                0.05071230545210423,
+                0.028027183237355674,
+                0.0013633063538663474,
+                5.821681745904209e-17,
+                2.3035269367811063e-17,
+                4.2784036163606814e-18,
+                8.162914120418111e-20
+              ],
+              "stable_rank": 2.223004606900278
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.44486036138325535,
+                "16": 1.0000000000000002,
+                "2": 0.5951700294391269,
+                "4": 0.7724973047125153,
+                "8": 0.9440067371648513
+              },
+              "frobenius_squared": 3611.2093922922586,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                40.080966995392465,
+                23.29806183002559,
+                19.722016598079747,
+                15.855850128010223,
+                15.706272899501936,
+                14.05413249410127,
+                10.569142779526686,
+                7.96517706577744,
+                7.366994981430104,
+                6.810336583958709,
+                6.162732589563827,
+                4.628676654969241,
+                4.271210680003866,
+                3.915228286279154,
+                2.928126270973851,
+                9.375954607005427e-16
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.5812749436086169,
+                0.4920544107717487,
+                0.39559549872718747,
+                0.3918636219856537,
+                0.35064354848816076,
+                0.2636948050864559,
+                0.19872716810183452,
+                0.1838028254726734,
+                0.16991447798007459,
+                0.15375708351228823,
+                0.11548315826565098,
+                0.10656456169071134,
+                0.0976829797227505,
+                0.07305528011114243,
+                2.3392535933784347e-17
+              ],
+              "stable_rank": 2.2478963890839485
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        },
+        "k39_n8192": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 1.1102230246251565e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6387539702270675,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04678123557326098,
+                "sum_abs_raw_coefficients": 0.04678123557326098,
+                "sum_grouped_abs_squared": 0.0021884840017609383
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.474973876657037,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17346932967709427,
+                "sum_abs_raw_coefficients": 0.25586272967492135,
+                "sum_grouped_abs_squared": 0.005026207464482152
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.3881466713667003,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15282117789207963,
+                "sum_abs_raw_coefficients": 0.21213820940522873,
+                "sum_grouped_abs_squared": 0.003892404360552772
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.503968257469529,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.47309938667029605,
+                "sum_abs_raw_coefficients": 1.184625846850724,
+                "sum_grouped_abs_squared": 0.01635213296187591
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.416820927908521,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.966738401114388,
+                "sum_abs_raw_coefficients": 2.3364335996260754,
+                "sum_grouped_abs_squared": 0.05700609738597926
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.2645162702933233,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3797854470218052,
+                "sum_abs_raw_coefficients": 0.8600303240015008,
+                "sum_grouped_abs_squared": 0.029439491530332377
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.0765728294247205,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.406814498123305,
+                "sum_abs_raw_coefficients": 7.141796257213545,
+                "sum_grouped_abs_squared": 0.048044857699428366
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.9058239376872814,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.920209265177387,
+                "sum_abs_raw_coefficients": 5.579790048121356,
+                "sum_grouped_abs_squared": 0.16261688135148436
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.89371461571097,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9661494905609238,
+                "sum_abs_raw_coefficients": 9.621774498630671,
+                "sum_grouped_abs_squared": 0.09073033814098512
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 23.01762084527369,
+              "median": 3.399845449567778,
+              "min": 1.0,
+              "p25": 2.252474099139056,
+              "p75": 3.830643335162766
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.4858682318105405,
+            "sum_abs_raw_pair_coefficients": 27.239232749097283,
+            "sum_q_a_abs_c_squared": 0.41529689489688126
+          },
+          "parity_cancellation": {
+            "E_prime": -7.786752514314333,
+            "E_prime_minus_2_E_semiprime": -23.79641360696426,
+            "E_semiprime": 8.004830546324964,
+            "after_crt_aggregation": {
+              "across_block_ratio": 18.336883520338777,
+              "cancellation_ratio": 18.868418569576576,
+              "gross": 449.0006923909692,
+              "projected_block_l1": 436.3520645127084,
+              "within_block_prime_semiprime_ratio": 1.0289872075943678
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 52.67283072168757,
+              "cancellation_ratio": 54.418315285017606,
+              "gross": 1294.9607383164641,
+              "projected_block_l1": 1253.4244657028912,
+              "within_block_prime_semiprime_ratio": 1.0331382334956103
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 2.8840951924164777,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.45349715734220303,
+                "16": 0.9999999999999999,
+                "2": 0.7473307859557455,
+                "4": 0.9327880946846968,
+                "8": 0.9962868625162884
+              },
+              "frobenius_squared": 0.41529689489688115,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.4339769133131154,
+                0.3493253405916719,
+                0.25317988634389577,
+                0.11366525239473013,
+                0.11186382979905718,
+                0.08022665610326479,
+                0.072768968315873,
+                0.04610515799406303,
+                0.030736235981589345,
+                0.021876048692515353,
+                0.0108719430007331,
+                0.0007600092013674992,
+                2.269608451162777e-17,
+                5.264778044597e-18,
+                4.544364622136826e-18,
+                1.8740913491177045e-18
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8049399170218828,
+                0.5833948271834125,
+                0.2619154358396028,
+                0.2577644717205202,
+                0.18486388017922295,
+                0.16767935363273578,
+                0.10623873431902596,
+                0.0708245877573056,
+                0.05040832362603522,
+                0.02505189254823094,
+                0.001751266433887811,
+                5.229790759687829e-17,
+                1.2131470322704586e-17,
+                1.0471443255918215e-17,
+                4.318412550590089e-18
+              ],
+              "stable_rank": 2.205085486887436
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.44495664497926507,
+                "16": 0.9999999999999999,
+                "2": 0.5953017244794016,
+                "4": 0.7714770962714003,
+                "8": 0.9432556473779156
+              },
+              "frobenius_squared": 3564.225708133037,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                39.823685327198454,
+                23.14873209153563,
+                19.525905484539315,
+                15.705661536203278,
+                15.565770975263977,
+                13.984382647505969,
+                10.518777712823669,
+                7.984776722091522,
+                7.349604991359895,
+                6.854438091644735,
+                6.149104576156491,
+                4.6263488300708975,
+                4.2762044214991946,
+                3.9087462391618764,
+                2.91047304113406,
+                1.307493448286574e-15
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.5812805093587283,
+                0.49030885323924733,
+                0.3943799125360393,
+                0.3908671647883124,
+                0.3511574213337566,
+                0.2641337090326907,
+                0.20050320949673997,
+                0.18455361252918304,
+                0.17211963270921457,
+                0.1544082252969397,
+                0.1161707861053038,
+                0.1073784203135682,
+                0.09815129381037753,
+                0.07308397043671618,
+                3.283205553539247e-17
+              ],
+              "stable_rank": 2.247409969676034
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        }
+      }
+    },
+    {
+      "common_reduced_model": {
+        "active_reduced_colours": 3,
+        "actual_full_atom_modulus_exponent": 0.513512280573024,
+        "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+          0.09702364841490761,
+          0.117307602045614,
+          0.1445551556144818,
+          0.1546258744980205
+        ],
+        "actual_maximum_prime_exponent": 0.1546258744980205,
+        "ambient_trial_dimension": 39,
+        "coarse_physical_fragment_sizes": [
+          0.18,
+          0.22,
+          0.26,
+          0.3
+        ],
+        "colour_shifts": [
+          2,
+          36,
+          48
+        ],
+        "compatible_pair_terms_after_support": 8455,
+        "configuration_count": 256,
+        "coordinate_colours": 3,
+        "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+        "local_residues_by_prime": {
+          "11": [
+            9,
+            8,
+            7
+          ],
+          "13": [
+            11,
+            3,
+            4
+          ],
+          "5": [
+            3,
+            4,
+            2
+          ],
+          "7": [
+            5,
+            6,
+            1
+          ]
+        },
+        "maximum_generated_modulus": 5005,
+        "one_prime_exponent_envelope": 0.19036992747781895,
+        "pair_modulus_exponent_envelope": 0.5485994,
+        "pre_normalization_l2": 9.335131572940733e-05,
+        "prime_atoms": [
+          5,
+          7,
+          11,
+          13
+        ],
+        "supported_configuration_count": 211,
+        "target_minus_colour_residue_integers": [
+          -2,
+          -36,
+          -48
+        ],
+        "target_shift": 0
+      },
+      "sector_enumeration": {
+        "degree_two_finite_carrier": true,
+        "effective_beta_log_x_z": 0.34717068403068047,
+        "interval": [
+          16000001,
+          32000000
+        ],
+        "prime_count": 942685,
+        "rough_semiprime_count": 607379,
+        "roughness_cutoff_z": 317,
+        "x": 16000000
+      },
+      "trial_normalizations": {
+        "k39_n4096": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.09702364841490761,
+            0.117307602045614,
+            0.1445551556144818,
+            0.1546258744980205
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.335131572940733e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        },
+        "k39_n8192": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.09702364841490761,
+            0.117307602045614,
+            0.1445551556144818,
+            0.1546258744980205
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.709384487874921e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        }
+      },
+      "trials": {
+        "k39_n4096": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 2.220446049250313e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6411182603585783,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04704126415547185,
+                "sum_abs_raw_coefficients": 0.04704126415547185,
+                "sum_grouped_abs_squared": 0.002212880533344881
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.4723653849331473,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17383120866753324,
+                "sum_abs_raw_coefficients": 0.25594305446316684,
+                "sum_grouped_abs_squared": 0.005047418937890815
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.386038240643401,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15310672546109588,
+                "sum_abs_raw_coefficients": 0.21221177638876956,
+                "sum_grouped_abs_squared": 0.00390695357612702
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.4983618674636405,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.4766159732770128,
+                "sum_abs_raw_coefficients": 1.1907591730593583,
+                "sum_grouped_abs_squared": 0.016697214610777354
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.409677315136683,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.9751099145655645,
+                "sum_abs_raw_coefficients": 2.3497002408935095,
+                "sum_grouped_abs_squared": 0.05821272086742658
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.25908914601645,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3812185134983268,
+                "sum_abs_raw_coefficients": 0.8612066061045955,
+                "sum_grouped_abs_squared": 0.029674729105949798
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.10036321727082,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.3986977388153667,
+                "sum_abs_raw_coefficients": 7.133866499133765,
+                "sum_grouped_abs_squared": 0.047174731202827
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.903021042102071,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.9236107721748503,
+                "sum_abs_raw_coefficients": 5.584282548437804,
+                "sum_grouped_abs_squared": 0.1653563577608414
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.920843482959864,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9516508676830218,
+                "sum_abs_raw_coefficients": 9.60376845325096,
+                "sum_grouped_abs_squared": 0.0881796836660939
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 24.42795991408696,
+              "median": 3.4227237857517134,
+              "min": 1.0,
+              "p25": 2.2474197584785363,
+              "p75": 3.836488918778814
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.480882978298244,
+            "sum_abs_raw_pair_coefficients": 27.238779615887402,
+            "sum_q_a_abs_c_squared": 0.4164626902612788
+          },
+          "parity_cancellation": {
+            "E_prime": 8.75141548447511,
+            "E_prime_minus_2_E_semiprime": 14.002668930412614,
+            "E_semiprime": -2.6256267229687524,
+            "after_crt_aggregation": {
+              "across_block_ratio": 34.673242404150265,
+              "cancellation_ratio": 35.584899866024834,
+              "gross": 498.28357174582993,
+              "projected_block_l1": 485.5179341292601,
+              "within_block_prime_semiprime_ratio": 1.0262928240528624
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 106.98902563717894,
+              "cancellation_ratio": 109.89424276967088,
+              "gross": 1538.8126988620916,
+              "projected_block_l1": 1498.1319051848443,
+              "within_block_prime_semiprime_ratio": 1.027154347048118
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 3.088226837321914,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.4498416228630241,
+                "16": 1.0000000000000002,
+                "2": 0.7445603837912094,
+                "4": 0.9318937264212964,
+                "8": 0.9961541761554231
+              },
+              "frobenius_squared": 0.4164626902612788,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.43283051238219633,
+                0.3503417874684987,
+                0.2551319089644982,
+                0.11368842014688628,
+                0.11205515211437853,
+                0.08121898081123814,
+                0.07363003897034004,
+                0.04677410796057432,
+                0.031182320725547163,
+                0.021949833152916723,
+                0.01213102008125436,
+                0.000590080587677875,
+                2.519801493005798e-17,
+                9.970367443331575e-18,
+                1.8518236294472356e-18,
+                3.533158301272436e-20
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8094202636969855,
+                0.5894499155346345,
+                0.2626626748682116,
+                0.258889216237676,
+                0.18764615360462497,
+                0.17011286603871292,
+                0.10806564376236032,
+                0.0720427969690193,
+                0.05071230545210423,
+                0.028027183237355674,
+                0.0013633063538663474,
+                5.821681745904209e-17,
+                2.3035269367811063e-17,
+                4.2784036163606814e-18,
+                8.162914120418111e-20
+              ],
+              "stable_rank": 2.223004606900278
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.2738983041217121,
+                "16": 0.9999999999999999,
+                "2": 0.4468618578403512,
+                "4": 0.6757455733167171,
+                "8": 0.8917628182435456
+              },
+              "frobenius_squared": 3346.4199192097694,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                30.275051457440544,
+                24.05844303901154,
+                21.004101311949874,
+                18.021341590741752,
+                15.207267820487646,
+                14.454623164079399,
+                12.22894074502257,
+                11.538643516076792,
+                10.546712839588508,
+                8.889183992704801,
+                7.302579081084799,
+                6.5072741605148146,
+                5.84612395092271,
+                5.125029429687569,
+                3.9800687320333363,
+                2.9967681525354157e-16
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.7946623335333364,
+                0.6937759079113903,
+                0.5952538715276977,
+                0.5023036159613276,
+                0.47744338880477644,
+                0.40392799207008867,
+                0.3811271314368319,
+                0.3483631680829562,
+                0.2936141662781601,
+                0.2412078173128945,
+                0.21493850042377236,
+                0.19310038032935986,
+                0.1692822698218079,
+                0.1314636487943995,
+                9.898474183431704e-18
+              ],
+              "stable_rank": 3.650990111846878
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        },
+        "k39_n8192": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 1.1102230246251565e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6387539702270675,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04678123557326098,
+                "sum_abs_raw_coefficients": 0.04678123557326098,
+                "sum_grouped_abs_squared": 0.0021884840017609383
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.474973876657037,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17346932967709427,
+                "sum_abs_raw_coefficients": 0.25586272967492135,
+                "sum_grouped_abs_squared": 0.005026207464482152
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.3881466713667003,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15282117789207963,
+                "sum_abs_raw_coefficients": 0.21213820940522873,
+                "sum_grouped_abs_squared": 0.003892404360552772
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.503968257469529,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.47309938667029605,
+                "sum_abs_raw_coefficients": 1.184625846850724,
+                "sum_grouped_abs_squared": 0.01635213296187591
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.416820927908521,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.966738401114388,
+                "sum_abs_raw_coefficients": 2.3364335996260754,
+                "sum_grouped_abs_squared": 0.05700609738597926
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.2645162702933233,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3797854470218052,
+                "sum_abs_raw_coefficients": 0.8600303240015008,
+                "sum_grouped_abs_squared": 0.029439491530332377
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.0765728294247205,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.406814498123305,
+                "sum_abs_raw_coefficients": 7.141796257213545,
+                "sum_grouped_abs_squared": 0.048044857699428366
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.9058239376872814,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.920209265177387,
+                "sum_abs_raw_coefficients": 5.579790048121356,
+                "sum_grouped_abs_squared": 0.16261688135148436
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.89371461571097,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9661494905609238,
+                "sum_abs_raw_coefficients": 9.621774498630671,
+                "sum_grouped_abs_squared": 0.09073033814098512
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 23.01762084527369,
+              "median": 3.399845449567778,
+              "min": 1.0,
+              "p25": 2.252474099139056,
+              "p75": 3.830643335162766
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.4858682318105405,
+            "sum_abs_raw_pair_coefficients": 27.239232749097283,
+            "sum_q_a_abs_c_squared": 0.41529689489688126
+          },
+          "parity_cancellation": {
+            "E_prime": 8.42370976618415,
+            "E_prime_minus_2_E_semiprime": 13.31667073956042,
+            "E_semiprime": -2.4464804866881353,
+            "after_crt_aggregation": {
+              "across_block_ratio": 36.408908721915594,
+              "cancellation_ratio": 37.36450084673444,
+              "gross": 497.570755123989,
+              "projected_block_l1": 484.8454494364596,
+              "within_block_prime_semiprime_ratio": 1.026246107295263
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 112.42632021633273,
+              "cancellation_ratio": 115.47348159275894,
+              "gross": 1537.722333521462,
+              "projected_block_l1": 1497.1442887812882,
+              "within_block_prime_semiprime_ratio": 1.0271036299201364
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 3.090459633501328,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.45349715734220303,
+                "16": 0.9999999999999999,
+                "2": 0.7473307859557455,
+                "4": 0.9327880946846968,
+                "8": 0.9962868625162884
+              },
+              "frobenius_squared": 0.41529689489688115,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.4339769133131154,
+                0.3493253405916719,
+                0.25317988634389577,
+                0.11366525239473013,
+                0.11186382979905718,
+                0.08022665610326479,
+                0.072768968315873,
+                0.04610515799406303,
+                0.030736235981589345,
+                0.021876048692515353,
+                0.0108719430007331,
+                0.0007600092013674992,
+                2.269608451162777e-17,
+                5.264778044597e-18,
+                4.544364622136826e-18,
+                1.8740913491177045e-18
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8049399170218828,
+                0.5833948271834125,
+                0.2619154358396028,
+                0.2577644717205202,
+                0.18486388017922295,
+                0.16767935363273578,
+                0.10623873431902596,
+                0.0708245877573056,
+                0.05040832362603522,
+                0.02505189254823094,
+                0.001751266433887811,
+                5.229790759687829e-17,
+                1.2131470322704586e-17,
+                1.0471443255918215e-17,
+                4.318412550590089e-18
+              ],
+              "stable_rank": 2.205085486887436
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.27267384862761357,
+                "16": 1.0,
+                "2": 0.44556739885237745,
+                "4": 0.6737376467014446,
+                "8": 0.8903703156408174
+              },
+              "frobenius_squared": 3310.6137429054447,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                30.04526236526312,
+                23.924543118601363,
+                20.843634065570267,
+                17.914420928175772,
+                15.155120893004382,
+                14.39109399748262,
+                12.137639059581485,
+                11.536183653459089,
+                10.53664608277289,
+                8.893918519811503,
+                7.324947594243373,
+                6.524458506939994,
+                5.882033057493733,
+                5.1125348859565936,
+                3.9823486088577007,
+                6.003864766055493e-16
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.7962833816442809,
+                0.6937411233815242,
+                0.5962477781151799,
+                0.5044096706083685,
+                0.47898047361107116,
+                0.4039784679535512,
+                0.3839601569529533,
+                0.35069243046300874,
+                0.296017335834425,
+                0.24379709204044506,
+                0.21715431962688592,
+                0.19577239785711625,
+                0.17016109973689095,
+                0.1325449769898465,
+                1.9982733693804822e-17
+              ],
+              "stable_rank": 3.6673850647323514
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        }
+      }
+    },
+    {
+      "common_reduced_model": {
+        "active_reduced_colours": 3,
+        "actual_full_atom_modulus_exponent": 0.492915410418418,
+        "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+          0.09313205017289865,
+          0.11260241866658065,
+          0.1387570785615866,
+          0.14842386301735208
+        ],
+        "actual_maximum_prime_exponent": 0.14842386301735208,
+        "ambient_trial_dimension": 39,
+        "coarse_physical_fragment_sizes": [
+          0.18,
+          0.22,
+          0.26,
+          0.3
+        ],
+        "colour_shifts": [
+          2,
+          36,
+          48
+        ],
+        "compatible_pair_terms_after_support": 8455,
+        "configuration_count": 256,
+        "coordinate_colours": 3,
+        "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+        "local_residues_by_prime": {
+          "11": [
+            9,
+            8,
+            7
+          ],
+          "13": [
+            11,
+            3,
+            4
+          ],
+          "5": [
+            3,
+            4,
+            2
+          ],
+          "7": [
+            5,
+            6,
+            1
+          ]
+        },
+        "maximum_generated_modulus": 5005,
+        "one_prime_exponent_envelope": 0.19036992747781895,
+        "pair_modulus_exponent_envelope": 0.5485994,
+        "pre_normalization_l2": 9.335131572940733e-05,
+        "prime_atoms": [
+          5,
+          7,
+          11,
+          13
+        ],
+        "supported_configuration_count": 211,
+        "target_minus_colour_residue_integers": [
+          -2,
+          -36,
+          -48
+        ],
+        "target_shift": 0
+      },
+      "sector_enumeration": {
+        "degree_two_finite_carrier": true,
+        "effective_beta_log_x_z": 0.3467032636049275,
+        "interval": [
+          32000001,
+          64000000
+        ],
+        "prime_count": 1811271,
+        "rough_semiprime_count": 1186600,
+        "roughness_cutoff_z": 400,
+        "x": 32000000
+      },
+      "trial_normalizations": {
+        "k39_n4096": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.09313205017289865,
+            0.11260241866658065,
+            0.1387570785615866,
+            0.14842386301735208
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.335131572940733e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        },
+        "k39_n8192": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.09313205017289865,
+            0.11260241866658065,
+            0.1387570785615866,
+            0.14842386301735208
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.709384487874921e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        }
+      },
+      "trials": {
+        "k39_n4096": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 2.220446049250313e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6411182603585783,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04704126415547185,
+                "sum_abs_raw_coefficients": 0.04704126415547185,
+                "sum_grouped_abs_squared": 0.002212880533344881
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.4723653849331473,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17383120866753324,
+                "sum_abs_raw_coefficients": 0.25594305446316684,
+                "sum_grouped_abs_squared": 0.005047418937890815
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.386038240643401,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15310672546109588,
+                "sum_abs_raw_coefficients": 0.21221177638876956,
+                "sum_grouped_abs_squared": 0.00390695357612702
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.4983618674636405,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.4766159732770128,
+                "sum_abs_raw_coefficients": 1.1907591730593583,
+                "sum_grouped_abs_squared": 0.016697214610777354
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.409677315136683,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.9751099145655645,
+                "sum_abs_raw_coefficients": 2.3497002408935095,
+                "sum_grouped_abs_squared": 0.05821272086742658
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.25908914601645,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3812185134983268,
+                "sum_abs_raw_coefficients": 0.8612066061045955,
+                "sum_grouped_abs_squared": 0.029674729105949798
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.10036321727082,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.3986977388153667,
+                "sum_abs_raw_coefficients": 7.133866499133765,
+                "sum_grouped_abs_squared": 0.047174731202827
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.903021042102071,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.9236107721748503,
+                "sum_abs_raw_coefficients": 5.584282548437804,
+                "sum_grouped_abs_squared": 0.1653563577608414
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.920843482959864,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9516508676830218,
+                "sum_abs_raw_coefficients": 9.60376845325096,
+                "sum_grouped_abs_squared": 0.0881796836660939
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 24.42795991408696,
+              "median": 3.4227237857517134,
+              "min": 1.0,
+              "p25": 2.2474197584785363,
+              "p75": 3.836488918778814
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.480882978298244,
+            "sum_abs_raw_pair_coefficients": 27.238779615887402,
+            "sum_q_a_abs_c_squared": 0.4164626902612788
+          },
+          "parity_cancellation": {
+            "E_prime": -18.41780689872751,
+            "E_prime_minus_2_E_semiprime": -31.717987101001047,
+            "E_semiprime": 6.650090101136769,
+            "after_crt_aggregation": {
+              "across_block_ratio": 18.520190276766286,
+              "cancellation_ratio": 19.168988574157478,
+              "gross": 608.0017323343633,
+              "projected_block_l1": 587.4231563065581,
+              "within_block_prime_semiprime_ratio": 1.035031945552153
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 58.251322645639334,
+              "cancellation_ratio": 60.385183822189674,
+              "gross": 1915.2964815637893,
+              "projected_block_l1": 1847.6147002906387,
+              "within_block_prime_semiprime_ratio": 1.0366319781188706
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 3.150149711268413,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.4498416228630241,
+                "16": 1.0000000000000002,
+                "2": 0.7445603837912094,
+                "4": 0.9318937264212964,
+                "8": 0.9961541761554231
+              },
+              "frobenius_squared": 0.4164626902612788,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.43283051238219633,
+                0.3503417874684987,
+                0.2551319089644982,
+                0.11368842014688628,
+                0.11205515211437853,
+                0.08121898081123814,
+                0.07363003897034004,
+                0.04677410796057432,
+                0.031182320725547163,
+                0.021949833152916723,
+                0.01213102008125436,
+                0.000590080587677875,
+                2.519801493005798e-17,
+                9.970367443331575e-18,
+                1.8518236294472356e-18,
+                3.533158301272436e-20
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8094202636969855,
+                0.5894499155346345,
+                0.2626626748682116,
+                0.258889216237676,
+                0.18764615360462497,
+                0.17011286603871292,
+                0.10806564376236032,
+                0.0720427969690193,
+                0.05071230545210423,
+                0.028027183237355674,
+                0.0013633063538663474,
+                5.821681745904209e-17,
+                2.3035269367811063e-17,
+                4.2784036163606814e-18,
+                8.162914120418111e-20
+              ],
+              "stable_rank": 2.223004606900278
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.1872778476577042,
+                "16": 1.0000000000000002,
+                "2": 0.35698789615606225,
+                "4": 0.6158765108077647,
+                "8": 0.8624435633101907
+              },
+              "frobenius_squared": 4081.77619987094,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                27.648259643823383,
+                26.319544768850786,
+                24.269246430906726,
+                21.627044721339054,
+                19.255355358652597,
+                15.946664845940296,
+                14.060727453395176,
+                13.552219019825898,
+                11.668960589894851,
+                10.615058031681116,
+                9.49154845242806,
+                8.725956120097623,
+                7.887800517510979,
+                6.932876278398215,
+                6.009702024623111,
+                1.5553470254706777e-15
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.951942187606393,
+                0.8777856813974355,
+                0.7822208341482547,
+                0.6964400510812708,
+                0.5767692090342033,
+                0.5085574149885539,
+                0.4901653555924075,
+                0.42205045598599533,
+                0.3839322318449262,
+                0.34329641629173824,
+                0.31560598144364577,
+                0.28529103166437864,
+                0.2507527188948046,
+                0.21736275997269427,
+                5.62547894698371e-17
+              ],
+              "stable_rank": 5.339659829003071
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        },
+        "k39_n8192": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 1.1102230246251565e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6387539702270675,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04678123557326098,
+                "sum_abs_raw_coefficients": 0.04678123557326098,
+                "sum_grouped_abs_squared": 0.0021884840017609383
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.474973876657037,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17346932967709427,
+                "sum_abs_raw_coefficients": 0.25586272967492135,
+                "sum_grouped_abs_squared": 0.005026207464482152
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.3881466713667003,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15282117789207963,
+                "sum_abs_raw_coefficients": 0.21213820940522873,
+                "sum_grouped_abs_squared": 0.003892404360552772
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.503968257469529,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.47309938667029605,
+                "sum_abs_raw_coefficients": 1.184625846850724,
+                "sum_grouped_abs_squared": 0.01635213296187591
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.416820927908521,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.966738401114388,
+                "sum_abs_raw_coefficients": 2.3364335996260754,
+                "sum_grouped_abs_squared": 0.05700609738597926
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.2645162702933233,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3797854470218052,
+                "sum_abs_raw_coefficients": 0.8600303240015008,
+                "sum_grouped_abs_squared": 0.029439491530332377
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.0765728294247205,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.406814498123305,
+                "sum_abs_raw_coefficients": 7.141796257213545,
+                "sum_grouped_abs_squared": 0.048044857699428366
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.9058239376872814,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.920209265177387,
+                "sum_abs_raw_coefficients": 5.579790048121356,
+                "sum_grouped_abs_squared": 0.16261688135148436
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.89371461571097,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9661494905609238,
+                "sum_abs_raw_coefficients": 9.621774498630671,
+                "sum_grouped_abs_squared": 0.09073033814098512
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 23.01762084527369,
+              "median": 3.399845449567778,
+              "min": 1.0,
+              "p25": 2.252474099139056,
+              "p75": 3.830643335162766
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.4858682318105405,
+            "sum_abs_raw_pair_coefficients": 27.239232749097283,
+            "sum_q_a_abs_c_squared": 0.41529689489688126
+          },
+          "parity_cancellation": {
+            "E_prime": -18.02122812976757,
+            "E_prime_minus_2_E_semiprime": -31.04456487629248,
+            "E_semiprime": 6.511668373262454,
+            "after_crt_aggregation": {
+              "across_block_ratio": 18.909904075330452,
+              "cancellation_ratio": 19.572487990404365,
+              "gross": 607.6193732085637,
+              "projected_block_l1": 587.0497438710638,
+              "within_block_prime_semiprime_ratio": 1.0350389886926137
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 59.485496332296975,
+              "cancellation_ratio": 61.664764936433514,
+              "gross": 1914.355795650436,
+              "projected_block_l1": 1846.7013500864518,
+              "within_block_prime_semiprime_ratio": 1.0366352932816219
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 3.1505838688809193,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.45349715734220303,
+                "16": 0.9999999999999999,
+                "2": 0.7473307859557455,
+                "4": 0.9327880946846968,
+                "8": 0.9962868625162884
+              },
+              "frobenius_squared": 0.41529689489688115,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.4339769133131154,
+                0.3493253405916719,
+                0.25317988634389577,
+                0.11366525239473013,
+                0.11186382979905718,
+                0.08022665610326479,
+                0.072768968315873,
+                0.04610515799406303,
+                0.030736235981589345,
+                0.021876048692515353,
+                0.0108719430007331,
+                0.0007600092013674992,
+                2.269608451162777e-17,
+                5.264778044597e-18,
+                4.544364622136826e-18,
+                1.8740913491177045e-18
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8049399170218828,
+                0.5833948271834125,
+                0.2619154358396028,
+                0.2577644717205202,
+                0.18486388017922295,
+                0.16767935363273578,
+                0.10623873431902596,
+                0.0708245877573056,
+                0.05040832362603522,
+                0.02505189254823094,
+                0.001751266433887811,
+                5.229790759687829e-17,
+                1.2131470322704586e-17,
+                1.0471443255918215e-17,
+                4.318412550590089e-18
+              ],
+              "stable_rank": 2.205085486887436
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.1860271848768733,
+                "16": 0.9999999999999999,
+                "2": 0.3552157617687317,
+                "4": 0.6131896153413153,
+                "8": 0.8609177696088709
+              },
+              "frobenius_squared": 4051.0525636903108,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                27.451883436506666,
+                26.17998888779134,
+                24.12329019830328,
+                21.52051372269558,
+                19.17869630270801,
+                15.974578601705714,
+                14.071269789470973,
+                13.511091280210914,
+                11.764981170466182,
+                10.592165554226453,
+                9.595373797069273,
+                8.687689195195395,
+                7.860625850443362,
+                6.913318548942766,
+                5.974120767323993,
+                1.5299231190773184e-15
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.9536682227411797,
+                0.8787480922428483,
+                0.7839357824926758,
+                0.6986295256231262,
+                0.5819119347003364,
+                0.5125793944891376,
+                0.49217356293460357,
+                0.42856735850847366,
+                0.3858447664884278,
+                0.3495342612561491,
+                0.316469695614478,
+                0.2863419505850725,
+                0.2518340340812152,
+                0.21762152608368418,
+                5.573108025960662e-17
+              ],
+              "stable_rank": 5.375558419925962
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        }
+      }
+    },
+    {
+      "common_reduced_model": {
+        "active_reduced_colours": 3,
+        "actual_full_atom_modulus_exponent": 0.4739070959348309,
+        "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+          0.0895405956134136,
+          0.10826012759515723,
+          0.13340618441144522,
+          0.1427001883148148
+        ],
+        "actual_maximum_prime_exponent": 0.1427001883148148,
+        "ambient_trial_dimension": 39,
+        "coarse_physical_fragment_sizes": [
+          0.18,
+          0.22,
+          0.26,
+          0.3
+        ],
+        "colour_shifts": [
+          2,
+          36,
+          48
+        ],
+        "compatible_pair_terms_after_support": 8455,
+        "configuration_count": 256,
+        "coordinate_colours": 3,
+        "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+        "local_residues_by_prime": {
+          "11": [
+            9,
+            8,
+            7
+          ],
+          "13": [
+            11,
+            3,
+            4
+          ],
+          "5": [
+            3,
+            4,
+            2
+          ],
+          "7": [
+            5,
+            6,
+            1
+          ]
+        },
+        "maximum_generated_modulus": 5005,
+        "one_prime_exponent_envelope": 0.19036992747781895,
+        "pair_modulus_exponent_envelope": 0.5485994,
+        "pre_normalization_l2": 9.335131572940733e-05,
+        "prime_atoms": [
+          5,
+          7,
+          11,
+          13
+        ],
+        "supported_configuration_count": 211,
+        "target_minus_colour_residue_integers": [
+          -2,
+          -36,
+          -48
+        ],
+        "target_shift": 0
+      },
+      "sector_enumeration": {
+        "degree_two_finite_carrier": true,
+        "effective_beta_log_x_z": 0.346080668657346,
+        "interval": [
+          64000001,
+          128000000
+        ],
+        "prime_count": 3485949,
+        "rough_semiprime_count": 2276533,
+        "roughness_cutoff_z": 503,
+        "x": 64000000
+      },
+      "trial_normalizations": {
+        "k39_n4096": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.0895405956134136,
+            0.10826012759515723,
+            0.13340618441144522,
+            0.1427001883148148
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.335131572940733e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        },
+        "k39_n8192": {
+          "active_reduced_colours": 3,
+          "actual_log_x_prime_exponents_used_only_for_envelope_checks": [
+            0.0895405956134136,
+            0.10826012759515723,
+            0.13340618441144522,
+            0.1427001883148148
+          ],
+          "ambient_trial_dimension": 39,
+          "coarse_physical_fragment_sizes": [
+            0.18,
+            0.22,
+            0.26,
+            0.3
+          ],
+          "configuration_count": 256,
+          "coordinate_colours": 3,
+          "lambda_normalization": "sum_d Lambda_d^2 = 1 on the reduced configuration set",
+          "pre_normalization_l2": 9.709384487874921e-05,
+          "prime_atoms": [
+            5,
+            7,
+            11,
+            13
+          ],
+          "supported_configuration_count": 211
+        }
+      },
+      "trials": {
+        "k39_n4096": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 2.220446049250313e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6411182603585783,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04704126415547185,
+                "sum_abs_raw_coefficients": 0.04704126415547185,
+                "sum_grouped_abs_squared": 0.002212880533344881
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.4723653849331473,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17383120866753324,
+                "sum_abs_raw_coefficients": 0.25594305446316684,
+                "sum_grouped_abs_squared": 0.005047418937890815
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.386038240643401,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15310672546109588,
+                "sum_abs_raw_coefficients": 0.21221177638876956,
+                "sum_grouped_abs_squared": 0.00390695357612702
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.4983618674636405,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.4766159732770128,
+                "sum_abs_raw_coefficients": 1.1907591730593583,
+                "sum_grouped_abs_squared": 0.016697214610777354
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.409677315136683,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.9751099145655645,
+                "sum_abs_raw_coefficients": 2.3497002408935095,
+                "sum_grouped_abs_squared": 0.05821272086742658
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.25908914601645,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3812185134983268,
+                "sum_abs_raw_coefficients": 0.8612066061045955,
+                "sum_grouped_abs_squared": 0.029674729105949798
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.10036321727082,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.3986977388153667,
+                "sum_abs_raw_coefficients": 7.133866499133765,
+                "sum_grouped_abs_squared": 0.047174731202827
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.903021042102071,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.9236107721748503,
+                "sum_abs_raw_coefficients": 5.584282548437804,
+                "sum_grouped_abs_squared": 0.1653563577608414
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.920843482959864,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9516508676830218,
+                "sum_abs_raw_coefficients": 9.60376845325096,
+                "sum_grouped_abs_squared": 0.0881796836660939
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 24.42795991408696,
+              "median": 3.4227237857517134,
+              "min": 1.0,
+              "p25": 2.2474197584785363,
+              "p75": 3.836488918778814
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.480882978298244,
+            "sum_abs_raw_pair_coefficients": 27.238779615887402,
+            "sum_q_a_abs_c_squared": 0.4164626902612788
+          },
+          "parity_cancellation": {
+            "E_prime": 35.19585065974605,
+            "E_prime_minus_2_E_semiprime": 95.04817050985943,
+            "E_semiprime": -29.926159925056695,
+            "after_crt_aggregation": {
+              "across_block_ratio": 8.163128655511654,
+              "cancellation_ratio": 8.494765473385621,
+              "gross": 807.4119171556233,
+              "projected_block_l1": 775.8904443429913,
+              "within_block_prime_semiprime_ratio": 1.0406261902597909
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 26.21858960861712,
+              "cancellation_ratio": 27.47456519466742,
+              "gross": 2611.407157306998,
+              "projected_block_l1": 2492.0289756478687,
+              "within_block_prime_semiprime_ratio": 1.0479040102766437
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 3.2342935518050653,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.4498416228630241,
+                "16": 1.0000000000000002,
+                "2": 0.7445603837912094,
+                "4": 0.9318937264212964,
+                "8": 0.9961541761554231
+              },
+              "frobenius_squared": 0.4164626902612788,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.43283051238219633,
+                0.3503417874684987,
+                0.2551319089644982,
+                0.11368842014688628,
+                0.11205515211437853,
+                0.08121898081123814,
+                0.07363003897034004,
+                0.04677410796057432,
+                0.031182320725547163,
+                0.021949833152916723,
+                0.01213102008125436,
+                0.000590080587677875,
+                2.519801493005798e-17,
+                9.970367443331575e-18,
+                1.8518236294472356e-18,
+                3.533158301272436e-20
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8094202636969855,
+                0.5894499155346345,
+                0.2626626748682116,
+                0.258889216237676,
+                0.18764615360462497,
+                0.17011286603871292,
+                0.10806564376236032,
+                0.0720427969690193,
+                0.05071230545210423,
+                0.028027183237355674,
+                0.0013633063538663474,
+                5.821681745904209e-17,
+                2.3035269367811063e-17,
+                4.2784036163606814e-18,
+                8.162914120418111e-20
+              ],
+              "stable_rank": 2.223004606900278
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.40493888529344657,
+                "16": 1.0000000000000002,
+                "2": 0.5875478382748637,
+                "4": 0.7658134169891203,
+                "8": 0.902784431419391
+              },
+              "frobenius_squared": 9108.408503988496,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                60.73177740197014,
+                40.783292415404304,
+                33.39815236781974,
+                22.545046718631205,
+                20.159612479212367,
+                17.787530258445315,
+                16.34665468104198,
+                16.048944680827237,
+                14.933300493852,
+                13.899899113905786,
+                13.430789336708285,
+                11.05075676438054,
+                8.658811501055231,
+                7.436008343005642,
+                6.041017182781668,
+                4.9909088426873745e-15
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.6715313491562869,
+                0.5499287818758339,
+                0.3712232324341596,
+                0.3319450432971914,
+                0.2928867064224649,
+                0.2691614732901213,
+                0.26425942673475267,
+                0.24588940308813625,
+                0.22887357670936323,
+                0.22114928808707301,
+                0.18196004196020868,
+                0.1425746433163726,
+                0.12244015672039951,
+                0.0994704492641063,
+                8.217952867826768e-17
+              ],
+              "stable_rank": 2.4695084525540962
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        },
+        "k39_n8192": {
+          "coefficient_metrics": {
+            "coefficient_compiler_identity": {
+              "maximum_absolute_error": 1.1102230246251565e-16,
+              "statement": "(sum_d Lambda_d 1_(d constraints))(m)^2 = sum_(q,a) c(q,a) 1_(m=a mod q)",
+              "tested_integers": 4194
+            },
+            "crt_collision_cancellation_ratio": 3.6387539702270675,
+            "dyadic_q": [
+              {
+                "crt_collision_cancellation_ratio": 1.0,
+                "occupied_crt_states": 1,
+                "q_interval": [
+                  1,
+                  2
+                ],
+                "raw_pair_count": 1,
+                "sum_abs_grouped_coefficients": 0.04678123557326098,
+                "sum_abs_raw_coefficients": 0.04678123557326098,
+                "sum_grouped_abs_squared": 0.0021884840017609383
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.474973876657037,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  4,
+                  8
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.17346932967709427,
+                "sum_abs_raw_coefficients": 0.25586272967492135,
+                "sum_grouped_abs_squared": 0.005026207464482152
+              },
+              {
+                "crt_collision_cancellation_ratio": 1.3881466713667003,
+                "occupied_crt_states": 6,
+                "q_interval": [
+                  8,
+                  16
+                ],
+                "raw_pair_count": 18,
+                "sum_abs_grouped_coefficients": 0.15282117789207963,
+                "sum_abs_raw_coefficients": 0.21213820940522873,
+                "sum_grouped_abs_squared": 0.003892404360552772
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.503968257469529,
+                "occupied_crt_states": 18,
+                "q_interval": [
+                  32,
+                  64
+                ],
+                "raw_pair_count": 162,
+                "sum_abs_grouped_coefficients": 0.47309938667029605,
+                "sum_abs_raw_coefficients": 1.184625846850724,
+                "sum_grouped_abs_squared": 0.01635213296187591
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.416820927908521,
+                "occupied_crt_states": 27,
+                "q_interval": [
+                  64,
+                  128
+                ],
+                "raw_pair_count": 243,
+                "sum_abs_grouped_coefficients": 0.966738401114388,
+                "sum_abs_raw_coefficients": 2.3364335996260754,
+                "sum_grouped_abs_squared": 0.05700609738597926
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.2645162702933233,
+                "occupied_crt_states": 9,
+                "q_interval": [
+                  128,
+                  256
+                ],
+                "raw_pair_count": 81,
+                "sum_abs_grouped_coefficients": 0.3797854470218052,
+                "sum_abs_raw_coefficients": 0.8600303240015008,
+                "sum_grouped_abs_squared": 0.029439491530332377
+              },
+              {
+                "crt_collision_cancellation_ratio": 5.0765728294247205,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  256,
+                  512
+                ],
+                "raw_pair_count": 1458,
+                "sum_abs_grouped_coefficients": 1.406814498123305,
+                "sum_abs_raw_coefficients": 7.141796257213545,
+                "sum_grouped_abs_squared": 0.048044857699428366
+              },
+              {
+                "crt_collision_cancellation_ratio": 2.9058239376872814,
+                "occupied_crt_states": 54,
+                "q_interval": [
+                  512,
+                  1024
+                ],
+                "raw_pair_count": 1368,
+                "sum_abs_grouped_coefficients": 1.920209265177387,
+                "sum_abs_raw_coefficients": 5.579790048121356,
+                "sum_grouped_abs_squared": 0.16261688135148436
+              },
+              {
+                "crt_collision_cancellation_ratio": 4.89371461571097,
+                "occupied_crt_states": 81,
+                "q_interval": [
+                  4096,
+                  8192
+                ],
+                "raw_pair_count": 5106,
+                "sum_abs_grouped_coefficients": 1.9661494905609238,
+                "sum_abs_raw_coefficients": 9.621774498630671,
+                "sum_grouped_abs_squared": 0.09073033814098512
+              }
+            ],
+            "material_nonzero_crt_coefficients": 256,
+            "occupied_crt_states_before_coefficient_cancellation": 256,
+            "per_state_raw_l1_over_abs_c_quantiles": {
+              "max": 23.01762084527369,
+              "median": 3.399845449567778,
+              "min": 1.0,
+              "p25": 2.252474099139056,
+              "p75": 3.830643335162766
+            },
+            "raw_compatible_pair_terms": 8455,
+            "raw_pairs_per_occupied_crt_state": 33.02734375,
+            "sum_abs_crt_aggregated_coefficients": 7.4858682318105405,
+            "sum_abs_raw_pair_coefficients": 27.239232749097283,
+            "sum_q_a_abs_c_squared": 0.41529689489688126
+          },
+          "parity_cancellation": {
+            "E_prime": 35.31016063523455,
+            "E_prime_minus_2_E_semiprime": 94.76523268197792,
+            "E_semiprime": -29.72753602337168,
+            "after_crt_aggregation": {
+              "across_block_ratio": 8.18042586469785,
+              "cancellation_ratio": 8.513141694399666,
+              "gross": 806.7498535244322,
+              "projected_block_l1": 775.2199605057622,
+              "within_block_prime_semiprime_ratio": 1.0406721893462334
+            },
+            "before_crt_aggregation": {
+              "across_block_ratio": 26.2829601866423,
+              "cancellation_ratio": 27.542193558314626,
+              "gross": 2610.0423811257588,
+              "projected_block_l1": 2490.710837658319,
+              "within_block_prime_semiprime_ratio": 1.0479106372619436
+            },
+            "definition": "For blocks b, R=(sum_b |P_b|+2|S_b|)/|sum_b(P_b-2S_b)|. Raw blocks are compatible (d,e); aggregated blocks are (q,a).",
+            "exact_scalar_ratio": 1.0,
+            "gross_reduction_from_crt_aggregation": 3.235256095459228,
+            "scalar_ratio_invariant_under_exact_crt_aggregation": true
+          },
+          "singular_value_decay": {
+            "coefficient_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.45349715734220303,
+                "16": 0.9999999999999999,
+                "2": 0.7473307859557455,
+                "4": 0.9327880946846968,
+                "8": 0.9962868625162884
+              },
+              "frobenius_squared": 0.41529689489688115,
+              "relative_rank_at_1e-6": 12,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                0.4339769133131154,
+                0.3493253405916719,
+                0.25317988634389577,
+                0.11366525239473013,
+                0.11186382979905718,
+                0.08022665610326479,
+                0.072768968315873,
+                0.04610515799406303,
+                0.030736235981589345,
+                0.021876048692515353,
+                0.0108719430007331,
+                0.0007600092013674992,
+                2.269608451162777e-17,
+                5.264778044597e-18,
+                4.544364622136826e-18,
+                1.8740913491177045e-18
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.8049399170218828,
+                0.5833948271834125,
+                0.2619154358396028,
+                0.2577644717205202,
+                0.18486388017922295,
+                0.16767935363273578,
+                0.10623873431902596,
+                0.0708245877573056,
+                0.05040832362603522,
+                0.02505189254823094,
+                0.001751266433887811,
+                5.229790759687829e-17,
+                1.2131470322704586e-17,
+                1.0471443255918215e-17,
+                4.318412550590089e-18
+              ],
+              "stable_rank": 2.205085486887436
+            },
+            "projected_error_table": {
+              "cumulative_frobenius_energy": {
+                "1": 0.40449821664190355,
+                "16": 0.9999999999999998,
+                "2": 0.5861070055287783,
+                "4": 0.7636713126714166,
+                "8": 0.9022711087550228
+              },
+              "frobenius_squared": 9036.021372902886,
+              "relative_rank_at_1e-6": 15,
+              "shape": [
+                16,
+                81
+              ],
+              "singular_values": [
+                60.45704699104433,
+                40.50951613989987,
+                33.11156097769342,
+                22.541060401544165,
+                20.140705174309907,
+                18.03680837358881,
+                16.28482892864425,
+                16.006892428957006,
+                14.8673931157973,
+                13.905171872539881,
+                13.42710818942819,
+                11.078389803059723,
+                8.627112225034788,
+                7.420928136315185,
+                6.014313964895579,
+                7.723651705101282e-16
+              ],
+              "singular_values_relative_to_first": [
+                1.0,
+                0.6700544958125504,
+                0.547687368564302,
+                0.3728442178937922,
+                0.3331407367166545,
+                0.298340876230039,
+                0.2693619642232371,
+                0.26476470859266665,
+                0.2459166276844393,
+                0.23000084464263848,
+                0.2220933515230604,
+                0.18324397823633026,
+                0.14269820731258584,
+                0.12274711560778792,
+                0.09948077625734013,
+                1.277543659425742e-17
+              ],
+              "stable_rank": 2.4721987857001744
+            },
+            "table_definition": "rows are physical prime-subset moduli; columns are full colour words; each restricted fibre is padded by K^(inactive/2), so Frobenius^2=sum_(q,a)|c(q,a)|^2"
+          }
+        }
+      }
+    }
+  ],
+  "schema": "primegaps.parity-crt-finite.v1",
+  "status": "exploratory-reduced-finite-model-not-an-asymptotic-or-theorem"
+}

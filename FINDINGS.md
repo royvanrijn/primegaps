@@ -353,7 +353,8 @@ excluded from this benchmark. Full vectors and controls are documented in
 
 ## Physical parity viability
 
-A genuinely different prime detector has passed its idealized numerical gate.
+A genuinely different prime detector passes the idealized full-face numerical
+gate, but not the frozen signed-restoration gate.
 For `beta=0.250001`, a beta-rough target has at most three prime factors, so
 `1_{Omega=1}=Omega-2*C(Omega,2)+3*C(Omega,3)`.  The associated leading rough
 constants are `3.6388648513`, `1.5402578959`, and `0.1472169802`; their signed
@@ -366,8 +367,38 @@ predictions `1.0192774814` at `k=39` and `1.0127855640` at `k=38`.  The final
 normalized parity errors may therefore be at most `0.0192774814 I` and
 `0.0127855640 I`; if all three unsigned terms have the same relative error,
 the limits shrink to `0.264108%` and `0.176290%`.  A four-mesh direct-
-convolution calculation and the published `k=40` hybrid calibration support
-the extrapolation, but it is not a rigorous enclosure.
+convolution calculation supports the extrapolation, but it is not a rigorous
+enclosure. This idealized calculation deliberately omits the signed hybrid
+restoration and is not the operative frozen-geometry score.
+
+The missing signed operator has now been assembled in the same 77-dimensional
+basis:
+
+```text
+H = J0 + (a+b) Jplus + b Jtail,
+a = 2479900401/2500000000,
+b = -843183/1000000000.
+```
+
+Its production-mesh extrapolations are `1.0001866542`, `0.9943709810`, and
+`0.9883950587` for `k=40,39,38`, respectively. Separate optimization at every
+mesh gives `1.0002083815`, `0.9943911126`, and `0.9884136585`. The `k=40`
+cross-check is only `2.3021e-6` above the published rigorous fixed-vector lower
+endpoint. Since every one of the 97 source-cover forms is nonnegative and is
+subtracted after restoration, this loss-free matrix is an upper screen for the
+full fixed-geometry operator. Therefore `k=39` and `k=38` are already below one
+before source losses: trial-only optimization is a numerical NO-GO, and the
+geometry or hybrid/source parameters must move.
+
+The exact source-ladder oracle reconstructs 29 old and 43 new rows and compares
+the union of exact order-three failures with grouped nonlargest `H_{5/2}` after
+the separate largest-fragment and opposite-root guards. Across 373,857 exactly
+classified critical and seeded cell configurations it records no false
+negative, and it provides a strict-overcoverage witness for each of the outer,
+old-inner, and new-inner groups. Thus `H_{5/2}` is not equivalent to the exact
+row predicate; it is the safe majorant used by the source proof. The finite
+census is not itself a theorem or a physical-law probability calculation. See
+[the restoration and factorization note](docs/physical-restoration-factorization.md).
 
 The generated-modulus reach has now been resolved numerically for `k=39`.
 Writing `E_{i,theta}` for the erased-coordinate operator restricted by
@@ -408,6 +439,24 @@ diagnostic, not a distribution theorem.  The first analytic target is therefore
 just above `1/3`, with `0.4` a secondary target if the rough sieve has enough
 depth.
 
+A reduced nondegenerate discrete compiler now evaluates the frozen `k=39`
+physical trial on 211 divisor configurations and maps 8,455 compatible
+`(d,e)` pairs to 256 residue-coloured `(q,a)` states.  With unit discrete
+`l2` normalization it gives `sum_(q,a)|c(q,a)|^2=0.4152968949`; CRT collision
+aggregation reduces coefficient `l1` by a factor `3.638754`.  Across
+`X=8,16,32,64` million, the requested blockwise parity cancellation ratio is
+`54.42--115.47` before aggregation and `8.51--37.36` afterwards.  The latter
+is persistent, but it comes almost entirely from cancellation across distinct
+CRT blocks: the within-`(q,a)` prime/semiprime ratio is only `1.026--1.041`.
+The literal ratio formed from the two fully summed scalar errors is exactly
+one at every scale because their signs oppose and the projected minus sign
+reinforces them.  The coefficient table has stable rank `2.205`; its top eight
+singular directions contain `99.629%` of energy, while the projected error
+table's top eight contain `86.09--94.33%`.  This is a qualified GO for studying
+one global CRT-coloured dispersion operator and a NO-GO for local aligned
+prime/semiprime cancellation.  See
+[the finite experiment](docs/physical-parity-crt-finite.md).
+
 ## Current gate / next milestone
 
 The exact `k=49`, `D=21` gate is complete. With the same published support,
@@ -425,10 +474,12 @@ Next:
    promote only the safe rational endpoint into the distribution oracle;
 4. only after those gates, jointly optimize support and Harman-minorant degrees
    of freedom.
-5. on the independent physical-parity branch, replace the refuted `(B_F)`
-   architecture with a decomposition that retains cancellation between rough
-   factor-count sectors before the outer absolute value; specify the discrete
-   physical lcm coefficients and their residue-coloured norms first.
+5. on the standard physical-source branch, move the frozen geometry or
+   hybrid/source parameters until the signed-restoration screen crosses one;
+   independently, on the full-face parity branch, pursue a theorem for the
+   now-specified global CRT-coloured projected operator. Do not rely on local
+   prime/semiprime cancellation, and test the observed across-CRT signal
+   against larger compressed models and residue/sign controls.
 
 No result below 240 should be claimed until an exact/rational certificate has
 been independently verified.

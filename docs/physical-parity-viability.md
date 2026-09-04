@@ -2,29 +2,35 @@
 
 ## Corrected status
 
-The numerical experiment remains a useful **ideal-geometry viability bound**:
-with a perfect prime-sector projector on the full PrimeGaps186 physical face,
-the frozen 77-dimensional model predicts
+The original numerical experiment remains a useful **ideal-geometry upper
+bound**: with a perfect prime-sector projector on the full PrimeGaps186
+physical face, the frozen 77-dimensional model predicts
 
 | dimension | ideal full-face score | margin above 1 |
 |---:|---:|---:|
 | 39 | 1.0192774814 | 0.0192774814 |
 | 38 | 1.0127855640 | 0.0127855640 |
 
-However, the Friedlander--Iwaniec bilinear axiom proposed in the previous
-version of this note is structurally false for the quarter-rough sequence.  The
-correct classification is therefore:
+The actual signed hybrid restoration has now also been assembled. It predicts
+only `0.9943709810` for `k=39` and `0.9883950587` for `k=38`, even before any
+source loss is charged. In addition, the Friedlander--Iwaniec bilinear axiom
+proposed in the previous version of this note is structurally false for the
+quarter-rough sequence. The correct classification is therefore:
 
 ```text
-ideal physical geometry:       GO
-factorial prime identity:      exact
-proposed F-I axiom B_F:        NO-GO (pointwise sign obstruction)
-actual parity architecture:    open
+ideal full-face geometry:      GO (conditional on a parity theorem)
+signed frozen hybrid route:     NO-GO for k=39/38 before losses
+factorial prime identity:       exact
+proposed F-I axiom B_F:         NO-GO (pointwise sign obstruction)
+actual parity architecture:     open
 ```
 
-The experiment shows that the physical geometry has enough latent score for
-`k=39` and `k=38`.  It does **not** identify a valid route to the required
-parity theorem.
+The full-face experiment shows latent score, not presently usable margin. The
+signed operator closes the trial-only question for the existing hybrid source
+route: its source-loss corrections can only lower the quotient. It does not
+remove the independent possibility that a new parity theorem justifies the
+full face directly. See
+[the restoration and factorization experiment](physical-restoration-factorization.md).
 
 This is an exploratory binary64 mesh extrapolation, not a certificate and not
 a prime-distribution theorem.  Its purpose is to identify the analytic theorem
@@ -66,14 +72,25 @@ suggested analytic route, not in the idealized finite-dimensional calculation.
 
 ## Numerical experiment retained
 
-The calculation ports the pinned PrimeGaps186 midpoint/Dickman cap model into
-explicit `77 x 77` matrices, freezes the profile, masks, signatures, radial
-degrees and `rho*`, and optimizes
+The idealized calculation ports the pinned PrimeGaps186 midpoint/Dickman cap
+model into explicit `77 x 77` matrices, freezes the profile, masks, signatures,
+radial degrees and `rho*`, and optimizes
 
 ```text
 rho* Jfull / I,
 Jfull = J0 + Jplus + Jtail.
 ```
+
+The restored calculation instead optimizes
+
+```text
+rho* (J0 + (a+b) Jplus + b Jtail) / I,
+a = 2479900401/2500000000,
+b = -843183/1000000000.
+```
+
+The latter is the relevant frozen-geometry upper screen. It should not be
+replaced by `Jfull` when allocating an analytic parity-error budget.
 
 For `beta=0.250001`, the constants are
 
@@ -550,6 +567,21 @@ This is worth a cheap exponent audit, but it is not presently the preferred
 route.
 
 ## Immediate experiments
+
+The signed 77-dimensional restoration experiment is complete and rules out
+trial-only optimization for frozen `k=39/38`. The exact factorization oracle is
+also complete: it classifies 373,857 finite configurations with no `H_{5/2}`
+false negative and exactly replays one strict-overcoverage witness in each
+order-`5/2` group. Details and replay commands are in
+[the combined note](physical-restoration-factorization.md).
+
+The first and third experiments below have now been combined in a reduced
+finite compiler.  The blockwise post-CRT cancellation ratio is `8.51--37.36`
+across four finite scales, but the literal fully summed prime/semiprime ratio
+is exactly one and the within-`(q,a)` sector ratio is only `1.026--1.041`.
+The surviving signal is cancellation across CRT-coloured blocks, not local
+factor-count cancellation.  See
+[the reduced CRT-coloured experiment](physical-parity-crt-finite.md).
 
 ### 1. Discrete coefficient compiler
 

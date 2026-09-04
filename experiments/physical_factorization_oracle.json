@@ -1,0 +1,201 @@
+{
+  "conclusion": {
+    "false_negatives": 0,
+    "statement": "The exact rational oracle found no H_{5/2} false negative in either finite census and has an explicit strict-overcoverage witness in every group. This is consistent with the source majorization, while the exact witnesses prove that it is not an equivalence. The general implication comes from PrimeGaps186 Lemma 1.4, not this finite census, and census frequencies are not probabilities under the physical fragment law.",
+    "strict_overcover_witnesses": 3
+  },
+  "exact_inputs": {
+    "comparison": "union of exact order-three row failures versus grouped nonlargest H_{5/2}",
+    "guards_assumed": [
+      "group radial window",
+      "largest-fragment cap",
+      "opposite-root allocation bound from PrimeGaps186 Lemma 1.4"
+    ],
+    "mesh": "2742997/258046918656",
+    "new_source_rows": 43,
+    "old_source_rows": 29,
+    "predicate_module": "src/primegaps/physical.py",
+    "predicate_module_sha256": "bbce38b1b3a2305a9b61dbe8c1d0c797e35950660631b88ce6f0a31557179d0a"
+  },
+  "groups": [
+    {
+      "critical_census": {
+        "both_bad": 48961,
+        "configurations": 101810,
+        "critical_value_count": 16,
+        "exact_bad": 48961,
+        "false_negatives": 0,
+        "h25_bad": 48961,
+        "max_fragments": 7,
+        "strict_overcovers": 0
+      },
+      "group": "outer_h25",
+      "parameters": {
+        "activation": "1038826867984921151804142858423732482601802307/30904730932085735018956267409864291787032494080000",
+        "hard_cap": "31942200065/64511729664",
+        "radial_lower": "16430591763736936545249922448197799591/16161921199408696007503616565983946000",
+        "radial_upper": "269644834091/258046918656",
+        "split": "13481830255/64511729664",
+        "threshold": "14400682015049/13781139750220"
+      },
+      "role": "outer",
+      "source_row_count": 19,
+      "strict_overcover_witness": {
+        "exact_group_failure": false,
+        "fragments": [
+          "6745029623/32255864832",
+          "101490889/2015991552",
+          "737866193/32255864832",
+          "19318927871/129023459328",
+          "56744378939/129023459328",
+          "4375080215/129023459328",
+          "13053922723/258046918656",
+          "161836823/2687988736"
+        ],
+        "grouped_h25_failure": true,
+        "total_mass": "33650203775681957220659328600822514630243/33099614616389009423367406727135121408000"
+      },
+      "uniform_cell_stress_census": {
+        "both_bad": 7505,
+        "configurations": 32797,
+        "draws": 100000,
+        "exact_bad": 7505,
+        "false_negatives": 0,
+        "fragment_cell_range": [
+          4,
+          46580
+        ],
+        "fragment_count_range": [
+          0,
+          14
+        ],
+        "h25_bad": 7505,
+        "seed": 186250,
+        "strict_overcovers": 0
+      }
+    },
+    {
+      "critical_census": {
+        "both_bad": 21995,
+        "configurations": 41294,
+        "critical_value_count": 14,
+        "exact_bad": 21995,
+        "false_negatives": 0,
+        "h25_bad": 21995,
+        "max_fragments": 7,
+        "strict_overcovers": 0
+      },
+      "group": "old_inner_h25",
+      "parameters": {
+        "activation": "5510626021724791925246764159/5541253346001764733777267222600",
+        "hard_cap": "32243929735/86015639552",
+        "radial_lower": "4995541783063166947260644391461203/5387307066469565335834538855327982",
+        "radial_upper": "245671040311/258046918656",
+        "split": "6141570283/32255864832",
+        "threshold": "656012965805917/689056987511000"
+      },
+      "role": "inner",
+      "source_row_count": 4,
+      "strict_overcover_witness": {
+        "exact_group_failure": false,
+        "fragments": [
+          "1829578999/86015639552",
+          "1105427791/86015639552",
+          "2427552345/43007819776",
+          "38871010487/258046918656",
+          "29166287101/86015639552",
+          "10398701627/258046918656",
+          "7584386705/129023459328",
+          "770782157/43007819776",
+          "3157189547/64511729664",
+          "48339836131/258046918656"
+        ],
+        "grouped_h25_failure": true,
+        "total_mass": "15056310533/16127932416"
+      },
+      "uniform_cell_stress_census": {
+        "both_bad": 7710,
+        "configurations": 37914,
+        "draws": 100000,
+        "exact_bad": 7710,
+        "false_negatives": 0,
+        "fragment_cell_range": [
+          94,
+          35265
+        ],
+        "fragment_count_range": [
+          0,
+          14
+        ],
+        "h25_bad": 7710,
+        "seed": 186251,
+        "strict_overcovers": 0
+      }
+    },
+    {
+      "critical_census": {
+        "both_bad": 61106,
+        "configurations": 121809,
+        "critical_value_count": 16,
+        "exact_bad": 61106,
+        "false_negatives": 0,
+        "h25_bad": 61106,
+        "max_fragments": 7,
+        "strict_overcovers": 0
+      },
+      "group": "new_inner_h25",
+      "parameters": {
+        "activation": "1038826867984921151804142858423732482601802307/30904730932085735018956267409864291787032494080000",
+        "hard_cap": "97154210743/258046918656",
+        "radial_lower": "14996041312783188570054475858126541591/16161921199408696007503616565983946000",
+        "radial_upper": "246740809141/258046918656",
+        "split": "24673258015/129023459328",
+        "threshold": "13177452424989/13781139750220"
+      },
+      "role": "inner",
+      "source_row_count": 15,
+      "strict_overcover_witness": {
+        "exact_group_failure": false,
+        "fragments": [
+          "1160287731/43007819776",
+          "194752787/8063966208",
+          "30450009697/86015639552",
+          "21705335261/258046918656",
+          "2323318459/86015639552",
+          "16636276805/86015639552",
+          "419678541/2687988736",
+          "1763747071/32255864832"
+        ],
+        "grouped_h25_failure": true,
+        "total_mass": "30712244452128681367459053984356578246243/33099614616389009423367406727135121408000"
+      },
+      "uniform_cell_stress_census": {
+        "both_bad": 7771,
+        "configurations": 38233,
+        "draws": 100000,
+        "exact_bad": 7771,
+        "false_negatives": 0,
+        "fragment_cell_range": [
+          4,
+          35419
+        ],
+        "fragment_count_range": [
+          0,
+          14
+        ],
+        "h25_bad": 7772,
+        "seed": 186252,
+        "strict_overcovers": 1
+      }
+    }
+  ],
+  "implementation_sha256": "dc04f5a3b232530159137bf6dc28b00753025ede1bbd681a4b7f92a6df2eed02",
+  "schema": "primegaps.physical-factorization-oracle.v1",
+  "status": "checked-finite-exact-predicate-experiment",
+  "upstream": {
+    "numerical_note": "equations (1.12), (1.21), (1.23)-(1.24), (1.34); Lemma 1.4",
+    "repository": "https://github.com/openai/PrimeGaps186",
+    "revision": "61340d0b74163003b32756bb16e91d9209a5e330",
+    "source_sha256": "7f71bdefcfe3bb5ca76a143929b3cb3f4156c21dc483253cda3077420f1e5de4"
+  }
+}

@@ -1,0 +1,365 @@
+{
+  "calibration": {
+    "difference": 2.3021366104547525e-06,
+    "note": "The prediction is an optimized value and should be at least the published fixed-vector value up to mesh-extrapolation error.",
+    "predicted_optimized_production_score": 1.000208381539029,
+    "published_rigorous_fixed_vector_lower_endpoint": 1.0002060794024186
+  },
+  "conclusion": "At frozen geometry the exact signed hybrid coefficients erase the idealized full-face crossing for k=39 and k=38 before any source loss is charged. Trial-only optimization of the complete restored certificate is therefore a numerical no-go; geometry or hybrid/source parameters must move.",
+  "dimensions": [
+    {
+      "all_mesh_fit_crosscheck": {
+        "coefficients_descending": [
+          -2125.485359298168,
+          -20.09263677347325,
+          1.0003909385974339
+        ],
+        "continuum": 1.0003909385974339,
+        "fit_meshes": [
+          1024,
+          2048,
+          4096,
+          8192
+        ],
+        "production": 1.000186325780777
+      },
+      "classification": "above_one_before_source_losses",
+      "dimension": 40,
+      "finest_restored_vector_scores": {
+        "1024": 0.9787421952428687,
+        "2048": 0.9900733743074949,
+        "4096": 0.9953587234800986,
+        "8192": 0.9979066076148768
+      },
+      "full_face_optimized_fit": {
+        "coefficients_descending": [
+          -259.6800243600303,
+          -20.945229569026377,
+          1.025823278544235
+        ],
+        "continuum": 1.025823278544235,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 1.0256101857792321
+      },
+      "full_face_scores_at_finest_restored_vector": {
+        "1024": 1.0011484256024068,
+        "2048": 1.0096898696316825,
+        "4096": 1.0137806721718121,
+        "8192": 1.0157671959135435
+      },
+      "mesh_runs": [
+        {
+          "full_face_score": 1.0051126804489467,
+          "mesh": 1024,
+          "projected_relative_residual": 1.5391993783554667e-10,
+          "published_vector_score": 0.9783318892975916,
+          "restored_score": 0.9800620289201203,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.0155342031263053,
+          "mesh": 2048,
+          "projected_relative_residual": 1.394771618242604e-10,
+          "published_vector_score": 0.9898808734566323,
+          "restored_score": 0.990313620436197,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.0206942189708776,
+          "mesh": 4096,
+          "projected_relative_residual": 2.1897582972630011e-10,
+          "published_vector_score": 0.9952711921218146,
+          "restored_score": 0.9953858091450682,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.0232626182914581,
+          "mesh": 8192,
+          "projected_relative_residual": 2.2717898551242943e-10,
+          "published_vector_score": 0.9978718658941157,
+          "restored_score": 0.9979066076148768,
+          "retained_dimension": 77
+        }
+      ],
+      "production_deficit_from_one": -0.0001866542193602605,
+      "restored_quadratic_inverse_mesh_fit": {
+        "coefficients_descending": [
+          -2120.426506592814,
+          -20.095743453225584,
+          1.0003912981153062
+        ],
+        "continuum": 1.0003912981153062,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 1.0001866542193603
+      },
+      "separately_optimized_fit_crosscheck": {
+        "coefficients_descending": [
+          -342.16314706086916,
+          -20.52507717781075,
+          1.000417208828268
+        ],
+        "continuum": 1.000417208828268,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 1.000208381539029
+      }
+    },
+    {
+      "all_mesh_fit_crosscheck": {
+        "coefficients_descending": [
+          -1959.5786335356554,
+          -19.479245141098097,
+          0.9945692199256219
+        ],
+        "continuum": 0.9945692199256219,
+        "fit_meshes": [
+          1024,
+          2048,
+          4096,
+          8192
+        ],
+        "production": 0.9943708640193945
+      },
+      "classification": "below_one_before_source_losses",
+      "dimension": 39,
+      "finest_restored_vector_scores": {
+        "1024": 0.9736777173008893,
+        "2048": 0.9845906871505549,
+        "4096": 0.9896967101641256,
+        "8192": 0.9921622022096707
+      },
+      "full_face_optimized_fit": {
+        "coefficients_descending": [
+          -239.70298781825844,
+          -20.29853341992726,
+          1.0194910988342074
+        ],
+        "continuum": 1.0194910988342074,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 1.0192845866698519
+      },
+      "full_face_scores_at_finest_restored_vector": {
+        "1024": 0.9955528023096201,
+        "2048": 1.0038481799240588,
+        "4096": 1.0078289596712833,
+        "8192": 1.00976664540375
+      },
+      "mesh_runs": [
+        {
+          "full_face_score": 0.9994308620925039,
+          "mesh": 1024,
+          "projected_relative_residual": 1.6456574851772517e-10,
+          "published_vector_score": 0.9735605824286808,
+          "restored_score": 0.9748913501165166,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.0095225559169965,
+          "mesh": 2048,
+          "projected_relative_residual": 9.608945545124436e-11,
+          "published_vector_score": 0.9845203615040165,
+          "restored_score": 0.984811253479975,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.014521114787043,
+          "mesh": 4096,
+          "projected_relative_residual": 2.72955721876709e-10,
+          "published_vector_score": 0.98965273627658,
+          "restored_score": 0.9897214745593261,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.0170096786634855,
+          "mesh": 8192,
+          "projected_relative_residual": 3.547703025462616e-10,
+          "published_vector_score": 0.9921330697113081,
+          "restored_score": 0.9921622022096707,
+          "retained_dimension": 77
+        }
+      ],
+      "production_deficit_from_one": 0.005629019025648829,
+      "restored_quadratic_inverse_mesh_fit": {
+        "coefficients_descending": [
+          -1957.777207235794,
+          -19.48035141062784,
+          0.9945693479477221
+        ],
+        "continuum": 0.9945693479477221,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 0.9943709809743512
+      },
+      "separately_optimized_fit_crosscheck": {
+        "coefficients_descending": [
+          -321.7397880145275,
+          -19.876616282223313,
+          0.9945933412671278
+        ],
+        "continuum": 0.9945933412671278,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 0.9943911125766514
+      }
+    },
+    {
+      "all_mesh_fit_crosscheck": {
+        "coefficients_descending": [
+          -1802.4985345804307,
+          -18.868279466330687,
+          0.988587288380035
+        ],
+        "continuum": 0.988587288380035,
+        "fit_meshes": [
+          1024,
+          2048,
+          4096,
+          8192
+        ],
+        "production": 0.9883951637927383
+      },
+      "classification": "below_one_before_source_losses",
+      "dimension": 38,
+      "finest_restored_vector_scores": {
+        "1024": 0.9684422398830984,
+        "2048": 0.9789444965670799,
+        "4096": 0.9838733687342665,
+        "8192": 0.9862571544704977
+      },
+      "full_face_optimized_fit": {
+        "coefficients_descending": [
+          -220.1895571173419,
+          -19.655337421792304,
+          1.0129921933284536
+        ],
+        "continuum": 1.0129921933284536,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 1.0127922261113942
+      },
+      "full_face_scores_at_finest_restored_vector": {
+        "1024": 0.9897895144747675,
+        "2048": 0.9978397529082972,
+        "4096": 1.001710740167838,
+        "8192": 1.0035993147774502
+      },
+      "mesh_runs": [
+        {
+          "full_face_score": 0.9935784373758111,
+          "mesh": 1024,
+          "projected_relative_residual": 5.2030203576386296e-11,
+          "published_vector_score": 0.9685313243046481,
+          "restored_score": 0.9695560458444266,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.0033423633216283,
+          "mesh": 2048,
+          "projected_relative_residual": 1.9555127230153259e-10,
+          "published_vector_score": 0.9789214311415253,
+          "restored_score": 0.9791466470467578,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.0081804026453765,
+          "mesh": 4096,
+          "projected_relative_residual": 1.6876026125032133e-10,
+          "published_vector_score": 0.9838033258894587,
+          "restored_score": 0.9838959824344112,
+          "retained_dimension": 77
+        },
+        {
+          "full_face_score": 1.010589579066999,
+          "mesh": 8192,
+          "projected_relative_residual": 2.838414705081146e-10,
+          "published_vector_score": 0.9861664575977299,
+          "restored_score": 0.9862571544704977,
+          "retained_dimension": 77
+        }
+      ],
+      "production_deficit_from_one": 0.011604941331203822,
+      "restored_quadratic_inverse_mesh_fit": {
+        "coefficients_descending": [
+          -1804.1177308798078,
+          -18.86728510562246,
+          0.9885871733084876
+        ],
+        "continuum": 0.9885871733084876,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 0.9883950586687962
+      },
+      "separately_optimized_fit_crosscheck": {
+        "coefficients_descending": [
+          -301.8927532931054,
+          -19.232164891412367,
+          0.9886093294014238
+        ],
+        "continuum": 0.9886093294014238,
+        "fit_meshes": [
+          2048,
+          4096,
+          8192
+        ],
+        "production": 0.9884136584632798
+      }
+    }
+  ],
+  "implementation_sha256": "7543c5fcfcef8166359595a67d72014e0d38986c5ee91c72e3e25f3c305c3fc0",
+  "inputs": {
+    "matrix_builder": "experiments/physical_parity_viability.py",
+    "matrix_builder_sha256": "bd5fb2d33330c365aa72be8558eaecf37d3a5706e74277c0f08bb638ac5a7cee",
+    "physical_input": "reproduction/186/physical-parity-input.json",
+    "physical_input_sha256": "e9513f9956230a2524f1eba77e6e874e2ce3835bf138526aff40ab2619135a78",
+    "upstream": {
+      "repository": "https://github.com/openai/PrimeGaps186",
+      "revision": "61340d0b74163003b32756bb16e91d9209a5e330",
+      "source_sha256": "7f71bdefcfe3bb5ca76a143929b3cb3f4156c21dc483253cda3077420f1e5de4"
+    }
+  },
+  "meshes": [
+    1024,
+    2048,
+    4096,
+    8192
+  ],
+  "operator": {
+    "a": "2479900401/2500000000",
+    "a_plus_b": "4955584887/5000000000",
+    "b": "-843183/1000000000",
+    "basis_dimension": 77,
+    "formula": "J0 + (a+b) Jplus + b Jtail",
+    "rho_star": "2624989/10000000",
+    "source_loss_dominance": "The complete fixed-geometry certificate subtracts 97 positive-semidefinite source-cover forms, so its largest generalized eigenvalue cannot exceed this signed cap value."
+  },
+  "production_intervals": 98304,
+  "schema": "primegaps.physical-restored-operator.v1",
+  "status": "exploratory-float64-signed-operator-upper-screen"
+}

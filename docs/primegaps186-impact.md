@@ -290,6 +290,22 @@ quite misleading.
 
 ### 2. Turn the entire restored certificate into a quadratic operator
 
+The first decisive part of this experiment is complete. The cap forms have
+been assembled in the actual 77-dimensional basis and combined with the exact
+signed hybrid coefficients:
+
+```text
+H = J0 + (a+b) J+ + b Jt.
+```
+
+Inverse-mesh extrapolation gives `0.9943709810` for `k=39` and
+`0.9883950587` for `k=38`, before source losses. Because all 97 loss forms
+below are positive semidefinite and subtracted, `H` is already a decisive upper
+screen: the full frozen-geometry operator cannot cross one. Accordingly, the
+expensive assembly of the 97 individual loss matrices is not warranted for
+this no-go decision. The exact calculation, calibration, and replay boundary
+are in [the restoration and factorization note](physical-restoration-factorization.md).
+
 For fixed profile, masks, source ladders, Young parameters and hybrid coefficients, every cap form
 and every one of the 97 loss terms is quadratic in the 77 trial coefficients. Build matrices
 
@@ -305,6 +321,10 @@ rho* (J_lambda,H - sum L_i) / I,
 
 not the raw cap quotient. This is a 77-dimensional generalized eigenproblem before basis expansion,
 so it should be far cheaper than the current from-scratch scalar certificate.
+
+That full loss-matrix build remains useful only after a geometry or
+hybrid/source change raises the signed cap screen above one; at the present
+parameters it can only strengthen the negative result.
 
 Then add angular signatures and radial degrees adaptively using a Davidson/column-generation loop.
 The trial space is compact compared with the 846/2526-term Stadlmann spaces, leaving obvious
